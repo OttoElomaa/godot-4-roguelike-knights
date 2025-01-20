@@ -128,7 +128,7 @@ func chooseTarget():
 func useSkills() -> bool:
 	
 	for skill in $Skills.get_children():
-		if skill.activate(target) == true:
+		if skill.activate() == true:
 			return true
 	return false
 
@@ -153,7 +153,10 @@ func takeDamage(amount:int):
 func recoverHealth(amount: int):
 	$HealthComponent.recoverHealth(amount)
 	#$AnimationComponent.playMeleeHit()
-	
+
+func hasFullHealth():
+	var he := $HealthComponent
+	return he.health >= he.maxHealth	
 	
 	
 func getNavigator():

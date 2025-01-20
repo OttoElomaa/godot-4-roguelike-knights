@@ -12,3 +12,4 @@ range = 1
 
 [node name="Script" type="Node" parent="Scripts" index="0"]
 script = ExtResource("3_d3tvs")
+damage = 10

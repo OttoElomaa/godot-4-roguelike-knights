@@ -30,7 +30,7 @@ func setup(actor:Node):
 
 #### TRY TO PERFORM SKILL ACTIONS
 #### SUCCESS=TRUE, FAILURE=FALSE
-func activate(target:Node) -> bool:
+func activate() -> bool:
 	
 	
 	var targets:Array = $Targeting.handleTargeting()

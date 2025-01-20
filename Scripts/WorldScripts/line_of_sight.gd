@@ -34,12 +34,19 @@ func lineOfSightBetweenObjects(object1:Node, object2:Node) -> bool:
 		
 	#### IF PATH IS DIRECT STRAIGHT LINE, RETURN TRUE
 	if next_path_point == finalPoint:
-		var line:Line2D = RangedLine.instantiate()
-		line.points = [current_pos, finalPoint]
-		$Disposables.add_child(line)
+		#var line:Line2D = RangedLine.instantiate()
+		#line.points = [current_pos, finalPoint]
+		#$Disposables.add_child(line)
 		return true
 		
 	return false
+
+
+func createRangedLine(startPos, endPos):
+	var line:Line2D = RangedLine.instantiate()
+	line.points = [startPos, endPos]
+	$Disposables.add_child(line)
+
 
 
 #### COORDS: Grid.getCoordsInRange(gridPos, distance)

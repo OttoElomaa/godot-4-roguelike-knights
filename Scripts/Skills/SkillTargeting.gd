@@ -34,9 +34,10 @@ func handleTargeting():
 	
 	var visibleTargets := []
 	for t in targetsInRange:
+		
 		if world.lineOfSight.lineOfSightBetweenObjects(actor, t):
 			visibleTargets.append(t)
-			world.aStar.createDebugLine([actor.position, t.position]) ##DEBUG
+			#world.aStar.createDebugLine([actor.position, t.position]) ##DEBUG
 			
 	return visibleTargets
 	

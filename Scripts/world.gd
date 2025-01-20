@@ -288,6 +288,13 @@ func _on_dumb_timer_timeout() -> void:
 	
 	
 func _on_dumb_timer_2_timeout() -> void:
+	pass
+	#if not turnOffLineOfSight:
+		#lineOfSightStuff()
+
+
+func _on_bake_finished() -> void:
 	
+	await get_tree().process_frame
 	if not turnOffLineOfSight:
 		lineOfSightStuff()

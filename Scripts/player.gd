@@ -98,7 +98,7 @@ func passTurn():
 
 func useSkill(index, target):
 	
-	$Skills.get_children()[index].activate(target)
+	$Skills.get_children()[index].activate()
 	passTurn()
 
 
@@ -111,6 +111,9 @@ func recoverHealth(amount: int):
 	$HealthComponent.recoverHealth(amount)
 	#$AnimationComponent.playMeleeHit()
 
+func hasFullHealth():
+	var he := $HealthComponent
+	return he.health >= he.maxHealth
 
 	
 func getSkills():
