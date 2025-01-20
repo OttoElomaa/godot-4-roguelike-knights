@@ -9,10 +9,11 @@ func setup(skill):
 	self.skill = skill
 
 
-# Called when the node enters the scene tree for the first time.
-func activate(target:Node):
+#### SUCCESS=TRUE, FAILURE=FALSE
+func activate(target:Node) -> bool:
 	
-	skill.ui.addMessage(skill.actor.creatureName + " uses " + skill.skillName)
+	skill.ui.addMessage(skill.actor.creatureName + " uses " + skill.skillName, Color.WHITE)
 	target.takeDamage(20)
+	return true
 	
 	

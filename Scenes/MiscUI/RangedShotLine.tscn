@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsli2mbg5pnea"]
+
+[ext_resource type="PackedScene" uid="uid://bedqd1giwm1pl" path="res://Scenes/DebugLine.tscn" id="1_1f38v"]
+
+[node name="RangedShotLine" instance=ExtResource("1_1f38v")]
+width = 2.0
+default_color = Color(0.277267, 0.543256, 0.743527, 1)

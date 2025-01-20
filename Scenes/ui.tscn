@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwakr1joaem2j"]
+[gd_scene load_steps=5 format=3 uid="uid://cwakr1joaem2j"]
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_ad2sj"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="2_0j1eo"]
 [ext_resource type="PackedScene" uid="uid://dkaqqpg8dxhsq" path="res://Scenes/MiscUI/skill_bar_box.tscn" id="2_rkxis"]
-[ext_resource type="Script" path="res://Scripts/basic_log.gd" id="4_yij0b"]
-[ext_resource type="PackedScene" uid="uid://irn8tsvxkxy0" path="res://Scenes/BasicLogMessage.tscn" id="5_g7r5i"]
+[ext_resource type="PackedScene" uid="uid://bbx4lxn5g5ryb" path="res://Scenes/basic_log.tscn" id="4_ejf0q"]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_ad2sj")
@@ -97,9 +96,5 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="CombatLog" type="VBoxContainer" parent="Margin2/LogPanel/MarginContainer"]
-layout_mode = 2
-script = ExtResource("4_yij0b")
-
-[node name="PanelContainer" parent="Margin2/LogPanel/MarginContainer/CombatLog" instance=ExtResource("5_g7r5i")]
+[node name="CombatLog" parent="Margin2/LogPanel/MarginContainer" instance=ExtResource("4_ejf0q")]
 layout_mode = 2

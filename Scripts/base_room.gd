@@ -4,6 +4,7 @@ extends Node2D
 
 var Orc = load("res://Scenes/Creatures/Orc.tscn")
 var Slime = load("res://Scenes/Creatures/Slime.tscn")
+var SkeletonArcher = load("res://Scenes/Creatures/SkeletonArcher.tscn")
 
 
 var game: Node = null
@@ -21,6 +22,7 @@ var metaGridPos := Vector2i.ZERO
 func setup(game: Node):
 	self.game = game
 	grid = game.getGrid()
+	player = game.getPlayer()
 	
 	
 func placeOnMetaGrid(metaPos: Vector2i):
@@ -39,8 +41,6 @@ func startGameAtRoom(setPlayer) -> void:
 	
 	
 	playerNewPos += originGridPos
-	
-	player = setPlayer
 	
 	player.gridPosition = playerNewPos
 	grid.placeGridObjectOnMap(player, playerNewPos)
@@ -67,12 +67,14 @@ func populateCreatures() -> Array:
 
 func createRandomCreature() -> Node:
 	
-	var rng = randi_range(1,2)
+	var rng = randi_range(1,3)
 	match rng:
 		1:
 			return Orc.instantiate()
 		2:
 			return Slime.instantiate()
+		3:
+			return SkeletonArcher.instantiate()
 			
 	return Orc.instantiate()	
 

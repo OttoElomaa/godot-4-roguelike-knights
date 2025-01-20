@@ -7,4 +7,5 @@ script = ExtResource("1_xqjs1")
 
 [node name="Text" type="Label" parent="."]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "This is a log entry."

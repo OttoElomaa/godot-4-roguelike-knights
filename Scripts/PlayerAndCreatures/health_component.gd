@@ -26,7 +26,17 @@ func updateVisual():
 
 func takeDamage(amount):
 	
+	var enemyHurtC := Color.DARK_GOLDENROD
+	var allyHurtC := Color.INDIAN_RED
+	
+	var colorToUse: Color = Color.ALICE_BLUE
+	if creature.isEnemy:
+		colorToUse = enemyHurtC
+	else:
+		colorToUse = allyHurtC
+	
 	health -= amount
 	updateVisual()
-	ui.addMessage(creature.creatureName + " takes " + str(amount) + " damage!")
+	var damageString : String = creature.creatureName + " takes " + str(amount) + " damage!"
+	ui.addMessage(damageString, colorToUse)
 	

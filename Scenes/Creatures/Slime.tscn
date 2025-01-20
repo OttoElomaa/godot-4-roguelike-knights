@@ -1,13 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3nup8qw8wgmx"]
+[gd_scene load_steps=4 format=3 uid="uid://c3nup8qw8wgmx"]
 
 [ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Scenes/Creatures/Creature.tscn" id="1_clxqf"]
 [ext_resource type="Texture2D" uid="uid://5u6pajxqu6we" path="res://Sprites/Enemies/creature-slime.png" id="2_5dk1v"]
+[ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Scenes/Skills/Strike.tscn" id="3_5jfn3"]
 
 [node name="Slime" instance=ExtResource("1_clxqf")]
 creatureName = "Slime"
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_5dk1v")
+
+[node name="Strike" parent="Skills" index="0" instance=ExtResource("3_5jfn3")]
 
 [node name="HealthComponent" parent="." index="2"]
 health = 20

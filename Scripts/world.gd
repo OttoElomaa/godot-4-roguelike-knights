@@ -53,7 +53,6 @@ func startGame(game):
 	#### LINE OF SIGHT SETUP
 	set_navigation_layer_value(1, true)
 	bake_navigation_polygon(true)
-	lineOfSightStuff()
 	
 	#### ADD CREATURES TO SPAWN LOCATIONS
 	#### CREATURES ARE SETUP IN PopulateCreatures()
@@ -62,6 +61,9 @@ func startGame(game):
 		creatures.append_array(room.populateCreatures() )
 	for creature in creatures:
 		$Creatures.add_child(creature)
+		
+		
+	lineOfSightStuff()
 		
 		
 	
@@ -95,7 +97,6 @@ func passTurn():
 	
 	$AStarGridNode.passTurn()
 	
-	set_navigation_layer_value(1, true)
 	bake_navigation_polygon(true)
 	
 	
@@ -106,15 +107,23 @@ func passTurn():
 	lineOfSightStuff()
 	
 	
-
+#### FOG OF WAR STUFF??
 func lineOfSightStuff():	
-	#### FOG OF WAR STUFF??
-	var playerPos: Vector2i = getPlayer().gridPosition
-	for coord:Vector2i in grid.getCoordsInRange(playerPos, 100):
-		$Utilities/FogTiles.set_cell(coord, 1, Vector2i(0,0))
 	
+	var playerPos: Vector2i = getPlayer().gridPosition
+	#for coord:Vector2i in grid.getCoordsInRange(playerPos, 100):
+	
+	#### SET ALL UNSEEN WALL/FLOOR TILES AS HIDDEN
+	for coord:Vector2i in grid.nonVoidTiles:
+		$Utilities/FogTiles.set_cell(coord, 0, Vector2i(0,0))
+	
+	var coordsToCheck := []
 	var coords2:Array = grid.getCoordsInRange(playerPos, 15)
-	$AStarGridNode.lineOfSightInRange(playerPos, coords2, $Utilities/FogTiles)
+	for coord in coords2:
+		if coord in grid.nonVoidTiles:
+			coordsToCheck.append(coord)
+	
+	$AStarGridNode.lineOfSightInRange(playerPos, coordsToCheck, $Utilities/FogTiles)
 	
 	
 

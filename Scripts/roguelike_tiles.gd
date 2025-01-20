@@ -5,14 +5,28 @@ var tileSize := 32
 
 var world: Node = null
 var roomsList := []
+
 var wallTilemapsDict := {}
+var floorTilemapsDict := {}
+
+var wallTiles := []
+var nonVoidTiles := []
+
+
 
 # Called when the node enters the scene tree for the first time.
 func setup(world: Node):
 	
 	self.world = world
+	
 	roomsList = world.getRooms()
-	wallTilemapsDict = createRoomsDictionary(roomsList)
+	var dicts = createRoomsDictionary(roomsList)
+	
+	wallTilemapsDict = dicts[0]
+	floorTilemapsDict = dicts[1]
+	
+	nonVoidTiles = getWallAndFloorTiles()
+	#wallTilemapsDict = createRoomsDictionary(roomsList)
 
 
 
@@ -50,15 +64,20 @@ func is_tile_empty(grid_pos: Vector2i) -> bool:
 	
 #### GET ALL ROOMS IN THE CURRENT WORLD STATE
 #### STORE EACH WALLS-TYPE TILEMAP AND ITS ROOM'S META POSITION IN A DICT	
-func createRoomsDictionary(rooms: Array) -> Dictionary:
+func createRoomsDictionary(rooms: Array) -> Array:
 
 	var returnDict := {}
+	var floorDict := {}
+	
 	for room in roomsList:
 		var originGridPos = room.originGridPos	
 		for tilem in room.get_node("Tiles").get_children():
 			if tilem.is_in_group("walltiles"):
 				returnDict[tilem] = originGridPos
-	return returnDict
+			elif tilem.is_in_group("floortiles"):
+				floorDict[tilem] = originGridPos
+					
+	return [returnDict, floorDict]
 
 
 func getAllWallTiles() -> Array:
@@ -74,7 +93,34 @@ func getAllWallTiles() -> Array:
 		
 		cells.append_array(myC2)
 	
+	wallTiles = cells
 	return cells
+	
+
+func getWallAndFloorTiles() -> Array:
+	
+	var cells := []
+	
+	var bothDicts = wallTilemapsDict.duplicate()
+	for key in floorTilemapsDict:
+		bothDicts[key] = floorTilemapsDict[key] 
+	
+	for tilemap: TileMapLayer in bothDicts:
+		var myOriginPos = bothDicts[tilemap]
+		var myCells = tilemap.get_used_cells()
+		var myC2 = []
+		#### ABSOLUTE VALUES BY ADDING THE ORIGIN OFFSET
+		for ce in myCells:
+			if not (ce + myOriginPos in cells):
+				myC2.append(ce + myOriginPos)
+			#prints(ce, myOriginPos)
+		
+		cells.append_array(myC2)
+	
+	wallTiles = cells
+	return cells
+	
+	
 	
 func getCreatureTiles() -> Array:
 	
@@ -83,6 +129,13 @@ func getCreatureTiles() -> Array:
 		creaturePositions.append(creature.gridPosition)
 		
 	return creaturePositions
+
+
+func getGridDistance(object1:Node, object2:Node) -> int:
+	
+	var distanceX = abs(object1.gridPosition.x - object2.gridPosition.x)
+	var distanceY = abs(object1.gridPosition.y - object2.gridPosition.y)
+	return max(distanceX, distanceY)
 
 
 func getAdjacentCreatures(actor) -> Array:

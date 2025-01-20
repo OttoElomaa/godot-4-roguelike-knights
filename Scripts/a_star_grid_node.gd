@@ -1,6 +1,8 @@
 extends Node2D
 
 
+var RangedLine = load("res://Scenes/MiscUI/RangedShotLine.tscn")
+
 var world:Node = null
 var grid:Node = null
 
@@ -8,7 +10,7 @@ var aStarGrid := AStarGrid2D.new()
 
 var aStarNormal := AStar2D.new()
 
-var aStarLineOfSight := AStarGrid2D.new()
+var previouslySeenTiles := []
 
 
 func setup(world) -> void:
@@ -45,8 +47,32 @@ func pathStuff(creature, target):
 	return debugLine
 
 
+func lineOfSightBetweenObjects(object1:Node, object2:Node) -> bool:
+	
+	#### OBJECT 1'S NAVIGATION AGENT SETS OBJECT 2 AS ITS TARGET
+	#### THEN CREATE PATH
+	var navigator = object1.getNavigator()
+	navigator.target_position = object2.gridPosition * 32 + Vector2i(16,16)
+	
+	var current_pos = object1.gridPosition * 32 + Vector2i(16,16)
+	var next_path_point = navigator.get_next_path_position()
+	var finalPoint = navigator.get_final_position()
+		
+	#### IF PATH IS DIRECT STRAIGHT LINE, RETURN TRUE
+	if next_path_point == finalPoint:
+		var line:Line2D = RangedLine.instantiate()
+		line.points = [current_pos, finalPoint]
+		$Disposables.add_child(line)
+		return true
+		
+	return false
+	
+
 
 func lineOfSightInRange(startCoord:Vector2i, coords: Array, tilemap:TileMapLayer):
+	
+	for coord in previouslySeenTiles:
+		tilemap.set_cell(coord, 1, Vector2i(0,0))
 	
 	var navigator:NavigationAgent2D = world.getPlayer().getNavigator()
 	var vec16 := Vector2i(16,16)
@@ -95,8 +121,18 @@ func lineOfSightInRange(startCoord:Vector2i, coords: Array, tilemap:TileMapLayer
 	for coord in walls:
 		tilemap.set_cell(coord, -1, Vector2i(0,0))
 		
-		
-
+	
+	var allSeenTiles = visibleCoords
+	allSeenTiles.append_array(walls)
+	
+	previouslySeenTiles.append_array(allSeenTiles)	
+	
+	#### CREATURE VISIBILITY
+	for creature in world.getCreatures():
+		if creature.gridPosition in allSeenTiles:
+			creature.show()
+		elif creature != world.getPlayer():
+			creature.hide()
 
 
 

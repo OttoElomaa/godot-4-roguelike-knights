@@ -7,3 +7,4 @@
 skillIcon = ExtResource("2_l0435")
 skillName = "Strong Strike"
 skillType = "melee"
+range = 1

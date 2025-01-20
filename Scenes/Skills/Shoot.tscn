@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://0o5uveeqmtnk"]
+
+[ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Scenes/Skills/BaseSkill.tscn" id="1_vko4m"]
+[ext_resource type="Texture2D" uid="uid://cf5s8r7g1xw1j" path="res://Sprites/Enemies/creature-skeleton.png" id="2_wn2nx"]
+
+[node name="Shoot" instance=ExtResource("1_vko4m")]
+skillIcon = ExtResource("2_wn2nx")
+skillName = "Shoot"
+skillType = "ranged"
+range = 3

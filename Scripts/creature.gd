@@ -10,6 +10,8 @@ var player:Node = null
 var gridPosition := Vector2i.ZERO
 var target:Node = null
 
+var isEnemy := true
+
 @export var creatureName := ""	
 	
 
@@ -22,6 +24,9 @@ func roomSetup(room):
 	
 	$HealthComponent.setup(self)
 	$AnimationComponent.setup(self)
+	
+	for skill in $Skills.get_children():
+		skill.setup(self)
 	
 	
 func mySetup():
@@ -49,7 +54,7 @@ func pathStuff():
 
 	#### GET A LINE OF THE PATH FROM SELF TO TARGET (PLAYER)
 	var line: Line2D = world.pathStuff(self, world.getPlayer())
-	#line.hide()
+	line.hide()
 	
 	#### IF ADJACENT TO TARGET, DON'T MOVE
 	if line.points.size() < 3:
@@ -95,7 +100,7 @@ func chooseTarget():
 func useSkills() -> bool:
 	
 	for skill in $Skills.get_children():
-		if skill.activate() == true:
+		if skill.activate(target) == true:
 			return true
 	return false
 
@@ -108,7 +113,11 @@ func move(vector):
 	tiles.placeGridObjectOnMap(self, gridPosition)
 	
 
-func takeDamage(amount):
+func takeDamage(amount:int):
 	
 	$HealthComponent.takeDamage(amount)
 	$AnimationComponent.playMeleeHit()
+	
+	
+func getNavigator():
+	return $NavigationAgent2D

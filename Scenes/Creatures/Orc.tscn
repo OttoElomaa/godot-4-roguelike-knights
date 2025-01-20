@@ -1,13 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbu18kyqxrpvs"]
+[gd_scene load_steps=4 format=3 uid="uid://cbu18kyqxrpvs"]
 
 [ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Scenes/Creatures/Creature.tscn" id="1_i5ohc"]
 [ext_resource type="Texture2D" uid="uid://b7wpnuw1nsyg3" path="res://Sprites/Enemies/creature-orc.png" id="2_40b0y"]
+[ext_resource type="PackedScene" uid="uid://cwkrdlxk2utha" path="res://Scenes/Skills/Strong Strike.tscn" id="3_w4nll"]
 
 [node name="Orc" instance=ExtResource("1_i5ohc")]
 creatureName = "Orc"
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_40b0y")
+
+[node name="StrongStrike" parent="Skills" index="0" instance=ExtResource("3_w4nll")]
 
 [node name="HealthComponent" parent="." index="2"]
 health = 40

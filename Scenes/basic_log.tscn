@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbx4lxn5g5ryb"]
+
+[ext_resource type="Script" path="res://Scripts/basic_log.gd" id="1_06myk"]
+[ext_resource type="PackedScene" uid="uid://irn8tsvxkxy0" path="res://Scenes/BasicLogMessage.tscn" id="2_1ya1y"]
+
+[node name="CombatLog" type="PanelContainer"]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_06myk")
+
+[node name="Scrolling" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(100, 200)
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="Rows" type="VBoxContainer" parent="Scrolling"]
+custom_minimum_size = Vector2(100, 200)
+layout_mode = 2
+
+[node name="BasicLogMessage" parent="Scrolling/Rows" instance=ExtResource("2_1ya1y")]
+layout_mode = 2

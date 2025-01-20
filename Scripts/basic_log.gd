@@ -1,13 +1,17 @@
-extends VBoxContainer
+extends PanelContainer
 
 
 var LogMessage = load("res://Scenes/BasicLogMessage.tscn")
 
 
-func addMessage(text:String) -> void:
+func addMessage(text:String, color:Color) -> void:
 	
 	var message = LogMessage.instantiate()
 	message.text = text
-	add_child(message)
+	message.color = color
+	$Scrolling/Rows.add_child(message)
+	
+	await get_tree().process_frame
+	$Scrolling.scroll_vertical = $Scrolling.get_v_scroll_bar().max_value
 	
 	

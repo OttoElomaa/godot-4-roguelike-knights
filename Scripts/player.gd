@@ -5,6 +5,8 @@ var grid: Node = null
 
 var gridPosition := Vector2i.ZERO
 
+var isEnemy := false
+
 @export var creatureName := ""
 
 # Called when the node enters the scene tree for the first time.
@@ -66,12 +68,22 @@ func processExplore():
 			useSkill(1, creatures[0])
 		
 	
-	
 			
 func passTurn():
 	world.passTurn()
+
+
+func useSkill(index, target):
 	
-	
+	$Skills.get_children()[index].activate(target)
+	passTurn()
+
+
+
+func takeDamage(amount: int):
+	$HealthComponent.takeDamage(amount)
+	$AnimationComponent.playMeleeHit()
+
 	
 func getSkills():
 	return $Skills.get_children()
@@ -82,8 +94,7 @@ func getHealth():
 	
 	
 
-func useSkill(index, target):
-	$Skills.get_children()[index].activate(target)
+
 
 
 func getNavigator():

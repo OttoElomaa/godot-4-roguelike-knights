@@ -55,6 +55,6 @@ func showLookInfo(game, lookTool):
 			
 			
 			
-func addMessage(text:String) -> void:
+func addMessage(text:String, color:Color) -> void:
 	
-	combatLog.addMessage(text)
+	combatLog.addMessage(text, color)
