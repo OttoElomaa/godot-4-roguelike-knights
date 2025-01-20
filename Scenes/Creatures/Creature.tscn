@@ -1,0 +1,160 @@
+[gd_scene load_steps=8 format=3 uid="uid://bjncipjr144kf"]
+
+[ext_resource type="Script" path="res://Scripts/creature.gd" id="1_22wni"]
+[ext_resource type="Texture2D" uid="uid://bdfti26osccyc" path="res://Sprites/roguelike-look-indicator.png" id="2_w27nt"]
+[ext_resource type="PackedScene" uid="uid://c88p26kmuj5fw" path="res://Scenes/health_component.tscn" id="3_sgkqn"]
+[ext_resource type="Script" path="res://Scripts/PlayerAndCreatures/animation_component.gd" id="4_o4mlq"]
+
+[sub_resource type="Animation" id="Animation_at7b3"]
+resource_name = "MeleeHit"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeleeHit1:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(3, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeleeHit2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(2, 2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeleeHit1:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeleeHit2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MeleeHit2:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.14159]
+}
+
+[sub_resource type="Animation" id="Animation_4ge8a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeleeHit1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeleeHit1:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeleeHit2:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeleeHit2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ka2d4"]
+_data = {
+"MeleeHit": SubResource("Animation_at7b3"),
+"RESET": SubResource("Animation_4ge8a")
+}
+
+[node name="Creature" type="Node2D"]
+script = ExtResource("1_22wni")
+creatureName = "BaseCreature"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_w27nt")
+
+[node name="Skills" type="Node" parent="."]
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_sgkqn")]
+health = 10
+
+[node name="AnimationComponent" type="Node2D" parent="."]
+script = ExtResource("4_o4mlq")
+
+[node name="MeleeHit1" type="Line2D" parent="AnimationComponent"]
+visible = false
+points = PackedVector2Array(-5, 0, 0, -5, 5, 0, 0, 5)
+closed = true
+width = 1.0
+
+[node name="MeleeHit2" type="Line2D" parent="AnimationComponent"]
+visible = false
+scale = Vector2(0.5, 0.5)
+points = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
+closed = true
+width = 1.0
+
+[node name="ParticleAnimations" type="AnimationPlayer" parent="AnimationComponent"]
+libraries = {
+"": SubResource("AnimationLibrary_ka2d4")
+}

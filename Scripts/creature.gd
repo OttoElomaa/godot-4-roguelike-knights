@@ -2,12 +2,13 @@ extends Node2D
 
 
 
-var game:Node = null
+var world:Node = null
 var grid:Node = null
 var aStarGrid:AStarGrid2D = null
 var player:Node = null
 
 var gridPosition := Vector2i.ZERO
+var target:Node = null
 
 @export var creatureName := ""	
 	
@@ -15,10 +16,12 @@ var gridPosition := Vector2i.ZERO
 func roomSetup(room):
 	
 	var tree = room.get_tree()
-	self.game = tree.root.get_node("GameMain")
-	self.grid = game.getGrid()
-	self.player = game.getPlayer()
-	#self.aStarGrid = game.getAStar()
+	self.world = tree.root.get_node("GameMain/World")
+	self.grid = world.getGrid()
+	self.player = world.getPlayer()
+	
+	$HealthComponent.setup(self)
+	$AnimationComponent.setup(self)
 	
 	
 func mySetup():
@@ -40,35 +43,61 @@ func _process(delta: float) -> void:
 	
 func pathStuff():
 
+	#### CREATURE CAN MOVE IN THESE DIRECTIONS
+	var allowedDirs := [Vector2.UP,Vector2.DOWN,Vector2.LEFT, Vector2.RIGHT]
+	allowedDirs.append_array([ Vector2(1,1),Vector2(-1,-1),Vector2(-1,1),Vector2(1,-1) ] )
+
 	#### GET A LINE OF THE PATH FROM SELF TO TARGET (PLAYER)
-	var line: Line2D = game.pathStuff(self, game.getPlayer())
+	var line: Line2D = world.pathStuff(self, world.getPlayer())
+	#line.hide()
 	
 	#### IF ADJACENT TO TARGET, DON'T MOVE
 	if line.points.size() < 3:
-		line.hide()
 		return
 	
-	var creaturePositions : Array = grid.getCreatureTiles()
-	var dir = position.direction_to(line.points[1])
-	
 	#### COMPARE TARGET POSITION TO CREATURE POSITIONS
-	match dir:
-		Vector2.UP,Vector2.DOWN,Vector2.LEFT, Vector2.RIGHT:
-			var targetGridPos = gridPosition + Vector2i(dir)
-			
-			#### IF TARGET POSITION IS OCCUPIED BY CREATURE, DON'T MOVE
-			if targetGridPos in creaturePositions:
-				return
-			else:
-				move(dir)
+	var dir = position.direction_to(line.points[1])
+	dir = Vector2(round(dir.x), round(dir.y))
+	
+	print(dir)
+	var creaturePositions : Array = grid.getCreatureTiles()
+	
+	if dir in allowedDirs:
+		var targetGridPos = gridPosition + Vector2i(dir)
+		
+		#### IF TARGET POSITION IS OCCUPIED BY CREATURE, DON'T MOVE
+		if targetGridPos in creaturePositions:
+			return
+		else:
+			move(dir)
 				
-	line.hide()
+	#line.queue_free()
 	
 
 
 func passTurn():
+	
+	#### PICK TARGET
+	chooseTarget()
+	#### TRY TO USE A SKILL
+	if useSkills():
+		return
+		
+	#### TRY TO MOVE	
 	pathStuff()	
 	
+
+
+func chooseTarget():
+	target = player
+
+
+func useSkills() -> bool:
+	
+	for skill in $Skills.get_children():
+		if skill.activate() == true:
+			return true
+	return false
 
 
 func move(vector):
@@ -78,3 +107,8 @@ func move(vector):
 	gridPosition += Vector2i(vector)
 	tiles.placeGridObjectOnMap(self, gridPosition)
 	
+
+func takeDamage(amount):
+	
+	$HealthComponent.takeDamage(amount)
+	$AnimationComponent.playMeleeHit()

@@ -1,6 +1,6 @@
 extends Node2D
 
-var game: Node = null
+var world: Node = null
 var grid: Node = null
 
 var gridPosition := Vector2i.ZERO
@@ -12,9 +12,14 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-func setup(game):
-	self.game = game
-	grid = game.getGrid()
+func setup(world):
+	self.world = world
+	grid = world.getGrid()
+	$Movement.setup(self)
+	$HealthComponent.setup(self)
+	
+	for skill in $Skills.get_children():
+		skill.setup(self)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,37 +31,60 @@ func _process(delta: float) -> void:
 	
 
 func processExplore():
-	if Input.is_action_just_pressed("ui_up"):
-		if grid.is_tile_empty(gridPosition + Vector2i.UP):
-			move(Vector2i.UP)
-			passTurn()
-			
-	elif Input.is_action_just_pressed("ui_down"):
-		if grid.is_tile_empty(gridPosition + Vector2i.DOWN):
-			move(Vector2i.DOWN)
-			passTurn()
-			
-	elif Input.is_action_just_pressed("ui_left"):
-		if grid.is_tile_empty(gridPosition + Vector2i.LEFT):
-			move(Vector2i.LEFT)
-			passTurn()
-			
-	elif Input.is_action_just_pressed("ui_right"):
-		if grid.is_tile_empty(gridPosition + Vector2i.RIGHT):
-			move(Vector2i.RIGHT)
-			passTurn()
-
-
-
-
-func move(vector):
 	
-	var tiles = get_tree().get_first_node_in_group("tilecontroller")
+	var skillToUse := 0
+	var creatures := []
 	
-	gridPosition += vector
-	tiles.placeGridObjectOnMap(self, gridPosition)
-
-
-
+	if Input.is_action_just_pressed("1"):
+		skillToUse = 1
+	elif Input.is_action_just_pressed("2"):
+		skillToUse = 2
+	
+	#### NO SKILL PICKED	
+	if skillToUse == 0:
+		return
+	
+	#### A SKILL WAS PICKED
+	if skillToUse in [1,2]:
+		creatures = grid.getAdjacentCreatures(self)
+		
+		#### NO MELEE ENEMIES
+		if creatures.is_empty():
+			print("No melee creatures!")
+			return
+	
+		#### MELEE ENEMY/IES FOUND
+		for cre in creatures:
+			print(cre.creatureName)
+	
+	match skillToUse:
+		#### USE SKILL	
+		1:
+			useSkill(0, creatures[0])
+			
+		2:
+			useSkill(1, creatures[0])
+		
+	
+	
+			
 func passTurn():
-	game.passTurn()
+	world.passTurn()
+	
+	
+	
+func getSkills():
+	return $Skills.get_children()
+	
+
+func getHealth():
+	return $HealthComponent.health
+	
+	
+
+func useSkill(index, target):
+	$Skills.get_children()[index].activate(target)
+
+
+func getNavigator():
+	return $NavigationAgent2D

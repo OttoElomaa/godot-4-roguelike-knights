@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwakr1joaem2j"]
+[gd_scene load_steps=6 format=3 uid="uid://cwakr1joaem2j"]
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_ad2sj"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="2_0j1eo"]
-[ext_resource type="PackedScene" uid="uid://dkaqqpg8dxhsq" path="res://Scenes/skill_bar_box.tscn" id="2_rkxis"]
+[ext_resource type="PackedScene" uid="uid://dkaqqpg8dxhsq" path="res://Scenes/MiscUI/skill_bar_box.tscn" id="2_rkxis"]
+[ext_resource type="Script" path="res://Scripts/basic_log.gd" id="4_yij0b"]
+[ext_resource type="PackedScene" uid="uid://irn8tsvxkxy0" path="res://Scenes/BasicLogMessage.tscn" id="5_g7r5i"]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_ad2sj")
@@ -71,23 +73,33 @@ layout_mode = 2
 [node name="SkillBarBox4" parent="Margin/SkillBar" instance=ExtResource("2_rkxis")]
 layout_mode = 2
 
-[node name="StartButton" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(300, 100)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -50.0
-offset_right = 150.0
-offset_bottom = 50.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Margin2" type="MarginContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
 
-[node name="Button" type="Button" parent="StartButton"]
+[node name="LogPanel" type="PanelContainer" parent="Margin2"]
+custom_minimum_size = Vector2(200, 300)
 layout_mode = 2
-size_flags_vertical = 4
-text = "Welcome to the Dungeon"
+theme_override_styles/panel = ExtResource("2_0j1eo")
 
-[connection signal="pressed" from="StartButton/Button" to="." method="_on_button_pressed"]
+[node name="MarginContainer" type="MarginContainer" parent="Margin2/LogPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="CombatLog" type="VBoxContainer" parent="Margin2/LogPanel/MarginContainer"]
+layout_mode = 2
+script = ExtResource("4_yij0b")
+
+[node name="PanelContainer" parent="Margin2/LogPanel/MarginContainer/CombatLog" instance=ExtResource("5_g7r5i")]
+layout_mode = 2

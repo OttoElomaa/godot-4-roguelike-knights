@@ -2,6 +2,9 @@ extends Node2D
 
 
 
+var Orc = load("res://Scenes/Creatures/Orc.tscn")
+var Slime = load("res://Scenes/Creatures/Slime.tscn")
+
 
 var game: Node = null
 
@@ -46,11 +49,10 @@ func startGameAtRoom(setPlayer) -> void:
 
 func populateCreatures() -> Array:
 	
-	var Creature = load("res://Scenes/Creature.tscn")
 	var creatures := []
 	
 	for start in $Utilities/CreatureSpawnPoints.get_children():
-		var newCreature = Creature.instantiate()
+		var newCreature = createRandomCreature()
 		newCreature.roomSetup(self)
 		
 		var newPos = $Tiles/FloorTiles2.local_to_map(start.position)
@@ -61,6 +63,19 @@ func populateCreatures() -> Array:
 		creatures.append(newCreature)
 		
 	return creatures
+
+
+func createRandomCreature() -> Node:
+	
+	var rng = randi_range(1,2)
+	match rng:
+		1:
+			return Orc.instantiate()
+		2:
+			return Slime.instantiate()
+			
+	return Orc.instantiate()	
+
 
 
 func randomizeTileGraphics():

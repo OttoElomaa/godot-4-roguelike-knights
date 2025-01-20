@@ -1,44 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://bckhqa15oogpo"]
+[gd_scene load_steps=5 format=3 uid="uid://bckhqa15oogpo"]
 
 [ext_resource type="Script" path="res://Scripts/game_main.gd" id="1_hxft8"]
-[ext_resource type="Script" path="res://Scripts/roguelike_tiles.gd" id="2_cvab1"]
-[ext_resource type="PackedScene" uid="uid://cwakr1joaem2j" path="res://Scenes/ui.tscn" id="2_gr1qq"]
-[ext_resource type="Script" path="res://Scripts/a_star_grid_node.gd" id="4_b50e2"]
-[ext_resource type="PackedScene" uid="uid://chxte6g0nwu8j" path="res://Scenes/Player.tscn" id="4_l3mjc"]
-[ext_resource type="PackedScene" uid="uid://bwpi8ic3tesb8" path="res://Scenes/BaseRoom.tscn" id="4_pmw7y"]
+[ext_resource type="PackedScene" uid="uid://6rirwqrl30jg" path="res://Scenes/world.tscn" id="3_ywy71"]
 [ext_resource type="Script" path="res://Scripts/file_loader.gd" id="6_t2g5i"]
-[ext_resource type="Script" path="res://Scripts/look_tool.gd" id="7_oekcm"]
-[ext_resource type="Texture2D" uid="uid://bdfti26osccyc" path="res://Sprites/roguelike-look-indicator.png" id="8_2mb8j"]
+[ext_resource type="PackedScene" uid="uid://6k45i4rxp5o4" path="res://Scenes/world_map.tscn" id="10_o3ock"]
 
 [node name="GameMain" type="Node2D"]
 script = ExtResource("1_hxft8")
 
-[node name="UI" parent="." instance=ExtResource("2_gr1qq")]
-
-[node name="World" type="Node2D" parent="."]
-
-[node name="GridController" type="Node" parent="World" groups=["tilecontroller"]]
-script = ExtResource("2_cvab1")
-
-[node name="AStarGridNode" type="Node2D" parent="World"]
-script = ExtResource("4_b50e2")
-
-[node name="Disposables" type="Node2D" parent="World/AStarGridNode"]
-
-[node name="Rooms" type="Node2D" parent="World"]
-
-[node name="BaseRoom" parent="World/Rooms" instance=ExtResource("4_pmw7y")]
-
-[node name="Creatures" type="Node2D" parent="World"]
-
-[node name="Player" parent="World/Creatures" instance=ExtResource("4_l3mjc")]
+[node name="World" parent="." instance=ExtResource("3_ywy71")]
 
 [node name="FileLoader" type="Node" parent="."]
 script = ExtResource("6_t2g5i")
 
-[node name="LookTool" type="Node2D" parent="."]
-position = Vector2(58, -36)
-script = ExtResource("7_oekcm")
-
-[node name="Sprite2D" type="Sprite2D" parent="LookTool"]
-texture = ExtResource("8_2mb8j")
+[node name="WorldMap" parent="." instance=ExtResource("10_o3ock")]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d21u4j6yuyimo"]
+
+[ext_resource type="Script" path="res://Scripts/skill.gd" id="1_xpeuu"]
+[ext_resource type="Script" path="res://Scripts/Skills/MeleeStrike.gd" id="2_jpod2"]
+
+[node name="BaseSkill" type="Node"]
+script = ExtResource("1_xpeuu")
+
+[node name="MeleeStrike" type="Node" parent="."]
+script = ExtResource("2_jpod2")

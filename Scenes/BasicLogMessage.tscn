@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://irn8tsvxkxy0"]
+
+[ext_resource type="Script" path="res://Scripts/MiscUI/basic_log_message.gd" id="1_xqjs1"]
+
+[node name="Message" type="PanelContainer"]
+script = ExtResource("1_xqjs1")
+
+[node name="Text" type="Label" parent="."]
+layout_mode = 2
+text = "This is a log entry."

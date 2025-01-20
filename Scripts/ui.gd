@@ -1,14 +1,29 @@
 extends CanvasLayer
 
 
-@onready var stateLabel = $MainMargin/LookPanel/Margin/Hbox/StateLabel
+@onready var stateLabel := $MainMargin/LookPanel/Margin/Hbox/StateLabel
 
-@onready var lookLabel = $MainMargin/LookPanel/Margin/Hbox/LookLabel
-@onready var lookLabel2 = $MainMargin/LookPanel/Margin/Hbox/LookLabel2
+@onready var lookLabel := $MainMargin/LookPanel/Margin/Hbox/LookLabel
+@onready var lookLabel2 := $MainMargin/LookPanel/Margin/Hbox/LookLabel2
+
+@onready var skillBar := $Margin/SkillBar
+@onready var combatLog := $Margin2/LogPanel/MarginContainer/CombatLog
 
 
 
 
+func displayPlayerSkills(player):
+	
+	var boxes:Array = skillBar.get_children()
+	var skills:Array = player.getSkills()
+	
+	if skills.is_empty():
+		return
+	#### SET EACH SKILL'S ICON IN SKILL BAR	
+	for i in range(skills.size()):
+		boxes[i].setup(skills[i])
+		
+		
 
 
 
@@ -37,9 +52,9 @@ func showLookInfo(game, lookTool):
 					return
 			#### OPTION 2.2.2: EMPTY TILE
 			lookLabel2.text = "It's an open space."
-
-
-func _on_button_pressed() -> void:
+			
+			
+			
+func addMessage(text:String) -> void:
 	
-	var game = get_parent()
-	game.startGame()
+	combatLog.addMessage(text)

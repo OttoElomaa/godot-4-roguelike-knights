@@ -25,7 +25,6 @@ navigation_enabled = false
 [node name="ClutterTiles2" type="TileMapLayer" parent="Tiles" groups=["cluttertiles"]]
 tile_map_data = PackedByteArray("AAAHAA4AAAAAAAAAAAAIAA4AAAAAAAAAAAAIABIAAAAAAAAAAAAOABAAAAAAAAAAAAAMAAkAAAAAAAAAAAAQAAwAAAAAAAAAAAASAA0AAAAAAAAAAAARAAUAAAAAAAAAAAASAAcAAAAAAAAAAAAQAAIAAAAAAAAAAAAGAAQAAAAAAAAAAAAIAAUAAAAAAAAAAAA=")
 tile_set = ExtResource("1_40nn7")
-navigation_enabled = false
 
 [node name="UtilityTiles" type="TileMapLayer" parent="Tiles"]
 tile_set = ExtResource("1_40nn7")

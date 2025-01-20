@@ -3,15 +3,15 @@ extends Node
 
 var tileSize := 32
 
-var game: Node = null
+var world: Node = null
 var roomsList := []
 var wallTilemapsDict := {}
 
 # Called when the node enters the scene tree for the first time.
-func setup(game: Node):
+func setup(world: Node):
 	
-	self.game = game
-	roomsList = game.getRooms()
+	self.world = world
+	roomsList = world.getRooms()
 	wallTilemapsDict = createRoomsDictionary(roomsList)
 
 
@@ -79,8 +79,34 @@ func getAllWallTiles() -> Array:
 func getCreatureTiles() -> Array:
 	
 	var creaturePositions := []
-	for creature in game.getCreatures():
+	for creature in world.getCreatures():
 		creaturePositions.append(creature.gridPosition)
 		
 	return creaturePositions
+
+
+func getAdjacentCreatures(actor) -> Array:
 	
+	var creatures := []
+	var adjacentCoords:Array = getCoordsInRange(actor.gridPosition, 1)
+	
+	for creature in world.getCreatures():
+		if creature.gridPosition in adjacentCoords and creature != actor:
+			creatures.append(creature)	
+				
+	return creatures
+	
+
+
+func getCoordsInRange(gridPos:Vector2i, distance:int) -> Array:
+	
+	var vectors := []
+	for x in range(gridPos.x - distance, gridPos.x + distance + 1):
+		for y in range(gridPos.y - distance, gridPos.y + distance + 1):
+			vectors.append(Vector2i(x, y) )	
+	return vectors
+
+	
+#if abs(creature.gridPosition.x - actor.gridPosition.x) <= 1:
+			#if abs(creature.gridPosition.y - actor.gridPosition.y) <= 1:
+				#if creature != actor:	
