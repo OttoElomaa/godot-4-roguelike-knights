@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://chxte6g0nwu8j"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_f7xdr"]
+[ext_resource type="Texture2D" uid="uid://bw8o6e8ukqaoq" path="res://Sprites/rogues.png" id="2_ogr4h"]
+
+[node name="Player" type="Node2D" groups=["player"]]
+script = ExtResource("1_f7xdr")
+creatureName = "Player"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ogr4h")
+hframes = 6
+vframes = 7
+frame = 16
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="Skills" type="Node" parent="."]

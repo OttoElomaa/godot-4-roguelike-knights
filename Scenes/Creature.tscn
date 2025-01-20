@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjncipjr144kf"]
+
+[ext_resource type="Script" path="res://Scripts/creature.gd" id="1_3smjv"]
+[ext_resource type="Texture2D" uid="uid://f45fjk30t5ph" path="res://Sprites/monsters.png" id="1_l4eq1"]
+
+[node name="Creature" type="Node2D"]
+script = ExtResource("1_3smjv")
+creatureName = "Orc"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_l4eq1")
+hframes = 12
+vframes = 12
+frame = 3
+
+[node name="Skills" type="Node" parent="."]

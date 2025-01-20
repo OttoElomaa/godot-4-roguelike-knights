@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkaqqpg8dxhsq"]
+
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="1_rfuei"]
+
+[node name="SkillBarBox" type="PanelContainer"]
+custom_minimum_size = Vector2(50, 50)
+theme_override_styles/panel = ExtResource("1_rfuei")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2

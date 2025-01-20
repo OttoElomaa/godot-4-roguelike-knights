@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://mtsi03oajols"]
+
+[ext_resource type="Texture2D" uid="uid://bdfti26osccyc" path="res://Sprites/roguelike-look-indicator.png" id="1_qd7kb"]
+
+[node name="DebugSprite" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("1_qd7kb")

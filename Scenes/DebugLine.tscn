@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bedqd1giwm1pl"]
+
+[node name="DebugLine" type="Line2D"]
+points = PackedVector2Array(36, 30, 96, 44)
+width = 4.0
+default_color = Color(1, 0.360784, 0.458824, 1)
