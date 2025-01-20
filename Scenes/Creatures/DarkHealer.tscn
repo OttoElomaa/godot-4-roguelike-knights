@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://ije8xsv38q1"]
+
+[ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Scenes/Creatures/Creature.tscn" id="1_q2tyf"]
+[ext_resource type="Texture2D" uid="uid://bnhrqy1c0eihc" path="res://Sprites/Enemies/enemy-dark-healer-transparent-32px.png" id="2_5yg5m"]
+[ext_resource type="PackedScene" uid="uid://1nkco862q1po" path="res://Scenes/Skills/BasicHeal.tscn" id="3_yo8tq"]
+
+[node name="Creature" instance=ExtResource("1_q2tyf")]
+creatureName = "Dark Healer"
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_5yg5m")
+
+[node name="Heal" parent="Skills" index="0" instance=ExtResource("3_yo8tq")]

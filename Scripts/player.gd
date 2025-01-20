@@ -5,7 +5,7 @@ var grid: Node = null
 
 var gridPosition := Vector2i.ZERO
 
-var isEnemy := false
+@export var isEnemy := false
 @export var isOverworld := false
 
 @export var creatureName := ""
@@ -106,6 +106,11 @@ func useSkill(index, target):
 func takeDamage(amount: int):
 	$HealthComponent.takeDamage(amount)
 	$AnimationComponent.playMeleeHit()
+	
+func recoverHealth(amount: int):
+	$HealthComponent.recoverHealth(amount)
+	#$AnimationComponent.playMeleeHit()
+
 
 	
 func getSkills():

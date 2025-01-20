@@ -10,10 +10,10 @@ func setup(skill):
 
 
 #### SUCCESS=TRUE, FAILURE=FALSE
-func activate(target:Node) -> bool:
+func activate(targets:Array) -> bool:
 	
 	skill.ui.addMessage(skill.actor.creatureName + " uses " + skill.skillName, Color.WHITE)
-	target.takeDamage(20)
+	targets[0].takeDamage(20)
 	return true
 	
 	

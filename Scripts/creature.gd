@@ -10,7 +10,7 @@ var player:Node = null
 var gridPosition := Vector2i.ZERO
 var target:Node = null
 
-var isEnemy := true
+@export var isEnemy := true
 
 @export var creatureName := ""	
 
@@ -72,7 +72,7 @@ func pathStuff():
 	var line: Line2D = world.aStar.createPathBetween(self, world.getPlayer())
 	
 	#### DEBUG: SHOW/HIDE LINE
-	#line.hide()
+	line.hide()
 	
 	#### IF ADJACENT TO TARGET, DON'T MOVE
 	if line.points.size() < 3:
@@ -148,7 +148,17 @@ func takeDamage(amount:int):
 	
 	$HealthComponent.takeDamage(amount)
 	$AnimationComponent.playMeleeHit()
+
+
+func recoverHealth(amount: int):
+	$HealthComponent.recoverHealth(amount)
+	#$AnimationComponent.playMeleeHit()
+	
 	
 	
 func getNavigator():
 	return $NavigationAgent2D
+	
+
+func getHealth():
+	return $HealthComponent.health

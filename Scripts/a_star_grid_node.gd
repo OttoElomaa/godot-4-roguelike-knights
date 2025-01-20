@@ -6,6 +6,7 @@ var world:Node = null
 var grid:Node = null
 
 var aStarGrid := AStarGrid2D.new()
+var aStarManhattan := AStarGrid2D.new()
 
 @export var debugKeepDisposables := false
 
@@ -18,6 +19,8 @@ func setup(world):
 	aStarGrid.cell_size = Vector2i(32,32)
 	aStarGrid.offset = Vector2i(16,16)
 	aStarGrid.update()
+	
+	setupManhattan()
 	#setupGrid()
 	
 	
@@ -30,6 +33,8 @@ func setupGrid():
 	#aStarGrid.default_compute_heuristic = AStarGrid2D.h
 	#aStarGrid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_
 	
+	#setupManhattan()
+	
 	#### TRYING: SET SOLID POINTS HERE
 	var walls = grid.wallTiles
 	for wallTile in walls:
@@ -40,6 +45,18 @@ func setupGrid():
 		aStarGrid.set_point_solid(tile, true)
 		
 	aStarGrid.update()
+	
+
+
+
+func setupManhattan():
+	aStarManhattan.region = Rect2i(-300,-300, 600,600)
+	aStarManhattan.cell_size = Vector2i(32,32)
+	aStarManhattan.offset = Vector2i(16,16)
+	aStarManhattan.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
+	aStarManhattan.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	
+	aStarManhattan.update()
 	
 	
 
@@ -77,6 +94,18 @@ func createDebugLine(path) -> Line2D:
 func createSimplePath(start: Vector2i, end:Vector2i):
 	
 	var path = aStarGrid.get_point_path(start, end )
+	var debugPath := []
+	
+	for coord in path:
+		debugPath.append(coord)
+	createDebugLine(debugPath)
+	
+	return path
+	
+	
+func createPathManhattan(start: Vector2i, end:Vector2i):
+	
+	var path = aStarManhattan.get_point_path(start, end )
 	var debugPath := []
 	
 	for coord in path:

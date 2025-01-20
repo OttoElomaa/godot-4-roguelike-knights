@@ -20,7 +20,6 @@ parsed_collision_mask = 4294901763
 source_geometry_mode = 2
 source_geometry_group_name = &"nav-geometry"
 agent_radius = 0.0
-baking_rect = Rect2(-10000, -10000, 20000, 20000)
 
 [node name="World" type="NavigationRegion2D"]
 navigation_polygon = SubResource("NavigationPolygon_akmnp")
@@ -65,7 +64,7 @@ tile_set = ExtResource("10_6haoq")
 collision_enabled = false
 navigation_enabled = false
 
-[node name="VoidTiles" type="TileMapLayer" parent="Utilities"]
+[node name="VoidTiles" type="TileMapLayer" parent="Utilities" groups=["nav-geometry"]]
 visible = false
 z_index = 5
 tile_set = ExtResource("11_qblsd")
@@ -76,7 +75,6 @@ wait_time = 0.4
 one_shot = true
 
 [node name="DumbTimer2" type="Timer" parent="Utilities"]
-wait_time = 0.1
 one_shot = true
 
 [connection signal="timeout" from="Utilities/DumbTimer" to="." method="_on_dumb_timer_timeout"]

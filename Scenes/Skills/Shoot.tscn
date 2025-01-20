@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Scenes/Skills/BaseSkill.tscn" id="1_vko4m"]
 [ext_resource type="Texture2D" uid="uid://cf5s8r7g1xw1j" path="res://Sprites/Enemies/creature-skeleton.png" id="2_wn2nx"]
-[ext_resource type="Script" path="res://Scripts/Skills/ranged_shot.gd" id="3_4vufc"]
+[ext_resource type="Script" path="res://Scripts/Skills/BasicPhysicalAttack.gd" id="3_ofo0r"]
 
 [node name="Shoot" instance=ExtResource("1_vko4m")]
 skillIcon = ExtResource("2_wn2nx")
@@ -11,4 +11,4 @@ skillType = "ranged"
 range = 3
 
 [node name="Script" type="Node" parent="Scripts" index="0"]
-script = ExtResource("3_4vufc")
+script = ExtResource("3_ofo0r")

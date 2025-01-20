@@ -129,7 +129,7 @@ func generatePath():
 	#### CREATE ASTAR PATHS BETWEEN EACH OF THEM
 	var paths := []
 	for i in range(1, dungeonPath.size()):
-		paths.append(aStar.createSimplePath(dungeonPath[i-1], dungeonPath[i]))
+		paths.append(aStar.createPathManhattan(dungeonPath[i-1], dungeonPath[i]))
 		#prints("start: ", dungeonPath[i-1]," end: ",dungeonPath[i])
 	
 	#### CONVERT THEM TO GRID COORDINATES
@@ -215,7 +215,7 @@ func passTurn():
 		lineOfSightStuff()
 	
 	if isFirstTurn:
-		bake_navigation_polygon(true)
+		#bake_navigation_polygon(true)
 		isFirstTurn = false
 	
 	
@@ -253,6 +253,27 @@ func getRooms():
 
 func getCreatures():
 	return $Creatures.get_children()
+
+
+func getAllies():
+	
+	var returnCreatures := []
+	for c in getCreatures():
+		
+		if not c.isEnemy:
+			returnCreatures.append(c)
+	return returnCreatures
+	
+
+func getEnemies():
+	
+	var returnCreatures := []
+	for c in getCreatures():
+		
+		if c.isEnemy:
+			returnCreatures.append(c)
+	return returnCreatures
+	
 	
 	
 func getUi():

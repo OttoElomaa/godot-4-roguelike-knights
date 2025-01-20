@@ -1,0 +1,44 @@
+[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://rqvrx1aog7gv"]
+
+[ext_resource type="Texture2D" uid="uid://mavyk7vljae1" path="res://Sprites/roguelike-tiles-floors.png" id="8_7squ5"]
+[ext_resource type="Texture2D" uid="uid://wmbncsmv3re5" path="res://Sprites/roguelike-tiles-debug.png" id="9_ln81i"]
+[ext_resource type="Texture2D" uid="uid://laaiy6u1cyae" path="res://Sprites/roguelike-tiles-blank-tile.png" id="11_yumtu"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_yar7h"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_yny76"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_6dt5a"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tf8q2"]
+texture = ExtResource("8_7squ5")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_yar7h")
+1:0/0 = 0
+1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_yny76")
+2:0/0 = 0
+2:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_6dt5a")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5y4s5"]
+texture = ExtResource("9_ln81i")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(16, -16, -16, -16, -16, 16, 16, 16)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(16, -16, -16, -16, -16, 16, 16, 16)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(16, -16, -16, -16, -16, 16, 16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2ukde"]
+texture = ExtResource("11_yumtu")
+texture_region_size = Vector2i(32, 32)
+
+[resource]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
+navigation_layer_0/layers = 3
+sources/81 = SubResource("TileSetAtlasSource_5y4s5")
+sources/6 = SubResource("TileSetAtlasSource_tf8q2")
+sources/83 = SubResource("TileSetAtlasSource_2ukde")

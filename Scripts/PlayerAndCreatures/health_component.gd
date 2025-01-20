@@ -24,7 +24,7 @@ func updateVisual():
 	$HealthBar.max_value = health
 	$HealthBar.value = health
 
-func takeDamage(amount):
+func takeDamage(amount: int):
 	
 	var enemyHurtC := Color.DARK_GOLDENROD
 	var allyHurtC := Color.INDIAN_RED
@@ -45,5 +45,27 @@ func takeDamage(amount):
 			var deathString:String = creature.creatureName + " died!"
 			ui.addMessage(deathString, Color.DARK_CYAN)
 			creature.queue_free()
+
+
+func recoverHealth(amount: int):
+
+	var enemyHealC := Color.CADET_BLUE
+	var allyHealC := Color.GREEN_YELLOW
 	
+	var colorToUse: Color = Color.ALICE_BLUE
+	if creature.isEnemy:
+		colorToUse = enemyHealC
+	else:
+		colorToUse = allyHealC
 	
+	#### CALCULATE HEALTH CHANGE
+	var afterHeal:int = health + amount
+	if afterHeal > maxHealth:
+		health = maxHealth
+	else:
+		health = afterHeal
+	
+		
+	updateVisual()
+	var damageString : String = creature.creatureName + " recovers " + str(amount) + " life!"
+	ui.addMessage(damageString, colorToUse)
