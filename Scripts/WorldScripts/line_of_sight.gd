@@ -154,22 +154,6 @@ func lineOfSightInRange(startCoord:Vector2i, coords: Array, tilemap:TileMapLayer
 	
 	
 	
-	####TRYING TO FIX BUG
-	#for coord in coords:
-		#if not coord in previouslySeenTiles:
-			#tilemap.set_cell(coord, 0, Vector2i(0,0))
-	
-
-
-func compareSlightDifference(vec1: Vector2, vec2: Vector2) -> bool:
-	
-	if abs(vec1.x - vec2.x) > 5:
-		return false
-	if abs(vec1.y - vec2.y) > 5:
-		return false
-	return true
-	
-	
 
 	
 	

@@ -71,12 +71,8 @@ tile_set = ExtResource("11_qblsd")
 navigation_enabled = false
 
 [node name="DumbTimer" type="Timer" parent="Utilities"]
-wait_time = 0.4
-one_shot = true
-
-[node name="DumbTimer2" type="Timer" parent="Utilities"]
+wait_time = 0.1
 one_shot = true
 
 [connection signal="bake_finished" from="." to="." method="_on_bake_finished"]
 [connection signal="timeout" from="Utilities/DumbTimer" to="." method="_on_dumb_timer_timeout"]
-[connection signal="timeout" from="Utilities/DumbTimer2" to="." method="_on_dumb_timer_2_timeout"]

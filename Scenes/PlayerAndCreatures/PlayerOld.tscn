@@ -45,7 +45,7 @@ _data = {
 "RESET": SubResource("Animation_t048g")
 }
 
-[node name="Player" type="Node2D" groups=["player"]]
+[node name="PlayerOld" type="Node2D" groups=["player"]]
 script = ExtResource("1_m5ige")
 creatureName = "Player"
 

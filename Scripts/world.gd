@@ -287,15 +287,8 @@ func getUi():
 func _on_dumb_timer_timeout() -> void:
 	bake_navigation_polygon(true)
 	var pointlessReturn = $AStarGridNode.setupGrid()
-	$Utilities/DumbTimer2.start()
 	
-	
-	
-func _on_dumb_timer_2_timeout() -> void:
-	pass
-	#if not turnOffLineOfSight:
-		#lineOfSightStuff()
-
+		
 
 func _on_bake_finished() -> void:
 	
