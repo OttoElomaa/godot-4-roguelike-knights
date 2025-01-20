@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjncipjr144kf"]
+[gd_scene load_steps=9 format=3 uid="uid://bjncipjr144kf"]
 
 [ext_resource type="Script" path="res://Scripts/creature.gd" id="1_22wni"]
 [ext_resource type="Texture2D" uid="uid://bdfti26osccyc" path="res://Sprites/roguelike-look-indicator.png" id="2_w27nt"]
 [ext_resource type="PackedScene" uid="uid://c88p26kmuj5fw" path="res://Scenes/PlayerAndCreatures/health_component.tscn" id="3_sgkqn"]
 [ext_resource type="PackedScene" uid="uid://bq678nwpus50l" path="res://Scenes/PlayerAndCreatures/animation_component.tscn" id="4_18r3n"]
+[ext_resource type="Script" path="res://Scripts/PlayerAndCreatures/creatureMovementComp.gd" id="5_hw60m"]
 
 [sub_resource type="Animation" id="Animation_dxgkf"]
 resource_name = "MovementWobble"
@@ -64,3 +65,6 @@ simplify_epsilon = 10.0
 libraries = {
 "": SubResource("AnimationLibrary_5otlx")
 }
+
+[node name="CreatureMovement" type="Node" parent="."]
+script = ExtResource("5_hw60m")

@@ -15,7 +15,7 @@ var grid:Node:
 
 func setup(game):
 	self.game = game
-	player.setup(self, true) #### TRUE = IS OVERWORLD
+	player.playerSetup(self, true) #### TRUE = IS OVERWORLD
 	$Grid.setup(self)
 	
 	for dungeonIcon in $Dungeons.get_children():

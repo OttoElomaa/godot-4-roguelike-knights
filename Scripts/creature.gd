@@ -1,5 +1,6 @@
 extends Node2D
 
+class_name Creature
 
 
 var world:Node = null
@@ -11,7 +12,7 @@ var gridPosition := Vector2i.ZERO
 var target:Node = null
 
 @export var isEnemy := true
-
+@export var isPlayer := false
 @export var creatureName := ""	
 
 
@@ -19,6 +20,13 @@ var target:Node = null
 var newPos:Vector2 = Vector2i.ZERO
 var t := 0.0
 var isMoving := false
+
+var isOverworld := false
+
+@onready var movementComponent := $CreatureMovement
+
+
+
 
 
 func roomSetup(room):
@@ -30,6 +38,8 @@ func roomSetup(room):
 	
 	$HealthComponent.setup(self)
 	$AnimationComponent.setup(self)
+	
+	$CreatureMovement.setup(self)
 	
 	for skill in $Skills.get_children():
 		skill.setup(self)
@@ -65,14 +75,14 @@ func _physics_process(delta: float) -> void:
 func pathStuff():
 
 	#### CREATURE CAN MOVE IN THESE DIRECTIONS
-	var allowedDirs := [Vector2.UP,Vector2.DOWN,Vector2.LEFT, Vector2.RIGHT]
-	allowedDirs.append_array([ Vector2(1,1),Vector2(-1,-1),Vector2(-1,1),Vector2(1,-1) ] )
+	var allowedDirs := [Vector2i.UP,Vector2i.DOWN,Vector2i.LEFT, Vector2i.RIGHT]
+	allowedDirs.append_array([ Vector2i(1,1),Vector2i(-1,-1),Vector2i(-1,1),Vector2i(1,-1) ] )
 
 	#### GET A LINE OF THE PATH FROM SELF TO TARGET (PLAYER)
-	var line: Line2D = world.aStar.createPathBetween(self, world.getPlayer())
+	var line: Line2D = world.aStar.createPathBetween(self, world.player)
 	
 	#### DEBUG: SHOW/HIDE LINE
-	line.hide()
+	#line.hide()
 	
 	#### IF ADJACENT TO TARGET, DON'T MOVE
 	if line.points.size() < 3:
@@ -81,7 +91,7 @@ func pathStuff():
 	#### COMPARE TARGET POSITION TO CREATURE POSITIONS
 	#### ROUND FROM 0.777... TO 1
 	var dir = position.direction_to(line.points[1])
-	dir = Vector2(round(dir.x), round(dir.y))
+	dir = Vector2i(round(dir.x), round(dir.y))
 	
 	#print(dir)
 	var creaturePositions : Array = grid.getCreatureTiles()
@@ -94,7 +104,7 @@ func pathStuff():
 			return
 			
 		else:
-			move(dir)
+			movementComponent.move(dir)
 			line.remove_point(0)
 			
 	
@@ -106,6 +116,13 @@ func pathStuff():
 
 
 func passTurn():
+	
+	
+	if isPlayer:
+		world.passTurn()
+		return
+		
+
 	
 	if $HealthComponent.health <= 0:
 		return
@@ -134,14 +151,20 @@ func useSkills() -> bool:
 
 
 func move(vector):
-		
-	gridPosition += Vector2i(vector)
 	#tiles.placeGridObjectOnMap(self, gridPosition)
 	
-	newPos = grid.grid_to_world(gridPosition)
-	isMoving = true
-	$SpriteAnimations.play("MovementWobble")
+	pass
+	#movementComponent.move()
 	
+	#gridPosition += Vector2i(vector)
+	#newPos = grid.grid_to_world(gridPosition)
+	#isMoving = true
+	#$SpriteAnimations.play("MovementWobble")
+
+
+func handleMove(dir:Vector2i):
+	
+	$CreatureMovement.handleMove(dir)
 	
 
 func takeDamage(amount:int):
@@ -157,11 +180,23 @@ func recoverHealth(amount: int):
 func hasFullHealth():
 	var he := $HealthComponent
 	return he.health >= he.maxHealth	
+
+
+func playMovementWobble():
+	$SpriteAnimations.play("MovementWobble")
 	
 	
 func getNavigator():
 	return $NavigationAgent2D
 	
+
+func getSkills():
+	#var skillsNode = self.get_node("Skills")
+	var skillsNode = self.get_node("Skills")
+	for c in self.get_children():
+		print(c)
+	return skillsNode.get_children()
+
 
 func getHealth():
 	return $HealthComponent.health

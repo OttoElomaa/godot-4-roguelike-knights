@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/world_map.gd" id="1_4qp7q"]
 [ext_resource type="Texture2D" uid="uid://bh5055qxfdx57" path="res://Sprites/worldmap-tiles-plains.png" id="1_qshja"]
 [ext_resource type="Script" path="res://Scripts/roguelike_tiles.gd" id="3_2wxbk"]
-[ext_resource type="PackedScene" uid="uid://chxte6g0nwu8j" path="res://Scenes/PlayerAndCreatures/Player.tscn" id="4_xde7m"]
+[ext_resource type="PackedScene" uid="uid://51k70pdjnr8x" path="res://Scenes/Creatures/Player.tscn" id="4_5ahmc"]
 [ext_resource type="Script" path="res://Scripts/dungeon_icon.gd" id="5_8r5lw"]
 [ext_resource type="Texture2D" uid="uid://dvi7npudqaxm8" path="res://Sprites/dungeon-entrance-transparent-32px.png" id="5_au2o8"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="7_m8t6f"]
@@ -59,10 +59,7 @@ script = ExtResource("3_2wxbk")
 
 [node name="Creatures" type="Node2D" parent="."]
 
-[node name="Player" parent="Creatures" instance=ExtResource("4_xde7m")]
-z_index = 1
-position = Vector2(-16, -16)
-isOverworld = true
+[node name="Player" parent="Creatures" instance=ExtResource("4_5ahmc")]
 
 [node name="Dungeons" type="Node2D" parent="."]
 

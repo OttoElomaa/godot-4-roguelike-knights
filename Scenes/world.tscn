@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://cwakr1joaem2j" path="res://Scenes/UI/ui.tscn" id="2_6sbxi"]
 [ext_resource type="Script" path="res://Scripts/roguelike_tiles.gd" id="2_t5xrp"]
 [ext_resource type="Script" path="res://Scripts/a_star_grid_node.gd" id="3_8ljqm"]
-[ext_resource type="PackedScene" uid="uid://chxte6g0nwu8j" path="res://Scenes/PlayerAndCreatures/Player.tscn" id="5_u4826"]
 [ext_resource type="Script" path="res://Scripts/WorldScripts/line_of_sight.gd" id="5_w2yeh"]
 [ext_resource type="Script" path="res://Scripts/look_tool.gd" id="6_qxpnc"]
 [ext_resource type="Texture2D" uid="uid://bdfti26osccyc" path="res://Sprites/roguelike-look-indicator.png" id="7_taxir"]
+[ext_resource type="PackedScene" uid="uid://51k70pdjnr8x" path="res://Scenes/Creatures/Player.tscn" id="8_8c6a2"]
 [ext_resource type="TileSet" uid="uid://d1ktl1xbf2yy8" path="res://Resources/Tilemaps/FogTileset.tres" id="10_6haoq"]
 [ext_resource type="TileSet" uid="uid://7slev8tg8jyu" path="res://Resources/Tilemaps/VoidDebugTiles.tres" id="11_qblsd"]
 [ext_resource type="Script" path="res://Scripts/WorldScripts/room_generation.gd" id="12_53axp"]
@@ -47,7 +47,7 @@ script = ExtResource("5_w2yeh")
 
 [node name="Creatures" type="Node2D" parent="."]
 
-[node name="Player" parent="Creatures" instance=ExtResource("5_u4826")]
+[node name="Player" parent="Creatures" instance=ExtResource("8_8c6a2")]
 
 [node name="Utilities" type="Node2D" parent="."]
 

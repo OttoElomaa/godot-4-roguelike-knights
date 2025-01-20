@@ -1,12 +1,12 @@
 [gd_scene load_steps=11 format=3 uid="uid://chxte6g0nwu8j"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_ivsqb"]
-[ext_resource type="Texture2D" uid="uid://bw8o6e8ukqaoq" path="res://Sprites/rogues.png" id="2_gv8jb"]
-[ext_resource type="Script" path="res://Scripts/player_movement.gd" id="3_2ixw8"]
-[ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Scenes/Skills/Strike.tscn" id="4_a0xux"]
-[ext_resource type="PackedScene" uid="uid://cwkrdlxk2utha" path="res://Scenes/Skills/Strong Strike.tscn" id="5_hwr5i"]
-[ext_resource type="PackedScene" uid="uid://c88p26kmuj5fw" path="res://Scenes/PlayerAndCreatures/health_component.tscn" id="6_58qse"]
-[ext_resource type="PackedScene" uid="uid://bq678nwpus50l" path="res://Scenes/PlayerAndCreatures/animation_component.tscn" id="7_hbd8h"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_m5ige"]
+[ext_resource type="Texture2D" uid="uid://bw8o6e8ukqaoq" path="res://Sprites/rogues.png" id="2_cfqve"]
+[ext_resource type="Script" path="res://Scripts/player_movement.gd" id="3_jf5cg"]
+[ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Scenes/Skills/Strike.tscn" id="4_pfgfq"]
+[ext_resource type="PackedScene" uid="uid://cwkrdlxk2utha" path="res://Scenes/Skills/Strong Strike.tscn" id="5_og08m"]
+[ext_resource type="PackedScene" uid="uid://c88p26kmuj5fw" path="res://Scenes/PlayerAndCreatures/health_component.tscn" id="6_hwubk"]
+[ext_resource type="PackedScene" uid="uid://bq678nwpus50l" path="res://Scenes/PlayerAndCreatures/animation_component.tscn" id="7_64ugq"]
 
 [sub_resource type="Animation" id="Animation_dxgkf"]
 resource_name = "MovementWobble"
@@ -46,29 +46,33 @@ _data = {
 }
 
 [node name="Player" type="Node2D" groups=["player"]]
-script = ExtResource("1_ivsqb")
+script = ExtResource("1_m5ige")
 creatureName = "Player"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_gv8jb")
+texture = ExtResource("2_cfqve")
 hframes = 6
 vframes = 7
 frame = 16
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
-
-[node name="Movement" type="Node" parent="."]
-script = ExtResource("3_2ixw8")
-
 [node name="Skills" type="Node" parent="."]
 
-[node name="Strike" parent="Skills" instance=ExtResource("4_a0xux")]
+[node name="Strike" parent="Skills" instance=ExtResource("4_pfgfq")]
 
-[node name="StrongStrike" parent="Skills" instance=ExtResource("5_hwr5i")]
+[node name="StrongStrike" parent="Skills" instance=ExtResource("5_og08m")]
 
-[node name="HealthComponent" parent="." instance=ExtResource("6_58qse")]
+[node name="HealthComponent" parent="." instance=ExtResource("6_hwubk")]
 health = 100
+
+[node name="AnimationComponent" parent="." instance=ExtResource("7_64ugq")]
+
+[node name="SpriteAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5otlx")
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
 
 [node name="LineOfSightNavigator" type="NavigationAgent2D" parent="."]
 path_desired_distance = 10.0
@@ -77,9 +81,5 @@ navigation_layers = 3
 simplify_path = true
 simplify_epsilon = 10.0
 
-[node name="AnimationComponent" parent="." instance=ExtResource("7_hbd8h")]
-
-[node name="SpriteAnimations" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_5otlx")
-}
+[node name="Movement" type="Node" parent="."]
+script = ExtResource("3_jf5cg")

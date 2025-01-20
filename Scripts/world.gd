@@ -27,6 +27,10 @@ var ui:
 var voidTilemap:
 	get:
 		return $Utilities/VoidTiles
+
+@onready var player:
+	get:
+		return $Creatures/Player
 		
 
 @onready var lookTool := $Utilities/LookTool
@@ -50,7 +54,7 @@ func startGame(game):
 	#await get_tree().process_frame
 	#await get_tree().process_frame
 	
-	getPlayer().setup(self, false)
+	player.playerSetup(self, false)
 	getUi().displayPlayerSkills(getPlayer())
 	
 	#####################################################

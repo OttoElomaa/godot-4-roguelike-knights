@@ -14,11 +14,12 @@ func setup(world):
 	position = world.grid.grid_to_world(gridPosition)
 	
 	startButton.hide()
-	#prints("dungeon pos: ", gridPosition)
+	prints("dungeon pos: ", gridPosition)
 	
 	
 func passTurn(player:Node):
 	
+	print("passing overworld turn")
 	if self.gridPosition == player.gridPosition:
 		print("Dungeon reached")
 		#world.setStartButtonVisible(true)
