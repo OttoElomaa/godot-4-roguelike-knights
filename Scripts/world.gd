@@ -1,14 +1,40 @@
 extends NavigationRegion2D
 
 
+@export var isOverworld := false
+
+@export var turnOffLineOfSight := false
+
 var game:Node = null
 var currentRoom: Node = null
-@onready var grid := $GridController
+
+@onready var grid:Node:
+	get:
+		return $GridController
+		
+var lineOfSight:
+	get:
+		return $LineOfSight
+
+var aStar:
+	get:
+		return $AStarGridNode
+
+var ui:
+	get:
+		return $UI
+
+var voidTilemap:
+	get:
+		return $Utilities/VoidTiles
+		
+
 @onready var lookTool := $Utilities/LookTool
 
-var firstRoom := load("res://Scenes/BaseRoom.tscn")
-var SecondRoom := load("res://Rooms/Basic/EntranceWest/BasicWestEast01.tscn")
-var TestRoom := load("res://Rooms/Basic/EntranceWest/TestRoom01.tscn")
+var isFirstTurn := false
+#var FirstRoom := load("res://Scenes/BaseRoom.tscn")
+#var SecondRoom := load("res://Rooms/Basic/EntranceWest/BasicWestEast01.tscn")
+#var TestRoom := load("res://Rooms/Basic/EntranceWest/TestRoom01.tscn")
 
 
 
@@ -16,57 +42,137 @@ var TestRoom := load("res://Rooms/Basic/EntranceWest/TestRoom01.tscn")
 func startGame(game):
 
 	self.game = game
-	getPlayer().setup(self)
-
+	
+	var pointlessReturn = null
+	
+	#var roomScenes:Dictionary = $RoomGeneration.generateRooms(self)
+	var roomScenes:Dictionary = $RoomGeneration.generateRoomsVersionTwo(self)
+	#await get_tree().process_frame
+	#await get_tree().process_frame
+	
+	getPlayer().setup(self, false)
 	getUi().displayPlayerSkills(getPlayer())
 	
-	
+	#####################################################
 	#### ROOMS STUFF
-	currentRoom = firstRoom.instantiate()
-	var secondRoom = TestRoom.instantiate()
+	#### SETUP ASTARGRID TO CREATE PATH BETWEEN ROOM SCENES
+	pointlessReturn = $AStarGridNode.setup(self)
+	set_navigation_layer_value(2, true)
 	
-	$Rooms.add_child(currentRoom) 
-	$Rooms.add_child(secondRoom) 
+	await get_tree().process_frame
+	await get_tree().process_frame
+	pointlessReturn = generateDungeon(roomScenes)
 	
-	#var secondRoom = SecondRoom.instantiate()
-	#$World/Rooms.add_child(secondRoom)
+	#### PLACE THE PLAYER ON THE MAP
+	#### ROOMS[0]: FIRST ROOM PLACED
+	var startingRoom = getRooms()[0]
+	startingRoom.startGameAtRoom(getPlayer())
+	
+	await get_tree().process_frame
+	await get_tree().process_frame
+	pointlessReturn = $GridController.setup(self)
+	
+	await get_tree().process_frame
+	await get_tree().process_frame
 	
 	
 	
-	for room in getRooms():
-		room.setup(self)
-		
-	currentRoom.placeOnMetaGrid(Vector2.ZERO)
-	secondRoom.placeOnMetaGrid(Vector2i.RIGHT)
+	$Utilities/DumbTimer.start()
+	#for room in getRooms():
+		#prints("room position: ",room.position)
 	
-	$GridController.setup(self)
 	
-	currentRoom.randomizeTileGraphics()
-	secondRoom.randomizeTileGraphics()
-	
-	secondRoom.startGameAtRoom(getPlayer())
-	
-	#### NAV STUFF
-	$AStarGridNode.setup(self)
-	$AStarGridNode.setupGrid()
-	
-	#### LINE OF SIGHT SETUP
-	set_navigation_layer_value(1, true)
-	bake_navigation_polygon(true)
-	
+	######################################################
 	#### ADD CREATURES TO SPAWN LOCATIONS
 	#### CREATURES ARE SETUP IN PopulateCreatures()
 	var creatures: Array = []
-	for room in $Rooms.get_children():
+	for room in getRooms():
 		creatures.append_array(room.populateCreatures() )
 	for creature in creatures:
 		$Creatures.add_child(creature)
-		
-		
-	lineOfSightStuff()
-		
-		
 	
+	##########################################
+	#### NAV STUFF
+	#### SETUP, NOTHING TO WAIT
+	pointlessReturn = $LineOfSight.setup(self)
+	
+	if not turnOffLineOfSight:
+		for x in range(-200,200):
+			for y in range(-200,200):
+				$Utilities/FogTiles.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
+	
+	#### LINE OF SIGHT SETUP
+	
+	
+	
+	
+	
+
+func generateDungeon(roomScenes:Dictionary):
+	
+	for coord in roomScenes.keys():
+		var scene = roomScenes[coord]
+		instantiateRoom(scene, coord)	
+	
+	return generatePath() #### GENERATE A PATH BETWEEN ROOMS
+
+
+
+#### GENERATE A PATH BETWEEN ROOMS	
+func generatePath():
+	
+	#### MAKE A SET OF POINTS THAT NEED TO CONNECT
+	var dungeonPath := []
+	for room in getRooms():	
+		dungeonPath.append(room.getStartPosition())
+	
+	#### CREATE ASTAR PATHS BETWEEN EACH OF THEM
+	var paths := []
+	for i in range(1, dungeonPath.size()):
+		paths.append(aStar.createSimplePath(dungeonPath[i-1], dungeonPath[i]))
+		#prints("start: ", dungeonPath[i-1]," end: ",dungeonPath[i])
+	
+	#### CONVERT THEM TO GRID COORDINATES
+	var gridPaths := []	
+	for path in paths:
+		var gridPath := []
+		for coord in path:
+			#### CONVERSION FROM REGULAR COORDINATES
+			gridPath.append(coord / 32 - Vector2(16.5, 16.5))
+		gridPaths.append(gridPath)
+	
+		
+	#### CREATE THE 1-WIDE PATH BETWEEN ROOMS
+	for room in getRooms():
+		room.generateOpenPath(gridPaths)
+		room.randomizeTileGraphics()	
+		
+	return
+	#for path in paths:
+		#prints("path: ", path)
+	#for path in gridPaths:
+		#prints("path: ", path)
+		
+		
+	#instantiateRoom(FirstRoom, Vector2.ZERO)
+	#instantiateRoom(TestRoom, Vector2i.RIGHT)
+		
+
+#### SETUP EACH ROOM HERE - ALSO CALL ITS SETUP FUNCTION
+#### AND ROOM'S PLACEMENT AND SPRITE GRAPHICS FUNCTIONS
+#### ROOMSCENE COMES FROM ROOM LOADER NODE
+func instantiateRoom(roomScene:PackedScene, metaCoords:Vector2i):
+	
+	var newRoom = roomScene.instantiate()
+	$Rooms.add_child(newRoom) 
+	newRoom.setup(self)	
+	
+	#### MOVE ROOM INTO POSITION BASED ON META POSITION AND GLOBAL ROOM SIZE
+	newRoom.placeOnMetaGrid(metaCoords) 
+	
+	#newRoom.randomizeTileGraphics()
+	#prints("init success! ", newRoom.position)
+
 
 func _process(delta: float) -> void:
 	
@@ -96,66 +202,42 @@ func _process(delta: float) -> void:
 func passTurn():
 	
 	$AStarGridNode.passTurn()
+	lineOfSight.passTurn()
 	
-	bake_navigation_polygon(true)
+	#bake_navigation_polygon(true)
 	
 	
 	for creature in getCreatures():
 		if creature != getPlayer():
 			creature.passTurn()
 	
-	lineOfSightStuff()
+	if not turnOffLineOfSight:
+		lineOfSightStuff()
+	
+	if isFirstTurn:
+		bake_navigation_polygon(true)
+		isFirstTurn = false
 	
 	
 #### FOG OF WAR STUFF??
 func lineOfSightStuff():	
 	
 	var playerPos: Vector2i = getPlayer().gridPosition
-	#for coord:Vector2i in grid.getCoordsInRange(playerPos, 100):
-	
-	#### SET ALL UNSEEN WALL/FLOOR TILES AS HIDDEN
-	for coord:Vector2i in grid.nonVoidTiles:
-		$Utilities/FogTiles.set_cell(coord, 0, Vector2i(0,0))
-	
-	var coordsToCheck := []
-	var coords2:Array = grid.getCoordsInRange(playerPos, 15)
-	for coord in coords2:
-		if coord in grid.nonVoidTiles:
-			coordsToCheck.append(coord)
-	
-	$AStarGridNode.lineOfSightInRange(playerPos, coordsToCheck, $Utilities/FogTiles)
+	var coordsToCheck:Array = grid.getCoordsInRange(playerPos, 15)	
+	$LineOfSight.lineOfSightInRange(playerPos, coordsToCheck, $Utilities/FogTiles)
 	
 	
 
-func pathStuff(creature, target):
-	return $AStarGridNode.pathStuff(creature, target)
+#func createPathBetween(creature, target):
+	#return $AStarGridNode.pathStuff(creature, target)
 
 
 func processLook():
-	
-	var showInfo := false
-	
-	if Input.is_action_just_pressed("ui_up"):
-		lookTool.move(Vector2i.UP)
-		showInfo = true
-	elif Input.is_action_just_pressed("ui_down"):
-		lookTool.move(Vector2i.DOWN)
-		showInfo = true
-	elif Input.is_action_just_pressed("ui_left"):
-		lookTool.move(Vector2i.LEFT)
-		showInfo = true	
-	elif Input.is_action_just_pressed("ui_right"):
-		lookTool.move(Vector2i.RIGHT)
-		showInfo = true
-	
-	#### OPTION 1: NOTHING TO SHOW
-	if not showInfo:
-		return
-		
-	else:
-		getUi().showLookInfo(self, lookTool)
+	$Utilities/LookTool.processLook(self)
 
 
+
+	
 
 func getPlayer():
 	return $Creatures/Player
@@ -175,3 +257,16 @@ func getCreatures():
 	
 func getUi():
 	return $UI
+
+
+func _on_dumb_timer_timeout() -> void:
+	bake_navigation_polygon(true)
+	var pointlessReturn = $AStarGridNode.setupGrid()
+	$Utilities/DumbTimer2.start()
+	
+	
+	
+func _on_dumb_timer_2_timeout() -> void:
+	
+	if not turnOffLineOfSight:
+		lineOfSightStuff()

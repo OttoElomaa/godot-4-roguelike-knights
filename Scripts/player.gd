@@ -6,20 +6,31 @@ var grid: Node = null
 var gridPosition := Vector2i.ZERO
 
 var isEnemy := false
+@export var isOverworld := false
 
 @export var creatureName := ""
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+
+var isZoomedIn := true
 
 
-func setup(world):
+
+func setup(world, isThisOverworld):
 	self.world = world
-	grid = world.getGrid()
+	grid = world.grid
 	$Movement.setup(self)
-	$HealthComponent.setup(self)
 	
+	#### TESTING SETUP STUFF
+	gridPosition = world.grid.world_to_grid(self.position)
+	position = world.grid.grid_to_world(gridPosition)
+	
+	isOverworld = isThisOverworld
+	$Movement.isOverworld = isOverworld
+	if isOverworld:
+		return
+	$Movement.dungeonSetup()
+		
+	$HealthComponent.setup(self)
 	for skill in $Skills.get_children():
 		skill.setup(self)
 
@@ -41,6 +52,16 @@ func processExplore():
 		skillToUse = 1
 	elif Input.is_action_just_pressed("2"):
 		skillToUse = 2
+	
+	elif Input.is_action_just_pressed("Z"):
+		if isZoomedIn:
+			$Camera2D.zoom = Vector2(0.4, 0.4)
+			isZoomedIn = false
+		else:
+			$Camera2D.zoom = Vector2(2, 2)
+			isZoomedIn = true
+	
+	
 	
 	#### NO SKILL PICKED	
 	if skillToUse == 0:
@@ -70,7 +91,9 @@ func processExplore():
 	
 			
 func passTurn():
+	#if not isOverworld:
 	world.passTurn()
+	#$AnimationComponent.reset()
 
 
 func useSkill(index, target):
@@ -98,4 +121,9 @@ func getHealth():
 
 
 func getNavigator():
-	return $NavigationAgent2D
+	return $LineOfSightNavigator
+
+
+
+func playMovementWobble():
+	$SpriteAnimations.play("MovementWobble")

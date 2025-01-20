@@ -1,9 +1,46 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjncipjr144kf"]
+[gd_scene load_steps=8 format=3 uid="uid://bjncipjr144kf"]
 
 [ext_resource type="Script" path="res://Scripts/creature.gd" id="1_22wni"]
 [ext_resource type="Texture2D" uid="uid://bdfti26osccyc" path="res://Sprites/roguelike-look-indicator.png" id="2_w27nt"]
-[ext_resource type="PackedScene" uid="uid://c88p26kmuj5fw" path="res://Scenes/health_component.tscn" id="3_sgkqn"]
-[ext_resource type="PackedScene" uid="uid://bq678nwpus50l" path="res://Scenes/animation_component.tscn" id="4_18r3n"]
+[ext_resource type="PackedScene" uid="uid://c88p26kmuj5fw" path="res://Scenes/PlayerAndCreatures/health_component.tscn" id="3_sgkqn"]
+[ext_resource type="PackedScene" uid="uid://bq678nwpus50l" path="res://Scenes/PlayerAndCreatures/animation_component.tscn" id="4_18r3n"]
+
+[sub_resource type="Animation" id="Animation_dxgkf"]
+resource_name = "MovementWobble"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -5), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_t048g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5otlx"]
+_data = {
+"MovementWobble": SubResource("Animation_dxgkf"),
+"RESET": SubResource("Animation_t048g")
+}
 
 [node name="Creature" type="Node2D"]
 script = ExtResource("1_22wni")
@@ -22,3 +59,8 @@ health = 10
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 simplify_path = true
 simplify_epsilon = 10.0
+
+[node name="SpriteAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5otlx")
+}

@@ -1,0 +1,23 @@
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://7slev8tg8jyu"]
+
+[ext_resource type="Texture2D" uid="uid://b5aockt6wcklk" path="res://Sprites/roguelike-tiles-debug-triangle-green.png" id="2_3nmbf"]
+[ext_resource type="Texture2D" uid="uid://cqweeatyqdsof" path="res://Sprites/roguelike-tiles-debug-triangle.png" id="4_o4lek"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4wusm"]
+texture = ExtResource("4_o4lek")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_18wo1"]
+texture = ExtResource("2_3nmbf")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[resource]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 131
+physics_layer_0/collision_mask = 131
+sources/1 = SubResource("TileSetAtlasSource_4wusm")
+sources/2 = SubResource("TileSetAtlasSource_18wo1")

@@ -1,0 +1,26 @@
+[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://d1ktl1xbf2yy8"]
+
+[ext_resource type="Texture2D" uid="uid://nd3u4mid0mcw" path="res://Sprites/roguelike-tiles-background.png" id="1_00yms"]
+[ext_resource type="Texture2D" uid="uid://c33ewec2rb8yj" path="res://Sprites/roguelike-tiles-fog-of-war.png" id="2_04k5n"]
+[ext_resource type="Texture2D" uid="uid://ubb1mie87222" path="res://Sprites/roguelike-tiles-fog-of-war-fullhidden.png" id="3_bjtbe"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c04mf"]
+texture = ExtResource("1_00yms")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vvyna"]
+texture = ExtResource("2_04k5n")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kfffq"]
+texture = ExtResource("3_bjtbe")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[resource]
+tile_size = Vector2i(32, 32)
+sources/1 = SubResource("TileSetAtlasSource_vvyna")
+sources/2 = SubResource("TileSetAtlasSource_kfffq")
+sources/0 = SubResource("TileSetAtlasSource_c04mf")

@@ -36,22 +36,33 @@ func updateStateLabel(isLook):
 
 func showLookInfo(game, lookTool):
 	
-		lookLabel.text = str(lookTool.gridPosition.x) + ", " + str(lookTool.gridPosition.y)
+	var grid = game.getGrid()
+	lookLabel.text = str(lookTool.gridPosition.x) + ", " + str(lookTool.gridPosition.y)
 	
-		#### OPTION 2.1: A WALL TILE
-		if not game.getGrid().is_tile_empty(lookTool.gridPosition):
-			lookLabel2.text = "It's a wall."
-			return
-		
-		else:
-			var creatures : Array = game.getCreatures()
-			#### OPTION 2.2.1: A CREATURE
-			for creature in creatures:
-				if lookTool.gridPosition == creature.gridPosition:
-					lookLabel2.text = "It's a creature called " + creature.creatureName
-					return
-			#### OPTION 2.2.2: EMPTY TILE
+	var pos = lookTool.gridPosition
+	
+	#### OPTION 2.1: A WALL TILE
+	#if not grid.is_tile_empty(lookTool.gridPosition):
+	if grid.getTileValue(pos) == 2:
+		lookLabel2.text = "It's a wall."
+		return
+	elif grid.getTileValue(pos) == 1:
+		lookLabel2.text = "It's an impassable void."
+		return
+	
+	else:
+		var creatures : Array = game.getCreatures()
+		#### OPTION 2.2.1: A CREATURE
+		for creature in creatures:
+			if pos == creature.gridPosition:
+				lookLabel2.text = "It's a creature called " + creature.creatureName
+				return
+		#### OPTION 2.2.2: EMPTY TILE
+		if grid.getTileValue(pos) == -1:
 			lookLabel2.text = "It's an open space."
+			return
+			
+		lookLabel2.text = "This tile is bugged?"
 			
 			
 			

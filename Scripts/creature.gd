@@ -13,7 +13,13 @@ var target:Node = null
 var isEnemy := true
 
 @export var creatureName := ""	
-	
+
+
+#### FOR MOVEMENT ANIMATION
+var newPos:Vector2 = Vector2i.ZERO
+var t := 0.0
+var isMoving := false
+
 
 func roomSetup(room):
 	
@@ -43,7 +49,17 @@ func _process(delta: float) -> void:
 		pathStuff()
 	
 	
+func _physics_process(delta: float) -> void:
 	
+	if isMoving:
+		
+		t += delta * 2.5
+		position = position.lerp(newPos, t)
+		
+		if position == newPos:
+			prints("movement goal reached, ", creatureName)
+			isMoving = false	
+			t = 0.0	
 	
 	
 func pathStuff():
@@ -53,18 +69,21 @@ func pathStuff():
 	allowedDirs.append_array([ Vector2(1,1),Vector2(-1,-1),Vector2(-1,1),Vector2(1,-1) ] )
 
 	#### GET A LINE OF THE PATH FROM SELF TO TARGET (PLAYER)
-	var line: Line2D = world.pathStuff(self, world.getPlayer())
-	line.hide()
+	var line: Line2D = world.aStar.createPathBetween(self, world.getPlayer())
+	
+	#### DEBUG: SHOW/HIDE LINE
+	#line.hide()
 	
 	#### IF ADJACENT TO TARGET, DON'T MOVE
 	if line.points.size() < 3:
 		return
 	
 	#### COMPARE TARGET POSITION TO CREATURE POSITIONS
+	#### ROUND FROM 0.777... TO 1
 	var dir = position.direction_to(line.points[1])
 	dir = Vector2(round(dir.x), round(dir.y))
 	
-	print(dir)
+	#print(dir)
 	var creaturePositions : Array = grid.getCreatureTiles()
 	
 	if dir in allowedDirs:
@@ -73,14 +92,23 @@ func pathStuff():
 		#### IF TARGET POSITION IS OCCUPIED BY CREATURE, DON'T MOVE
 		if targetGridPos in creaturePositions:
 			return
+			
 		else:
 			move(dir)
+			line.remove_point(0)
+			
+	
+	else:
+		push_error("WHAT THE SHIT ASTARGRID")
 				
 	#line.queue_free()
 	
 
 
 func passTurn():
+	
+	if $HealthComponent.health <= 0:
+		return
 	
 	#### PICK TARGET
 	chooseTarget()
@@ -106,11 +134,14 @@ func useSkills() -> bool:
 
 
 func move(vector):
-	
-	var tiles = get_tree().get_first_node_in_group("tilecontroller")
-	
+		
 	gridPosition += Vector2i(vector)
-	tiles.placeGridObjectOnMap(self, gridPosition)
+	#tiles.placeGridObjectOnMap(self, gridPosition)
+	
+	newPos = grid.grid_to_world(gridPosition)
+	isMoving = true
+	$SpriteAnimations.play("MovementWobble")
+	
 	
 
 func takeDamage(amount:int):

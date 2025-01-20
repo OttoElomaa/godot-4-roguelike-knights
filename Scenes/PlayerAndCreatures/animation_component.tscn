@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bq678nwpus50l"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerAndCreatures/animation_component.gd" id="1_17g7h"]
+[ext_resource type="Script" path="res://Scripts/PlayerAndCreatures/animation_component.gd" id="1_fh7it"]
 
 [sub_resource type="Animation" id="Animation_at7b3"]
 resource_name = "MeleeHit"
@@ -15,7 +15,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0.2, 0.2), Vector2(3, 3)]
+"values": [Vector2(0.2, 0.2), Vector2(2, 2)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -65,6 +65,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [0.0, 3.14159]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MeleeHit1:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.74533]
+}
 
 [sub_resource type="Animation" id="Animation_4ge8a"]
 length = 0.001
@@ -90,7 +102,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [Vector2(0.2, 0.2)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -124,13 +136,15 @@ _data = {
 }
 
 [node name="AnimationComponent" type="Node2D"]
-script = ExtResource("1_17g7h")
+script = ExtResource("1_fh7it")
 
 [node name="MeleeHit1" type="Line2D" parent="."]
 visible = false
+scale = Vector2(0.2, 0.2)
 points = PackedVector2Array(-5, 0, 0, -5, 5, 0, 0, 5)
 closed = true
 width = 1.0
+default_color = Color(1, 0.47451, 0.388235, 1)
 
 [node name="MeleeHit2" type="Line2D" parent="."]
 visible = false

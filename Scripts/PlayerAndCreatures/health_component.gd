@@ -40,3 +40,10 @@ func takeDamage(amount):
 	var damageString : String = creature.creatureName + " takes " + str(amount) + " damage!"
 	ui.addMessage(damageString, colorToUse)
 	
+	if creature.isEnemy:
+		if health <= 0:
+			var deathString:String = creature.creatureName + " died!"
+			ui.addMessage(deathString, Color.DARK_CYAN)
+			creature.queue_free()
+	
+	

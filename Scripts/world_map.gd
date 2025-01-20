@@ -1,12 +1,41 @@
 extends Node2D
 
 
-var game:Node = null
+@export var isOverworld := true
 
+var game:Node = null
+@onready var player := $Creatures/Player
+@onready var ui := $UI
+
+
+var grid:Node:
+	get:
+		return $Grid
+		
 
 func setup(game):
 	self.game = game
+	player.setup(self, true) #### TRUE = IS OVERWORLD
+	$Grid.setup(self)
+	
+	for dungeonIcon in $Dungeons.get_children():
+		dungeonIcon.setup(self)
+		
+	setStartButtonVisible(false)
 
+
+
+func passTurn():
+	
+	for dungeonIcon in $Dungeons.get_children():
+		dungeonIcon.passTurn(player)
+
+
+
+
+func startGame():
+	game.startGame()
+	
 
 func _on_button_pressed() -> void:
 	
@@ -18,3 +47,11 @@ func _on_button_pressed() -> void:
 func hideFunc():
 	self.hide()
 	$UI.hide()
+
+
+
+func setStartButtonVisible(show:bool):
+	if show:
+		$UI/MarginContainer/StartButton.show()
+	else:
+		$UI/MarginContainer/StartButton.hide()

@@ -13,7 +13,7 @@ func setup(skill):
 #### SUCCESS=TRUE, FAILURE=FALSE
 func activate(target:Node) -> bool:
 	
-	var isTargetVisible: bool = world.getAStar().lineOfSightBetweenObjects(skill.actor, target)
+	var isTargetVisible: bool = world.lineOfSight.lineOfSightBetweenObjects(skill.actor, target)
 	
 	if isTargetVisible:
 	

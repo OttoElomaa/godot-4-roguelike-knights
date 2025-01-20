@@ -11,7 +11,11 @@ var actor:Node = null
 var world:Node = null
 
 var ui:Node = null
-		
+
+enum targetingGroupEnum {
+	SELF, ENEMY, ALL_ENEMIES, ALLY, ALL_ALLIES
+}	
+@export var targetingGroup:targetingGroupEnum = targetingGroupEnum.ENEMY
 
 
 func setup(actor:Node):
@@ -20,7 +24,7 @@ func setup(actor:Node):
 	self.world = actor.world
 	self.ui = actor.world.getUi()
 	
-	for skill in self.get_children():
+	for skill in $Scripts.get_children():
 		skill.setup(self)
 
 #### TRY TO PERFORM SKILL ACTIONS
@@ -29,20 +33,23 @@ func activate(target:Node) -> bool:
 	
 	if not isInRangedRange(target):
 		return false
-	print("enemy in range")
-	match self.skillType:
 		
-		"melee":
-			print("melee attack")
-			return $MeleeStrike.activate(target)
-		"ranged":
-			print("ranged attack")
-			return $RangedShot.activate(target)
+	print("enemy in range")
+	
+	for script in $Scripts.get_children():
+		script.activate(target)
+		
+	return false	
+	
+	#match self.skillType:
+		#"melee":
+			#print("melee attack")
+			#return $MeleeStrike.activate(target)
+		#"ranged":
+			#print("ranged attack")
+			#return $RangedShot.activate(target)
 			
-	return false
-
-
-
+	
 
 func isInRangedRange(target:Node) -> bool:
 	

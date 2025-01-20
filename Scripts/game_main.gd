@@ -2,9 +2,7 @@ extends Node2D
 
 
 
-
-
-
+var World = load("res://Scenes/world.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -12,17 +10,21 @@ func _ready() -> void:
 	
 	$WorldMap.setup(self)
 	
-	$World.hide()
+	#$World.hide()
 	$WorldMap.show()
 	
 
 	
 func startGame():
 	
-	$WorldMap.hideFunc()
-	$World.show()
 	
-	$World.startGame(self)
+	
+	var world = World.instantiate()
+	add_child(world)
+	world.startGame(self)
+	
+	#$WorldMap.hideFunc()
+	$WorldMap.queue_free()
 	
 	
 

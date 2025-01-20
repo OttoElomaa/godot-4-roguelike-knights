@@ -17,6 +17,7 @@ var playerGridPos := Vector2i.ZERO
 var originGridPos := Vector2i.ZERO
 var metaGridPos := Vector2i.ZERO
 
+var globalRoomSize := 15
 
 
 func setup(game: Node):
@@ -24,11 +25,13 @@ func setup(game: Node):
 	grid = game.getGrid()
 	player = game.getPlayer()
 	
+	$Tiles/Backdrop2.queue_free()
+	
 	
 func placeOnMetaGrid(metaPos: Vector2i):
 	
 	metaGridPos = metaPos
-	originGridPos = metaGridPos * 20
+	originGridPos = metaGridPos * globalRoomSize
 	position += Vector2(originGridPos) * 32
 	
 	
@@ -108,8 +111,50 @@ func randomizeTileGraphics():
 				tilemap.set_cell(tilePos, tilemap.get_cell_source_id(tilePos), Vector2i(rng, 0) )
 
 
+func getStartPosition():
+	var pos = $Utilities/Center.position
+	return grid.world_to_grid(position + pos) 
+
+
+
+func generateOpenPath(paths:Array):
+	
+	var utilTiles := $Tiles/UtilityTiles
+	var myPath := []
+	var coolTestArray := []
+	
+	for path in paths:
+		for coord in path:
+			var transformed = coord - Vector2(originGridPos) + Vector2(16,16)
+			coolTestArray.append(transformed)
+			#prints("deleting wall tile: ", transformed)
+			
+			#### CONVERT THEM INTO FLOOR TILES
+			#if not transformed in grid.floorTiles:
+				#grid.floorTiles.append(transformed)
+			
+			#assert(transformed in utilTiles.get_used_cells(), "BRUH")
+			if Vector2i(transformed) in utilTiles.get_used_cells():
+				myPath = path
+				$Tiles/WallTiles2.set_cell(transformed, -1)
+				$Tiles/FloorTiles2.set_cell(transformed, 6, Vector2(0,0))
+				
+	#prints("test pathtiles: ",coolTestArray)
+	#prints("test util bordertiles: ", utilTiles.get_used_cells())
 
 	
+	#### SET SOME NICE WALLS AROUND THE PATH - NOT ESSENTIAL
+	#var adjacentTiles := []
+	#for tile in myPath:
+		#adjacentTiles.append_array(grid.getCoordsInRange(tile, 1))
+	#for tile in adjacentTiles:
+		#var tileFixed = Vector2(tile)
+		#if not tileFixed in $Tiles/WallTiles2.get_used_cells():
+			#if not tileFixed in $Tiles/FloorTiles2.get_used_cells():
+				#$Tiles/WallTiles2.set_cell(tileFixed, 21, Vector2(0,0))
 	
+	for tilePos:Vector2i in utilTiles.get_used_cells():
+		utilTiles.set_cell(tilePos, -1)
+	utilTiles.queue_free()
 	
 	

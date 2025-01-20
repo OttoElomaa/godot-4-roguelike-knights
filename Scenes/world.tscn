@@ -1,49 +1,35 @@
-[gd_scene load_steps=17 format=3 uid="uid://6rirwqrl30jg"]
+[gd_scene load_steps=13 format=3 uid="uid://6rirwqrl30jg"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_7s3px"]
-[ext_resource type="PackedScene" uid="uid://cwakr1joaem2j" path="res://Scenes/ui.tscn" id="2_6sbxi"]
+[ext_resource type="PackedScene" uid="uid://cwakr1joaem2j" path="res://Scenes/UI/ui.tscn" id="2_6sbxi"]
 [ext_resource type="Script" path="res://Scripts/roguelike_tiles.gd" id="2_t5xrp"]
 [ext_resource type="Script" path="res://Scripts/a_star_grid_node.gd" id="3_8ljqm"]
-[ext_resource type="PackedScene" uid="uid://bwpi8ic3tesb8" path="res://Scenes/BaseRoom.tscn" id="4_w0hro"]
-[ext_resource type="PackedScene" uid="uid://chxte6g0nwu8j" path="res://Scenes/Player.tscn" id="5_u4826"]
+[ext_resource type="PackedScene" uid="uid://chxte6g0nwu8j" path="res://Scenes/PlayerAndCreatures/Player.tscn" id="5_u4826"]
+[ext_resource type="Script" path="res://Scripts/WorldScripts/line_of_sight.gd" id="5_w2yeh"]
 [ext_resource type="Script" path="res://Scripts/look_tool.gd" id="6_qxpnc"]
 [ext_resource type="Texture2D" uid="uid://bdfti26osccyc" path="res://Sprites/roguelike-look-indicator.png" id="7_taxir"]
-[ext_resource type="Texture2D" uid="uid://nd3u4mid0mcw" path="res://Sprites/roguelike-tiles-background.png" id="9_7ta7i"]
-[ext_resource type="Texture2D" uid="uid://c33ewec2rb8yj" path="res://Sprites/roguelike-tiles-fog-of-war.png" id="9_ghnv2"]
-[ext_resource type="Texture2D" uid="uid://ubb1mie87222" path="res://Sprites/roguelike-tiles-fog-of-war-fullhidden.png" id="10_jakig"]
+[ext_resource type="TileSet" uid="uid://d1ktl1xbf2yy8" path="res://Resources/Tilemaps/FogTileset.tres" id="10_6haoq"]
+[ext_resource type="TileSet" uid="uid://7slev8tg8jyu" path="res://Resources/Tilemaps/VoidDebugTiles.tres" id="11_qblsd"]
+[ext_resource type="Script" path="res://Scripts/WorldScripts/room_generation.gd" id="12_53axp"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_kausf"]
-vertices = PackedVector2Array(2358.28, -1158.49, 2453.68, 1894.13, -1126.47, 1941.87, -1285.47, -1349.43)
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_akmnp"]
+vertices = PackedVector2Array(9504, -9680, 9456, 9424, -9504, 9504, -9552, -9808)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-1296, -1360, -1136, 1952, 2464, 1904, 2368, -1168)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-9552, -9808, 9504, -9680, 9456, 9424, -9504, 9504)])
+parsed_collision_mask = 4294901763
+source_geometry_mode = 2
+source_geometry_group_name = &"nav-geometry"
 agent_radius = 0.0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c04mf"]
-texture = ExtResource("9_7ta7i")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vvyna"]
-texture = ExtResource("9_ghnv2")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kfffq"]
-texture = ExtResource("10_jakig")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_eujck"]
-tile_size = Vector2i(32, 32)
-sources/1 = SubResource("TileSetAtlasSource_vvyna")
-sources/2 = SubResource("TileSetAtlasSource_kfffq")
-sources/0 = SubResource("TileSetAtlasSource_c04mf")
+baking_rect = Rect2(-10000, -10000, 20000, 20000)
 
 [node name="World" type="NavigationRegion2D"]
-navigation_polygon = SubResource("NavigationPolygon_kausf")
+navigation_polygon = SubResource("NavigationPolygon_akmnp")
 script = ExtResource("1_7s3px")
 
 [node name="UI" parent="." instance=ExtResource("2_6sbxi")]
+
+[node name="RoomGeneration" type="Node" parent="."]
+script = ExtResource("12_53axp")
 
 [node name="GridController" type="Node" parent="." groups=["tilecontroller"]]
 script = ExtResource("2_t5xrp")
@@ -53,9 +39,12 @@ script = ExtResource("3_8ljqm")
 
 [node name="Disposables" type="Node2D" parent="AStarGridNode"]
 
-[node name="Rooms" type="Node2D" parent="."]
+[node name="LineOfSight" type="Node2D" parent="."]
+script = ExtResource("5_w2yeh")
 
-[node name="BaseRoom" parent="Rooms" instance=ExtResource("4_w0hro")]
+[node name="Disposables" type="Node2D" parent="LineOfSight"]
+
+[node name="Rooms" type="Node2D" parent="."]
 
 [node name="Creatures" type="Node2D" parent="."]
 
@@ -72,4 +61,23 @@ texture = ExtResource("7_taxir")
 
 [node name="FogTiles" type="TileMapLayer" parent="Utilities"]
 z_index = 2
-tile_set = SubResource("TileSet_eujck")
+tile_set = ExtResource("10_6haoq")
+collision_enabled = false
+navigation_enabled = false
+
+[node name="VoidTiles" type="TileMapLayer" parent="Utilities"]
+visible = false
+z_index = 5
+tile_set = ExtResource("11_qblsd")
+navigation_enabled = false
+
+[node name="DumbTimer" type="Timer" parent="Utilities"]
+wait_time = 0.4
+one_shot = true
+
+[node name="DumbTimer2" type="Timer" parent="Utilities"]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="Utilities/DumbTimer" to="." method="_on_dumb_timer_timeout"]
+[connection signal="timeout" from="Utilities/DumbTimer2" to="." method="_on_dumb_timer_2_timeout"]

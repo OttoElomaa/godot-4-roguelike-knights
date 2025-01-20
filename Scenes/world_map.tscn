@@ -1,7 +1,12 @@
-[gd_scene load_steps=5 format=4 uid="uid://6k45i4rxp5o4"]
+[gd_scene load_steps=10 format=4 uid="uid://6k45i4rxp5o4"]
 
 [ext_resource type="Script" path="res://Scripts/world_map.gd" id="1_4qp7q"]
 [ext_resource type="Texture2D" uid="uid://bh5055qxfdx57" path="res://Sprites/worldmap-tiles-plains.png" id="1_qshja"]
+[ext_resource type="Script" path="res://Scripts/roguelike_tiles.gd" id="3_2wxbk"]
+[ext_resource type="PackedScene" uid="uid://chxte6g0nwu8j" path="res://Scenes/PlayerAndCreatures/Player.tscn" id="4_xde7m"]
+[ext_resource type="Script" path="res://Scripts/dungeon_icon.gd" id="5_8r5lw"]
+[ext_resource type="Texture2D" uid="uid://dvi7npudqaxm8" path="res://Sprites/dungeon-entrance-transparent-32px.png" id="5_au2o8"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="7_m8t6f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q8jxy"]
 texture = ExtResource("1_qshja")
@@ -26,9 +31,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -150.0
-offset_top = -50.0
+offset_top = -224.0
 offset_right = 150.0
-offset_bottom = 50.0
+offset_bottom = -124.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -49,4 +54,46 @@ text = "Welcome to the Dungeon"
 tile_map_data = PackedByteArray("AAD+//z/AQAAAAAAAAD///z/AQAAAAAAAAAAAP3/AQAAAAAAAAABAP3/AQAAAAAAAAABAP7/AQAAAAAAAAAAAP7/AQAAAAAAAAD/////AQABAAAAAAD+////AQABAAAAAAD+//7/AQAAAAAAAAD+//3/AQAAAAAAAAD+/wAAAQABAAAAAAD///3/AQAAAAAAAAD///7/AQAAAAAAAAD//wAAAQABAAAAAAAAAPz/AQAAAAAAAAAAAP//AQAAAAAAAAAAAAAAAQABAAAAAAABAPz/AQAAAAAAAAABAP//AQAAAAAAAAABAAAAAQABAAAAAAAAAAEAAQABAAAAAAAAAAIAAQABAAAAAAAAAAMAAQABAAAAAAABAAEAAQABAAAAAAABAAIAAQABAAAAAAABAAMAAQABAAAAAAACAP//AQAAAAAAAAACAAAAAQAAAAAAAAACAAEAAQAAAAAAAAACAAIAAQABAAAAAAACAAMAAQABAAAAAAADAP//AQAAAAAAAAADAAAAAQAAAAAAAAADAAEAAQAAAAAAAAADAAIAAQABAAAAAAADAAMAAQABAAAAAAAEAP//AQAAAAAAAAAEAAAAAQAAAAAAAAAEAAEAAQAAAAAAAAAEAAIAAQAAAAAAAAAEAAMAAQABAAAAAAAFAP//AQAAAAAAAAAFAAAAAQAAAAAAAAAFAAEAAQAAAAAAAAAFAAIAAQAAAAAAAAAFAAMAAQABAAAAAAD9/wAAAQABAAAAAAD9/wEAAQABAAAAAAD9/wIAAQABAAAAAAD9/wMAAQABAAAAAAD+/wEAAQABAAAAAAD+/wIAAQABAAAAAAD+/wMAAQABAAAAAAD//wEAAQABAAAAAAD//wIAAQABAAAAAAD//wMAAQABAAAAAAABAAQAAQABAAAAAAABAAUAAQABAAAAAAABAAYAAQABAAAAAAACAAQAAQABAAAAAAACAAUAAQABAAAAAAACAAYAAQABAAAAAAADAAQAAQABAAAAAAADAAUAAQABAAAAAAADAAYAAQABAAAAAAAEAAQAAQABAAAAAAAEAAUAAQABAAAAAAAEAAYAAQABAAAAAAAFAAQAAQABAAAAAAAFAAUAAQABAAAAAAAGAAMAAQABAAAAAAAGAAQAAQABAAAAAAAGAAUAAQABAAAAAAAHAAMAAQABAAAAAAAHAAQAAQABAAAAAAAHAAUAAQABAAAAAAAIAAMAAQABAAAAAAAIAAQAAQABAAAAAAAIAAUAAQABAAAAAAAGAAEAAQAAAAAAAAAGAAIAAQAAAAAAAAAHAAEAAQAAAAAAAAAHAAIAAQAAAAAAAAACAP7/AQAAAAAAAAADAP7/AQAAAAAAAAACAP3/AQAAAAAAAAD8//3/AQAAAAAAAAD8//7/AQAAAAAAAAD8////AQAAAAAAAAD9//3/AQAAAAAAAAD9//7/AQAAAAAAAAD9////AQAAAAAAAAD7//7/AQAAAAAAAAD7////AQAAAAAAAAD5/wAAAQABAAAAAAD5/wEAAQABAAAAAAD5/wIAAQABAAAAAAD6/wAAAQABAAAAAAD6/wEAAQABAAAAAAD6/wIAAQABAAAAAAD7/wAAAQABAAAAAAD7/wEAAQABAAAAAAD7/wIAAQABAAAAAAD8/wAAAQABAAAAAAD8/wEAAQABAAAAAAD8/wIAAQABAAAAAAD5//7/AQABAAAAAAD5////AQABAAAAAAD6//7/AQABAAAAAAD6////AQABAAAAAAD6//3/AQABAAAAAAD7//3/AQABAAAAAAD6//v/AQAAAAAAAAD6//z/AQAAAAAAAAD7//v/AQAAAAAAAAD7//z/AQAAAAAAAAD8//v/AQAAAAAAAAD8//z/AQAAAAAAAAD9//v/AQAAAAAAAAD9//z/AQAAAAAAAAD4//z/AQAAAAAAAAD4//3/AQAAAAAAAAD5//z/AQAAAAAAAAD5//3/AQAAAAAAAAD3//7/AQAAAAAAAAD3////AQAAAAAAAAD4//7/AQAAAAAAAAD4////AQAAAAAAAAA=")
 tile_set = SubResource("TileSet_0k3il")
 
+[node name="Grid" type="Node" parent="."]
+script = ExtResource("3_2wxbk")
+
+[node name="Creatures" type="Node2D" parent="."]
+
+[node name="Player" parent="Creatures" instance=ExtResource("4_xde7m")]
+z_index = 1
+position = Vector2(-16, -16)
+isOverworld = true
+
+[node name="Dungeons" type="Node2D" parent="."]
+
+[node name="DungeonIcon" type="Node2D" parent="Dungeons"]
+position = Vector2(80, -16)
+script = ExtResource("5_8r5lw")
+metadata/_edit_group_ = true
+
+[node name="Sprite" type="Sprite2D" parent="Dungeons/DungeonIcon"]
+texture = ExtResource("5_au2o8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Dungeons/DungeonIcon"]
+
+[node name="StartButton" type="PanelContainer" parent="Dungeons/DungeonIcon/CanvasLayer"]
+custom_minimum_size = Vector2(300, 100)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -124.0
+offset_right = 150.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="Dungeons/DungeonIcon/CanvasLayer/StartButton"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("7_m8t6f")
+text = "Welcome to the Dungeon"
+
 [connection signal="pressed" from="UI/MarginContainer/StartButton/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Dungeons/DungeonIcon/CanvasLayer/StartButton/Button" to="Dungeons/DungeonIcon" method="_on_button_pressed"]
