@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://chxte6g0nwu8j"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_m5ige"]
+[ext_resource type="Script" path="res://Scripts/player-OLD.gd" id="1_m5ige"]
 [ext_resource type="Texture2D" uid="uid://bw8o6e8ukqaoq" path="res://Sprites/rogues.png" id="2_cfqve"]
 [ext_resource type="Script" path="res://Scripts/player_movement.gd" id="3_jf5cg"]
 [ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Scenes/Skills/Strike.tscn" id="4_pfgfq"]

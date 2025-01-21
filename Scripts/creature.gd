@@ -118,6 +118,9 @@ func pathStuff():
 func passTurn():
 	
 	
+	for skill in getSkills():
+		skill.passTurn()
+	
 	if isPlayer:
 		world.passTurn()
 		return

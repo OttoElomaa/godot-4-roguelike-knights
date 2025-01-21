@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cwakr1joaem2j"]
 
-[ext_resource type="Script" path="res://Scripts/ui.gd" id="1_wy0uv"]
+[ext_resource type="Script" path="res://Scripts/WorldScripts/dungeon_ui.gd" id="1_wy0uv"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="2_0cgky"]
 [ext_resource type="PackedScene" uid="uid://dkaqqpg8dxhsq" path="res://Scenes/UI/skill_bar_box.tscn" id="3_j24mf"]
 [ext_resource type="PackedScene" uid="uid://bbx4lxn5g5ryb" path="res://Scenes/UI/basic_log.tscn" id="4_e6hou"]

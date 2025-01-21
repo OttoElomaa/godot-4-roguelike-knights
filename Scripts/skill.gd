@@ -28,10 +28,19 @@ func setup(actor:Node):
 
 
 
+func passTurn():
+	$Cooldown.tickCooldown()
+
+
+
 #### TRY TO PERFORM SKILL ACTIONS
 #### SUCCESS=TRUE, FAILURE=FALSE
 func activate() -> bool:
 	
+	var cool = $Cooldown
+	if cool.isOnCooldown():
+		ui.addMessage( "%s can't use %s (Cooldown %d)" % [actor.creatureName,skillName, cool.currentCooldown], Color.WHITE)
+		return false
 	
 	var targets:Array = $Targeting.handleTargeting()
 	
@@ -43,6 +52,10 @@ func activate() -> bool:
 	var success := false
 	for script in $Scripts.get_children():
 		success = script.activate(targets)
+		
+		
+	if success:
+		cool.putOnCooldown()
 		
 	return success	
 				

@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=4 uid="uid://qw3rjqj42di6"]
 
 [ext_resource type="Script" path="res://Scripts/base_room.gd" id="1_r56rv"]
-[ext_resource type="Script" path="res://Scripts/roguelike_tiles.gd" id="2_svuqj"]
+[ext_resource type="Script" path="res://Scripts/WorldScripts/roguelike_tiles.gd" id="2_svuqj"]
 [ext_resource type="TileSet" uid="uid://ddl5lqa65tlur" path="res://Resources/RoguesEnvironsTiles.tres" id="3_lmlc2"]
-[ext_resource type="Script" path="res://Scripts/player.gd" id="4_rs50x"]
+[ext_resource type="Script" path="res://Scripts/player-OLD.gd" id="4_rs50x"]
 [ext_resource type="Texture2D" uid="uid://bw8o6e8ukqaoq" path="res://Sprites/rogues.png" id="5_f4vkn"]
 
 [node name="BaseRoom" type="Node2D"]

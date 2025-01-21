@@ -16,3 +16,6 @@ targetingGroup = 3
 [node name="Node" type="Node" parent="Scripts" index="0"]
 script = ExtResource("2_n7q23")
 healAmount = 8
+
+[node name="Cooldown" parent="." index="3"]
+cooldown = 2
