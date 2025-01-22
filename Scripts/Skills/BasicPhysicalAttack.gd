@@ -20,7 +20,7 @@ func activate(targets:Array) -> bool:
 	var target = targets[0]
 	
 	skill.ui.addMessage(skill.actor.creatureName + " uses " + skill.skillName, Color.WHITE)
-	target.takeDamage(damage)
+	target.handlePhysicalHit(damage)
 	
 	if isRanged:
 		skill.world.lineOfSight.createRangedLine(actor.position, target.position)

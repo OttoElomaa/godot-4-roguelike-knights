@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Scenes/Creatures/Creature.tscn" id="1_oyi6b"]
 [ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Scenes/Skills/Strike.tscn" id="2_65cc6"]
 [ext_resource type="Script" path="res://Scripts/PlayerAndCreatures/movementInputComponent.gd" id="2_eephr"]
-[ext_resource type="Texture2D" uid="uid://bnhrqy1c0eihc" path="res://Sprites/Enemies/enemy-dark-healer-transparent-32px.png" id="3_ibhe8"]
+[ext_resource type="Texture2D" uid="uid://iouh024wqtl4" path="res://Sprites/heroes-warden.png" id="3_g15wy"]
 [ext_resource type="PackedScene" uid="uid://cwkrdlxk2utha" path="res://Scenes/Skills/Strong Strike.tscn" id="3_pbg33"]
 
 [node name="Player" instance=ExtResource("1_oyi6b")]
@@ -14,7 +14,7 @@ isPlayer = true
 creatureName = "Player"
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("3_ibhe8")
+texture = ExtResource("3_g15wy")
 
 [node name="Strike" parent="Skills" index="0" instance=ExtResource("2_65cc6")]
 

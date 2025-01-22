@@ -51,6 +51,10 @@ creatureName = "BaseCreature"
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_w27nt")
 
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("6_x3hfw")
+block = 20
+
 [node name="Skills" type="Node" parent="."]
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_sgkqn")]
@@ -69,8 +73,5 @@ libraries = {
 
 [node name="CreatureMovement" type="Node" parent="."]
 script = ExtResource("5_hw60m")
-
-[node name="Stats" type="Node" parent="."]
-script = ExtResource("6_x3hfw")
 
 [node name="Items" type="Node" parent="."]

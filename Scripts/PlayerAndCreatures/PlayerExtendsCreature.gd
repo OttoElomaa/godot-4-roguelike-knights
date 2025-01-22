@@ -27,6 +27,8 @@ func playerSetup(world, isThisOverworld):
 		return
 	
 	$HealthComponent.setup(self)
+	$Stats.setup(self)
+	
 	$AnimationComponent.setup(self)
 	$CreatureMovement.setup(self)
 	

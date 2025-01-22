@@ -37,6 +37,8 @@ func roomSetup(room):
 	self.player = world.getPlayer()
 	
 	$HealthComponent.setup(self)
+	$Stats.setup(self)
+	
 	$AnimationComponent.setup(self)
 	
 	$CreatureMovement.setup(self)
@@ -44,13 +46,7 @@ func roomSetup(room):
 	for skill in $Skills.get_children():
 		skill.setup(self)
 	
-	
-func mySetup():
-	pass
-	#self.game = game
-	
-	
-	
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -174,6 +170,10 @@ func takeDamage(amount:int):
 	
 	$HealthComponent.takeDamage(amount)
 	$AnimationComponent.playMeleeHit()
+
+
+func handlePhysicalHit(damage:int):
+	$Stats.handlePhysicalHit(damage)
 
 
 func recoverHealth(amount: int):
