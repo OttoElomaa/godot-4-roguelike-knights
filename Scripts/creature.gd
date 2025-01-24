@@ -52,7 +52,7 @@ func roomSetup(room):
 func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("P"):
-		pathStuff()
+		creatureMove()
 	
 	
 func _physics_process(delta: float) -> void:
@@ -68,17 +68,23 @@ func _physics_process(delta: float) -> void:
 			t = 0.0	
 	
 	
-func pathStuff():
-
+func creatureMove():
+	
+	var movementTarget = world.player
+	
+	#### ENEMIES VERY FAR FROM PLAYER WILL NOT CHASE PLAYER
+	if world.grid.getGridDistance(self, movementTarget) > 10:
+		return
+	
 	#### CREATURE CAN MOVE IN THESE DIRECTIONS
 	var allowedDirs := [Vector2i.UP,Vector2i.DOWN,Vector2i.LEFT, Vector2i.RIGHT]
 	allowedDirs.append_array([ Vector2i(1,1),Vector2i(-1,-1),Vector2i(-1,1),Vector2i(1,-1) ] )
 
 	#### GET A LINE OF THE PATH FROM SELF TO TARGET (PLAYER)
-	var line: Line2D = world.aStar.createPathBetween(self, world.player)
+	var line: Line2D = world.aStar.createPathBetween(self, movementTarget)
 	
 	#### DEBUG: SHOW/HIDE LINE
-	#line.hide()
+	line.hide()
 	
 	#### IF ADJACENT TO TARGET, DON'T MOVE
 	if line.points.size() < 3:
@@ -113,16 +119,17 @@ func pathStuff():
 
 func passTurn():
 	
-	
+	#### TICK COOLDOWNS ETC ON-TURN EFFECTS ON SKILL NODES
 	for skill in getSkills():
 		skill.passTurn()
 	
+	#### PLAYER PASSES TURN AFTER TAKING ACTION, SO DO NOTHING NOW
 	if isPlayer:
 		world.passTurn()
 		return
 		
-
 	
+	#### DON'T DO ANYTHING IF DEAD
 	if $HealthComponent.health <= 0:
 		return
 	
@@ -133,7 +140,7 @@ func passTurn():
 		return
 		
 	#### TRY TO MOVE	
-	pathStuff()	
+	creatureMove()	
 	
 
 
@@ -180,6 +187,7 @@ func recoverHealth(amount: int):
 	$HealthComponent.recoverHealth(amount)
 	#$AnimationComponent.playMeleeHit()
 
+
 func hasFullHealth():
 	var he := $HealthComponent
 	return he.health >= he.maxHealth	
@@ -194,11 +202,7 @@ func getNavigator():
 	
 
 func getSkills():
-	#var skillsNode = self.get_node("Skills")
-	var skillsNode = self.get_node("Skills")
-	for c in self.get_children():
-		print(c)
-	return skillsNode.get_children()
+	return get_node("Skills").get_children()
 
 
 func getHealth():

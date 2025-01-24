@@ -2,6 +2,7 @@ extends Node
 
 
 
+@export var armor := 0
 @export var guard := 0
 @export var crit := 0
 @export var evade := 0
@@ -24,9 +25,10 @@ func handlePhysicalHit(damage:int):
 	
 	if tryBlock():
 		var blockString : String =  "%s blocks %d damage without taking any!" % [creature.creatureName, damage] 
-		ui.addMessage(blockString, Color.WHITE)
+		ui.addMessage(blockString, Color.LIGHT_GRAY)
 	else:
-		creature.takeDamage(damage)
+		var reduced = reduceDamageByArmor(damage)
+		creature.takeDamage(reduced)
 	
 	
 
@@ -37,4 +39,11 @@ func tryBlock():
 		return true
 	return false
 	
+
+
+func reduceDamageByArmor(damage:int) -> int:
 	
+	var multiplier = float(100 - armor) / 100
+	var reducedDamage:int = ceil(damage * multiplier)
+	print("damage:%d, multiplier:%d, reduced:%d" % [damage,multiplier,reducedDamage])
+	return reducedDamage

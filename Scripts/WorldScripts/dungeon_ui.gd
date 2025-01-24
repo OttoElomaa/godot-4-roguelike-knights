@@ -69,3 +69,7 @@ func showLookInfo(game, lookTool):
 func addMessage(text:String, color:Color) -> void:
 	
 	combatLog.addMessage(text, color)
+
+
+func closeLoadingScreen():
+	$LoadingImage.queue_free()

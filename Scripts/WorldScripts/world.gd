@@ -47,6 +47,7 @@ func startGame(game):
 
 	self.game = game
 	
+	States.inputModeOff()
 	var pointlessReturn = null
 	
 	#var roomScenes:Dictionary = $RoomGeneration.generateRooms(self)
@@ -293,5 +294,8 @@ func _on_dumb_timer_timeout() -> void:
 func _on_bake_finished() -> void:
 	
 	await get_tree().process_frame
+	States.inputModeExplore()
+	ui.closeLoadingScreen()
+	
 	if not turnOffLineOfSight:
 		lineOfSightStuff()

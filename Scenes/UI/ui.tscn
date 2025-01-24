@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwakr1joaem2j"]
+[gd_scene load_steps=6 format=3 uid="uid://cwakr1joaem2j"]
 
 [ext_resource type="Script" path="res://Scripts/WorldScripts/dungeon_ui.gd" id="1_wy0uv"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="2_0cgky"]
 [ext_resource type="PackedScene" uid="uid://dkaqqpg8dxhsq" path="res://Scenes/UI/skill_bar_box.tscn" id="3_j24mf"]
 [ext_resource type="PackedScene" uid="uid://bbx4lxn5g5ryb" path="res://Scenes/UI/basic_log.tscn" id="4_e6hou"]
+[ext_resource type="Texture2D" uid="uid://dgf0gnmb68l05" path="res://Sprites/loading-screen-temp.png" id="5_farj6"]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_wy0uv")
@@ -98,3 +99,14 @@ theme_override_constants/margin_bottom = 5
 
 [node name="CombatLog" parent="Margin2/LogPanel/MarginContainer" instance=ExtResource("4_e6hou")]
 layout_mode = 2
+
+[node name="LoadingImage" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 3
+texture = ExtResource("5_farj6")
+expand_mode = 1

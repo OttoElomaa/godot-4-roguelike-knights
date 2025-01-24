@@ -2,11 +2,19 @@ extends Node
 
 
 enum InputStates {
-	EXPLORE, LOOK,
+	NONE, EXPLORE, LOOK,
 }
 
 var GameState: InputStates = InputStates.EXPLORE
 
+
+
+func inputModeOff():
+	GameState = InputStates.NONE
+	
+
+func inputModeExplore():
+	GameState = InputStates.EXPLORE
 
 
 func handleLook() -> bool:

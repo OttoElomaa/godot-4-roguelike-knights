@@ -64,7 +64,7 @@ func _physics_process(delta: float) -> void:
 #### MOVEMENT DONE, RESOLVE ITS RESULT
 func resolveCompletedMovement():
 	
-	print("movement goal reached")
+	#print("movement goal reached")
 	print(creature.gridPosition)
 	isMoving = false	
 	t = 0.0
