@@ -146,7 +146,7 @@ func passTurn():
 		return
 	
 	#### PICK TARGET
-	chooseTarget()
+	#chooseTarget()
 	#### TRY TO USE A SKILL
 	if useSkills():
 		return
