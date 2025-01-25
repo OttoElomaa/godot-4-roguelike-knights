@@ -73,7 +73,7 @@ func creatureMove():
 	var movementTarget = world.player
 	
 	#### ENEMIES VERY FAR FROM PLAYER WILL NOT CHASE PLAYER
-	if world.grid.getGridDistance(self, movementTarget) > 10:
+	if world.grid.getGridDistance(self, movementTarget) > 5:
 		return
 	
 	#### CREATURE CAN MOVE IN THESE DIRECTIONS

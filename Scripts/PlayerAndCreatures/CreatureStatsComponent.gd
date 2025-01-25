@@ -5,7 +5,7 @@ extends Node
 @export var armor := 0
 @export var guard := 0
 @export var crit := 0
-@export var evade := 0
+@export var evasion := 0
 @export var block := 0
 
 var creature: Node = null
@@ -26,9 +26,16 @@ func handlePhysicalHit(damage:int):
 	if tryBlock():
 		var blockString : String =  "%s blocks %d damage without taking any!" % [creature.creatureName, damage] 
 		ui.addMessage(blockString, Color.LIGHT_GRAY)
-	else:
-		var reduced = reduceDamageByArmor(damage)
-		creature.takeDamage(reduced)
+		return
+		
+	if tryEvade():
+		var evadeString : String =  "%s evades %d damage!" % [creature.creatureName, damage] 
+		ui.addMessage(evadeString, Color.LIGHT_GRAY)
+		return
+		
+	
+	var reduced = reduceDamageByArmor(damage)
+	creature.takeDamage(reduced)
 	
 	
 
@@ -38,7 +45,13 @@ func tryBlock():
 	if rand < block:
 		return true
 	return false
+
+func tryEvade():
 	
+	var rand = rng.randi_range(0,100)
+	if rand < evasion:
+		return true
+	return false	
 
 
 func reduceDamageByArmor(damage:int) -> int:

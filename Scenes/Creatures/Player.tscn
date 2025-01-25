@@ -16,9 +16,16 @@ creatureName = "Player"
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_g15wy")
 
+[node name="Stats" parent="." index="1"]
+armor = 30
+block = 30
+
 [node name="Strike" parent="Skills" index="0" instance=ExtResource("2_65cc6")]
 
 [node name="StrongStrike" parent="Skills" index="1" instance=ExtResource("3_pbg33")]
+
+[node name="HealthComponent" parent="." index="3"]
+health = 50
 
 [node name="Camera2D" type="Camera2D" parent="." index="7"]
 zoom = Vector2(2, 2)

@@ -61,6 +61,7 @@ script = ExtResource("3_2wxbk")
 
 [node name="Player" parent="Creatures" instance=ExtResource("4_5ahmc")]
 z_index = 0
+y_sort_enabled = false
 
 [node name="Dungeons" type="Node2D" parent="."]
 
