@@ -47,6 +47,7 @@ func startGame(game):
 
 	self.game = game
 	
+	ui.toggleLoadingScreen(true)
 	States.inputModeOff()
 	var pointlessReturn = null
 	
@@ -295,7 +296,7 @@ func _on_bake_finished() -> void:
 	
 	await get_tree().process_frame
 	States.inputModeExplore()
-	ui.closeLoadingScreen()
+	ui.toggleLoadingScreen(false)
 	
 	if not turnOffLineOfSight:
 		lineOfSightStuff()

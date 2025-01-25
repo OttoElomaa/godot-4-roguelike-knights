@@ -48,6 +48,7 @@ script = ExtResource("5_w2yeh")
 [node name="Creatures" type="Node2D" parent="."]
 
 [node name="Player" parent="Creatures" instance=ExtResource("8_8c6a2")]
+z_index = 0
 
 [node name="Utilities" type="Node2D" parent="."]
 

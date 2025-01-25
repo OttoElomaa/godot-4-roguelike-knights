@@ -70,12 +70,16 @@ func resolveCompletedMovement():
 	t = 0.0
 	
 	if creature.isPlayer:
+		creature.get_node("MovementInput").resolvePlayerMovement()
+	
+	if creature.isPlayer:
 		creature.passTurn()
 
 
 		
 
-func handlePlayerMove():
+func continuePlayerMovement():
+	#isMoving = true
 	handleMove(movementDir)
 
 			
@@ -83,7 +87,8 @@ func handleMove(dir):
 	
 	if not grid.is_tile_empty(creature.gridPosition + dir):
 		return
-		
+	
+	#isMoving = true
 	move(dir)
 	movementDir = dir
 

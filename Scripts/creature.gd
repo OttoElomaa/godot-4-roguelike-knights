@@ -207,3 +207,12 @@ func getSkills():
 
 func getHealth():
 	return $HealthComponent.health
+
+
+func _on_mouse_area_mouse_entered() -> void:
+	
+	if world.isOverworld:
+		return
+	
+	prints("Mouse entered: ", creatureName)
+	world.ui.showMouseLookCreature(self)

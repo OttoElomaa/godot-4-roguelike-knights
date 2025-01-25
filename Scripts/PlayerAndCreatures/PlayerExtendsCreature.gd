@@ -69,18 +69,7 @@ func processExplore():
 	if skillToUse == 0:
 		return
 	
-	#### A SKILL WAS PICKED
-	#if skillToUse in [1,2]:
-		#creatures = grid.getAdjacentCreatures(self)
-		
-		#### NO MELEE ENEMIES
-		#if creatures.is_empty():
-			#print("No melee creatures!")
-			#return
-	
-		#### MELEE ENEMY/IES FOUND
-		#for cre in creatures:
-			#print(cre.creatureName)
+
 	
 	match skillToUse:
 		#### USE SKILL	
@@ -97,15 +86,6 @@ func useSkill(index):
 	var skill = self.getSkills()[index]
 	skill.activate()
 	passTurn()
-
-
-
-#func getSkills():
-	##var skillsNode = self.get_node("Skills")
-	#var skillsNode = self.get_node("Skills")
-	#for c in self.get_children():
-		#print(c)
-	#return skillsNode.get_children()
 
 
 

@@ -1,10 +1,10 @@
 extends CanvasLayer
 
 
-@onready var stateLabel := $MainMargin/LookPanel/Margin/Hbox/StateLabel
+@onready var stateLabel := $LookMargin/LookPanel/Margin/Hbox/StateLabel
 
-@onready var lookLabel := $MainMargin/LookPanel/Margin/Hbox/LookLabel
-@onready var lookLabel2 := $MainMargin/LookPanel/Margin/Hbox/LookLabel2
+@onready var lookLabel := $LookMargin/LookPanel/Margin/Hbox/LookLabel
+@onready var lookLabel2 := $LookMargin/LookPanel/Margin/Hbox/LookLabel2
 
 @onready var skillBar := $Margin/SkillBar
 @onready var combatLog := $Margin2/LogPanel/MarginContainer/CombatLog
@@ -34,10 +34,15 @@ func updateStateLabel(isLook):
 		stateLabel.text = "Input State = Explore"
 
 
+
+func showMouseLookCreature(creature:Node):
+	lookLabel.text = "%d, %d" % [creature.gridPosition.x, creature.gridPosition.y]
+	lookLabel2.text = "It's a creature called " + creature.creatureName
+
 func showLookInfo(game, lookTool):
 	
 	var grid = game.getGrid()
-	lookLabel.text = str(lookTool.gridPosition.x) + ", " + str(lookTool.gridPosition.y)
+	lookLabel.text = "%d, %d" % [lookTool.gridPosition.x, lookTool.gridPosition.y] 
 	
 	var pos = lookTool.gridPosition
 	
@@ -71,5 +76,8 @@ func addMessage(text:String, color:Color) -> void:
 	combatLog.addMessage(text, color)
 
 
-func closeLoadingScreen():
-	$LoadingImage.queue_free()
+func toggleLoadingScreen(visible:bool):
+	if visible:
+		$LoadingImage.show()
+	else:
+		$LoadingImage.hide()

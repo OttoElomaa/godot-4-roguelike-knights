@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bjncipjr144kf"]
+[gd_scene load_steps=11 format=3 uid="uid://bjncipjr144kf"]
 
 [ext_resource type="Script" path="res://Scripts/creature.gd" id="1_22wni"]
 [ext_resource type="Texture2D" uid="uid://bdfti26osccyc" path="res://Sprites/roguelike-look-indicator.png" id="2_w27nt"]
@@ -44,7 +44,11 @@ _data = {
 "RESET": SubResource("Animation_t048g")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vxror"]
+size = Vector2(30, 30)
+
 [node name="Creature" type="Node2D"]
+z_index = 10
 script = ExtResource("1_22wni")
 creatureName = "BaseCreature"
 
@@ -76,3 +80,12 @@ libraries = {
 script = ExtResource("5_hw60m")
 
 [node name="Items" type="Node" parent="."]
+
+[node name="MouseArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseArea"]
+shape = SubResource("RectangleShape2D_vxror")
+
+[connection signal="mouse_entered" from="MouseArea" to="." method="_on_mouse_area_mouse_entered"]

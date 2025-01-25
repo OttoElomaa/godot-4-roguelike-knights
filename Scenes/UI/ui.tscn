@@ -9,7 +9,7 @@
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_wy0uv")
 
-[node name="MainMargin" type="MarginContainer" parent="."]
+[node name="LookMargin" type="MarginContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
@@ -19,28 +19,28 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="LookPanel" type="PanelContainer" parent="MainMargin"]
+[node name="LookPanel" type="PanelContainer" parent="LookMargin"]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_0cgky")
 
-[node name="Margin" type="MarginContainer" parent="MainMargin/LookPanel"]
+[node name="Margin" type="MarginContainer" parent="LookMargin/LookPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="Hbox" type="VBoxContainer" parent="MainMargin/LookPanel/Margin"]
+[node name="Hbox" type="VBoxContainer" parent="LookMargin/LookPanel/Margin"]
 layout_mode = 2
 
-[node name="StateLabel" type="Label" parent="MainMargin/LookPanel/Margin/Hbox"]
+[node name="StateLabel" type="Label" parent="LookMargin/LookPanel/Margin/Hbox"]
 layout_mode = 2
 text = "Input Mode"
 
-[node name="LookLabel" type="Label" parent="MainMargin/LookPanel/Margin/Hbox"]
+[node name="LookLabel" type="Label" parent="LookMargin/LookPanel/Margin/Hbox"]
 layout_mode = 2
 
-[node name="LookLabel2" type="Label" parent="MainMargin/LookPanel/Margin/Hbox"]
+[node name="LookLabel2" type="Label" parent="LookMargin/LookPanel/Margin/Hbox"]
 layout_mode = 2
 
 [node name="Margin" type="MarginContainer" parent="."]
@@ -101,6 +101,7 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 
 [node name="LoadingImage" type="TextureRect" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

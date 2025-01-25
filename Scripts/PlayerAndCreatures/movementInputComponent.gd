@@ -16,14 +16,6 @@ func setup(player):
 
 func _process(delta: float) -> void:
 	
-	#### MOVEMENT UNDERWAY, DON'T ACCEPT NEW INPUT
-	if isMoving:
-		return
-	#### MOVEMENT ONLY IN EXPLORE STATE
-	if States.GameState == States.InputStates.EXPLORE:
-		processMovement()
-	
-	
 	#### PLAYER STOPPED PRESSING MOVEMENT
 	if Input.is_action_just_released("ui_up"):
 		holdingKey = false
@@ -33,11 +25,20 @@ func _process(delta: float) -> void:
 		holdingKey = false
 	elif Input.is_action_just_released("ui_right"):
 		holdingKey = false
-		
-		
-		
+	
+	
+	#### MOVEMENT UNDERWAY, DON'T ACCEPT NEW INPUT
+	if isMoving:
+		return
+	#### MOVEMENT ONLY IN EXPLORE STATE
+	if States.GameState == States.InputStates.EXPLORE:
+		processMovement()
+	
+	
+	
 func processMovement():
 	
+	#### JUST PRESSED MOVEMENT KEY
 	if Input.is_action_just_pressed("ui_up"):
 		handleMove(Vector2i.UP)
 				
@@ -64,17 +65,19 @@ func processMovement():
 
 func handleMove(dir:Vector2i):
 	
+	holdingKey = true
 	player.movementComponent.handleMove(dir)
 	
 	
 #### MOVEMENT DONE, RESOLVE ITS RESULT
-func resolveCompletedMovement():
+func resolvePlayerMovement():
 	
-	player.movementComponent.resolveCompletedMovement()
+	#### RESOLVE THE PREVIOUS, NOW COMPLETED MOVEMENT
+	#player.movementComponent.resolveCompletedMovement()
 	
-
+	#### IF PLAYER STILL PRESSING MOVE KEY, START A NEW MOVEMENT
 	if holdingKey:
-		player.movementComponent.handlePlayerMove()
+		player.movementComponent.continuePlayerMovement()
 	
 	if not player.isOverworld:
 		player.world.ui.addMessage("You take a step", Color.WHITE)	
