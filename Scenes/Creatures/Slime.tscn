@@ -12,5 +12,5 @@ texture = ExtResource("2_5dk1v")
 
 [node name="Strike" parent="Skills" index="0" instance=ExtResource("3_5jfn3")]
 
-[node name="HealthComponent" parent="." index="2"]
+[node name="HealthComponent" parent="." index="3"]
 health = 20

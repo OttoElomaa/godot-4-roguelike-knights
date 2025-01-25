@@ -7,6 +7,8 @@ var game:Node = null
 @onready var player := $Creatures/Player
 @onready var ui := $UI
 
+var PlayerScene :PackedScene = load("res://Scenes/Creatures/Player.tscn")
+
 
 var grid:Node:
 	get:
@@ -34,13 +36,11 @@ func passTurn():
 
 
 func startGame():
-	game.startGame()
+	game.startGame(PlayerScene)
 	
 
 func _on_button_pressed() -> void:
-	
-	#self.game = get_parent()
-	game.startGame()
+	startGame()
 	
 	
 	

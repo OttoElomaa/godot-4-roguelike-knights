@@ -15,13 +15,13 @@ func _ready() -> void:
 	
 
 	
-func startGame():
+func startGame(playerScene:PackedScene):
 	
 	
 	
 	var world = World.instantiate()
 	add_child(world)
-	world.startGame(self)
+	world.startGame(self, playerScene)
 	
 	#$WorldMap.hideFunc()
 	$WorldMap.queue_free()

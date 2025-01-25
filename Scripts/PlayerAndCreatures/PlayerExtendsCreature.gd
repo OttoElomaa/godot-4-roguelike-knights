@@ -54,6 +54,10 @@ func processExplore():
 		skillToUse = 1
 	elif Input.is_action_just_pressed("2"):
 		skillToUse = 2
+	elif Input.is_action_just_pressed("3"):
+		skillToUse = 3
+	elif Input.is_action_just_pressed("4"):
+		skillToUse = 4
 	
 	elif Input.is_action_just_pressed("Z"):
 		if isZoomedIn:
@@ -73,11 +77,11 @@ func processExplore():
 	
 	match skillToUse:
 		#### USE SKILL	
-		1:
-			self.useSkill(0)
+		1,2,3:
+			self.useSkill(skillToUse-1)
 			
-		2:
-			self.useSkill(1)
+		#2:
+			#self.useSkill(1)
 		
 
 	

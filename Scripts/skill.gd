@@ -37,6 +37,9 @@ func passTurn():
 #### SUCCESS=TRUE, FAILURE=FALSE
 func activate() -> bool:
 	
+	if actor.isPlayer:
+		print("%s uses %s" % [actor.creatureName, skillName])
+	
 	var cool = $Cooldown
 	if cool.isOnCooldown():
 		ui.addMessage( "%s can't use %s (Cooldown %d)" % [actor.creatureName,skillName, cool.currentCooldown], Color.WHITE)

@@ -33,20 +33,32 @@ func roomSetup(room):
 	
 	var tree = room.get_tree()
 	self.world = tree.root.get_node("GameMain/World")
+	setupHelp()
+	
+	
+func basicSetup(world):
+	
+	self.world = world
+	setupHelp()
+	
+
+
+
+func setupHelp():
+	
 	self.grid = world.getGrid()
 	self.player = world.getPlayer()
 	
 	$HealthComponent.setup(self)
 	$Stats.setup(self)
+	$CreatureMovement.setup(self)
 	
 	$AnimationComponent.setup(self)
 	
-	$CreatureMovement.setup(self)
-	
 	for skill in $Skills.get_children():
 		skill.setup(self)
-	
-		
+
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

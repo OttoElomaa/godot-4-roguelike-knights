@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://dav2j8d0nekym"]
+
+[ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Scenes/Skills/BaseSkill.tscn" id="1_cm60j"]
+[ext_resource type="Texture2D" uid="uid://5u6pajxqu6we" path="res://Sprites/Enemies/creature-slime.png" id="2_khvdq"]
+[ext_resource type="Script" path="res://Scripts/Skills/summon_script.gd" id="3_mmq5u"]
+[ext_resource type="PackedScene" uid="uid://c3nup8qw8wgmx" path="res://Scenes/Creatures/Slime.tscn" id="4_riw6y"]
+
+[node name="Summon" instance=ExtResource("1_cm60j")]
+skillIcon = ExtResource("2_khvdq")
+skillName = "Summon"
+
+[node name="Targeting" parent="." index="0"]
+targetingGroup = 0
+
+[node name="SummonScript" type="Node" parent="Scripts" index="0"]
+script = ExtResource("3_mmq5u")
+summonsAmount = 1
+SummonCreatureScene = ExtResource("4_riw6y")

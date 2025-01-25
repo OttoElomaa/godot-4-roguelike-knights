@@ -62,6 +62,9 @@ func getTargetGroup() -> Array:
 				targets = world.getEnemies()
 			else:
 				targets = world.getAllies()
+				
+		targetingGroupEnum.SELF:
+			targets = [actor]
 	
 	return targets
 			

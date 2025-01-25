@@ -158,7 +158,8 @@ func createVoidTiles(voidTilemap:TileMapLayer):
 				voidTiles.append(coord)
 				voidTilemap.set_cell(coord, 1, Vector2i(0,0))
 		
-
+#### VALUES:
+#### -1: Empty  |  1:Void  |  2:Walls
 func getTileValue(coord) -> int:
 	
 	#var gridPos = voidTilemap.local_to_map(coord)
@@ -205,4 +206,49 @@ func getCoordsInRange(gridPos:Vector2i, distance:int) -> Array:
 			vectors.append(Vector2i(x, y) )	
 	return vectors
 
+
+
+func findEmptyTileInRange(startingPos:Vector2i):
+	var dirs = [Vector2i.UP,Vector2i.DOWN,Vector2i.RIGHT,Vector2i.LEFT,
+	Vector2i(1,1),Vector2i(-1,-1),Vector2i(1,-1),Vector2i(-1,1)] 
 	
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	
+	var emptyTiles:Array = getEmptyTilesInRange(startingPos)
+	var randIndex:int = rng.randi_range(1,emptyTiles.size())
+	
+	if emptyTiles.is_empty():
+		return Vector2i(999,999)
+	return emptyTiles[randIndex - 1]
+	
+	#var newPos = startingPos
+	#var newPosFound := false
+	#var counter = 0
+	#
+	##### WHILE LOOP ######################################
+	#while not newPosFound:
+		#newPos = startingPos
+		#var dir = dirs[randi() % 8]
+		#newPos += dir * rng.randi_range(1,3)
+		#
+		#if getTileValue(newPos) == -1:
+			#if not newPos in getCreatureTiles():
+				#newPosFound = true
+				#
+		#counter += 0
+			#
+	#return newPos
+
+
+
+func getEmptyTilesInRange(startPos:Vector2i):
+	
+	var positions:Array = getCoordsInRange(startPos,3)
+	var emptyTiles := []
+	
+	for pos in positions:
+		if getTileValue(pos) == -1:
+			if not pos in getCreatureTiles():
+				emptyTiles.append(pos)
+	return emptyTiles

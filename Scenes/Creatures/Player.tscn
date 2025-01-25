@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://51k70pdjnr8x"]
+[gd_scene load_steps=8 format=3 uid="uid://51k70pdjnr8x"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerAndCreatures/PlayerExtendsCreature.gd" id="1_frca6"]
 [ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Scenes/Creatures/Creature.tscn" id="1_oyi6b"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/PlayerAndCreatures/movementInputComponent.gd" id="2_eephr"]
 [ext_resource type="Texture2D" uid="uid://iouh024wqtl4" path="res://Sprites/heroes-warden.png" id="3_g15wy"]
 [ext_resource type="PackedScene" uid="uid://cwkrdlxk2utha" path="res://Scenes/Skills/Strong Strike.tscn" id="3_pbg33"]
+[ext_resource type="PackedScene" uid="uid://dav2j8d0nekym" path="res://Scenes/Skills/SummonFox.tscn" id="6_a504w"]
 
 [node name="Player" instance=ExtResource("1_oyi6b")]
 script = ExtResource("1_frca6")
@@ -23,6 +24,8 @@ block = 30
 [node name="Strike" parent="Skills" index="0" instance=ExtResource("2_65cc6")]
 
 [node name="StrongStrike" parent="Skills" index="1" instance=ExtResource("3_pbg33")]
+
+[node name="Summon" parent="Skills" index="2" instance=ExtResource("6_a504w")]
 
 [node name="HealthComponent" parent="." index="3"]
 health = 50

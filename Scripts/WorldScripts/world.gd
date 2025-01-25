@@ -43,9 +43,11 @@ var isFirstTurn := false
 
 
 
-func startGame(game):
+func startGame(game:Node, PlayerScene:PackedScene):
 
 	self.game = game
+	
+	player = PlayerScene.instantiate()
 	
 	ui.toggleLoadingScreen(true)
 	States.inputModeOff()
@@ -242,7 +244,9 @@ func processLook():
 	$Utilities/LookTool.processLook(self)
 
 
-
+func addCreature(creature:Node):
+	creature.basicSetup(self)
+	$Creatures.add_child(creature)
 	
 
 func getPlayer():
