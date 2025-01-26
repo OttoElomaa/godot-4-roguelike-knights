@@ -46,8 +46,7 @@ func setupGrid():
 		
 	aStarGrid.update()
 	
-
-
+	
 
 func setupManhattan():
 	aStarManhattan.region = Rect2i(-300,-300, 600,600)

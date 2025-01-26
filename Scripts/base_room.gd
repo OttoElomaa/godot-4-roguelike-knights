@@ -26,7 +26,7 @@ func setup(game: Node):
 	grid = game.getGrid()
 	player = game.getPlayer()
 	
-	$Tiles/Backdrop2.queue_free()
+	#$Tiles/Backdrop2.queue_free()
 	
 	
 func placeOnMetaGrid(metaPos: Vector2i):
@@ -35,9 +35,13 @@ func placeOnMetaGrid(metaPos: Vector2i):
 	originGridPos = metaGridPos * globalRoomSize
 	position += Vector2(originGridPos) * 32
 	
-	
-	
-	
+
+func placeOnGrid(gridPos:Vector2i):	
+	originGridPos = gridPos
+	position += Vector2(originGridPos) * 32
+
+
+
 func startGameAtRoom(setPlayer) -> void:
 	
 	var playerStart = $Utilities/PlayerStart
@@ -123,13 +127,13 @@ func getStartPosition():
 func generateOpenPath(paths:Array):
 	
 	var utilTiles := $Tiles/UtilityTiles
-	var myPath := []
-	var coolTestArray := []
+	#var myPath := []
+	#var coolTestArray := []
 	
 	for path in paths:
 		for coord in path:
 			var transformed = coord - Vector2(originGridPos) + Vector2(16,16)
-			coolTestArray.append(transformed)
+			#coolTestArray.append(transformed)
 			#prints("deleting wall tile: ", transformed)
 			
 			#### CONVERT THEM INTO FLOOR TILES
@@ -137,10 +141,12 @@ func generateOpenPath(paths:Array):
 				#grid.floorTiles.append(transformed)
 			
 			#assert(transformed in utilTiles.get_used_cells(), "BRUH")
-			if Vector2i(transformed) in utilTiles.get_used_cells():
-				myPath = path
-				$Tiles/WallTiles2.set_cell(transformed, -1)
-				$Tiles/FloorTiles2.set_cell(transformed, 6, Vector2(0,0))
+			var pos = Vector2i(transformed)
+			if pos in $Tiles/Backdrop2.get_used_cells():
+				if not pos in utilTiles.get_used_cells():
+					#myPath = path
+					$Tiles/WallTiles2.set_cell(transformed, -1)
+					$Tiles/FloorTiles2.set_cell(transformed, 6, Vector2(0,0))
 				
 	#prints("test pathtiles: ",coolTestArray)
 	#prints("test util bordertiles: ", utilTiles.get_used_cells())
@@ -158,6 +164,8 @@ func generateOpenPath(paths:Array):
 	
 	for tilePos:Vector2i in utilTiles.get_used_cells():
 		utilTiles.set_cell(tilePos, -1)
+		
 	utilTiles.queue_free()
+	$Tiles/Backdrop2.queue_free()
 	
 	

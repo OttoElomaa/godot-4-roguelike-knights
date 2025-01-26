@@ -33,7 +33,7 @@ func generateRoomsVersionTwo(world):
 		
 		match rng.randi_range(0,2):
 			0:
-				scene = load("res://Rooms/Detached/NormalRoom02.tscn")
+				scene = load("res://Rooms/Detached/Cavern/Cavern02.tscn")
 			1:
 				scene = load("res://Rooms/Detached/Cavern/Cavern01.tscn")
 			2:

@@ -36,6 +36,9 @@ var voidTilemap:
 @onready var lookTool := $Utilities/LookTool
 
 var isFirstTurn := false
+
+var roomsMetaPosArray := []
+
 #var FirstRoom := load("res://Scenes/BaseRoom.tscn")
 #var SecondRoom := load("res://Rooms/Basic/EntranceWest/BasicWestEast01.tscn")
 #var TestRoom := load("res://Rooms/Basic/EntranceWest/TestRoom01.tscn")
@@ -119,9 +122,14 @@ func startGame(game:Node, PlayerScene:PackedScene):
 func generateDungeon(roomScenes:Dictionary):
 	
 	for coord in roomScenes.keys():
+		roomsMetaPosArray.append(coord)
+		
 		var scene = roomScenes[coord]
 		instantiateRoom(scene, coord)	
 	
+	#for room:Node in getRooms():
+		#addRoomOffset(room)
+		
 	return generatePath() #### GENERATE A PATH BETWEEN ROOMS
 
 
@@ -181,6 +189,19 @@ func instantiateRoom(roomScene:PackedScene, metaCoords:Vector2i):
 	#newRoom.randomizeTileGraphics()
 	#prints("init success! ", newRoom.position)
 
+func addRoomOffset(room:Node):
+	
+	var gridPos = room.metaGridPos
+	var rng = RandomNumberGenerator.new()
+	
+	if not gridPos+Vector2i.UP in roomsMetaPosArray:
+		room.placeOnGrid(gridPos + Vector2i.UP * rng.randi_range(0,5))
+	if not gridPos+Vector2i.LEFT in roomsMetaPosArray:
+		room.placeOnGrid(gridPos + Vector2i.LEFT * rng.randi_range(0,5))
+	if not gridPos+Vector2i.RIGHT in roomsMetaPosArray:
+		room.placeOnGrid(gridPos + Vector2i.RIGHT * rng.randi_range(0,5))
+	if not gridPos+Vector2i.DOWN in roomsMetaPosArray:
+		room.placeOnGrid(gridPos + Vector2i.DOWN * rng.randi_range(0,5))
 
 func _process(delta: float) -> void:
 	
