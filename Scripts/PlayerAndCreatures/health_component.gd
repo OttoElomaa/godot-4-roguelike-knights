@@ -1,4 +1,4 @@
-extends Node2D
+extends PanelContainer
 
 
 var creature:Node = null
@@ -9,20 +9,37 @@ var maxHealth := 0
 @onready var healthLabel := $HealthLabel
 var ui: Node = null
 
+var style1 : StyleBoxFlat = preload("res://Resources/HealthBarBasic.tres")
+var style2 : StyleBoxFlat = preload("res://Resources/HealthBarDarkRed.tres")
+
+
 
 func setup(creature):
 	
 	self.creature = creature
 	maxHealth = health
+	
+	$HealthBar.max_value = health
 	updateVisual()
 	ui = creature.world.getUi()
 
+	
 
 func updateVisual():
 		
 	$HealthLabel.text = str(health)
-	$HealthBar.max_value = health
 	$HealthBar.value = health
+	
+	if health >= maxHealth:
+		$HealthBar.hide()
+	else:
+		$HealthBar.show()
+	
+	if health < (maxHealth / 2):
+		$HealthBar.add_theme_stylebox_override("fill", style2)
+	else:
+		$HealthBar.add_theme_stylebox_override("fill", style1)
+
 
 func takeDamage(amount: int):
 	

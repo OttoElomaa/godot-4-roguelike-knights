@@ -1,35 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://c88p26kmuj5fw"]
+[gd_scene load_steps=5 format=3 uid="uid://c88p26kmuj5fw"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerAndCreatures/health_component.gd" id="1_jqaur"]
-[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="2_jag7l"]
-[ext_resource type="StyleBox" uid="uid://dxm1ilomf8lhq" path="res://Resources/TreeProgressGreen.tres" id="3_4kl3p"]
+[ext_resource type="StyleBox" uid="uid://ddemw1shpdae2" path="res://Resources/ResourceBarBackground01.tres" id="2_nheb4"]
+[ext_resource type="StyleBox" uid="uid://bp7hh5ftt14iw" path="res://Resources/HealthBarBasic.tres" id="3_l1dc2"]
 
-[node name="HealthComponent" type="Node2D"]
-position = Vector2(0, -40)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2prju"]
+
+[node name="HealthComponent" type="PanelContainer"]
+custom_minimum_size = Vector2(40, 10)
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 10.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2prju")
 script = ExtResource("1_jqaur")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
-visible = false
-custom_minimum_size = Vector2(40, 0)
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 27.0
-grow_horizontal = 2
-theme_override_styles/background = ExtResource("2_jag7l")
-theme_override_styles/fill = ExtResource("3_4kl3p")
-value = 100.0
+custom_minimum_size = Vector2(40, 5)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = ExtResource("2_nheb4")
+theme_override_styles/fill = ExtResource("3_l1dc2")
+value = 50.0
+allow_greater = true
+allow_lesser = true
 show_percentage = false
 
 [node name="HealthLabel" type="Label" parent="."]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
-grow_horizontal = 2
+visible = false
+layout_mode = 2
+text = "HealthAmount"
 horizontal_alignment = 1
 vertical_alignment = 1
