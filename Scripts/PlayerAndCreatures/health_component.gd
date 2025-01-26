@@ -22,23 +22,36 @@ func setup(creature):
 	$HealthBar.max_value = health
 	updateVisual()
 	ui = creature.world.getUi()
-
+	
+	$HealthBarRed.max_value = 100
+	$HealthBarRed.value = 100
 	
 
 func updateVisual():
 		
 	$HealthLabel.text = str(health)
-	$HealthBar.value = health
+	#$HealthBar.value = health
+	$HealthBar.value = 0
+	
+	
+	var barWidth = 32
+	var diff:float = float(health) / float(maxHealth)
+	var alteredWidth:int = ceil(barWidth * diff )
+	prints("diff: ", diff)
+	prints("health width: ", alteredWidth)
+	$HealthBarRed.custom_minimum_size.x = alteredWidth
 	
 	if health >= maxHealth:
 		$HealthBar.hide()
+		$HealthBarRed.hide()
 	else:
 		$HealthBar.show()
+		$HealthBarRed.show()
 	
 	if health < (maxHealth / 2):
-		$HealthBar.add_theme_stylebox_override("fill", style2)
+		$HealthBarRed.add_theme_stylebox_override("fill", style2)
 	else:
-		$HealthBar.add_theme_stylebox_override("fill", style1)
+		$HealthBarRed.add_theme_stylebox_override("fill", style1)
 
 
 func takeDamage(amount: int):
