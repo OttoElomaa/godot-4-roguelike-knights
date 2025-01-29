@@ -88,6 +88,10 @@ func creatureMove():
 	if world.grid.getGridDistance(self, movementTarget) > 7:
 		return
 	
+	#### ADJACENT CREATURES DON'T MOVE	
+	elif world.grid.getGridDistance(self, movementTarget) < 2:
+		return
+	
 	#### CREATURE CAN MOVE IN THESE DIRECTIONS
 	var allowedDirs := [Vector2i.UP,Vector2i.DOWN,Vector2i.LEFT, Vector2i.RIGHT]
 	allowedDirs.append_array([ Vector2i(1,1),Vector2i(-1,-1),Vector2i(-1,1),Vector2i(1,-1) ] )
@@ -98,9 +102,8 @@ func creatureMove():
 	#### DEBUG: SHOW/HIDE LINE
 	line.hide()
 	
-	#### IF ADJACENT TO TARGET, DON'T MOVE
-	if line.points.size() < 3:
-		return
+	if line.points.size() < 1:
+		push_error("WHAT THE-- PATHING ERROR")
 	
 	#### COMPARE TARGET POSITION TO CREATURE POSITIONS
 	#### ROUND FROM 0.777... TO 1

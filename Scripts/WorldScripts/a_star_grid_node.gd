@@ -26,14 +26,6 @@ func setup(world):
 	
 	
 func setupGrid():
-	#aStarGrid.region = Rect2i(-300,-300, 600,600)
-	#aStarGrid.cell_size = Vector2i(32,32)
-	#aStarGrid.offset = Vector2i(16,16)
-	
-	#aStarGrid.default_compute_heuristic = AStarGrid2D.h
-	#aStarGrid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_
-	
-	#setupManhattan()
 	
 	#### TRYING: SET SOLID POINTS HERE
 	var walls = grid.wallTiles

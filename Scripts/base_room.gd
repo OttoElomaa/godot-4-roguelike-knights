@@ -38,7 +38,7 @@ func placeOnMetaGrid(metaPos: Vector2i):
 
 func placeOnGrid(gridPos:Vector2i):	
 	originGridPos = gridPos
-	position += Vector2(originGridPos) * 32
+	position = Vector2(originGridPos) * 32
 
 
 
@@ -116,6 +116,7 @@ func randomizeTileGraphics():
 		else:
 			for tilePos:Vector2i in tilemap.get_used_cells():
 				tilemap.set_cell(tilePos, tilemap.get_cell_source_id(tilePos), Vector2i(rng, 0) )
+				
 
 
 func getStartPosition():

@@ -127,8 +127,9 @@ func generateDungeon(roomScenes:Dictionary):
 		var scene = roomScenes[coord]
 		instantiateRoom(scene, coord)	
 	
-	#for room:Node in getRooms():
-		#addRoomOffset(room)
+	#### REMOVE IF BUGGED
+	for room:Node in getRooms():
+		addRoomOffset(room)
 		
 	return generatePath() #### GENERATE A PATH BETWEEN ROOMS
 
@@ -191,17 +192,18 @@ func instantiateRoom(roomScene:PackedScene, metaCoords:Vector2i):
 
 func addRoomOffset(room:Node):
 	
-	var gridPos = room.metaGridPos
+	var metaPos = room.metaGridPos
+	var origin = room.originGridPos
 	var rng = RandomNumberGenerator.new()
 	
-	if not gridPos+Vector2i.UP in roomsMetaPosArray:
-		room.placeOnGrid(gridPos + Vector2i.UP * rng.randi_range(0,5))
-	if not gridPos+Vector2i.LEFT in roomsMetaPosArray:
-		room.placeOnGrid(gridPos + Vector2i.LEFT * rng.randi_range(0,5))
-	if not gridPos+Vector2i.RIGHT in roomsMetaPosArray:
-		room.placeOnGrid(gridPos + Vector2i.RIGHT * rng.randi_range(0,5))
-	if not gridPos+Vector2i.DOWN in roomsMetaPosArray:
-		room.placeOnGrid(gridPos + Vector2i.DOWN * rng.randi_range(0,5))
+	if not metaPos+Vector2i.UP in roomsMetaPosArray:
+		room.placeOnGrid(origin + Vector2i.UP * rng.randi_range(0,5))
+	if not metaPos+Vector2i.LEFT in roomsMetaPosArray:
+		room.placeOnGrid(origin + Vector2i.LEFT * rng.randi_range(0,5))
+	if not metaPos+Vector2i.RIGHT in roomsMetaPosArray:
+		room.placeOnGrid(origin + Vector2i.RIGHT * rng.randi_range(0,5))
+	if not metaPos+Vector2i.DOWN in roomsMetaPosArray:
+		room.placeOnGrid(origin + Vector2i.DOWN * rng.randi_range(0,5))
 
 func _process(delta: float) -> void:
 	
@@ -312,8 +314,9 @@ func getUi():
 
 
 func _on_dumb_timer_timeout() -> void:
-	bake_navigation_polygon(true)
 	var pointlessReturn = $AStarGridNode.setupGrid()
+	bake_navigation_polygon(true)
+	
 	
 		
 
