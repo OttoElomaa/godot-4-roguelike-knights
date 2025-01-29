@@ -101,7 +101,7 @@ func randomizeTileGraphics():
 			for tilePos:Vector2i in tilemap.get_used_cells():
 				tilemap.set_cell(tilePos, 82, Vector2i(0,0))
 				
-				
+		#### RANDOMIZE SOME CLUTTER ITEMS LIKE PLANTS/BARRELS IN ROOM		
 		elif tilemap.is_in_group("cluttertiles"):
 			for tilePos:Vector2i in tilemap.get_used_cells():
 				var blankSpaceRng = randi_range(1,5)
@@ -112,7 +112,7 @@ func randomizeTileGraphics():
 				else:
 					tilemap.set_cell(tilePos, 83, Vector2i(0,0)) #### BLANK TILE
 		
-			
+		#### CHANGE "BIOME" BY SWITCHING ATLAS COORDINATES	
 		else:
 			for tilePos:Vector2i in tilemap.get_used_cells():
 				tilemap.set_cell(tilePos, tilemap.get_cell_source_id(tilePos), Vector2i(rng, 0) )
@@ -133,37 +133,25 @@ func generateOpenPath(paths:Array):
 	for path in paths:
 		for coord in path:
 			var transformed = coord - Vector2(originGridPos) + Vector2(16,16)
-			#coolTestArray.append(transformed)
-			#prints("deleting wall tile: ", transformed)
 			
-			#### CONVERT THEM INTO FLOOR TILES
-			#if not transformed in grid.floorTiles:
-				#grid.floorTiles.append(transformed)
-			
+			#### CONVERT THEM INTO FLOOR TILES	
 			#assert(transformed in utilTiles.get_used_cells(), "BRUH")
 			var pos = Vector2i(transformed)
 			if pos in $Tiles/Backdrop2.get_used_cells():
 				if not pos in utilTiles.get_used_cells():
 					#myPath = path
 					$Tiles/WallTiles2.set_cell(transformed, -1)
-					$Tiles/FloorTiles2.set_cell(transformed, 6, Vector2(0,0))
+					$Tiles/PathTiles.set_cell(transformed, 6, Vector2(0,0))
 				
 	#prints("test pathtiles: ",coolTestArray)
 	#prints("test util bordertiles: ", utilTiles.get_used_cells())
 
 	
 	#### SET SOME NICE WALLS AROUND THE PATH - NOT ESSENTIAL
-	#var adjacentTiles := []
-	#for tile in myPath:
-		#adjacentTiles.append_array(grid.getCoordsInRange(tile, 1))
-	#for tile in adjacentTiles:
-		#var tileFixed = Vector2(tile)
-		#if not tileFixed in $Tiles/WallTiles2.get_used_cells():
-			#if not tileFixed in $Tiles/FloorTiles2.get_used_cells():
-				#$Tiles/WallTiles2.set_cell(tileFixed, 21, Vector2(0,0))
+
 	
-	for tilePos:Vector2i in utilTiles.get_used_cells():
-		utilTiles.set_cell(tilePos, -1)
+	#for tilePos:Vector2i in utilTiles.get_used_cells():
+		#utilTiles.set_cell(tilePos, -1)
 		
 	utilTiles.queue_free()
 	$Tiles/Backdrop2.queue_free()
