@@ -71,7 +71,8 @@ collision_enabled = false
 navigation_enabled = false
 
 [node name="VoidTiles" type="TileMapLayer" parent="Utilities" groups=["nav-geometry"]]
-z_index = 5
+visible = false
+z_index = 10
 tile_set = ExtResource("11_qblsd")
 navigation_enabled = false
 

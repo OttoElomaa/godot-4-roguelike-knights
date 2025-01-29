@@ -150,9 +150,12 @@ func generateOpenPath(paths:Array):
 	
 	#### SET SOME NICE WALLS AROUND THE PATH - NOT ESSENTIAL
 
+	#### FOR UNPASSABLE VOID TILES CREATION, MAP THE ENTIRE AREA OF THE ROOM VIA BACKDROP LAYER
+	for tilePos:Vector2i in $Tiles/Backdrop2.get_used_cells():
+		var fixedPos = tilePos + originGridPos
+		if not fixedPos in grid.regionTiles:
+			grid.regionTiles.append(fixedPos)
 	
-	#for tilePos:Vector2i in utilTiles.get_used_cells():
-		#utilTiles.set_cell(tilePos, -1)
 		
 	utilTiles.queue_free()
 	$Tiles/Backdrop2.queue_free()

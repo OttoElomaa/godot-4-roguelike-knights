@@ -14,6 +14,9 @@ var floorTiles := []
 var nonVoidTiles := []
 var voidTiles := []
 
+#### ALL TILES WITHIN ANY ROOM'S BACKDROP SQUARE
+var regionTiles := []
+
 var voidTilemap:TileMapLayer = null
 
 
@@ -149,14 +152,17 @@ func getWallAndFloorTiles() -> Array:
 
 func createVoidTiles(voidTilemap:TileMapLayer):
 	
-	for x in range(-200,200):
-		for y in range(-200,200):
-			var coord = Vector2i(x,y)
-			if coord in floorTiles or coord in wallTiles:
-				pass
-			else:
-				voidTiles.append(coord)
-				voidTilemap.set_cell(coord, 1, Vector2i(0,0))
+	#for x in range(-200,200):
+		#for y in range(-200,200):
+			#pass
+	for coord in regionTiles:
+			
+		#var coord = Vector2i(x,y)
+		if coord in floorTiles or coord in wallTiles:
+			pass
+		else:
+			voidTiles.append(coord)
+			voidTilemap.set_cell(coord, 1, Vector2i(0,0))
 		
 #### VALUES:
 #### -1: Empty  |  1:Void  |  2:Walls

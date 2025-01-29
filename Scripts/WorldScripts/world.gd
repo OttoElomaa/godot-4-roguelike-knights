@@ -165,16 +165,9 @@ func generatePath():
 		room.randomizeTileGraphics()	
 		
 	return
-	#for path in paths:
-		#prints("path: ", path)
-	#for path in gridPaths:
-		#prints("path: ", path)
+	
 		
-		
-	#instantiateRoom(FirstRoom, Vector2.ZERO)
-	#instantiateRoom(TestRoom, Vector2i.RIGHT)
-		
-
+			
 #### SETUP EACH ROOM HERE - ALSO CALL ITS SETUP FUNCTION
 #### AND ROOM'S PLACEMENT AND SPRITE GRAPHICS FUNCTIONS
 #### ROOMSCENE COMES FROM ROOM LOADER NODE
