@@ -25,6 +25,9 @@ var isOverworld := false
 
 @onready var movementComponent := $CreatureMovement
 
+var stats:
+	get:
+		return $Stats
 
 
 
@@ -49,8 +52,9 @@ func setupHelp():
 	self.grid = world.getGrid()
 	self.player = world.getPlayer()
 	
-	$HealthComponent.setup(self)
 	$Stats.setup(self)
+	$HealthBar.setup(self)
+	
 	$CreatureMovement.setup(self)
 	
 	$AnimationComponent.setup(self)
@@ -145,7 +149,7 @@ func passTurn():
 		
 	
 	#### DON'T DO ANYTHING IF DEAD
-	if $HealthComponent.health <= 0:
+	if $Stats.health.current <= 0:
 		return
 	
 	#### PICK TARGET
@@ -190,7 +194,7 @@ func handleMove(dir:Vector2i):
 
 func takeDamage(amount:int):
 	
-	$HealthComponent.takeDamage(amount)
+	$Stats.takeDamage(amount)
 	$AnimationComponent.playMeleeHit()
 
 
@@ -199,13 +203,18 @@ func handlePhysicalHit(damage:int):
 
 
 func recoverHealth(amount: int):
-	$HealthComponent.recoverHealth(amount)
+	$Stats.recoverHealth(amount)
 	#$AnimationComponent.playMeleeHit()
 
 
 func hasFullHealth():
-	var he := $HealthComponent
-	return he.health >= he.maxHealth	
+	var he = stats.health
+	return he.current >= he.max	
+
+
+#### THIS RECEIVES A STATRESOURCE, STATS.HEALTH, WITH VALUES 'CURRENT' AND 'MAX'
+func updateHealthBar(health):
+	$HealthBar.updateVisual(health)
 
 
 func playMovementWobble():
@@ -221,7 +230,7 @@ func getSkills():
 
 
 func getHealth():
-	return $HealthComponent.health
+	return $Stats.health.current
 
 
 func _on_mouse_area_mouse_entered() -> void:

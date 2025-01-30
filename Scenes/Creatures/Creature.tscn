@@ -64,8 +64,7 @@ baseBlock = 10
 
 [node name="Skills" type="Node" parent="."]
 
-[node name="HealthComponent" parent="." instance=ExtResource("3_sgkqn")]
-health = 10
+[node name="HealthBar" parent="." instance=ExtResource("3_sgkqn")]
 
 [node name="AnimationComponent" parent="." instance=ExtResource("4_18r3n")]
 

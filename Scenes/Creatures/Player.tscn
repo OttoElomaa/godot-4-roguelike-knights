@@ -26,9 +26,6 @@ armor = 30
 
 [node name="Summon" parent="Skills" index="2" instance=ExtResource("6_a504w")]
 
-[node name="HealthComponent" parent="." index="3"]
-health = 50
-
 [node name="Camera2D" type="Camera2D" parent="." index="7"]
 zoom = Vector2(2, 2)
 

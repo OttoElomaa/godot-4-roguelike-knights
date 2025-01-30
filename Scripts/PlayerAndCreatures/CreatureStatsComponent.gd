@@ -2,16 +2,21 @@ extends Node
 
 
 
+@export var baseHealth := 10
+
 @export var armor := 0
 @export var guard := 0
 @export var crit := 0
 @export var baseEvasion := 0
 @export var baseBlock := 0
 
+
+var health:StatResource = null
+
 var block:Stat = null
 var evasion:Stat = null
 
-
+###########################################
 var creature: Node = null
 var ui: Node = null
 
@@ -30,10 +35,22 @@ class Stat:
 		self.current = baseline
 
 
+class StatResource:
+	var max := 0
+	var current := 0
+	
+	func _init(baseline, current) -> void:
+		self.max = baseline
+		self.current = current
+
+
+
 func setup(creature):
 	
 	self.creature = creature
 	self.ui = creature.world.ui
+	
+	health = StatResource.new(baseHealth, baseHealth)
 	
 	block = Stat.new(baseBlock)
 	evasion = Stat.new(baseEvasion)
@@ -48,6 +65,58 @@ func resetCurrentToAltered():
 	   #### RESET each stats' current value to its altered baseline value
 	self.block.current = self.block.altered
 	self.evasion.current = self.evasion.altered
+
+
+##################################################################################
+
+
+
+func takeDamage(amount: int):
+	
+	var enemyHurtC := Color.DARK_GOLDENROD
+	var allyHurtC := Color.INDIAN_RED
+	
+	var colorToUse: Color = Color.ALICE_BLUE
+	if creature.isEnemy:
+		colorToUse = enemyHurtC
+	else:
+		colorToUse = allyHurtC
+	
+	health.current -= amount
+	creature.updateHealthBar(health)
+	var damageString : String = creature.creatureName + " takes " + str(amount) + " damage!"
+	ui.addMessage(damageString, colorToUse)
+	
+	if creature.isEnemy:
+		if health.current <= 0:
+			var deathString:String = creature.creatureName + " died!"
+			ui.addMessage(deathString, Color.DARK_CYAN)
+			creature.queue_free()
+
+
+func recoverHealth(amount: int):
+
+	var enemyHealC := Color.CADET_BLUE
+	var allyHealC := Color.GREEN_YELLOW
+	
+	var colorToUse: Color = Color.ALICE_BLUE
+	if creature.isEnemy:
+		colorToUse = enemyHealC
+	else:
+		colorToUse = allyHealC
+	
+	#### CALCULATE HEALTH CHANGE
+	var afterHeal:int = health.current + amount
+	if afterHeal > health.max:
+		health.current = health.max
+	else:
+		health.current = afterHeal
+	
+		
+	creature.updateHealthBar(health)
+	var damageString : String = creature.creatureName + " recovers " + str(amount) + " life!"
+	ui.addMessage(damageString, colorToUse)
+
 
 
 
@@ -65,7 +134,7 @@ func handlePhysicalHit(damage:int):
 		
 	
 	var reduced = reduceDamageByArmor(damage)
-	creature.takeDamage(reduced)
+	takeDamage(reduced)
 	
 	
 
