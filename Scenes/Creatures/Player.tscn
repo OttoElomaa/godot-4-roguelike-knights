@@ -19,7 +19,6 @@ texture = ExtResource("3_g15wy")
 
 [node name="Stats" parent="." index="1"]
 armor = 30
-block = 30
 
 [node name="Strike" parent="Skills" index="0" instance=ExtResource("2_65cc6")]
 

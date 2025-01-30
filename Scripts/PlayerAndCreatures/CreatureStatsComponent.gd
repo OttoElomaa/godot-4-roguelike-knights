@@ -5,8 +5,12 @@ extends Node
 @export var armor := 0
 @export var guard := 0
 @export var crit := 0
-@export var evasion := 0
-@export var block := 0
+@export var baseEvasion := 0
+@export var baseBlock := 0
+
+var block:Stat = null
+var evasion:Stat = null
+
 
 var creature: Node = null
 var ui: Node = null
@@ -14,12 +18,38 @@ var ui: Node = null
 var rng := RandomNumberGenerator.new()
 
 
+
+class Stat:
+	var baseline := 0
+	var altered := 0
+	var current := 0
+	
+	func _init(baseline) -> void:
+		self.baseline = baseline
+		self.altered = baseline
+		self.current = baseline
+
+
 func setup(creature):
 	
 	self.creature = creature
 	self.ui = creature.world.ui
 	
+	block = Stat.new(baseBlock)
+	evasion = Stat.new(baseEvasion)
 	
+
+
+func turnStartUpdate():
+	resetCurrentToAltered()
+
+
+func resetCurrentToAltered():
+	   #### RESET each stats' current value to its altered baseline value
+	self.block.current = self.block.altered
+	self.evasion.current = self.evasion.altered
+
+
 
 func handlePhysicalHit(damage:int):
 	
@@ -42,14 +72,14 @@ func handlePhysicalHit(damage:int):
 func tryBlock():
 	
 	var rand = rng.randi_range(0,100)
-	if rand < block:
+	if rand < block.current:
 		return true
 	return false
 
 func tryEvade():
 	
 	var rand = rng.randi_range(0,100)
-	if rand < evasion:
+	if rand < evasion.current:
 		return true
 	return false	
 
