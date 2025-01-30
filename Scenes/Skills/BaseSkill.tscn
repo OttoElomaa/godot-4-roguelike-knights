@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://d21u4j6yuyimo"]
+[gd_scene load_steps=5 format=3 uid="uid://d21u4j6yuyimo"]
 
 [ext_resource type="Script" path="res://Scripts/skill.gd" id="1_xpeuu"]
 [ext_resource type="Script" path="res://Scripts/Skills/SkillTargeting.gd" id="2_ibixw"]
 [ext_resource type="Script" path="res://Scripts/Skills/SkillCooldown.gd" id="3_jjqw8"]
+[ext_resource type="Script" path="res://Scripts/Skills/StatusEffect.gd" id="4_p3f36"]
 
 [node name="BaseSkill" type="Node"]
 script = ExtResource("1_xpeuu")
@@ -10,9 +11,14 @@ script = ExtResource("1_xpeuu")
 [node name="Targeting" type="Node" parent="."]
 script = ExtResource("2_ibixw")
 
-[node name="Scripts" type="Node" parent="."]
-
-[node name="OnSuccess" type="Node" parent="."]
-
 [node name="Cooldown" type="Node" parent="."]
 script = ExtResource("3_jjqw8")
+
+[node name="Scripts" type="Node" parent="."]
+
+[node name="StatusEffects" type="Node" parent="."]
+
+[node name="StatusEffect" type="Node" parent="StatusEffects"]
+script = ExtResource("4_p3f36")
+
+[node name="OnSuccess" type="Node" parent="."]

@@ -64,6 +64,13 @@ baseBlock = 10
 
 [node name="Skills" type="Node" parent="."]
 
+[node name="StatusEffects" type="Node" parent="."]
+
+[node name="Items" type="Node" parent="."]
+
+[node name="CreatureMovement" type="Node" parent="."]
+script = ExtResource("5_hw60m")
+
 [node name="HealthBar" parent="." instance=ExtResource("3_sgkqn")]
 
 [node name="AnimationComponent" parent="." instance=ExtResource("4_18r3n")]
@@ -76,11 +83,6 @@ simplify_epsilon = 10.0
 libraries = {
 "": SubResource("AnimationLibrary_5otlx")
 }
-
-[node name="CreatureMovement" type="Node" parent="."]
-script = ExtResource("5_hw60m")
-
-[node name="Items" type="Node" parent="."]
 
 [node name="MouseArea" type="Area2D" parent="."]
 collision_layer = 4
