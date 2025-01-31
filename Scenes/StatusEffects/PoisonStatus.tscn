@@ -5,6 +5,7 @@
 
 [node name="PoisonEffect" instance=ExtResource("1_xobrl")]
 effectName = "Poison"
+effectedTitle = "Poisoned"
 duration = 3
 
 [node name="Poison" type="Node" parent="Scripts" index="0"]

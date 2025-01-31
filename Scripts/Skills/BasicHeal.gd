@@ -20,7 +20,7 @@ func activate(targets:Array) -> Node:
 	if target.hasFullHealth():
 		return null
 	
-	skill.ui.addMessage(skill.actor.creatureName + " uses " + skill.skillName, Color.WHITE)
+	skill.ui.saveInitialMessage(skill.actor.creatureName + " uses " + skill.skillName, Color.WHITE)
 	target.recoverHealth(healAmount)
 	
 	skill.world.lineOfSight.createRangedLine(skill.actor.position, target.position)

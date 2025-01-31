@@ -19,8 +19,13 @@ func activate(targets:Array) -> Node:
 	
 	var target = targets[0]
 	
-	skill.ui.addMessage(skill.actor.creatureName + " uses " + skill.skillName, Color.WHITE)
-	target.handlePhysicalHit(damage)
+	#### CREATE FIRST HALF OF DOUBLE MESSAGE
+	skill.ui.saveInitialMessage(skill.actor.creatureName + " uses " + skill.skillName, Color.WHITE)
+	var success = target.handlePhysicalHit(damage)
+	
+	#### POST THE FIRST HALF IF LAST HALF FAILS
+	#if not success:
+		#skill.ui.clearInitialRow()
 	
 	if isRanged:
 		skill.world.lineOfSight.createRangedLine(actor.position, target.position)

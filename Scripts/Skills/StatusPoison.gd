@@ -11,7 +11,7 @@ func setup(effect:Node):
 
 func tickStatus(target:Node):
 	
-	var text = "%s takes damage from %s... (%d)" % [target.creatureName, effect.effectName, effect.duration]
-	effect.ui.addMessage(text, Color.WHITE)
+	var text = "%s is %s... (%d)" % [target.creatureName, effect.effectedTitle, effect.duration]
+	effect.ui.saveInitialMessage(text, Color.WHITE)
 	target.stats.takeDamage(damage)
 	

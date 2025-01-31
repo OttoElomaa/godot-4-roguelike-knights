@@ -7,6 +7,8 @@ enum targetingGroupEnum {
 @export var targetingGroup:targetingGroupEnum = targetingGroupEnum.ENEMY
 
 @export var effectName := "Effect Name"
+@export var effectedTitle := "Effect Name"
+
 @export var duration := 0
 
 var skill:Node = null

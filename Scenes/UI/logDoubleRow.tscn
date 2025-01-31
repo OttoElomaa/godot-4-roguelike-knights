@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwj2nugtlksob"]
+
+[ext_resource type="Script" path="res://Scripts/MiscUI/log_double_row.gd" id="1_uqpx8"]
+
+[node name="LogDoubleRow" type="HBoxContainer"]
+theme_override_constants/separation = 10
+script = ExtResource("1_uqpx8")

@@ -46,7 +46,8 @@ func activate() -> bool:
 	
 	var cool = $Cooldown
 	if cool.isOnCooldown():
-		ui.addMessage( "%s can't use %s (Cooldown %d)" % [actor.creatureName,skillName, cool.currentCooldown], Color.WHITE)
+		if actor.isPlayer:
+			ui.addMessage( "%s can't use %s (Cooldown %d)" % [actor.creatureName,skillName, cool.currentCooldown], Color.WHITE)
 		return false
 	
 	var targets:Array = $Targeting.handleTargeting()

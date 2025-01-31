@@ -15,3 +15,8 @@ func addMessage(text:String, color:Color) -> void:
 	$Scrolling.scroll_vertical = $Scrolling.get_v_scroll_bar().max_value
 	
 	
+func addItem(item:Node):
+	
+	$Scrolling/Rows.add_child(item)
+	await get_tree().process_frame
+	$Scrolling.scroll_vertical = $Scrolling.get_v_scroll_bar().max_value

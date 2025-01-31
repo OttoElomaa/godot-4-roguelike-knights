@@ -85,7 +85,7 @@ func takeDamage(amount: int):
 	health.current -= amount
 	creature.updateHealthBar(health)
 	var damageString : String = creature.creatureName + " takes " + str(amount) + " damage!"
-	ui.addMessage(damageString, colorToUse)
+	ui.addLogRow(damageString, colorToUse)
 	
 	if not creature.isPlayer:
 		if health.current <= 0:
@@ -115,27 +115,29 @@ func recoverHealth(amount: int):
 		
 	creature.updateHealthBar(health)
 	var damageString : String = creature.creatureName + " recovers " + str(amount) + " life!"
-	ui.addMessage(damageString, colorToUse)
+	ui.addLogRow(damageString, colorToUse)
 
 
 
 
-func handlePhysicalHit(damage:int):
+func handlePhysicalHit(damage:int) -> bool:
 	
 	if tryBlock():
 		var blockString : String =  "%s blocks %d damage without taking any!" % [creature.creatureName, damage] 
-		ui.addMessage(blockString, Color.LIGHT_GRAY)
-		return
+		ui.clearInitialRow()
+		ui.addMessage(blockString, Color.DARK_GRAY)
+		return false
 		
 	if tryEvade():
 		var evadeString : String =  "%s evades %d damage!" % [creature.creatureName, damage] 
-		ui.addMessage(evadeString, Color.LIGHT_GRAY)
-		return
+		ui.clearInitialRow()
+		ui.addMessage(evadeString, Color.DARK_GRAY)
+		return false
 		
 	
 	var reduced = reduceDamageByArmor(damage)
 	takeDamage(reduced)
-	
+	return true
 	
 
 func tryBlock():

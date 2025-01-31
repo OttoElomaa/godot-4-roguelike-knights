@@ -9,7 +9,10 @@ extends CanvasLayer
 @onready var skillBar := $Margin/SkillBar
 @onready var combatLog := $Margin2/LogPanel/MarginContainer/CombatLog
 
+var LogDoubleRow:PackedScene = load("res://Scenes/UI/logDoubleRow.tscn")
+var LogMessage = load("res://Scenes/UI/BasicLogMessage.tscn")
 
+var initialMessage:Node = null
 
 
 func displayPlayerSkills(player):
@@ -78,6 +81,36 @@ func showLookInfo(game, lookTool):
 func addMessage(text:String, color:Color) -> void:
 	
 	combatLog.addMessage(text, color)
+
+
+
+func saveInitialMessage(text:String, color:Color) -> void:
+
+	initialMessage = LogMessage.instantiate()
+	initialMessage.text = text
+	initialMessage.color = color
+
+
+func addLogRow(text:String, color:Color) -> void:
+	
+	
+	var item1:Node = initialMessage
+	
+	var item2:Node = LogMessage.instantiate()
+	item2.text = text
+	item2.color = color
+	
+	var row = LogDoubleRow.instantiate()
+	row.setupRowFromArray(self, item1, item2)
+	
+
+
+func addLogItemHelp(item:Node):
+	combatLog.addItem(item)
+
+
+func clearInitialRow():
+	addLogItemHelp(initialMessage)
 
 
 func toggleLoadingScreen(visible:bool):
