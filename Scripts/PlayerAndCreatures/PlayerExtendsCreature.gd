@@ -89,8 +89,9 @@ func processExplore():
 func useSkill(index):
 	
 	var skill = self.getSkills()[index]
-	skill.activate()
-	passTurn()
+	var success = skill.activate()
+	if success:
+		passTurn()
 
 
 

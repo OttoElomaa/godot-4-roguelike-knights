@@ -22,8 +22,12 @@ func displayPlayerSkills(player):
 	#### SET EACH SKILL'S ICON IN SKILL BAR	
 	for i in range(skills.size()):
 		boxes[i].setup(skills[i])
-		
-		
+	
+
+func updateVisualsOnTurn():
+	for box in skillBar.get_children():
+		if box.skill != null:
+			box.updateVisuals()	
 
 
 

@@ -6,15 +6,20 @@
 [sub_resource type="LabelSettings" id="LabelSettings_mo8mu"]
 
 [node name="SkillBarBox" type="PanelContainer"]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(100, 100)
 theme_override_styles/panel = ExtResource("1_uiii7")
 script = ExtResource("2_mnnst")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
 
+[node name="Overlay" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.00784314, 0.282353, 0.184314, 0.392157)
+
 [node name="NameLabel" type="Label" parent="."]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+text = "Skill Name"
 label_settings = SubResource("LabelSettings_mo8mu")
 autowrap_mode = 2

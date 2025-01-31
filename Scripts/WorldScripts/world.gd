@@ -62,7 +62,8 @@ func startGame(game:Node, PlayerScene:PackedScene):
 	#await get_tree().process_frame
 	
 	player.playerSetup(self, false)
-	getUi().displayPlayerSkills(getPlayer())
+	ui.displayPlayerSkills(getPlayer())
+	ui.updateVisualsOnTurn()
 	
 	#####################################################
 	#### ROOMS STUFF
@@ -222,8 +223,10 @@ func _process(delta: float) -> void:
 		processLook()
 		
 
-
+#### THIS TRIGGERS AFTER PLAYER HAS COMPLETED A VALID ACTION
 func passTurn():
+	
+	ui.updateVisualsOnTurn()
 	
 	$AStarGridNode.passTurn()
 	lineOfSight.passTurn()

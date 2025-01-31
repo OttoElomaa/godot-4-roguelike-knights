@@ -76,4 +76,11 @@ func applyStatusEffects(target:Node):
 	for effect in $StatusEffects.get_children():
 		effect.applyStatus(target)
 
+
+func isOnCooldown() -> bool:
 	
+	return $Cooldown.isOnCooldown()
+
+
+func getCooldown():
+	return $Cooldown.currentCooldown	
