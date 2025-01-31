@@ -11,21 +11,22 @@ func setup(skill):
 	self.skill = skill
 
 
-#### SUCCESS=TRUE, FAILURE=FALSE
-func activate(targets:Array) -> bool:
+#### RETURN TARGET=TRUE, RETURN NULL=FALSE
+func activate(targets:Array) -> Node:
 	
 	var target = sortByLowestHealth(targets)
 	
 	#if target.getHealth() >= target.maxHealth:
 	if target.hasFullHealth():
-		return false
+		return null
 	
 	skill.ui.addMessage(skill.actor.creatureName + " uses " + skill.skillName, Color.WHITE)
 	target.recoverHealth(healAmount)
 	
 	skill.world.lineOfSight.createRangedLine(skill.actor.position, target.position)
 	
-	return true
+	return target
+
 
 
 func sortByLowestHealth(targets:Array) -> Node:

@@ -6,6 +6,8 @@ enum targetingGroupEnum {
 }	
 @export var targetingGroup:targetingGroupEnum = targetingGroupEnum.ENEMY
 
+@export var effectName := "Effect Name"
+@export var duration := 0
 
 var skill:Node = null
 var actor:Node = null
@@ -21,15 +23,36 @@ func setup(skill:Node):
 	self.world = actor.world
 	self.ui = world.getUi()
 	
+	for script in $Scripts.get_children():
+		script.setup(self)
 	
 
-func applyStatus():
-	pass
+func applyStatus(target:Node):
+	
+	var text = "%s affects %s with %s!" % [actor.creatureName, target.creatureName, effectName]
+	ui.addMessage(text, Color.WHITE)
+	
+	var appliedStatus = self.duplicate()
+	appliedStatus.setup(skill)
+	target.addStatus(appliedStatus)
+	
+	#
 	
 	
 func removeStatus():
 	pass
 	
 
-func tickStatus():
-	pass
+#### CREATURE PASSES ITSELF AS TARGET, EACH TURN
+func tickStatus(target):
+	
+	if duration > 0:
+		duration -= 1
+	else:
+		var text = "%s recovers from %s..." % [target.creatureName, effectName]
+		ui.addMessage(text, Color.WHITE)
+		self.queue_free()
+		return
+	
+	for script in $Scripts.get_children():
+		script.tickStatus(target)

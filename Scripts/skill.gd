@@ -12,6 +12,7 @@ var world:Node = null
 
 var ui:Node = null
 
+var selectedTarget: Node = null
 
 
 
@@ -23,8 +24,11 @@ func setup(actor:Node):
 	
 	$Targeting.setup(self)
 		
-	for skill in $Scripts.get_children():
-		skill.setup(self)
+	for script in $Scripts.get_children():
+		script.setup(self)
+		
+	for e in $StatusEffects.get_children():
+		e.setup(self)
 
 
 
@@ -52,17 +56,24 @@ func activate() -> bool:
 		
 	print("enemy in range")
 	
-	var success := false
+	#var success := false
 	for script in $Scripts.get_children():
-		success = script.activate(targets)
+		selectedTarget = script.activate(targets)
 		
 		
-	if success:
+	if selectedTarget != null:
 		cool.putOnCooldown()
+		applyStatusEffects(selectedTarget)
+		return true
 		
-	return success	
+	return false	
 				
 
 
+
+func applyStatusEffects(target:Node):
+	
+	for effect in $StatusEffects.get_children():
+		effect.applyStatus(target)
 
 	

@@ -87,7 +87,7 @@ func takeDamage(amount: int):
 	var damageString : String = creature.creatureName + " takes " + str(amount) + " damage!"
 	ui.addMessage(damageString, colorToUse)
 	
-	if creature.isEnemy:
+	if not creature.isPlayer:
 		if health.current <= 0:
 			var deathString:String = creature.creatureName + " died!"
 			ui.addMessage(deathString, Color.DARK_CYAN)

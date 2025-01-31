@@ -14,8 +14,8 @@ func setup(skill):
 	self.actor = skill.actor
 
 
-#### SUCCESS=TRUE, FAILURE=FALSE
-func activate(targets:Array) -> bool:
+#### RETURN TARGET=TRUE, RETURN NULL=FALSE
+func activate(targets:Array) -> Node:
 	
 	var target = targets[0]
 	
@@ -25,6 +25,6 @@ func activate(targets:Array) -> bool:
 	if isRanged:
 		skill.world.lineOfSight.createRangedLine(actor.position, target.position)
 		
-	return true
+	return target
 	
 	

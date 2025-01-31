@@ -13,10 +13,8 @@ func setup(skill):
 
 
 
-#### SUCCESS=TRUE, FAILURE=FALSE
-func activate(targets:Array) -> bool:
-	
-	
+#### RETURN TARGET=TRUE, RETURN NULL=FALSE
+func activate(targets:Array) -> Node:
 	
 	var actorPos = skill.actor.gridPosition
 	var creaturePos = skill.world.grid.findEmptyTileInRange(actorPos)
@@ -24,7 +22,7 @@ func activate(targets:Array) -> bool:
 	if creaturePos == Vector2i(999,999):
 		var summonText = "%s failed to summon a creature!" % skill.actor.creatureName
 		skill.ui.addMessage(summonText, Color.WHITE)
-		return false
+		return null
 	
 	var summonedCreature = SummonCreatureScene.instantiate()
 	skill.world.addCreature(summonedCreature)
@@ -37,4 +35,4 @@ func activate(targets:Array) -> bool:
 	summonedCreature.gridPosition = creaturePos
 	skill.world.grid.placeGridObjectOnMap(summonedCreature, creaturePos)
 	
-	return true
+	return skill.actor

@@ -83,27 +83,28 @@ func lineOfSightInRange(startCoord:Vector2i, coords: Array, tilemap:TileMapLayer
 	############################################################################
 	#### GET NAVIGATION PATH FROM START TO TARGET. ONLY IF PASSABLE TILE 
 	for coord:Vector2 in coordsDict.keys():
-		if grid.getTileValue(coordsDict[coord]) == -1:
 		
-			#### IF PATH IS STRAIGHT LINE, TARGET IS VISIBLE
-			navigator.target_position = coord
-			var next_path_point = navigator.get_next_path_position()
-			var finalPoint = navigator.get_final_position()
-			
-			#### CALCULATE PATH LENGTH, COMPARE TO SEE IS IT LINEAR
-			var points = navigator.get_current_navigation_path()
-			var dist := 0
-			for i in range(1, points.size()):
+		if grid.getTileValue(coordsDict[coord]) == -1:
+			if coordsDict[coord] in grid.regionTiles:
+				#### IF PATH IS STRAIGHT LINE, TARGET IS VISIBLE
+				navigator.target_position = coord
+				var next_path_point = navigator.get_next_path_position()
+				var finalPoint = navigator.get_final_position()
 				
-				var new:Vector2 = points[i]
-				var prev = points[i-1]
-				dist += new.distance_to(prev)
-			
-			var straightDistance = navigator.get_parent().position.distance_to(coord)
-			
-			if dist <= straightDistance:
-				tilemap.set_cell(coordsDict[coord], -1, Vector2i(0,0))
-				visibleCoords.append(coordsDict[coord])
+				#### CALCULATE PATH LENGTH, COMPARE TO SEE IS IT LINEAR
+				var points = navigator.get_current_navigation_path()
+				var dist := 0
+				for i in range(1, points.size()):
+					
+					var new:Vector2 = points[i]
+					var prev = points[i-1]
+					dist += new.distance_to(prev)
+				
+				var straightDistance = navigator.get_parent().position.distance_to(coord)
+				
+				if dist <= straightDistance:
+					tilemap.set_cell(coordsDict[coord], -1, Vector2i(0,0))
+					visibleCoords.append(coordsDict[coord])
 			
 		
 			

@@ -142,6 +142,9 @@ func passTurn():
 	for skill in getSkills():
 		skill.passTurn()
 	
+	for effect in $StatusEffects.get_children():
+		effect.tickStatus(self)
+	
 	#### PLAYER PASSES TURN AFTER TAKING ACTION, SO DO NOTHING NOW
 	if isPlayer:
 		world.passTurn()
@@ -212,6 +215,11 @@ func hasFullHealth():
 	return he.current >= he.max	
 
 
+func addStatus(status:Node):
+	$StatusEffects.add_child(status)
+
+
+
 #### THIS RECEIVES A STATRESOURCE, STATS.HEALTH, WITH VALUES 'CURRENT' AND 'MAX'
 func updateHealthBar(health):
 	$HealthBar.updateVisual(health)
@@ -220,6 +228,9 @@ func updateHealthBar(health):
 func playMovementWobble():
 	$SpriteAnimations.play("MovementWobble")
 	
+	
+	
+#########################################################################
 	
 func getNavigator():
 	return $NavigationAgent2D
