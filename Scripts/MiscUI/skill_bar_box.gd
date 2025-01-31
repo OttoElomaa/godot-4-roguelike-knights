@@ -2,6 +2,10 @@ extends PanelContainer
 
 
 var skill:Node = null
+@onready var textureR := $VBoxContainer/PanelC/TextureRect
+@onready var label := $VBoxContainer/NameLabel
+@onready var overlay := $VBoxContainer/PanelC/Overlay
+
 
 func setup(skill:Node):
 	
@@ -9,16 +13,16 @@ func setup(skill:Node):
 	
 	var texture:Texture = skill.skillIcon
 	
-	$TextureRect.texture = texture
-	$NameLabel.text = skill.skillName
+	textureR.texture = texture
+	label.text = skill.skillName
 
 
 
 func updateVisuals():
 	
 	if skill.isOnCooldown():
-		$Overlay.show()
-		$NameLabel.text = "%s (%d)" % [skill.skillName, skill.getCooldown()]
+		overlay.show()
+		label.text = "%s (%d)" % [skill.skillName, skill.getCooldown()]
 	else:
-		$Overlay.hide()
-		$NameLabel.text = skill.skillName
+		overlay.hide()
+		label.text = skill.skillName
