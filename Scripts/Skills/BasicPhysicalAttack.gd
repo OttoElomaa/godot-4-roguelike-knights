@@ -6,6 +6,8 @@ var skill:Node = null
 var actor:Node = null
 
 @export var damage := 0
+@export var attacksCount := 0
+
 @export var isRanged := false
 
 
@@ -21,7 +23,12 @@ func activate(targets:Array) -> Node:
 	
 	#### CREATE FIRST HALF OF DOUBLE MESSAGE
 	skill.ui.saveInitialMessage(skill.actor.creatureName + " uses " + skill.skillName, Color.WHITE)
-	var success = target.handlePhysicalHit(damage)
+	var success = false
+	
+	for i in range(attacksCount):
+		var newSuccess:bool = target.stats.handlePhysicalHit(damage)
+		if newSuccess:
+			success = true
 	
 	#### POST THE FIRST HALF IF LAST HALF FAILS
 	#if not success:

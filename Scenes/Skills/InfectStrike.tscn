@@ -14,5 +14,6 @@ range = 1
 [node name="Script" type="Node" parent="Scripts" index="0"]
 script = ExtResource("3_tufjf")
 damage = 2
+attacksCount = 1
 
 [node name="PoisonEffect" parent="StatusEffects" index="0" instance=ExtResource("4_d2gbv")]

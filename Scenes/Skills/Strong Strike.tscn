@@ -16,3 +16,4 @@ cooldown = 2
 [node name="Script" type="Node" parent="Scripts" index="0"]
 script = ExtResource("3_d3tvs")
 damage = 10
+attacksCount = 1

@@ -13,4 +13,5 @@ range = 3
 [node name="Script" type="Node" parent="Scripts" index="0"]
 script = ExtResource("3_ofo0r")
 damage = 4
+attacksCount = 1
 isRanged = true

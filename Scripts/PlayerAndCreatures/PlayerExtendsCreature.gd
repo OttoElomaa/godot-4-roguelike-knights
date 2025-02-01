@@ -78,7 +78,7 @@ func processExplore():
 	
 	match skillToUse:
 		#### USE SKILL	
-		1,2,3:
+		1,2,3,4:
 			self.useSkill(skillToUse-1)
 			
 		#2:
