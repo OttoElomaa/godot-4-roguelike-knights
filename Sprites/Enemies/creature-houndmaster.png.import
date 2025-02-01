@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1iu0jmh4uvb0"
-path="res://.godot/imported/heroes-wizard.png-6e740c2854af0b7df02a9314014b8b4c.ctex"
+uid="uid://bnut6as3xry7a"
+path="res://.godot/imported/creature-houndmaster.png-7e6f6b0dee646d69c0f2ff1c82948628.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/heroes-wizard.png"
-dest_files=["res://.godot/imported/heroes-wizard.png-6e740c2854af0b7df02a9314014b8b4c.ctex"]
+source_file="res://Sprites/Enemies/creature-houndmaster.png"
+dest_files=["res://.godot/imported/creature-houndmaster.png-7e6f6b0dee646d69c0f2ff1c82948628.ctex"]
 
 [params]
 

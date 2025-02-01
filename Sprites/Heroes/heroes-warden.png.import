@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq8503ln6m6hc"
-path="res://.godot/imported/heroes-thief.png-609ba3d3e46b37e939075ecf0d646112.ctex"
+uid="uid://iouh024wqtl4"
+path="res://.godot/imported/heroes-warden.png-c4caddaffb28717c5b8cc711a121743e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/heroes-thief.png"
-dest_files=["res://.godot/imported/heroes-thief.png-609ba3d3e46b37e939075ecf0d646112.ctex"]
+source_file="res://Sprites/Heroes/heroes-warden.png"
+dest_files=["res://.godot/imported/heroes-warden.png-c4caddaffb28717c5b8cc711a121743e.ctex"]
 
 [params]
 

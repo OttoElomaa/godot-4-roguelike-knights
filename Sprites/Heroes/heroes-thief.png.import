@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cd1rirf0mh0ad"
-path="res://.godot/imported/heroes-sorcerer.png-5cb71e2142c08f7758bfc0e3ec706742.ctex"
+uid="uid://cq8503ln6m6hc"
+path="res://.godot/imported/heroes-thief.png-0accdb916f72f8b89cfa4cd115d6f6d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/heroes-sorcerer.png"
-dest_files=["res://.godot/imported/heroes-sorcerer.png-5cb71e2142c08f7758bfc0e3ec706742.ctex"]
+source_file="res://Sprites/Heroes/heroes-thief.png"
+dest_files=["res://.godot/imported/heroes-thief.png-0accdb916f72f8b89cfa4cd115d6f6d3.ctex"]
 
 [params]
 

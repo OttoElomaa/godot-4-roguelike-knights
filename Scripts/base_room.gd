@@ -6,7 +6,7 @@ var Orc = load("res://Scenes/Creatures/Orc.tscn")
 var Slime = load("res://Scenes/Creatures/Slime.tscn")
 var SkeletonArcher = load("res://Scenes/Creatures/SkeletonArcher.tscn")
 var DarkHealer = load("res://Scenes/Creatures/DarkHealer.tscn")
-
+var HoundMaster = load("res://Scenes/Creatures/Houndmaster.tscn")
 
 var game: Node = null
 
@@ -75,7 +75,7 @@ func populateCreatures() -> Array:
 
 func createRandomCreature() -> Node:
 	
-	var rng = randi_range(1,4)
+	var rng = randi_range(1,5)
 	match rng:
 		1:
 			return Orc.instantiate()
@@ -85,6 +85,8 @@ func createRandomCreature() -> Node:
 			return SkeletonArcher.instantiate()
 		4:
 			return DarkHealer.instantiate()
+		5:
+			return HoundMaster.instantiate()
 			
 	return Orc.instantiate()	
 

@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3sgsr785g1p1"]
+
+[ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Scenes/Creatures/Creature.tscn" id="1_7g7m4"]
+[ext_resource type="Texture2D" uid="uid://bnut6as3xry7a" path="res://Sprites/Enemies/creature-houndmaster.png" id="2_kd8vu"]
+[ext_resource type="PackedScene" uid="uid://bgn3tn8gncvs" path="res://Scenes/Skills/SummonDog.tscn" id="3_226g2"]
+[ext_resource type="PackedScene" uid="uid://0o5uveeqmtnk" path="res://Scenes/Skills/Shoot.tscn" id="4_35vdw"]
+
+[node name="Houndmaster" instance=ExtResource("1_7g7m4")]
+creatureName = "Houndmaster"
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_kd8vu")
+
+[node name="Stats" parent="." index="1"]
+baseHealth = 30
+
+[node name="SummonDogs" parent="Skills" index="0" instance=ExtResource("3_226g2")]
+
+[node name="Shoot" parent="Skills" index="1" instance=ExtResource("4_35vdw")]

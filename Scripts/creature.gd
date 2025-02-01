@@ -89,11 +89,11 @@ func creatureMove():
 	var movementTarget = world.player
 	
 	#### ENEMIES VERY FAR FROM PLAYER WILL NOT CHASE PLAYER
-	if world.grid.getGridDistance(self, movementTarget) > 7:
-		return
+	#if world.grid.getGridDistance(self, movementTarget) > 7:
+		#return
 	
 	#### ADJACENT CREATURES DON'T MOVE	
-	elif world.grid.getGridDistance(self, movementTarget) < 2:
+	if world.grid.getGridDistance(self, movementTarget) < 2:
 		return
 	
 	#### CREATURE CAN MOVE IN THESE DIRECTIONS
@@ -138,6 +138,7 @@ func creatureMove():
 
 func passTurn():
 	
+	
 	#### TICK COOLDOWNS ETC ON-TURN EFFECTS ON SKILL NODES
 	for skill in getSkills():
 		skill.passTurn()
@@ -155,6 +156,12 @@ func passTurn():
 	if $Stats.health.current <= 0:
 		return
 	
+	#### DON'T DO ANYHTHING IF AWAY FROM PLAYER
+	#### SO ALL ALLIES/ENEMIES/ETC FREEZE WHEN FAR AWAY
+	if world.grid.getGridDistance(self, player) > 12:
+		return
+	
+	###################################################
 	#### PICK TARGET
 	#chooseTarget()
 	#### TRY TO USE A SKILL

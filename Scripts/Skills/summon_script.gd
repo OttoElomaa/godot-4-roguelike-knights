@@ -17,6 +17,15 @@ func setup(skill):
 func activate(targets:Array) -> Node:
 	
 	var actorPos = skill.actor.gridPosition
+	for i in range(summonsAmount):
+		summonCreature(actorPos)
+	
+	return skill.actor
+
+
+
+func summonCreature(actorPos:Vector2i):
+	
 	var creaturePos = skill.world.grid.findEmptyTileInRange(actorPos)
 	
 	if creaturePos == Vector2i(999,999):
@@ -34,5 +43,3 @@ func activate(targets:Array) -> Node:
 	
 	summonedCreature.gridPosition = creaturePos
 	skill.world.grid.placeGridObjectOnMap(summonedCreature, creaturePos)
-	
-	return skill.actor
