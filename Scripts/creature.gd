@@ -32,10 +32,11 @@ var stats:
 
 
 
-func roomSetup(room):
+func roomSetup(room:Node, world:Node):
 	
-	var tree = room.get_tree()
-	self.world = tree.root.get_node("GameMain/World")
+	#var tree = room.get_tree()
+	#self.world = tree.root.get_node("GameMain/World")
+	self.world = world
 	setupHelp()
 	
 	
@@ -65,13 +66,20 @@ func setupHelp():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+#func _process(delta: float) -> void:
 	
-	if Input.is_action_just_pressed("P"):
-		creatureMove()
+	
 	
 	
 func _physics_process(delta: float) -> void:
+	
+	if not world:
+		return
+	elif world.isMapKilled:
+		return
+	
+	if Input.is_action_just_pressed("P"):
+		creatureMove()
 	
 	if isMoving:
 		
@@ -142,6 +150,10 @@ func passTurn():
 	if isPlayer and not isOverworld:
 		if gridPosition == world.exitGridPos:
 			print("EXIT REACHEDDDDDDDD")
+			world.resetLevel()
+			return
+			
+			
 	
 	#### TICK COOLDOWNS ETC ON-TURN EFFECTS ON SKILL NODES
 	for skill in getSkills():

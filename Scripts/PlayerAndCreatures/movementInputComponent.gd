@@ -16,6 +16,11 @@ func setup(player):
 
 func _process(delta: float) -> void:
 	
+	if not player:
+		return
+	elif player.world.isMapKilled:
+		return
+	
 	#### PLAYER STOPPED PRESSING MOVEMENT
 	if Input.is_action_just_released("ui_up"):
 		holdingKey = false

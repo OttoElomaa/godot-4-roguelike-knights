@@ -41,9 +41,11 @@ func generateRoomsVersionTwo(world):
 		#### STORE THE LAST ROOM'S CENTER GRID POSITION, TO PLACE EXIT TILE
 		if i == siz - 1:
 			world.exitGridPos = scene.getStartPosition() + coord * 16
+			world.lastRoom = scene
 			prints("EXIT ROOM NUM: ", i)
 		elif i == 0:
 			world.startingGridPos = scene.getStartPosition() + coord * 16
+			world.firstRoom = scene
 			prints("ENTRANCE ROOM NUM: ", i)
 	
 	#### RETURN DICTIONARY TO ROOM SCRIPT

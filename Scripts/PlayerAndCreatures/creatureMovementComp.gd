@@ -36,19 +36,23 @@ func dungeonSetup():
 	self.world = creature.world
 	self.grid = world.grid
 	
-func _process(delta: float) -> void:
 	
+#func _process(delta: float) -> void:
 	#### MOVEMENT UNDERWAY, DON'T ACCEPT NEW INPUT
-	if isMoving:
-		return
-		
 	
-
+		
 func _physics_process(delta: float) -> void:
 	
 	#### FOR NOW, ONLY FOR PLAYER
 	#if not creature:
 		#return
+	#if isMoving:
+		#return
+		
+	if not world:
+		return
+	elif world.isMapKilled:
+		return
 	
 	#### MOVEMENT UNDERWAY FROM ONE TILE TO OTHER
 	if isMoving:

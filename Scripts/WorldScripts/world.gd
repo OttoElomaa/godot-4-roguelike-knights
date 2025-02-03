@@ -15,6 +15,9 @@ var currentRoom: Node = null
 var exitGridPos := Vector2i.ZERO
 var startingGridPos := Vector2i.ZERO
 
+var firstRoom:Node = null
+var lastRoom:Node = null
+
 
 @onready var grid:Node:
 	get:
@@ -44,6 +47,7 @@ var voidTilemap:
 @onready var lookTool := $Utilities/LookTool
 
 var isFirstTurn := false
+var isMapKilled := true
 
 var roomsMetaPosArray := []
 
@@ -54,11 +58,12 @@ var roomsMetaPosArray := []
 
 
 
-func startGame(game:Node, PlayerScene:PackedScene):
+func startGame(game:Node, playerScene:Node):
 
 	self.game = game
 	
-	player = PlayerScene.instantiate()
+	#player = PlayerScene.instantiate()
+	player = playerScene
 	
 	ui.toggleLoadingScreen(true)
 	States.inputModeOff()
@@ -87,12 +92,14 @@ func startGame(game:Node, PlayerScene:PackedScene):
 	#### ROOMS[0]: FIRST ROOM PLACED
 	#var startingRoom = getRooms()[0]
 	#startingRoom.startGameAtRoom(getPlayer())
+	startingGridPos = firstRoom.getStartPosition()
 	player.gridPosition = startingGridPos
 	grid.placeGridObjectOnMap(player, startingGridPos)
+	prints("PLAYER PLACED AT: ", startingGridPos)
 	
 	#### PLACE EXIT - SAVED DURING ROOMS DICT CREATION
+	exitGridPos = lastRoom.getStartPosition()
 	grid.placeGridObjectOnMap($ExitSprite, exitGridPos)
-	#.position = grid.grid_to_world()
 	prints("EXIT PLACED AT: ", exitGridPos)
 	
 	await get_tree().process_frame
@@ -114,7 +121,7 @@ func startGame(game:Node, PlayerScene:PackedScene):
 	#### CREATURES ARE SETUP IN PopulateCreatures()
 	var creatures: Array = []
 	for room in getRooms():
-		creatures.append_array(room.populateCreatures() )
+		creatures.append_array(room.populateCreatures(self) )
 	for creature in creatures:
 		$Creatures.add_child(creature)
 	
@@ -128,6 +135,7 @@ func startGame(game:Node, PlayerScene:PackedScene):
 			for y in range(-200,200):
 				$Utilities/FogTiles.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
 	
+	isMapKilled = false
 	#### LINE OF SIGHT SETUP
 	
 	
@@ -230,9 +238,18 @@ func _process(delta: float) -> void:
 		getUi().updateStateLabel(isLook)
 		
 	
+	#### FOR DEBUG
 	if Input.is_action_just_pressed("u"):
 		for r in getRooms():
 			r.randomizeTileGraphics()
+	
+	#### FOR DEBUG TELEPORTING
+	if Input.is_action_just_pressed("X"):
+		var lookPos = lookTool.gridPosition
+		player.gridPosition = lookPos
+		grid.placeGridObjectOnMap(player, lookPos)
+		
+	
 			
 	if States.GameState == States.InputStates.LOOK:
 		processLook()
@@ -282,6 +299,18 @@ func addCreature(creature:Node):
 	creature.basicSetup(self)
 	$Creatures.add_child(creature)
 	
+
+
+#### ORDER GAME TO GENERATE NEW DUNGEON LEVEL
+func resetLevel():
+	isMapKilled = true
+	game.storedPlayer = player
+	$Creatures.remove_child(player)
+	game.generateNewLevel()
+	self.queue_free()
+
+
+###################################################################
 
 func getPlayer():
 	return $Creatures/Player

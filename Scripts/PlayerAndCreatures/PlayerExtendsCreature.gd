@@ -41,6 +41,11 @@ func playerSetup(world, isThisOverworld):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
+	if not world:
+		return
+	elif world.isMapKilled:
+		return
+	
 	if States.GameState == States.InputStates.EXPLORE:
 		self.processExplore()
 	

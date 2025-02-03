@@ -49,13 +49,13 @@ func startGameAtRoom(setPlayer) -> void:
 
 
 
-func populateCreatures() -> Array:
+func populateCreatures(world) -> Array:
 	
 	var creatures := []
 	
 	for start in $Utilities/CreatureSpawnPoints.get_children():
 		var newCreature = FileLoader.createRandomCreature()
-		newCreature.roomSetup(self)
+		newCreature.roomSetup(self, world)
 		
 		var newPos = $Tiles/FloorTiles2.local_to_map(start.position)
 		var gridPos = newPos + originGridPos

@@ -9,6 +9,7 @@ var game:Node = null
 
 var PlayerScene :PackedScene = load("res://Scenes/Creatures/Player.tscn")
 
+var isMapKilled := false
 
 var grid:Node:
 	get:
