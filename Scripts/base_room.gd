@@ -2,12 +2,6 @@ extends Node2D
 
 
 
-var Orc = load("res://Scenes/Creatures/Orc.tscn")
-var Slime = load("res://Scenes/Creatures/Slime.tscn")
-var SkeletonArcher = load("res://Scenes/Creatures/SkeletonArcher.tscn")
-var DarkHealer = load("res://Scenes/Creatures/DarkHealer.tscn")
-var HoundMaster = load("res://Scenes/Creatures/Houndmaster.tscn")
-
 var game: Node = null
 
 var player: Node = null
@@ -60,7 +54,7 @@ func populateCreatures() -> Array:
 	var creatures := []
 	
 	for start in $Utilities/CreatureSpawnPoints.get_children():
-		var newCreature = createRandomCreature()
+		var newCreature = FileLoader.createRandomCreature()
 		newCreature.roomSetup(self)
 		
 		var newPos = $Tiles/FloorTiles2.local_to_map(start.position)
@@ -72,23 +66,6 @@ func populateCreatures() -> Array:
 		
 	return creatures
 
-
-func createRandomCreature() -> Node:
-	
-	var rng = randi_range(1,5)
-	match rng:
-		1:
-			return Orc.instantiate()
-		2:
-			return Slime.instantiate()
-		3:
-			return SkeletonArcher.instantiate()
-		4:
-			return DarkHealer.instantiate()
-		5:
-			return HoundMaster.instantiate()
-			
-	return Orc.instantiate()	
 
 
 
@@ -121,9 +98,11 @@ func randomizeTileGraphics():
 				
 
 
+#### GET GLOBAL POSITION OF ROOM'S "CENTER" POSITION
+#### USED MOSTLY FOR CONNECTING ROOMS WITH A PATH. ALSO PLACING EXIT
 func getStartPosition():
 	var pos = $Utilities/Center.position
-	return grid.world_to_grid(position + pos) 
+	return GridTools.world_to_grid(position + pos) 
 
 
 

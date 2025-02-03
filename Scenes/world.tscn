@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://6rirwqrl30jg"]
+[gd_scene load_steps=14 format=3 uid="uid://6rirwqrl30jg"]
 
 [ext_resource type="Script" path="res://Scripts/WorldScripts/world.gd" id="1_7s3px"]
 [ext_resource type="PackedScene" uid="uid://cwakr1joaem2j" path="res://Scenes/UI/ui.tscn" id="2_6sbxi"]
@@ -11,6 +11,7 @@
 [ext_resource type="TileSet" uid="uid://d1ktl1xbf2yy8" path="res://Resources/Tilemaps/FogTileset.tres" id="10_6haoq"]
 [ext_resource type="TileSet" uid="uid://7slev8tg8jyu" path="res://Resources/Tilemaps/VoidDebugTiles.tres" id="11_qblsd"]
 [ext_resource type="Script" path="res://Scripts/WorldScripts/room_generation.gd" id="12_53axp"]
+[ext_resource type="Texture2D" uid="uid://5bjgdk2y721r" path="res://Sprites/stairs-down-monochrome-transparent-32px.png" id="12_hyajq"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_akmnp"]
 vertices = PackedVector2Array(9504, -9680, 9456, 9424, -9504, 9504, -9552, -9808)
@@ -24,6 +25,7 @@ agent_radius = 0.0
 [node name="World" type="NavigationRegion2D"]
 navigation_polygon = SubResource("NavigationPolygon_akmnp")
 script = ExtResource("1_7s3px")
+turnOffLineOfSight = true
 
 [node name="UI" parent="." instance=ExtResource("2_6sbxi")]
 
@@ -79,6 +81,9 @@ navigation_enabled = false
 [node name="DumbTimer" type="Timer" parent="Utilities"]
 wait_time = 0.1
 one_shot = true
+
+[node name="ExitSprite" type="Sprite2D" parent="."]
+texture = ExtResource("12_hyajq")
 
 [connection signal="bake_finished" from="." to="." method="_on_bake_finished"]
 [connection signal="timeout" from="Utilities/DumbTimer" to="." method="_on_dumb_timer_timeout"]

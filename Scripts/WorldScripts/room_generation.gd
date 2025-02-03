@@ -15,10 +15,12 @@ func generateRoomsVersionTwo(world):
 		
 	var roomPositions = [Vector2i.ZERO]
 	
+	#### ROOMCOUNT = HOW MANY TIMES WE MAKE ROOM
 	for i in range(1, roomCount + 1):
 		var previousCoords = roomPositions[i - 1]
 		var success := false
 		
+		#### TRY TO DESIGNATE ROOM POSITION IN RANDOM DIRECTION
 		while not success:
 			var direction = directions[rng.randi_range(0,3)]
 			var newPos = movePosition(previousCoords, direction)
@@ -27,97 +29,31 @@ func generateRoomsVersionTwo(world):
 				roomPositions.append(newPos)
 	
 	var rooms := {}
-	var scene:PackedScene = null
+	var scene:Node = null
 	
-	for coords in roomPositions:
+	#### LOAD A ROOM SCENE, STORE ITS POSITION IN DICT
+	var siz = roomPositions.size()
+	for i in range(siz):
+		var coord = roomPositions[i]
+		scene = FileLoader.createRandomRoom()
+		rooms[coord] = scene
 		
-		match rng.randi_range(0,2):
-			0:
-				scene = load("res://Rooms/Detached/Cavern/Cavern02.tscn")
-			1:
-				scene = load("res://Rooms/Detached/Cavern/Cavern01.tscn")
-			2:
-				scene = load("res://Rooms/Detached/Cells/Cells01.tscn")
-		
-		rooms[coords] = scene
+		#### STORE THE LAST ROOM'S CENTER GRID POSITION, TO PLACE EXIT TILE
+		if i == siz - 1:
+			world.exitGridPos = scene.getStartPosition() + coord * 16
+			prints("EXIT ROOM NUM: ", i)
+		elif i == 0:
+			world.startingGridPos = scene.getStartPosition() + coord * 16
+			prints("ENTRANCE ROOM NUM: ", i)
 	
+	#### RETURN DICTIONARY TO ROOM SCRIPT
 	return rooms
 		
+
 
 func movePosition(position, direction):
 	return Vector2i(position.x + direction.x, position.y + direction.y)
 
-
-func generateRooms(world):
-
-	var roomDicts:Array = createRoomsList()
-	var roomScenes := {}
-	
-	for roomDictionary in roomDicts:
-		var roomScene = loadRoom(roomDictionary)
-		roomScenes[roomScene] = roomDictionary["position"]
-		#roomScenes.append(roomScene)
-	
-	return roomScenes
-
-
-func createRoomsList():
-	
-	self.world = world
-	
-	var rng := RandomNumberGenerator.new()
-	var directions := ["up", "down", "left", "right"]
-	var firstPos := Vector2i.ZERO
-	
-	var rooms := []
-
-	# The first room has no entrance, only an exit
-	var first_exit = directions[rng.randi_range(0,3)]
-	
-	rooms.append({
-		"entrance": "",
-		"exit": first_exit,
-		"position": firstPos,
-		})
-	
-		
-	######################################	
-	# Determine subsequent rooms
-	var previousExit := ""
-	var entrance := ""
-	for i in range(1, 4):
-		
-		var previousRoom = rooms[i-1]
-		previousExit = previousRoom['exit']
-		entrance = opposite_direction(previousExit)
-
-		# Calculate the new position based on the previous exit direction
-		var previousPos = previousRoom["position"]
-		var new_position = move_position(previousPos, previousExit)
-		
-
-		
-		var exit := ""
-		#### ROOM 3 IS LAST AND HAS NO EXIT
-		#### CHECK THAT ENTRANCE AND EXIT ARE DIFFERENT
-		if i < 3:
-			exit = directions[rng.randi_range(0,3)]
-			while exit == entrance:
-				exit = directions[rng.randi_range(0,3)]
-		
-		rooms.append({
-			'entrance': entrance,
-			'exit': exit,
-			'position': new_position
-			})
-	
-	prints("rooms count: ", rooms.size())
-	for room in rooms:
-		prints("room. entrance: ", room["entrance"])
-		prints("exit: ", room["exit"])	
-		prints("position: ", room["position"])
-		print("")		
-	return rooms
 
 
 func opposite_direction(direction):
@@ -128,6 +64,7 @@ func opposite_direction(direction):
 		'right': 'left'
 		}
 	return opposite[direction]
+
 
 
 func move_position(position:Vector2i, direction) -> Vector2i:
@@ -145,78 +82,3 @@ func move_position(position:Vector2i, direction) -> Vector2i:
 		return Vector2i(x + 1, y)
 		
 	return position
-
-
-
-func loadRoom(room:Dictionary):
-	
-	var entrance:String = room["entrance"]
-	var exit:String = room["exit"]
-	var result := ""
-	var combination = entrance + "-" + exit
-	
-	prints("room combp text: ", combination)
-	
-	#################################
-	match combination:
-		"-right", "right-":
-			return load("res://Rooms/Basic/BasicEntranceRight01.tscn")
-		"-left", "left-":
-			return load("res://Rooms/Basic/BasicEntranceLeft01.tscn")
-		"-up", "up-":
-			return load("res://Rooms/Basic/BasicEntanceUp01.tscn")
-		"-down", "down-":
-			return load("res://Rooms/Basic/BasicEntranceDown01.tscn")
-			
-		##########################
-		"up-down", "down-up":
-			return load("res://Rooms/Basic/BasicUpDown01.tscn")
-		"left-right", "right-left":
-			return load("res://Rooms/Basic/BasicLeftRight01.tscn")
-		
-		#####################################	
-		"up-right", "right-up":
-			return load("res://Rooms/Basic/BasicUpRight01.tscn")
-			
-		"up-left", "left-up":
-			return load("res://Rooms/Basic/BasicUpLeft01.tscn")
-			
-		"down-left", "left-down":
-			return load("res://Rooms/Basic/BasicDownLeft01.tscn")
-			
-		"down-right", "right-down":
-			return load("res://Rooms/Basic/BasicDownRight01.tscn")
-	
-	#match entrance:
-		#"up":
-			#match exit:
-				#"down":
-					#result = "up-down"
-				#"left":
-					#result = "up-left"
-				#"right":
-					#result = "up-right"		
-		#"down":
-			#match exit:
-				#"up":
-					#result = "up-down"
-				#"left":
-					#result = "down-left"
-				#"right":
-					#result = "down-right"
-		#"left":
-			#match exit:
-				#"down":
-					#result = "down-left"
-				#"up":
-					#result = "up-left"
-				#"right":
-					#result = "left-right"
-		#"right":
-			#match exit:
-				#"down":
-					#result = "down-right"
-				#"up":
-					#result = "up-right"
-				#"left":
-					#result = "left-right"

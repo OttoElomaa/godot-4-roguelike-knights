@@ -5,8 +5,16 @@ extends NavigationRegion2D
 
 @export var turnOffLineOfSight := false
 
+@export var dungeonName := "Cool Dungeon Name"
+
+@export var roomSize := 16
+
 var game:Node = null
 var currentRoom: Node = null
+
+var exitGridPos := Vector2i.ZERO
+var startingGridPos := Vector2i.ZERO
+
 
 @onready var grid:Node:
 	get:
@@ -77,8 +85,15 @@ func startGame(game:Node, PlayerScene:PackedScene):
 	
 	#### PLACE THE PLAYER ON THE MAP
 	#### ROOMS[0]: FIRST ROOM PLACED
-	var startingRoom = getRooms()[0]
-	startingRoom.startGameAtRoom(getPlayer())
+	#var startingRoom = getRooms()[0]
+	#startingRoom.startGameAtRoom(getPlayer())
+	player.gridPosition = startingGridPos
+	grid.placeGridObjectOnMap(player, startingGridPos)
+	
+	#### PLACE EXIT - SAVED DURING ROOMS DICT CREATION
+	grid.placeGridObjectOnMap($ExitSprite, exitGridPos)
+	#.position = grid.grid_to_world()
+	prints("EXIT PLACED AT: ", exitGridPos)
 	
 	await get_tree().process_frame
 	await get_tree().process_frame
@@ -117,20 +132,19 @@ func startGame(game:Node, PlayerScene:PackedScene):
 	
 	
 	
-	
-	
-
 func generateDungeon(roomScenes:Dictionary):
 	
 	for coord in roomScenes.keys():
 		roomsMetaPosArray.append(coord)
 		
-		var scene = roomScenes[coord]
+		var scene:Node = roomScenes[coord]
 		instantiateRoom(scene, coord)	
 	
 	#### REMOVE IF BUGGED
 	for room:Node in getRooms():
 		addRoomOffset(room)
+	
+	
 		
 	return generatePath() #### GENERATE A PATH BETWEEN ROOMS
 
@@ -172,9 +186,10 @@ func generatePath():
 #### SETUP EACH ROOM HERE - ALSO CALL ITS SETUP FUNCTION
 #### AND ROOM'S PLACEMENT AND SPRITE GRAPHICS FUNCTIONS
 #### ROOMSCENE COMES FROM ROOM LOADER NODE
-func instantiateRoom(roomScene:PackedScene, metaCoords:Vector2i):
+func instantiateRoom(roomScene:Node, metaCoords:Vector2i):
 	
-	var newRoom = roomScene.instantiate()
+	#var newRoom = roomScene.instantiate()
+	var newRoom = roomScene
 	$Rooms.add_child(newRoom) 
 	newRoom.setup(self)	
 	

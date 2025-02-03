@@ -139,6 +139,10 @@ func creatureMove():
 func passTurn():
 	
 	
+	if isPlayer and not isOverworld:
+		if gridPosition == world.exitGridPos:
+			print("EXIT REACHEDDDDDDDD")
+	
 	#### TICK COOLDOWNS ETC ON-TURN EFFECTS ON SKILL NODES
 	for skill in getSkills():
 		skill.passTurn()

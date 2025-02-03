@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1pphtuav552i"]
+
+[ext_resource type="Script" path="res://Scenes/Autoloads/file_loader.gd" id="1_ix2vx"]
+
+[node name="FileLoader" type="Node2D"]
+script = ExtResource("1_ix2vx")
