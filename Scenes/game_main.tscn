@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bckhqa15oogpo"]
+[gd_scene load_steps=5 format=3 uid="uid://bckhqa15oogpo"]
 
 [ext_resource type="Script" path="res://Scripts/game_main.gd" id="1_hxft8"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="4_gh64h"]
 [ext_resource type="Script" path="res://Scripts/file_loader.gd" id="6_t2g5i"]
 [ext_resource type="PackedScene" uid="uid://6k45i4rxp5o4" path="res://Scenes/world_map.tscn" id="10_o3ock"]
 
@@ -11,3 +12,26 @@ script = ExtResource("1_hxft8")
 script = ExtResource("6_t2g5i")
 
 [node name="WorldMap" parent="." instance=ExtResource("10_o3ock")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DeathMessage" type="PanelContainer" parent="CanvasLayer"]
+visible = false
+custom_minimum_size = Vector2(400, 200)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("4_gh64h")
+
+[node name="Label" type="Label" parent="CanvasLayer/DeathMessage"]
+layout_mode = 2
+text = "You died........"
+horizontal_alignment = 1

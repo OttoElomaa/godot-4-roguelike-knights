@@ -39,5 +39,9 @@ func generateNewLevel():
 
 
 
+func showDeathMessage():
+	$CanvasLayer/DeathMessage.show()
+
+
 func getUi():
 	return $UI

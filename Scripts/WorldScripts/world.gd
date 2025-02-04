@@ -4,6 +4,7 @@ extends NavigationRegion2D
 @export var isOverworld := false
 
 @export var turnOffLineOfSight := false
+@export var debugImmortalPlayer := false
 
 @export var dungeonName := "Cool Dungeon Name"
 
