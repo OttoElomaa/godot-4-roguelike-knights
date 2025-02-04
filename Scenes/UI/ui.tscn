@@ -33,6 +33,18 @@ theme_override_constants/margin_bottom = 5
 [node name="Hbox" type="VBoxContainer" parent="LookMargin/LookPanel/Margin"]
 layout_mode = 2
 
+[node name="FloorLabel" type="Label" parent="LookMargin/LookPanel/Margin/Hbox"]
+layout_mode = 2
+text = "Dungeon floor num"
+
+[node name="GoldLabel" type="Label" parent="LookMargin/LookPanel/Margin/Hbox"]
+layout_mode = 2
+text = "Gold: Amount"
+
+[node name="EnemiesLabel" type="Label" parent="LookMargin/LookPanel/Margin/Hbox"]
+layout_mode = 2
+text = "Enemies killed: Amount"
+
 [node name="StateLabel" type="Label" parent="LookMargin/LookPanel/Margin/Hbox"]
 layout_mode = 2
 text = "Input Mode"

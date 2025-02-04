@@ -28,6 +28,8 @@ func displayPlayerSkills(player):
 	
 
 func updateVisualsOnTurn():
+	updateProgressLabels()
+	
 	for box in skillBar.get_children():
 		if box.skill != null:
 			box.updateVisuals()	
@@ -40,6 +42,10 @@ func updateStateLabel(isLook):
 	else:
 		stateLabel.text = "Input State = Explore"
 
+
+func updateProgressLabels():
+	$LookMargin/LookPanel/Margin/Hbox/GoldLabel.text = "Gold: %d" % ProgressData.gold
+	$LookMargin/LookPanel/Margin/Hbox/EnemiesLabel.text = "Enemies killed: %d" % ProgressData.enemiesKilled
 
 
 func showMouseLookCreature(creature:Node):

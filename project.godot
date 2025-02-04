@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 States="*res://Scenes/Autoloads/States.tscn"
 FileLoader="*res://Scenes/Autoloads/FileLoader.tscn"
 GridTools="*res://Scenes/Autoloads/GridTools.tscn"
+ProgressData="*res://Scenes/Autoloads/ProgressData.tscn"
 
 [display]
 

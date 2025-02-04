@@ -87,11 +87,24 @@ func takeDamage(amount: int):
 	var damageString : String = creature.creatureName + " takes " + str(amount) + " damage!"
 	ui.addLogRow(damageString, colorToUse)
 	
+	handleCreatureDeath()
+	
+
+
+
+func handleCreatureDeath():
 	if not creature.isPlayer:
 		if health.current <= 0:
+			
 			var deathString:String = creature.creatureName + " died!"
 			ui.addMessage(deathString, Color.DARK_CYAN)
+			
+			if creature.isEnemy:
+				ProgressData.enemiesKilled += 1
+				ProgressData.gold += 5
+			
 			creature.queue_free()
+
 
 
 func recoverHealth(amount: int):
