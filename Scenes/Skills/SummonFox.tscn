@@ -13,7 +13,7 @@ skillName = "Summon"
 targetingGroup = 0
 
 [node name="Cooldown" parent="." index="1"]
-cooldown = 10
+cooldown = 20
 
 [node name="SummonScript" type="Node" parent="Scripts" index="0"]
 script = ExtResource("3_mmq5u")

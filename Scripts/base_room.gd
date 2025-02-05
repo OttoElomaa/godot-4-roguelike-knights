@@ -51,6 +51,11 @@ func startGameAtRoom(setPlayer) -> void:
 
 func populateCreatures(world) -> Array:
 	
+	#### BOSS IS SPAWNED IN WORLD SCRIPT. NO OTHER ENEMIES IN BOSS ROOM
+	if self == world.lastRoom:
+		return []
+	
+	#### SPAWN AN ENEMY IN EACH START LOCATION
 	var creatures := []
 	
 	for start in $Utilities/CreatureSpawnPoints.get_children():
@@ -104,6 +109,10 @@ func getStartPosition():
 	var pos = $Utilities/Center.position
 	return GridTools.world_to_grid(position + pos) 
 
+
+func getPlayerStartPos():
+	var pos = $Utilities/PlayerStart.position
+	return GridTools.world_to_grid(position + pos) 
 
 
 func generateOpenPath(paths:Array):

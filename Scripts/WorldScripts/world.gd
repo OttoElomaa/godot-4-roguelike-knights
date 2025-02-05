@@ -91,17 +91,20 @@ func startGame(game:Node, playerScene:Node):
 	
 	#### PLACE THE PLAYER ON THE MAP
 	#### ROOMS[0]: FIRST ROOM PLACED
-	#var startingRoom = getRooms()[0]
-	#startingRoom.startGameAtRoom(getPlayer())
 	startingGridPos = firstRoom.getStartPosition()
 	player.gridPosition = startingGridPos
 	grid.placeGridObjectOnMap(player, startingGridPos)
-	prints("PLAYER PLACED AT: ", startingGridPos)
 	
 	#### PLACE EXIT - SAVED DURING ROOMS DICT CREATION
 	exitGridPos = lastRoom.getStartPosition()
 	grid.placeGridObjectOnMap($ExitSprite, exitGridPos)
-	prints("EXIT PLACED AT: ", exitGridPos)
+	
+	#### PLACE BOSS
+	var boss = FileLoader.createRandomBoss()
+	addCreature(boss)
+	var lastRoomSpawnPos = lastRoom.getPlayerStartPos()
+	boss.gridPosition = lastRoomSpawnPos
+	grid.placeGridObjectOnMap(boss, lastRoomSpawnPos)
 	
 	await get_tree().process_frame
 	await get_tree().process_frame

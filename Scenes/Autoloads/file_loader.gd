@@ -7,6 +7,8 @@ var SkeletonArcher = load("res://Scenes/Creatures/SkeletonArcher.tscn")
 var DarkHealer = load("res://Scenes/Creatures/DarkHealer.tscn")
 var HoundMaster = load("res://Scenes/Creatures/Houndmaster.tscn")
 
+var OrcWarlord = load("res://Scenes/Creatures/OrcWarlord.tscn")
+
 
 func createRandomCreature() -> Node:
 	
@@ -25,6 +27,12 @@ func createRandomCreature() -> Node:
 			
 	return Orc.instantiate()
 	
+
+
+func createRandomBoss() -> Node:
+	
+	return OrcWarlord.instantiate()
+
 
 
 func createRandomRoom() -> Node:

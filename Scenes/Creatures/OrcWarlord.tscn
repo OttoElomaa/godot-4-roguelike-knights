@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3 uid="uid://drr6x5762e2r0"]
+
+[ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Scenes/Creatures/Creature.tscn" id="1_bs4ux"]
+[ext_resource type="Texture2D" uid="uid://djhu8g6oew0nk" path="res://Sprites/Enemies/boss-orc-warlord.png" id="2_of1cj"]
+[ext_resource type="PackedScene" uid="uid://j84ahsk1aocg" path="res://Scenes/Skills/DoubleStrike.tscn" id="3_jg8vv"]
+[ext_resource type="PackedScene" uid="uid://cwkrdlxk2utha" path="res://Scenes/Skills/Strong Strike.tscn" id="4_rwbg3"]
+[ext_resource type="PackedScene" uid="uid://bht4bnosjb7ch" path="res://Scenes/Skills/InfectStrike.tscn" id="5_52m6y"]
+[ext_resource type="PackedScene" uid="uid://1nkco862q1po" path="res://Scenes/Skills/BasicHeal.tscn" id="6_tweun"]
+[ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Scenes/Skills/Strike.tscn" id="7_aeina"]
+
+[node name="Orc Warlord" instance=ExtResource("1_bs4ux")]
+creatureName = "Orc Warlord"
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_of1cj")
+
+[node name="Stats" parent="." index="1"]
+baseHealth = 40
+armor = 20
+baseEvasion = 15
+
+[node name="DoubleStrike" parent="Skills" index="0" instance=ExtResource("3_jg8vv")]
+
+[node name="StrongStrike" parent="Skills" index="1" instance=ExtResource("4_rwbg3")]
+
+[node name="Infect" parent="Skills" index="2" instance=ExtResource("5_52m6y")]
+
+[node name="Heal" parent="Skills" index="3" instance=ExtResource("6_tweun")]
+
+[node name="Strike" parent="Skills" index="4" instance=ExtResource("7_aeina")]
