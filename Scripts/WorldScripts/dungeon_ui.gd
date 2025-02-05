@@ -1,10 +1,14 @@
 extends CanvasLayer
 
 
-@onready var stateLabel := $LookMargin/LookPanel/Margin/Hbox/StateLabel
+@onready var stateLabel := $LookMargin/VBox/LookPanel/Margin/Hbox/StateLabel
 
-@onready var lookLabel := $LookMargin/LookPanel/Margin/Hbox/LookLabel
-@onready var lookLabel2 := $LookMargin/LookPanel/Margin/Hbox/LookLabel2
+@onready var lookLabel := $LookMargin/VBox/LookPanel/Margin/Hbox/LookLabel
+@onready var lookLabel2 := $LookMargin/VBox/LookPanel/Margin/Hbox/LookLabel2
+
+@onready var floorLabel := $LookMargin/VBox/FloorInfo/Margin/Hbox/FloorLabel
+@onready var goldLabel := $LookMargin/VBox/FloorInfo/Margin/Hbox/GoldLabel
+@onready var enemiesLabel := $LookMargin/VBox/FloorInfo/Margin/Hbox/EnemiesLabel
 
 @onready var skillBar := $Margin/SkillBar
 @onready var combatLog := $Margin2/LogPanel/MarginContainer/CombatLog
@@ -44,8 +48,8 @@ func updateStateLabel(isLook):
 
 
 func updateProgressLabels():
-	$LookMargin/LookPanel/Margin/Hbox/GoldLabel.text = "Gold: %d" % ProgressData.gold
-	$LookMargin/LookPanel/Margin/Hbox/EnemiesLabel.text = "Enemies killed: %d" % ProgressData.enemiesKilled
+	goldLabel.text = "Gold: %d" % ProgressData.gold
+	enemiesLabel.text = "Enemies killed: %d" % ProgressData.enemiesKilled
 
 
 func showMouseLookCreature(creature:Node):

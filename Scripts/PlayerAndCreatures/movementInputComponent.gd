@@ -26,9 +26,18 @@ func _process(delta: float) -> void:
 		holdingKey = false
 	elif Input.is_action_just_released("ui_down"):
 		holdingKey = false
-	elif Input.is_action_just_released("ui_left"):
+	if Input.is_action_just_released("ui_left"):
 		holdingKey = false
 	elif Input.is_action_just_released("ui_right"):
+		holdingKey = false
+		
+	if Input.is_action_just_released("num7"):
+		holdingKey = false
+	elif Input.is_action_just_released("num3"):
+		holdingKey = false
+	if Input.is_action_just_released("num9"):
+		holdingKey = false
+	elif Input.is_action_just_released("num1"):
 		holdingKey = false
 	
 	

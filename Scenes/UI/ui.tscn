@@ -19,40 +19,57 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="LookPanel" type="PanelContainer" parent="LookMargin"]
+[node name="VBox" type="VBoxContainer" parent="LookMargin"]
+layout_mode = 2
+
+[node name="FloorInfo" type="PanelContainer" parent="LookMargin/VBox"]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_0cgky")
 
-[node name="Margin" type="MarginContainer" parent="LookMargin/LookPanel"]
+[node name="Margin" type="MarginContainer" parent="LookMargin/VBox/FloorInfo"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="Hbox" type="VBoxContainer" parent="LookMargin/LookPanel/Margin"]
+[node name="Hbox" type="VBoxContainer" parent="LookMargin/VBox/FloorInfo/Margin"]
 layout_mode = 2
 
-[node name="FloorLabel" type="Label" parent="LookMargin/LookPanel/Margin/Hbox"]
+[node name="FloorLabel" type="Label" parent="LookMargin/VBox/FloorInfo/Margin/Hbox"]
 layout_mode = 2
 text = "Dungeon floor num"
 
-[node name="GoldLabel" type="Label" parent="LookMargin/LookPanel/Margin/Hbox"]
+[node name="GoldLabel" type="Label" parent="LookMargin/VBox/FloorInfo/Margin/Hbox"]
 layout_mode = 2
 text = "Gold: Amount"
 
-[node name="EnemiesLabel" type="Label" parent="LookMargin/LookPanel/Margin/Hbox"]
+[node name="EnemiesLabel" type="Label" parent="LookMargin/VBox/FloorInfo/Margin/Hbox"]
 layout_mode = 2
 text = "Enemies killed: Amount"
 
-[node name="StateLabel" type="Label" parent="LookMargin/LookPanel/Margin/Hbox"]
+[node name="LookPanel" type="PanelContainer" parent="LookMargin/VBox"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_0cgky")
+
+[node name="Margin" type="MarginContainer" parent="LookMargin/VBox/LookPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Hbox" type="VBoxContainer" parent="LookMargin/VBox/LookPanel/Margin"]
+layout_mode = 2
+
+[node name="StateLabel" type="Label" parent="LookMargin/VBox/LookPanel/Margin/Hbox"]
 layout_mode = 2
 text = "Input Mode"
 
-[node name="LookLabel" type="Label" parent="LookMargin/LookPanel/Margin/Hbox"]
+[node name="LookLabel" type="Label" parent="LookMargin/VBox/LookPanel/Margin/Hbox"]
 layout_mode = 2
 
-[node name="LookLabel2" type="Label" parent="LookMargin/LookPanel/Margin/Hbox"]
+[node name="LookLabel2" type="Label" parent="LookMargin/VBox/LookPanel/Margin/Hbox"]
 layout_mode = 2
 
 [node name="Margin" type="MarginContainer" parent="."]

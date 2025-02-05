@@ -13,6 +13,11 @@ creatureName = "Guardian Spirit"
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_5mp80")
 
+[node name="Stats" parent="." index="1"]
+baseHealth = 30
+armor = 30
+baseEvasion = 10
+
 [node name="Heal" parent="Skills" index="0" instance=ExtResource("4_7b8u4")]
 
 [node name="Infect" parent="Skills" index="1" instance=ExtResource("4_qf74e")]
