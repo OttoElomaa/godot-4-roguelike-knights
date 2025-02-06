@@ -25,6 +25,7 @@ func setup(world) -> void:
 
 func createTargetingDict():
 	
+	targetsDict = {}
 	var creatures = world.getCreatures()
 	
 	var counter = 0
@@ -32,9 +33,9 @@ func createTargetingDict():
 		if creature == player:
 			pass
 		elif lineOfSight.lineOfSightBetweenObjects(player, creature):
-			if grid.getGridDistance(player, creature) <= 15:
-				targetsDict[counter] = creature
-				counter += 1
+			#if grid.getGridDistance(player, creature) <= 15:
+			targetsDict[counter] = creature
+			counter += 1
 			
 
 func autoSetTarget():
