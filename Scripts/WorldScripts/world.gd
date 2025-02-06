@@ -139,10 +139,6 @@ func startGame(game:Node, playerScene:Node):
 			for y in range(-200,200):
 				$Utilities/FogTiles.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
 	
-	#### CREATE LIST OF CURRENT TARGETS
-	$Utilities/Targeting.setup(self)
-	$Utilities/Targeting.createTargetingDict()
-	$Utilities/Targeting.autoSetTarget()
 	
 	#### INPUT MANAGEMENT
 	isMapKilled = false
@@ -385,3 +381,8 @@ func _on_bake_finished() -> void:
 	
 	if not turnOffLineOfSight:
 		lineOfSightStuff()
+	
+	#### CREATE LIST OF CURRENT TARGETS
+	$Utilities/Targeting.setup(self)
+	$Utilities/Targeting.createTargetingDict()
+	$Utilities/Targeting.autoSetTarget()
