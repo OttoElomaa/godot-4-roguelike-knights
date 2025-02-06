@@ -6,6 +6,7 @@ extends Creature
 #var isOverworld := false
 var isZoomedIn := true
 
+var selectedTarget:Node = null
 
 
 

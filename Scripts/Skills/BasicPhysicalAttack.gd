@@ -19,7 +19,14 @@ func setup(skill):
 #### RETURN TARGET=TRUE, RETURN NULL=FALSE
 func activate(targets:Array) -> Node:
 	
+	#### NPC's GET TARGET FROM FILTERED LIST
+	#### PLAYER HAS ITS OWN TARGETING SYSTEM
 	var target = targets[0]
+	if actor.isPlayer:
+		target = actor.selectedTarget
+	
+	
+	
 	
 	#### CREATE FIRST HALF OF DOUBLE MESSAGE
 	skill.ui.saveInitialMessage(skill.actor.creatureName + " uses " + skill.skillName, Color.WHITE)

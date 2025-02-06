@@ -50,6 +50,8 @@ func overworldSetup(worldMap:Node):
 	self.world = worldMap
 
 
+func matchPositionToGridPos(object:Node):
+	placeGridObjectOnMap(object, object.gridPosition)
 
 func placeGridObjectOnMap(object:Node, gridPos:Vector2i):
 	

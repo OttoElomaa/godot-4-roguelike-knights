@@ -139,8 +139,13 @@ func startGame(game:Node, playerScene:Node):
 			for y in range(-200,200):
 				$Utilities/FogTiles.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
 	
+	#### CREATE LIST OF CURRENT TARGETS
+	$Utilities/Targeting.setup(self)
+	$Utilities/Targeting.createTargetingDict()
+	$Utilities/Targeting.autoSetTarget()
+	
+	#### INPUT MANAGEMENT
 	isMapKilled = false
-	#### LINE OF SIGHT SETUP
 	
 	
 	
@@ -254,6 +259,9 @@ func _process(delta: float) -> void:
 		grid.placeGridObjectOnMap(player, lookPos)
 		
 	
+	if Input.is_action_just_pressed("R"):
+		$Utilities/Targeting.shuffleTargets()
+	
 			
 	if States.GameState == States.InputStates.LOOK:
 		processLook()
@@ -280,6 +288,11 @@ func passTurn():
 	if isFirstTurn:
 		#bake_navigation_polygon(true)
 		isFirstTurn = false
+		
+	#### CREATE LIST OF CURRENT TARGETS
+	$Utilities/Targeting.createTargetingDict()
+	$Utilities/Targeting.autoSetTarget()
+	
 	
 	
 #### FOG OF WAR STUFF??
