@@ -24,6 +24,8 @@ func activate(targets:Array) -> Node:
 	var target = targets[0]
 	if actor.isPlayer:
 		target = actor.selectedTarget
+	if not target:
+		return null
 	
 	
 	
@@ -33,9 +35,11 @@ func activate(targets:Array) -> Node:
 	var success = false
 	
 	for i in range(attacksCount):
-		var newSuccess:bool = target.stats.handlePhysicalHit(damage)
-		if newSuccess:
-			success = true
+		if is_instance_valid(target):
+			
+			var newSuccess:bool = target.stats.handlePhysicalHit(damage)
+			if newSuccess:
+				success = true
 	
 	#### POST THE FIRST HALF IF LAST HALF FAILS
 	#if not success:

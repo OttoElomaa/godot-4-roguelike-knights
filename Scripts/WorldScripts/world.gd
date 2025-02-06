@@ -286,6 +286,7 @@ func passTurn():
 		isFirstTurn = false
 		
 	#### CREATE LIST OF CURRENT TARGETS
+	await get_tree().process_frame
 	$Utilities/Targeting.createTargetingDict()
 	$Utilities/Targeting.autoSetTarget()
 	

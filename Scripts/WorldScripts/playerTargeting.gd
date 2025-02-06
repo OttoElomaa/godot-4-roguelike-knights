@@ -32,16 +32,27 @@ func createTargetingDict():
 	for creature in creatures:
 		if creature == player:
 			pass
+		elif not creature.isEnemy:
+			pass
 		elif lineOfSight.lineOfSightBetweenObjects(player, creature):
-			#if grid.getGridDistance(player, creature) <= 15:
-			targetsDict[counter] = creature
-			counter += 1
+			if is_instance_valid(creature):
+				targetsDict[counter] = creature
+				counter += 1
 			
 
 func autoSetTarget():
 	
 	selectionNum = 0
 	
+	#### NOTHING TO TARGET?
+	if targetsDict.is_empty():
+		$TargetingIcon.hide()
+		player.selectedTarget = null
+		return
+	else:
+		$TargetingIcon.show()
+	
+	#### PICK CLOSEST TARGET
 	var closest:Node = targetsDict.values()[0]
 	for creature in targetsDict.values():
 		var distCre = grid.getGridDistance(player, creature)
@@ -63,6 +74,14 @@ func setTarget(creature:Node):
 
 
 func shuffleTargets():
+	
+	#### NOTHING TO TARGET?
+	if targetsDict.is_empty():
+		$TargetingIcon.hide()
+		player.selectedTarget = null
+		return
+	else:
+		$TargetingIcon.show()
 	
 	var dictSize = targetsDict.size()
 	
