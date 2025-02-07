@@ -1,10 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://6rirwqrl30jg"]
+[gd_scene load_steps=19 format=3 uid="uid://6rirwqrl30jg"]
 
 [ext_resource type="Script" path="res://Scripts/WorldScripts/world.gd" id="1_7s3px"]
 [ext_resource type="PackedScene" uid="uid://cwakr1joaem2j" path="res://Scenes/UI/ui.tscn" id="2_6sbxi"]
 [ext_resource type="Script" path="res://Scripts/WorldScripts/roguelike_tiles.gd" id="2_t5xrp"]
 [ext_resource type="Script" path="res://Scripts/WorldScripts/a_star_grid_node.gd" id="3_8ljqm"]
+[ext_resource type="Script" path="res://Scripts/WorldScripts/walkerWorldgen.gd" id="4_wk0xd"]
+[ext_resource type="TileSet" uid="uid://rqvrx1aog7gv" path="res://Resources/Tilemaps/FloorTileset.tres" id="5_5613e"]
 [ext_resource type="Script" path="res://Scripts/WorldScripts/line_of_sight.gd" id="5_w2yeh"]
+[ext_resource type="Script" path="res://Scripts/WorldScripts/walkerWorldgenV2.gd" id="6_ovekx"]
 [ext_resource type="Script" path="res://Scripts/WorldScripts/look_tool.gd" id="6_qxpnc"]
 [ext_resource type="Texture2D" uid="uid://bdfti26osccyc" path="res://Sprites/roguelike-look-indicator.png" id="7_taxir"]
 [ext_resource type="PackedScene" uid="uid://51k70pdjnr8x" path="res://Scenes/Creatures/Player.tscn" id="8_8c6a2"]
@@ -30,8 +33,18 @@ script = ExtResource("1_7s3px")
 
 [node name="UI" parent="." instance=ExtResource("2_6sbxi")]
 
-[node name="RoomGeneration" type="Node" parent="."]
+[node name="RoomGeneration" type="Node2D" parent="."]
 script = ExtResource("12_53axp")
+
+[node name="Walker" type="Node" parent="RoomGeneration"]
+script = ExtResource("4_wk0xd")
+
+[node name="GlobalFloorTiles" type="TileMapLayer" parent="RoomGeneration" groups=["floortiles", "nav-geometry"]]
+tile_set = ExtResource("5_5613e")
+collision_enabled = false
+
+[node name="Walker2" type="Node" parent="RoomGeneration"]
+script = ExtResource("6_ovekx")
 
 [node name="GridController" type="Node" parent="." groups=["tilecontroller"]]
 script = ExtResource("2_t5xrp")
@@ -86,7 +99,7 @@ tile_set = ExtResource("11_qblsd")
 navigation_enabled = false
 
 [node name="DumbTimer" type="Timer" parent="Utilities"]
-wait_time = 0.1
+wait_time = 0.3
 one_shot = true
 
 [node name="ExitSprite" type="Sprite2D" parent="."]

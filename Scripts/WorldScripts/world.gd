@@ -19,6 +19,9 @@ var startingGridPos := Vector2i.ZERO
 var firstRoom:Node = null
 var lastRoom:Node = null
 
+var pathTiles := []
+var pathTurns := []
+
 
 @onready var grid:Node:
 	get:
@@ -71,7 +74,7 @@ func startGame(game:Node, playerScene:Node):
 	var pointlessReturn = null
 	
 	#var roomScenes:Dictionary = $RoomGeneration.generateRooms(self)
-	var roomScenes:Dictionary = $RoomGeneration.generateRoomsVersionTwo(self)
+	#var roomScenes:Dictionary = $RoomGeneration.generateRoomsVersionTwo(self)
 	#await get_tree().process_frame
 	#await get_tree().process_frame
 	
@@ -87,7 +90,7 @@ func startGame(game:Node, playerScene:Node):
 	
 	await get_tree().process_frame
 	await get_tree().process_frame
-	pointlessReturn = generateDungeon(roomScenes)
+	pointlessReturn = generateDungeon()
 	
 	#### PLACE THE PLAYER ON THE MAP
 	#### ROOMS[0]: FIRST ROOM PLACED
@@ -113,9 +116,6 @@ func startGame(game:Node, playerScene:Node):
 	await get_tree().process_frame
 	await get_tree().process_frame
 	
-	
-	
-	$Utilities/DumbTimer.start()
 	#for room in getRooms():
 		#prints("room position: ",room.position)
 	
@@ -141,41 +141,74 @@ func startGame(game:Node, playerScene:Node):
 	
 	
 	#### INPUT MANAGEMENT
+	$Utilities/DumbTimer.start()
 	isMapKilled = false
 	
 	
 	
-func generateDungeon(roomScenes:Dictionary):
+func generateDungeon():
 	
-	for coord in roomScenes.keys():
-		roomsMetaPosArray.append(coord)
+	#### TRYING NEW PATH STUFF
+	var walkerRoomPositions = $RoomGeneration.generateWalkerPath()
+	#var walkerRoomPositions = $RoomGeneration/Walker2.walk(10,grid)
+	pathTurns = walkerRoomPositions
+	
+	#### RANDOM NOISE OFFSETS
+	#var newPositions := []
+	#for coord in walkerRoomPositions:
+		#prints("random: ", randi_range(-5,5))
+		#var x = coord.x + randi_range(-5,5)
+		#var y = coord.y + randi_range(-5,5)
+		#newPositions.append(Vector2i(x, y))
+	#walkerRoomPositions = newPositions
+	
+	pathTiles = generatePath(walkerRoomPositions) 
+	for coord in pathTiles:
+		$RoomGeneration/GlobalFloorTiles.set_cell(coord, 6, Vector2i.ZERO)
+	
+	
+	#### TRY TO CREATE ROOMS ALONG PATH
+	var count := 0
+	var occupiedTiles := []
+	var latest:Node = null
+	
+	for tile in pathTiles:
+		prints("pathtiles worldgen: ", tile)
+		var suitableLocation = true
 		
-		var scene:Node = roomScenes[coord]
-		instantiateRoom(scene, coord)	
+		for occ in occupiedTiles:
+			if grid.getGridDistanceOfCoords(tile,occ) < 16:
+				suitableLocation = false
+				
+		if suitableLocation:
+			var scene = FileLoader.createRandomRoom()
+			placeRoom(scene, tile - Vector2i(8,8))
+			occupiedTiles.append(tile)
+			if count == 0:
+				firstRoom = scene
+			count += 1
+			latest = scene
 	
-	#### REMOVE IF BUGGED
-	for room:Node in getRooms():
-		addRoomOffset(room)
-	
-	
-		
-	return generatePath() #### GENERATE A PATH BETWEEN ROOMS
-
-
-
-#### GENERATE A PATH BETWEEN ROOMS	
-func generatePath():
-	
+	lastRoom = latest
+			
+	#### GENERATE A PATH BETWEEN ROOMS
 	#### MAKE A SET OF POINTS THAT NEED TO CONNECT
-	var dungeonPath := []
-	for room in getRooms():	
-		dungeonPath.append(room.getStartPosition())
+	for room in getRooms():
+		room.createOpenPathFromArray(pathTiles)
+		
+	return pathTiles
+
+
+#### GENERATE A PATH BETWEEN ROOMS
+#### INPUT: ARRAY OF COORDS. WAYPOINTS TO CREATE PATHS BETWEEN
+func generatePath(dungeonPath:Array) -> Array:
+	
+	var allPathTiles := []
 	
 	#### CREATE ASTAR PATHS BETWEEN EACH OF THEM
 	var paths := []
 	for i in range(1, dungeonPath.size()):
 		paths.append(aStar.createPathManhattan(dungeonPath[i-1], dungeonPath[i]))
-		#prints("start: ", dungeonPath[i-1]," end: ",dungeonPath[i])
 	
 	#### CONVERT THEM TO GRID COORDINATES
 	var gridPaths := []	
@@ -183,18 +216,23 @@ func generatePath():
 		var gridPath := []
 		for coord in path:
 			#### CONVERSION FROM REGULAR COORDINATES
-			gridPath.append(coord / 32 - Vector2(16.5, 16.5))
+			var converted = coord / 32 - Vector2(16.5, 16.5)
+			if not converted in allPathTiles:
+				gridPath.append(converted)
+				allPathTiles.append(Vector2i(converted))
 		gridPaths.append(gridPath)
 	
 		
-	#### CREATE THE 1-WIDE PATH BETWEEN ROOMS
-	for room in getRooms():
-		room.generateOpenPath(gridPaths)
-		room.randomizeTileGraphics()	
-		
-	return
+	prints("Path by aStar node: ", allPathTiles )
+	return allPathTiles
 	
-		
+
+func placeRoom(roomScene:Node, gridPos:Vector2i):
+	
+	$Rooms.add_child(roomScene) 
+	roomScene.placeOnGrid(gridPos)
+	roomScene.setup(self)	
+	
 			
 #### SETUP EACH ROOM HERE - ALSO CALL ITS SETUP FUNCTION
 #### AND ROOM'S PLACEMENT AND SPRITE GRAPHICS FUNCTIONS

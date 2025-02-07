@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 
 
@@ -8,12 +8,23 @@ var roomCount := 6
 
 
 
-func generateRoomsVersionTwo(world):
+func generateWalkerPath() -> Array:
+	
+	var walkerRoomPositions:Array = $Walker.walk(400, Vector2.ZERO, true)
+	#for coord in walkerSteps:
+		#$GlobalFloorTiles.set_cell(coord, 6, Vector2i.ZERO)
+	return walkerRoomPositions
+	
+	
+func generateRoomsVersionTwo(world) -> Dictionary:
 	
 	var rng := RandomNumberGenerator.new()
 	var directions = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
 		
 	var roomPositions = [Vector2i.ZERO]
+	
+	
+	
 	
 	#### ROOMCOUNT = HOW MANY TIMES WE MAKE ROOM
 	for i in range(1, roomCount + 1):

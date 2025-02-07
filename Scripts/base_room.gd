@@ -126,7 +126,6 @@ func generateOpenPath(paths:Array):
 			var transformed = coord - Vector2(originGridPos) + Vector2(16,16)
 			
 			#### CONVERT THEM INTO FLOOR TILES	
-			#assert(transformed in utilTiles.get_used_cells(), "BRUH")
 			var pos = Vector2i(transformed)
 			if pos in $Tiles/Backdrop2.get_used_cells():
 				if not pos in utilTiles.get_used_cells():
@@ -134,9 +133,7 @@ func generateOpenPath(paths:Array):
 					$Tiles/WallTiles2.set_cell(transformed, -1)
 					$Tiles/PathTiles.set_cell(transformed, 6, Vector2(0,0))
 				
-	#prints("test pathtiles: ",coolTestArray)
-	#prints("test util bordertiles: ", utilTiles.get_used_cells())
-
+	
 	
 	#### SET SOME NICE WALLS AROUND THE PATH - NOT ESSENTIAL
 
@@ -147,7 +144,36 @@ func generateOpenPath(paths:Array):
 			grid.regionTiles.append(fixedPos)
 	
 		
-	utilTiles.queue_free()
+	finishRoomSetup()
+	
+
+
+func createOpenPathFromArray(path:Array):
+	var utilTiles := $Tiles/UtilityTiles
+	#var myPath := []
+	#var coolTestArray := []
+	
+	for coord in path:
+		var transformed = coord - Vector2i(originGridPos)
+		
+		#### CONVERT THEM INTO FLOOR TILES	
+		var pos = Vector2i(transformed)
+		if pos in $Tiles/WallTiles2.get_used_cells():
+			if not pos in utilTiles.get_used_cells():
+				$Tiles/WallTiles2.set_cell(transformed, -1)
+				
+	for tilePos:Vector2i in $Tiles/Backdrop2.get_used_cells():
+		var fixedPos = tilePos + originGridPos
+		if not fixedPos in grid.regionTiles:
+			grid.regionTiles.append(fixedPos)
+	
+	finishRoomSetup()	
+			
+			
+
+func finishRoomSetup():
+	
+	$Tiles/UtilityTiles.queue_free()
 	$Tiles/Backdrop2.queue_free()
 	
 	

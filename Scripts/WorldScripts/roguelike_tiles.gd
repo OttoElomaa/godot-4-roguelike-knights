@@ -41,10 +41,7 @@ func setup(world: Node):
 	voidTilemap = world.voidTilemap
 	createVoidTiles(voidTilemap)
 	
-	for coord in wallTiles:
-		voidTilemap.set_cell(coord, 2, Vector2i(0,0))
 	
-
 
 func overworldSetup(worldMap:Node):
 	self.world = worldMap
@@ -154,17 +151,29 @@ func getWallAndFloorTiles() -> Array:
 
 func createVoidTiles(voidTilemap:TileMapLayer):
 	
-	#for x in range(-200,200):
-		#for y in range(-200,200):
-			#pass
+	#### MAKE SURE PATHS' AREA IS ALSO IN REGIONTILES
+	for tile in world.pathTurns:
+		for tile2 in getCoordsInRange(tile,20):
+			if not tile2 in regionTiles:
+				regionTiles.append(tile2)
+	
+			
 	for coord in regionTiles:
 			
 		#var coord = Vector2i(x,y)
-		if coord in floorTiles or coord in wallTiles:
-			pass
+		#if or coord in wallTiles:
+			#pass
+		
+		if coord in world.pathTiles or coord in floorTiles:
+			#prints("non void path tile: ",coord)
+			voidTilemap.set_cell(coord, -1, Vector2i(0,0))
+		elif coord in wallTiles:
+			voidTilemap.set_cell(coord, 2, Vector2i(0,0))	
 		else:
 			voidTiles.append(coord)
 			voidTilemap.set_cell(coord, 1, Vector2i(0,0))
+		
+		
 		
 #### VALUES:
 #### -1: Empty  |  1:Void  |  2:Walls
@@ -191,6 +200,11 @@ func getGridDistance(object1:Node, object2:Node) -> int:
 	var distanceY = abs(object1.gridPosition.y - object2.gridPosition.y)
 	return max(distanceX, distanceY)
 
+
+func getGridDistanceOfCoords(coord1:Vector2i, coord2:Vector2i):
+	var distanceX = abs(coord1.x - coord2.x)
+	var distanceY = abs(coord1.y - coord2.y)
+	return max(distanceX, distanceY)
 
 
 func getAdjacentCreatures(actor) -> Array:
