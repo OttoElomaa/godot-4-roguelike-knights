@@ -4,10 +4,13 @@ extends Node2D
 @export var isOverworld := true
 
 var game:Node = null
-@onready var player := $Creatures/Player
-@onready var ui := $UI
+#@onready var player := $Creatures/PlayerKnight
+@onready var player:Node = null
 
-var PlayerScene :PackedScene = load("res://Scenes/Creatures/Player.tscn")
+@onready var ui := $UI
+@onready var startButton := $UI/MarginContainer/StartButton
+
+var PlayerScene :PackedScene = load("res://Scenes/Creatures/PlayerKnight.tscn")
 
 var isMapKilled := false
 
@@ -18,13 +21,20 @@ var grid:Node:
 
 func setup(game):
 	self.game = game
+	player = PlayerScene.instantiate()
+	$Creatures.add_child(player)
+	prints("player at start of game: ", player, player.creatureName)
+	
 	player.playerSetup(self, true) #### TRUE = IS OVERWORLD
 	$Grid.setup(self)
 	
 	for dungeonIcon in $Dungeons.get_children():
 		dungeonIcon.setup(self)
+	
+	for characterIcon in $UI/Vbox/Chars_Hbox.get_children():
+		characterIcon.setup(self)
 		
-	setStartButtonVisible(false)
+	#setStartButtonVisible(false)
 
 
 
@@ -34,25 +44,23 @@ func passTurn():
 		dungeonIcon.passTurn(player)
 
 
-
+func startGameFromPlayerScene(playerPacked:PackedScene):
+	game.startGame(playerPacked)
+	
 
 func startGame():
 	game.startGame(PlayerScene)
 	
 
-func _on_button_pressed() -> void:
-	startGame()
-	
-	
-	
+
 func hideFunc():
 	self.hide()
 	$UI.hide()
 
 
 
-func setStartButtonVisible(show:bool):
-	if show:
-		$UI/MarginContainer/StartButton.show()
-	else:
-		$UI/MarginContainer/StartButton.hide()
+#func setStartButtonVisible(show:bool):
+	#if show:
+		#startButton.show()
+	#else:
+		#startButton.hide()

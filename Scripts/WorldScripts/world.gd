@@ -43,9 +43,7 @@ var voidTilemap:
 	get:
 		return $Utilities/VoidTiles
 
-@onready var player:
-	get:
-		return $Creatures/Player
+@onready var player:Player = null
 		
 
 @onready var lookTool := $Utilities/LookTool
@@ -68,6 +66,8 @@ func startGame(game:Node, playerScene:Node):
 	
 	#player = PlayerScene.instantiate()
 	player = playerScene
+	$Creatures.add_child(player)
+	prints("player at start of game: ", player, player.creatureName)
 	
 	ui.toggleLoadingScreen(true)
 	States.inputModeOff()
@@ -79,7 +79,7 @@ func startGame(game:Node, playerScene:Node):
 	#await get_tree().process_frame
 	
 	player.playerSetup(self, false)
-	ui.displayPlayerSkills(getPlayer())
+	ui.displayPlayerSkills(player)
 	ui.updateVisualsOnTurn()
 	
 	#####################################################
@@ -257,7 +257,7 @@ func _process(delta: float) -> void:
 		
 		#### ACTUAL LOOK STUFF
 		var isLook = States.handleLook()
-		lookTool.gridPosition = getPlayer().gridPosition
+		lookTool.gridPosition = player.gridPosition
 	
 		getUi().updateStateLabel(isLook)
 		
@@ -285,6 +285,9 @@ func _process(delta: float) -> void:
 #### THIS TRIGGERS AFTER PLAYER HAS COMPLETED A VALID ACTION
 func passTurn():
 	
+	if not is_instance_valid(player):
+		return
+	
 	ui.updateVisualsOnTurn()
 	
 	$AStarGridNode.passTurn()
@@ -294,9 +297,12 @@ func passTurn():
 	
 	
 	for creature in getCreatures():
-		if creature != getPlayer():
+		if creature != player:
 			creature.passTurn()
 	
+	if not is_instance_valid(player):
+		return
+		
 	if not turnOffLineOfSight:
 		lineOfSightStuff()
 	
@@ -306,6 +312,9 @@ func passTurn():
 		
 	#### CREATE LIST OF CURRENT TARGETS
 	await get_tree().process_frame
+	if not is_instance_valid(player):
+		return
+		
 	$Utilities/Targeting.createTargetingDict()
 	$Utilities/Targeting.autoSetTarget()
 	
@@ -314,7 +323,7 @@ func passTurn():
 #### FOG OF WAR STUFF??
 func lineOfSightStuff():	
 	
-	var playerPos: Vector2i = getPlayer().gridPosition
+	var playerPos: Vector2i = player.gridPosition
 	var coordsToCheck:Array = grid.getCoordsInRange(playerPos, 15)	
 	$LineOfSight.lineOfSightInRange(playerPos, coordsToCheck, $Utilities/FogTiles)
 	
@@ -339,14 +348,13 @@ func resetLevel():
 	isMapKilled = true
 	game.storedPlayer = player
 	$Creatures.remove_child(player)
-	game.generateNewLevel()
+	game.generateNewLevel(player)
 	self.queue_free()
 
 
 ###################################################################
 
-func getPlayer():
-	return $Creatures/Player
+
 	
 func getGrid():
 	return $GridController

@@ -1,11 +1,15 @@
-[gd_scene load_steps=10 format=4 uid="uid://6k45i4rxp5o4"]
+[gd_scene load_steps=14 format=4 uid="uid://6k45i4rxp5o4"]
 
 [ext_resource type="Script" path="res://Scripts/world_map.gd" id="1_4qp7q"]
 [ext_resource type="Texture2D" uid="uid://bh5055qxfdx57" path="res://Sprites/worldmap-tiles-plains.png" id="1_qshja"]
+[ext_resource type="PackedScene" uid="uid://qxc2qwv3njt4" path="res://Scenes/UI/GameStartCharButton.tscn" id="2_hm6rm"]
 [ext_resource type="Script" path="res://Scripts/WorldScripts/roguelike_tiles.gd" id="3_2wxbk"]
-[ext_resource type="PackedScene" uid="uid://51k70pdjnr8x" path="res://Scenes/Creatures/Player.tscn" id="4_5ahmc"]
+[ext_resource type="PackedScene" uid="uid://t6iw2eyutq4j" path="res://Scenes/Creatures/PlayerKnight.tscn" id="3_vcrdl"]
+[ext_resource type="Texture2D" uid="uid://nce6ksq6qacd" path="res://Sprites/Heroes/heroes-knight.png" id="4_chujc"]
 [ext_resource type="Script" path="res://Scripts/dungeon_icon.gd" id="5_8r5lw"]
 [ext_resource type="Texture2D" uid="uid://dvi7npudqaxm8" path="res://Sprites/dungeon-entrance-transparent-32px.png" id="5_au2o8"]
+[ext_resource type="PackedScene" uid="uid://buwcv3cj51l34" path="res://Scenes/Creatures/PlayerWarden.tscn" id="5_i4le7"]
+[ext_resource type="Texture2D" uid="uid://iouh024wqtl4" path="res://Sprites/Heroes/heroes-warden.png" id="6_iuaeq"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="7_m8t6f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q8jxy"]
@@ -24,29 +28,40 @@ script = ExtResource("1_4qp7q")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="UI"]
+[node name="Vbox" type="VBoxContainer" parent="UI"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -150.0
-offset_top = -224.0
+offset_top = -90.5
 offset_right = 150.0
-offset_bottom = -124.0
+offset_bottom = 90.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="StartButton" type="PanelContainer" parent="UI/MarginContainer"]
-custom_minimum_size = Vector2(300, 100)
+[node name="Label" type="Label" parent="UI/Vbox"]
+layout_mode = 2
+text = "Choose your character!"
+
+[node name="Chars_Hbox" type="HBoxContainer" parent="UI/Vbox"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="UI/MarginContainer/StartButton"]
+[node name="CharButton" parent="UI/Vbox/Chars_Hbox" instance=ExtResource("2_hm6rm")]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-size_flags_vertical = 4
-text = "Welcome to the Dungeon"
+characterScene = ExtResource("3_vcrdl")
+characterName = "Knight"
+characterSprite = ExtResource("4_chujc")
+
+[node name="CharButton2" parent="UI/Vbox/Chars_Hbox" instance=ExtResource("2_hm6rm")]
+layout_mode = 2
+characterScene = ExtResource("5_i4le7")
+characterName = "Warden"
+characterSprite = ExtResource("6_iuaeq")
 
 [node name="Tilemaps" type="Node2D" parent="."]
 
@@ -58,10 +73,6 @@ tile_set = SubResource("TileSet_0k3il")
 script = ExtResource("3_2wxbk")
 
 [node name="Creatures" type="Node2D" parent="."]
-
-[node name="Player" parent="Creatures" instance=ExtResource("4_5ahmc")]
-z_index = 0
-y_sort_enabled = false
 
 [node name="Dungeons" type="Node2D" parent="."]
 
@@ -83,16 +94,15 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -150.0
-offset_top = -124.0
+offset_top = -50.0
 offset_right = 150.0
-offset_bottom = -24.0
+offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("7_m8t6f")
 
 [node name="Button" type="Button" parent="Dungeons/DungeonIcon/CanvasLayer/StartButton"]
 layout_mode = 2
-theme_override_styles/normal = ExtResource("7_m8t6f")
 text = "Welcome to the Dungeon"
 
-[connection signal="pressed" from="UI/MarginContainer/StartButton/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Dungeons/DungeonIcon/CanvasLayer/StartButton/Button" to="Dungeons/DungeonIcon" method="_on_button_pressed"]

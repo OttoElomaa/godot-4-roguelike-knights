@@ -58,7 +58,7 @@ func lineOfSightInRange(startCoord:Vector2i, coords: Array, tilemap:TileMapLayer
 	var visibleCoords := []
 	var vec16 := Vector2i(16,16)
 	
-	var navigator:NavigationAgent2D = world.getPlayer().getNavigator()
+	var navigator:NavigationAgent2D = world.player.getNavigator()
 	
 	
 	var current_pos = startCoord * 32 + vec16
@@ -143,7 +143,7 @@ func lineOfSightInRange(startCoord:Vector2i, coords: Array, tilemap:TileMapLayer
 	for creature in world.getCreatures():
 		if creature.gridPosition in allSeenTiles:
 			creature.show()
-		elif creature != world.getPlayer():
+		elif creature != world.player:
 			creature.hide()
 
 	

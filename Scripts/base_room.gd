@@ -17,8 +17,8 @@ var globalRoomSize := 15
 
 func setup(game: Node):
 	self.game = game
-	grid = game.getGrid()
-	player = game.getPlayer()
+	grid = game.grid
+	player = game.player
 	
 	#$Tiles/Backdrop2.queue_free()
 	

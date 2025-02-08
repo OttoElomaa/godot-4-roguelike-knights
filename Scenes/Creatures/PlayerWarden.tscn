@@ -1,0 +1,17 @@
+[gd_scene load_steps=6 format=3 uid="uid://buwcv3cj51l34"]
+
+[ext_resource type="PackedScene" uid="uid://51k70pdjnr8x" path="res://Scenes/Creatures/Player.tscn" id="1_2lpdc"]
+[ext_resource type="Script" path="res://Scenes/Creatures/playerVariant.gd" id="2_8hymd"]
+[ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Scenes/Skills/Strike.tscn" id="2_guxo3"]
+[ext_resource type="PackedScene" uid="uid://dav2j8d0nekym" path="res://Scenes/Skills/SummonFox.tscn" id="3_svb3u"]
+[ext_resource type="PackedScene" uid="uid://j84ahsk1aocg" path="res://Scenes/Skills/DoubleStrike.tscn" id="4_uohwb"]
+
+[node name="PlayerWarden" instance=ExtResource("1_2lpdc")]
+script = ExtResource("2_8hymd")
+creatureName = "Warden"
+
+[node name="Strike" parent="Skills" index="0" instance=ExtResource("2_guxo3")]
+
+[node name="Summon" parent="Skills" index="1" instance=ExtResource("3_svb3u")]
+
+[node name="DoubleStrike" parent="Skills" index="2" instance=ExtResource("4_uohwb")]

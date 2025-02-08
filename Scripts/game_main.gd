@@ -20,7 +20,8 @@ func _ready() -> void:
 func startGame(playerScene:PackedScene):
 	
 	storedPlayer = playerScene.instantiate()
-	generateNewLevel()
+	assert(storedPlayer, "WTF")
+	generateNewLevel(storedPlayer)
 	
 	
 	#$WorldMap.hideFunc()
@@ -28,14 +29,14 @@ func startGame(playerScene:PackedScene):
 	
 	
 
-func generateNewLevel():
+func generateNewLevel(player:Node):
 	
 	var world = World.instantiate()
 	add_child(world)
 	
 	await get_tree().process_frame
 	await get_tree().process_frame
-	world.startGame(self, storedPlayer)
+	world.startGame(self, player)
 
 
 

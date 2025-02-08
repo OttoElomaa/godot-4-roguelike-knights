@@ -50,8 +50,8 @@ func basicSetup(world):
 
 func setupHelp():
 	
-	self.grid = world.getGrid()
-	self.player = world.getPlayer()
+	self.grid = world.grid
+	self.player = world.player
 	
 	$Stats.setup(self)
 	$HealthBar.setup(self)
