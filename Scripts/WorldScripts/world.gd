@@ -150,7 +150,7 @@ func generateDungeon():
 	
 	#### TRYING NEW PATH STUFF
 	#var walkerRoomPositions = $RoomGeneration.generateWalkerPath()
-	var walkerRoomPositions = $RoomGeneration/Walker2.walk(200,grid)
+	var walkerRoomPositions = $RoomGeneration/Walker2.walk(40,grid)
 	pathTurns = walkerRoomPositions
 	
 	#### RANDOM NOISE OFFSETS

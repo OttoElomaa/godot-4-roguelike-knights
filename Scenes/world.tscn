@@ -41,12 +41,12 @@ script = ExtResource("12_53axp")
 [node name="Walker" type="Node" parent="RoomGeneration"]
 script = ExtResource("4_wk0xd")
 
+[node name="Walker2" type="Node" parent="RoomGeneration"]
+script = ExtResource("6_ovekx")
+
 [node name="GlobalFloorTiles" type="TileMapLayer" parent="RoomGeneration" groups=["floortiles", "nav-geometry"]]
 tile_set = ExtResource("5_5613e")
 collision_enabled = false
-
-[node name="Walker2" type="Node" parent="RoomGeneration"]
-script = ExtResource("6_ovekx")
 
 [node name="GridController" type="Node" parent="." groups=["tilecontroller"]]
 script = ExtResource("2_t5xrp")

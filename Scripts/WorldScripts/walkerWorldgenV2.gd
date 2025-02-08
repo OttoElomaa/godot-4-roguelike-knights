@@ -15,9 +15,9 @@ var faultyStepsCount := 0
 func walk(walkAmount, grid):
 	
 	while stepsTaken < walkAmount:
-		walkerPos.x += randi_range(-8,8)
-		walkerPos.y += randi_range(-8,8)
-		walkerPos += direction * 2
+		#walkerPos += direction * randi_range(1,2)
+		walkerPos.x += randi_range(-5,5)
+		walkerPos.y += randi_range(-5,5)
 		
 		#### GO THROUGH, SEE IF IT'S TOO CLOSE TO OTHER POINTS
 		var tooClose := false
@@ -30,19 +30,39 @@ func walk(walkAmount, grid):
 		if not tooClose:
 			
 			turnPoints.append(walkerPos)
-			change_direction()
+			stepsTaken += 1
+			goAwayFromPoints(walkerPos)
 			faultyStepsCount = 0
 		else:
 			faultyStepsCount += 1
 		
-		if faultyStepsCount > 6:
-			change_direction()
+		if faultyStepsCount > 4:
+			direction = goAwayFromPoints(walkerPos)
+			walkerPos += direction
+			faultyStepsCount = 0
+			stepsTaken += 1
 		
-		stepsTaken += 1
+		
 	
 	prints("turning points, walker 2: ", turnPoints)			
 	return turnPoints		
-	
+
+
+func restoreToWithinBoundary(distX:int, distY:int):	
+	#### ENFORCE MAP BORDERS
+	while distX >= 40:
+		if walkerPos.x >= 0:
+			walkerPos.x -= 1
+		else:
+			walkerPos.x += 1
+		distX -= 1
+		
+	while distY >= 20:
+		if walkerPos.y >= 0:
+			walkerPos.y -= 1
+		else:
+			walkerPos.y += 1
+		distY -= 1
 	
 
 #### THIS FUNCTION TURNS THE PATH WALKER AROUND
@@ -68,20 +88,42 @@ func change_direction():
 			else:
 				pass
 	
-	#### ENFORCE MAP BORDERS
-	while distX >= 40:
-		if walkerPos.x >= 0:
-			walkerPos.x -= 1
-		else:
-			walkerPos.x += 1
-		distX -= 1
-		
-	while distY >= 20:
-		if walkerPos.y >= 0:
-			walkerPos.y -= 1
-		else:
-			walkerPos.y += 1
-		distY -= 1
+	restoreToWithinBoundary(distX, distY)
 	
 	return
 				
+
+
+func goAwayFromPoints(pos:Vector2i):
+	var closestPoint := Vector2i.ZERO
+	var shortestDistance := 1000
+	
+	if turnPoints.size() == 0:
+		return direction
+	
+	#### GET CLOSEST POINT TO CURRENT WALKER POSITION	
+	for point in turnPoints:
+		if pos.distance_to(point) < shortestDistance:
+			closestPoint = point
+			shortestDistance = pos.distance_to(point)
+			
+	var dir = Vector2(pos).direction_to(Vector2(closestPoint))
+	dir.x = round(dir.x)
+	dir.y = round(dir.y)
+	
+	prints("closest room pos: ", closestPoint)
+	prints("direction to it: ", dir)
+	
+	match dir:
+		Vector2.UP, Vector2(1, -1), Vector2(-1, -1):
+			return Vector2i.DOWN
+		Vector2.DOWN, Vector2(1, 1), Vector2(-1, 1):
+			return Vector2i.UP
+		Vector2.LEFT:
+			return Vector2i.RIGHT
+		Vector2.RIGHT:
+			return Vector2i.LEFT
+	
+	restoreToWithinBoundary(walkerPos.x, walkerPos.y)
+			
+	return direction
