@@ -16,8 +16,8 @@ func walk(walkAmount, grid):
 	
 	while stepsTaken < walkAmount:
 		#walkerPos += direction * randi_range(1,2)
-		walkerPos.x += randi_range(-5,5)
-		walkerPos.y += randi_range(-5,5)
+		walkerPos.x += randi_range(-2,2)
+		walkerPos.y += randi_range(-2,2)
 		
 		#### GO THROUGH, SEE IF IT'S TOO CLOSE TO OTHER POINTS
 		var tooClose := false
@@ -63,6 +63,7 @@ func restoreToWithinBoundary(distX:int, distY:int):
 		else:
 			walkerPos.y += 1
 		distY -= 1
+	prints("restoring order: ", walkerPos)
 	
 
 #### THIS FUNCTION TURNS THE PATH WALKER AROUND

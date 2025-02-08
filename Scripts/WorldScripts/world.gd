@@ -149,18 +149,9 @@ func startGame(game:Node, playerScene:Node):
 func generateDungeon():
 	
 	#### TRYING NEW PATH STUFF
-	#var walkerRoomPositions = $RoomGeneration.generateWalkerPath()
-	var walkerRoomPositions = $RoomGeneration/Walker2.walk(40,grid)
+	var walkerRoomPositions = $RoomGeneration/Walker2.walk(100,grid)
 	pathTurns = walkerRoomPositions
 	
-	#### RANDOM NOISE OFFSETS
-	#var newPositions := []
-	#for coord in walkerRoomPositions:
-		#prints("random: ", randi_range(-5,5))
-		#var x = coord.x + randi_range(-5,5)
-		#var y = coord.y + randi_range(-5,5)
-		#newPositions.append(Vector2i(x, y))
-	#walkerRoomPositions = newPositions
 	
 	pathTiles = generatePath(walkerRoomPositions) 
 	for coord in pathTiles:
@@ -175,13 +166,7 @@ func generateDungeon():
 	for tile in pathTurns:
 		prints("pathtiles worldgen: ", tile)
 		var suitableLocation = true
-		
-		#### UN-COMMENT IF YOU'RE CHANGING 
-		#### COULD BE USEFUL FOR CERTAIN ROOM GENERATION TECHNIQUES
-		#for occ in occupiedTiles:
-			#if grid.getGridDistanceOfCoords(tile,occ) < 16:
-				#suitableLocation = false
-				
+					
 		if suitableLocation:
 			var scene = FileLoader.createRandomRoom()
 			placeRoom(scene, tile - Vector2i(25,25))
@@ -193,8 +178,7 @@ func generateDungeon():
 	
 	lastRoom = latest
 			
-	#### GENERATE A PATH BETWEEN ROOMS
-	#### MAKE A SET OF POINTS THAT NEED TO CONNECT
+	#### OPEN UP HOLES IN ROOM WALLS SO THE PATH CAN BE TRAVELED
 	for room in getRooms():
 		room.createOpenPathFromArray(pathTiles)
 		

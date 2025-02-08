@@ -1,10 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://6rirwqrl30jg"]
+[gd_scene load_steps=17 format=3 uid="uid://6rirwqrl30jg"]
 
 [ext_resource type="Script" path="res://Scripts/WorldScripts/world.gd" id="1_7s3px"]
 [ext_resource type="PackedScene" uid="uid://cwakr1joaem2j" path="res://Scenes/UI/ui.tscn" id="2_6sbxi"]
 [ext_resource type="Script" path="res://Scripts/WorldScripts/roguelike_tiles.gd" id="2_t5xrp"]
 [ext_resource type="Script" path="res://Scripts/WorldScripts/a_star_grid_node.gd" id="3_8ljqm"]
-[ext_resource type="Script" path="res://Scripts/WorldScripts/walkerWorldgen.gd" id="4_wk0xd"]
 [ext_resource type="TileSet" uid="uid://rqvrx1aog7gv" path="res://Resources/Tilemaps/FloorTileset.tres" id="5_5613e"]
 [ext_resource type="Script" path="res://Scripts/WorldScripts/line_of_sight.gd" id="5_w2yeh"]
 [ext_resource type="Script" path="res://Scripts/WorldScripts/walkerWorldgenV2.gd" id="6_ovekx"]
@@ -15,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://dilvg23aedefe" path="res://Sprites/roguelike-indicator-targeting.png" id="9_lkyqr"]
 [ext_resource type="TileSet" uid="uid://d1ktl1xbf2yy8" path="res://Resources/Tilemaps/FogTileset.tres" id="10_6haoq"]
 [ext_resource type="TileSet" uid="uid://7slev8tg8jyu" path="res://Resources/Tilemaps/VoidDebugTiles.tres" id="11_qblsd"]
-[ext_resource type="Script" path="res://Scripts/WorldScripts/room_generation.gd" id="12_53axp"]
 [ext_resource type="Texture2D" uid="uid://5bjgdk2y721r" path="res://Sprites/stairs-down-monochrome-transparent-32px.png" id="12_hyajq"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_akmnp"]
@@ -36,10 +34,6 @@ debugImmortalPlayer = true
 [node name="UI" parent="." instance=ExtResource("2_6sbxi")]
 
 [node name="RoomGeneration" type="Node2D" parent="."]
-script = ExtResource("12_53axp")
-
-[node name="Walker" type="Node" parent="RoomGeneration"]
-script = ExtResource("4_wk0xd")
 
 [node name="Walker2" type="Node" parent="RoomGeneration"]
 script = ExtResource("6_ovekx")
