@@ -88,8 +88,6 @@ func startGame(game:Node, playerScene:Node):
 	pointlessReturn = $AStarGridNode.setup(self)
 	set_navigation_layer_value(2, true)
 	
-	await get_tree().process_frame
-	await get_tree().process_frame
 	pointlessReturn = generateDungeon()
 	
 	#### PLACE THE PLAYER ON THE MAP
@@ -111,14 +109,13 @@ func startGame(game:Node, playerScene:Node):
 	
 	await get_tree().process_frame
 	await get_tree().process_frame
+	
+	#### CREATE VOID TILES, ETC
 	pointlessReturn = $GridController.setup(self)
-	
-	await get_tree().process_frame
-	await get_tree().process_frame
-	
-	#for room in getRooms():
-		#prints("room position: ",room.position)
-	
+	##########################################
+	#### NAV STUFF
+	#### SETUP, NOTHING TO WAIT
+	pointlessReturn = $LineOfSight.setup(self)
 	
 	######################################################
 	#### ADD CREATURES TO SPAWN LOCATIONS
@@ -128,11 +125,6 @@ func startGame(game:Node, playerScene:Node):
 		creatures.append_array(room.populateCreatures(self) )
 	for creature in creatures:
 		$Creatures.add_child(creature)
-	
-	##########################################
-	#### NAV STUFF
-	#### SETUP, NOTHING TO WAIT
-	pointlessReturn = $LineOfSight.setup(self)
 	
 	if not turnOffLineOfSight:
 		for x in range(-200,200):
@@ -179,8 +171,11 @@ func generateDungeon():
 	lastRoom = latest
 			
 	#### OPEN UP HOLES IN ROOM WALLS SO THE PATH CAN BE TRAVELED
+	#### GRAPHICS: 0 castle, 1 forest, 2 desert
+	var graphicsValue = randi_range(0,2)
 	for room in getRooms():
 		room.createOpenPathFromArray(pathTiles)
+		room.setTileGraphics(graphicsValue)
 		
 	return pathTiles
 

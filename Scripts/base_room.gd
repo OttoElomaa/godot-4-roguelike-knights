@@ -74,10 +74,10 @@ func populateCreatures(world) -> Array:
 
 
 
-func randomizeTileGraphics():
+func setTileGraphics(setValue:int):
 	
 	#### THEME SETTER: CASTLE, CAVE ETC
-	var rng = randi_range(0,2)
+	#var rng = randi_range(0,2)
 	
 	for tilemap:TileMapLayer in $Tiles.get_children():
 		
@@ -92,14 +92,14 @@ func randomizeTileGraphics():
 				if blankSpaceRng > 2:
 					#### VARIANT SETTER (Y POS IN ATLAS)
 					var rngY = randi_range(0,2)
-					tilemap.set_cell(tilePos, 0, Vector2i(rng,rngY))
+					tilemap.set_cell(tilePos, 0, Vector2i(setValue,rngY))
 				else:
 					tilemap.set_cell(tilePos, 83, Vector2i(0,0)) #### BLANK TILE
 		
 		#### CHANGE "BIOME" BY SWITCHING ATLAS COORDINATES	
 		else:
 			for tilePos:Vector2i in tilemap.get_used_cells():
-				tilemap.set_cell(tilePos, tilemap.get_cell_source_id(tilePos), Vector2i(rng, 0) )
+				tilemap.set_cell(tilePos, tilemap.get_cell_source_id(tilePos), Vector2i(setValue, 0) )
 				
 
 
