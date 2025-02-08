@@ -114,8 +114,9 @@ func creatureMove():
 	#### DEBUG: SHOW/HIDE LINE
 	line.hide()
 	
+	#assert(line.points.size() < 2, "WHAT THE-- PATHING ERROR")
 	if line.points.size() < 2:
-		push_error("WHAT THE-- PATHING ERROR")
+		return
 	
 	#### COMPARE TARGET POSITION TO CREATURE POSITIONS
 	#### ROUND FROM 0.777... TO 1

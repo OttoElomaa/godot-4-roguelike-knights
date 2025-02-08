@@ -149,8 +149,8 @@ func startGame(game:Node, playerScene:Node):
 func generateDungeon():
 	
 	#### TRYING NEW PATH STUFF
-	var walkerRoomPositions = $RoomGeneration.generateWalkerPath()
-	#var walkerRoomPositions = $RoomGeneration/Walker2.walk(10,grid)
+	#var walkerRoomPositions = $RoomGeneration.generateWalkerPath()
+	var walkerRoomPositions = $RoomGeneration/Walker2.walk(200,grid)
 	pathTurns = walkerRoomPositions
 	
 	#### RANDOM NOISE OFFSETS
@@ -172,17 +172,19 @@ func generateDungeon():
 	var occupiedTiles := []
 	var latest:Node = null
 	
-	for tile in pathTiles:
+	for tile in pathTurns:
 		prints("pathtiles worldgen: ", tile)
 		var suitableLocation = true
 		
-		for occ in occupiedTiles:
-			if grid.getGridDistanceOfCoords(tile,occ) < 16:
-				suitableLocation = false
+		#### UN-COMMENT IF YOU'RE CHANGING 
+		#### COULD BE USEFUL FOR CERTAIN ROOM GENERATION TECHNIQUES
+		#for occ in occupiedTiles:
+			#if grid.getGridDistanceOfCoords(tile,occ) < 16:
+				#suitableLocation = false
 				
 		if suitableLocation:
 			var scene = FileLoader.createRandomRoom()
-			placeRoom(scene, tile - Vector2i(8,8))
+			placeRoom(scene, tile - Vector2i(25,25))
 			occupiedTiles.append(tile)
 			if count == 0:
 				firstRoom = scene

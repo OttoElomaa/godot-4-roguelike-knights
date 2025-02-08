@@ -5,6 +5,7 @@ extends Creature
 
 #var isOverworld := false
 var isZoomedIn := true
+var zoomLevel := 0
 
 var selectedTarget:Node = null
 
@@ -67,12 +68,18 @@ func processExplore():
 		skillToUse = 4
 	
 	elif Input.is_action_just_pressed("Z"):
-		if isZoomedIn:
-			$Camera2D.zoom = Vector2(0.4, 0.4)
-			isZoomedIn = false
-		else:
-			$Camera2D.zoom = Vector2(2, 2)
-			isZoomedIn = true
+		
+		match zoomLevel:
+			0:
+				$Camera2D.zoom = Vector2(0.4, 0.4)
+				zoomLevel = 1
+			1:
+				$Camera2D.zoom = Vector2(0.2, 0.2)
+				zoomLevel = 2
+			2:
+				$Camera2D.zoom = Vector2(2, 2)
+				zoomLevel = 0
+		
 	
 	
 	

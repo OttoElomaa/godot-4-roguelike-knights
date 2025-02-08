@@ -1,70 +1,87 @@
 extends Node
 
 
-var turnPoints := []
-var walkerPos = Vector2i.ZERO
-var stepsTaken := 0
-var direction = Vector2i.RIGHT
-
-
-
-
-
 const DIRECTIONS = [Vector2i.RIGHT, Vector2i.UP, Vector2i.LEFT, Vector2i.DOWN]
 
+var walkerPos = Vector2i.ZERO
+var direction = Vector2i.RIGHT
 
-
-#var borders = Rect2()
-var step_history = []
-var steps_since_turn = 0
-
-var path_tiles := []
-var roomPositions := []
-
+var stepsTaken := 0
+var turnPoints := []
+#### TRACK HOW MANY UNSUCCESSFUL STEPS AFTER LAST TURN
+var faultyStepsCount := 0
 
 
 func walk(walkAmount, grid):
 	
-	
 	while stepsTaken < walkAmount:
+		walkerPos.x += randi_range(-8,8)
+		walkerPos.y += randi_range(-8,8)
+		walkerPos += direction * 2
 		
-		var tooClose := true
-		change_direction()
-		walkerPos.x += randi_range(-5,5)
-		walkerPos.y += randi_range(-5,5)
-		turnPoints.append(walkerPos)
-		
-		while tooClose:
-			tooClose = false
-			walkerPos += direction
-			for pos in turnPoints:
+		#### GO THROUGH, SEE IF IT'S TOO CLOSE TO OTHER POINTS
+		var tooClose := false
+		for pos in turnPoints:
+			if not tooClose:
 				if grid.getGridDistanceOfCoords(walkerPos, pos) < 16:
 					tooClose = true
+				
+		#### AFTER CHECKING EXISTING ROOM POSITIONS
+		if not tooClose:
+			
+			turnPoints.append(walkerPos)
+			change_direction()
+			faultyStepsCount = 0
+		else:
+			faultyStepsCount += 1
+		
+		if faultyStepsCount > 6:
+			change_direction()
 		
 		stepsTaken += 1
-				
+	
+	prints("turning points, walker 2: ", turnPoints)			
 	return turnPoints		
 	
 	
 
-
+#### THIS FUNCTION TURNS THE PATH WALKER AROUND
+#### IT ALSO
 func change_direction():
-		
-	steps_since_turn = 0
+	var distX := 0
+	var distY := 0
+				
 	var directions = DIRECTIONS.duplicate()
 	directions.erase(direction)
 	directions.shuffle()
 	
+	var validDirection := false
 	for dir in directions:
+		if not validDirection:
+			var targetPosition = walkerPos + dir
+			distX = abs(targetPosition.x)
+			distY = abs(targetPosition.y)
+			
+			if distX <= 40 and distY <= 20:
+				direction = dir
+				validDirection = true
+			else:
+				pass
 	
-		var targetPosition = walkerPos + dir
-		var distX = abs(targetPosition.x)
-		var distY = abs(targetPosition.y)
-		
-		if distX <= 100 and distY <= 100:
-			direction = dir
-			return
+	#### ENFORCE MAP BORDERS
+	while distX >= 40:
+		if walkerPos.x >= 0:
+			walkerPos.x -= 1
 		else:
-			direction = Vector2.RIGHT
-		return
+			walkerPos.x += 1
+		distX -= 1
+		
+	while distY >= 20:
+		if walkerPos.y >= 0:
+			walkerPos.y -= 1
+		else:
+			walkerPos.y += 1
+		distY -= 1
+	
+	return
 				
