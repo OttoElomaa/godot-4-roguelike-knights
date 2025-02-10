@@ -1,10 +1,10 @@
 extends CanvasLayer
 
 
-@onready var stateLabel := $LookMargin/VBox/LookPanel/Margin/Hbox/StateLabel
+@onready var stateLabel := $LookMargin/VBox/LookPanel/Margin/LookHbox/StateLabel
 
-@onready var lookLabel := $LookMargin/VBox/LookPanel/Margin/Hbox/LookLabel
-@onready var lookLabel2 := $LookMargin/VBox/LookPanel/Margin/Hbox/LookLabel2
+@onready var lookLabel := $LookMargin/VBox/LookPanel/Margin/LookHbox/LookLabel
+@onready var nameLabel := $LookMargin/VBox/LookPanel/Margin/LookHbox/NameText
 
 @onready var floorLabel := $LookMargin/VBox/FloorInfo/Margin/Hbox/FloorLabel
 @onready var goldLabel := $LookMargin/VBox/FloorInfo/Margin/Hbox/GoldLabel
@@ -52,9 +52,18 @@ func updateProgressLabels():
 	enemiesLabel.text = "Enemies killed: %d" % ProgressData.enemiesKilled
 
 
+
 func showMouseLookCreature(creature:Node):
+	var labelsBox := $LookMargin/VBox/LookPanel/Margin/LookHbox
+	
 	lookLabel.text = "%d, %d" % [creature.gridPosition.x, creature.gridPosition.y]
-	lookLabel2.text = "It's a creature called " + creature.creatureName
+	nameLabel.text = "It's a creature called %s" % creature.creatureName
+	
+	labelsBox.get_node("HealthLabel").text = "Health: %d" % creature.stats.health.current
+	labelsBox.get_node("ArmorLabel").text = "Armor: %d" % creature.stats.armor.current
+	labelsBox.get_node("BlockLabel").text = "Armor: %d" % creature.stats.block.current
+	labelsBox.get_node("EvasionLabel").text = "Armor: %d" % creature.stats.evasion.current
+
 
 func showLookInfo(game, lookTool):
 	
@@ -66,10 +75,10 @@ func showLookInfo(game, lookTool):
 	#### OPTION 2.1: A WALL TILE
 	#if not grid.is_tile_empty(lookTool.gridPosition):
 	if grid.getTileValue(pos) == 2:
-		lookLabel2.text = "It's a wall."
+		nameLabel.text = "It's a wall."
 		return
 	elif grid.getTileValue(pos) == 1:
-		lookLabel2.text = "It's an impassable void."
+		nameLabel.text = "It's an impassable void."
 		return
 	
 	else:
@@ -77,14 +86,14 @@ func showLookInfo(game, lookTool):
 		#### OPTION 2.2.1: A CREATURE
 		for creature in creatures:
 			if pos == creature.gridPosition:
-				lookLabel2.text = "It's a creature called " + creature.creatureName
+				nameLabel.text = "It's a creature called " + creature.creatureName
 				return
 		#### OPTION 2.2.2: EMPTY TILE
 		if grid.getTileValue(pos) == -1:
-			lookLabel2.text = "It's an open space."
+			nameLabel.text = "It's an open space."
 			return
 			
-		lookLabel2.text = "This tile is bugged?"
+		nameLabel.text = "This tile is bugged?"
 			
 			
 			

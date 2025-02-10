@@ -39,8 +39,8 @@ func setup(world: Node):
 	
 	#### STORE TILE INFO IN A TILEMAP AT WORLD
 	voidTilemap = world.voidTilemap
-	createVoidTiles(voidTilemap)
-	
+	var pointlessReturn = createVoidTiles(voidTilemap)
+	return pointlessReturn
 	
 
 func overworldSetup(worldMap:Node):

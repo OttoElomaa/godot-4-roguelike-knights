@@ -44,29 +44,30 @@ func activate() -> bool:
 	if actor.isPlayer:
 		print("%s uses %s" % [actor.creatureName, skillName])
 	
+	
+	#### COOLDOWN
 	var cool = $Cooldown
 	if cool.isOnCooldown():
 		if actor.isPlayer:
 			ui.addMessage( "%s can't use %s (Cooldown %d)" % [actor.creatureName,skillName, cool.currentCooldown], Color.WHITE)
 		return false
 	
+	#### TARGETING
 	var targets:Array = $Targeting.handleTargeting()
-	
 	if targets.is_empty():
 		return false
 		
-	print("enemy in range")
-	
-	#var success := false
+	#### USE SCRIPTS - COLLECT WHAT TARGET THEY PICKED
 	for script in $Scripts.get_children():
 		selectedTarget = script.activate(targets)
 		
-		
+	#### IF TARGET WAS FOUND
 	if selectedTarget != null:
 		cool.putOnCooldown()
 		applyStatusEffects(selectedTarget)
 		return true
-		
+	
+	#### NO TARGET FOUND	
 	return false	
 				
 

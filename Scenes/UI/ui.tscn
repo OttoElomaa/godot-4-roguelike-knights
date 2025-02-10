@@ -59,17 +59,33 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="Hbox" type="VBoxContainer" parent="LookMargin/VBox/LookPanel/Margin"]
+[node name="LookHbox" type="VBoxContainer" parent="LookMargin/VBox/LookPanel/Margin"]
 layout_mode = 2
 
-[node name="StateLabel" type="Label" parent="LookMargin/VBox/LookPanel/Margin/Hbox"]
+[node name="StateLabel" type="Label" parent="LookMargin/VBox/LookPanel/Margin/LookHbox"]
 layout_mode = 2
 text = "Input Mode"
 
-[node name="LookLabel" type="Label" parent="LookMargin/VBox/LookPanel/Margin/Hbox"]
+[node name="LookLabel" type="Label" parent="LookMargin/VBox/LookPanel/Margin/LookHbox"]
+layout_mode = 2
+text = "Look status here"
+
+[node name="NameText" type="Label" parent="LookMargin/VBox/LookPanel/Margin/LookHbox"]
+layout_mode = 2
+text = "Creature Name Here"
+
+[node name="HealthLabel" type="Label" parent="LookMargin/VBox/LookPanel/Margin/LookHbox"]
+layout_mode = 2
+text = "Health"
+
+[node name="ArmorLabel" type="Label" parent="LookMargin/VBox/LookPanel/Margin/LookHbox"]
 layout_mode = 2
 
-[node name="LookLabel2" type="Label" parent="LookMargin/VBox/LookPanel/Margin/Hbox"]
+[node name="BlockLabel" type="Label" parent="LookMargin/VBox/LookPanel/Margin/LookHbox"]
+layout_mode = 2
+text = "Focus"
+
+[node name="EvasionLabel" type="Label" parent="LookMargin/VBox/LookPanel/Margin/LookHbox"]
 layout_mode = 2
 
 [node name="Margin" type="MarginContainer" parent="."]

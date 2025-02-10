@@ -58,7 +58,7 @@ texture = ExtResource("2_w27nt")
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("6_x3hfw")
-armor = 10
+baseArmor = 5
 baseEvasion = 5
 baseBlock = 5
 

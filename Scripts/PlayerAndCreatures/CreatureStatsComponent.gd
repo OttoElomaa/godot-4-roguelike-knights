@@ -4,15 +4,16 @@ extends Node
 
 @export var baseHealth := 10
 
-@export var armor := 0
-@export var guard := 0
-@export var crit := 0
+@export var baseArmor := 0
+@export var baseGuard := 0
+@export var baseCrit := 0
 @export var baseEvasion := 0
 @export var baseBlock := 0
 
 
 var health:StatResource = null
 
+var armor:Stat = null
 var block:Stat = null
 var evasion:Stat = null
 
@@ -52,6 +53,8 @@ func setup(creature):
 	
 	health = StatResource.new(baseHealth, baseHealth)
 	
+	
+	armor = Stat.new(baseArmor)
 	block = Stat.new(baseBlock)
 	evasion = Stat.new(baseEvasion)
 	
@@ -177,7 +180,7 @@ func tryEvade():
 
 func reduceDamageByArmor(damage:int) -> int:
 	
-	var multiplier = float(100 - armor) / 100
+	var multiplier = float(100 - armor.current) / 100
 	var reducedDamage:int = ceil(damage * multiplier)
 	print("damage:%d, multiplier:%d, reduced:%d" % [damage,multiplier,reducedDamage])
 	return reducedDamage

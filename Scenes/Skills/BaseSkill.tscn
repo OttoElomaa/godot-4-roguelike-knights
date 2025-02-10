@@ -13,6 +13,8 @@ script = ExtResource("2_ibixw")
 [node name="Cooldown" type="Node" parent="."]
 script = ExtResource("3_jjqw8")
 
+[node name="Resources" type="Node" parent="."]
+
 [node name="Scripts" type="Node" parent="."]
 
 [node name="StatusEffects" type="Node" parent="."]
