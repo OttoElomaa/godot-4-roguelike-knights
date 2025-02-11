@@ -14,6 +14,10 @@ var ui:Node = null
 
 var selectedTarget: Node = null
 
+#### RESOURCE STUFF
+var zealGain := 0
+var zealCost := 0
+var zealEnhance := 0
 
 
 func setup(actor:Node):
@@ -23,12 +27,17 @@ func setup(actor:Node):
 	self.ui = actor.world.getUi()
 	
 	$Targeting.setup(self)
-		
+	
 	for script in $Scripts.get_children():
 		script.setup(self)
 		
 	for e in $StatusEffects.get_children():
 		e.setup(self)
+	
+	#### ALSO SETS UP	
+	for script in $Resources.get_children():
+		script.setup(self)
+		script.setSkillResources(self)
 
 
 
@@ -44,12 +53,17 @@ func activate() -> bool:
 	if actor.isPlayer:
 		print("%s uses %s" % [actor.creatureName, skillName])
 	
+	#### RESOURCES - CHECK FOR COST - CAN'T USE IF CAN'T PAY
+	if zealCost > 0:
+		if zealCost > actor.stats.zeal.current:
+			ui.addMessage( "%s can't use %s (Not enough Zeal)" % [actor.creatureName, skillName], Color.WHITE)			
+			return false
 	
 	#### COOLDOWN
 	var cool = $Cooldown
 	if cool.isOnCooldown():
 		if actor.isPlayer:
-			ui.addMessage( "%s can't use %s (Cooldown %d)" % [actor.creatureName,skillName, cool.currentCooldown], Color.WHITE)
+			ui.addMessage( "%s can't use %s (Cooldown %d)" % [actor.creatureName, skillName, cool.currentCooldown], Color.WHITE)
 		return false
 	
 	#### TARGETING
@@ -62,15 +76,24 @@ func activate() -> bool:
 		selectedTarget = script.activate(targets)
 		
 	#### IF TARGET WAS FOUND
+	#### SUCCESS
 	if selectedTarget != null:
-		cool.putOnCooldown()
-		applyStatusEffects(selectedTarget)
+		handleSuccess()
 		return true
 	
 	#### NO TARGET FOUND	
 	return false	
-				
 
+
+
+#### THESE ACTIONS ARE DONE WHEN SKILL USE IS SUCCESSFUL
+func handleSuccess():			
+	$Cooldown.putOnCooldown()
+	applyStatusEffects(selectedTarget)
+	
+	#### RESOURCE MANAGEMENT
+	actor.stats.zeal.current += zealGain
+	actor.stats.zeal.current -= zealCost
 
 
 func applyStatusEffects(target:Node):

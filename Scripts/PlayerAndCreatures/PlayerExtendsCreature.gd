@@ -101,6 +101,9 @@ func processExplore():
 	
 func useSkill(index):
 	
+	if index > getSkills().size() - 1:
+		return
+	
 	var skill = self.getSkills()[index]
 	var success = skill.activate()
 	if success:

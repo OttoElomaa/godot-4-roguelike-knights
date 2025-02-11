@@ -17,6 +17,8 @@ var armor:Stat = null
 var block:Stat = null
 var evasion:Stat = null
 
+var zeal:StatResource = null
+
 ###########################################
 var creature: Node = null
 var ui: Node = null
@@ -40,8 +42,8 @@ class StatResource:
 	var max := 0
 	var current := 0
 	
-	func _init(baseline, current) -> void:
-		self.max = baseline
+	func _init(maximum, current) -> void:
+		self.max = maximum
 		self.current = current
 
 
@@ -51,13 +53,13 @@ func setup(creature):
 	self.creature = creature
 	self.ui = creature.world.ui
 	
-	health = StatResource.new(baseHealth, baseHealth)
-	
-	
 	armor = Stat.new(baseArmor)
 	block = Stat.new(baseBlock)
 	evasion = Stat.new(baseEvasion)
 	
+	health = StatResource.new(baseHealth, baseHealth)
+	zeal = StatResource.new(100, 0)
+
 
 
 func turnStartUpdate():

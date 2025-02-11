@@ -61,8 +61,10 @@ func showMouseLookCreature(creature:Node):
 	
 	labelsBox.get_node("HealthLabel").text = "Health: %d" % creature.stats.health.current
 	labelsBox.get_node("ArmorLabel").text = "Armor: %d" % creature.stats.armor.current
-	labelsBox.get_node("BlockLabel").text = "Armor: %d" % creature.stats.block.current
-	labelsBox.get_node("EvasionLabel").text = "Armor: %d" % creature.stats.evasion.current
+	labelsBox.get_node("BlockLabel").text = "Block: %d" % creature.stats.block.current
+	labelsBox.get_node("EvasionLabel").text = "Evasion: %d" % creature.stats.evasion.current
+	
+	labelsBox.get_node("ZealLabel").text = "Zeal: %d" % creature.stats.zeal.current
 
 
 func showLookInfo(game, lookTool):

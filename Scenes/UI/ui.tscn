@@ -80,13 +80,19 @@ text = "Health"
 
 [node name="ArmorLabel" type="Label" parent="LookMargin/VBox/LookPanel/Margin/LookHbox"]
 layout_mode = 2
+text = "Armor"
 
 [node name="BlockLabel" type="Label" parent="LookMargin/VBox/LookPanel/Margin/LookHbox"]
 layout_mode = 2
-text = "Focus"
+text = "Block"
 
 [node name="EvasionLabel" type="Label" parent="LookMargin/VBox/LookPanel/Margin/LookHbox"]
 layout_mode = 2
+text = "Evasion"
+
+[node name="ZealLabel" type="Label" parent="LookMargin/VBox/LookPanel/Margin/LookHbox"]
+layout_mode = 2
+text = "Zeal"
 
 [node name="Margin" type="MarginContainer" parent="."]
 anchors_preset = 3

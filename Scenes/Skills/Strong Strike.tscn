@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwkrdlxk2utha"]
+[gd_scene load_steps=5 format=3 uid="uid://cwkrdlxk2utha"]
 
 [ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Scenes/Skills/BaseSkill.tscn" id="1_25u2t"]
 [ext_resource type="Texture2D" uid="uid://bdfti26osccyc" path="res://Sprites/roguelike-look-indicator.png" id="2_l0435"]
+[ext_resource type="PackedScene" uid="uid://cij3n60fr0m55" path="res://Scenes/Skills/ComponentZealResource.tscn" id="3_d2bwv"]
 [ext_resource type="Script" path="res://Scripts/Skills/BasicPhysicalAttack.gd" id="3_d3tvs"]
 
 [node name="StrongStrike" instance=ExtResource("1_25u2t")]
@@ -12,6 +13,10 @@ range = 1
 
 [node name="Cooldown" parent="." index="1"]
 cooldown = 2
+
+[node name="ZealResourceComponent" parent="Resources" index="0" instance=ExtResource("3_d2bwv")]
+zealCost = 2
+zealEnhance = 2
 
 [node name="Script" type="Node" parent="Scripts" index="0"]
 script = ExtResource("3_d3tvs")
