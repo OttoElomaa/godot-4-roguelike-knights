@@ -118,7 +118,7 @@ func createRoomsDictionary(rooms: Array):
 	wallTiles = getAllDictionaryTiles(wallTilemapsDict)
 	floorTiles = getAllDictionaryTiles(floorTilemapsDict)			
 	#return [wallsDict, floorDict]
-
+	return []
 
 	
 func getAllDictionaryTiles(dictionary) -> Array:
@@ -148,6 +148,7 @@ func getWallAndFloorTiles() -> Array:
 		cells.append(tile)
 	return cells
 	
+	
 
 func createVoidTiles(voidTilemap:TileMapLayer):
 	
@@ -159,19 +160,17 @@ func createVoidTiles(voidTilemap:TileMapLayer):
 	
 			
 	for coord in regionTiles:
-			
-		#var coord = Vector2i(x,y)
-		#if or coord in wallTiles:
-			#pass
 		
-		if coord in world.pathTiles or coord in floorTiles:
-			#prints("non void path tile: ",coord)
-			voidTilemap.set_cell(coord, -1, Vector2i(0,0))
-		elif coord in wallTiles:
+		if coord in wallTiles:
 			voidTilemap.set_cell(coord, 2, Vector2i(0,0))	
+						
+		elif coord in world.pathTiles or coord in floorTiles:
+			voidTilemap.set_cell(coord, -1, Vector2i(0,0))
 		else:
 			voidTiles.append(coord)
 			voidTilemap.set_cell(coord, 1, Vector2i(0,0))
+		
+	return []
 		
 		
 		

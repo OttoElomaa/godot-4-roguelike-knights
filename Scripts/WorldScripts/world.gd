@@ -3,12 +3,17 @@ extends NavigationRegion2D
 
 @export var isOverworld := false
 
-@export var turnOffLineOfSight := false
-@export var debugImmortalPlayer := false
+
 
 @export var dungeonName := "Cool Dungeon Name"
 
 @export var roomSize := 16
+
+
+@export var turnOffLineOfSight := false
+@export var debugImmortalPlayer := false
+@export var debugShowVoidTiles := false
+
 
 var game:Node = null
 var currentRoom: Node = null
@@ -62,22 +67,23 @@ var roomsMetaPosArray := []
 
 func startGame(game:Node, playerScene:Node):
 
+	#### SETUP SELF AND UI
 	self.game = game
-	
-	#player = PlayerScene.instantiate()
-	player = playerScene
-	$Creatures.add_child(player)
-	prints("player at start of game: ", player, player.creatureName)
-	
 	ui.toggleLoadingScreen(true)
 	States.inputModeOff()
 	var pointlessReturn = null
 	
-	#var roomScenes:Dictionary = $RoomGeneration.generateRooms(self)
-	#var roomScenes:Dictionary = $RoomGeneration.generateRoomsVersionTwo(self)
-	#await get_tree().process_frame
-	#await get_tree().process_frame
 	
+	if debugShowVoidTiles:
+		$Utilities/VoidTiles.show()
+	else:
+		$Utilities/VoidTiles.hide()
+	
+	
+	#### SETUP PLAYER
+	player = playerScene
+	$Creatures.add_child(player)
+	#prints("player at start of game: ", player, player.creatureName)
 	player.playerSetup(self, false)
 	ui.displayPlayerSkills(player)
 	ui.updateVisualsOnTurn()
@@ -117,6 +123,8 @@ func startGame(game:Node, playerScene:Node):
 	#### SETUP, NOTHING TO WAIT
 	pointlessReturn = $LineOfSight.setup(self)
 	
+	
+	
 	######################################################
 	#### ADD CREATURES TO SPAWN LOCATIONS
 	#### CREATURES ARE SETUP IN PopulateCreatures()
@@ -126,14 +134,18 @@ func startGame(game:Node, playerScene:Node):
 	for creature in creatures:
 		$Creatures.add_child(creature)
 	
+	
+	#### SHROUD THE WHOLE MAP IN FOG PRE- LINE OF SIGHT CHECKS
 	if not turnOffLineOfSight:
 		for x in range(-200,200):
 			for y in range(-200,200):
 				$Utilities/FogTiles.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
 	
 	
-	#### INPUT MANAGEMENT
+	
 	$Utilities/DumbTimer.start()
+	
+	#### INPUT MANAGEMENT
 	isMapKilled = false
 	
 	
