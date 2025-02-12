@@ -18,6 +18,7 @@ var block:Stat = null
 var evasion:Stat = null
 
 var zeal:StatResource = null
+var guard:StatResource = null
 
 ###########################################
 var creature: Node = null
@@ -59,6 +60,7 @@ func setup(creature):
 	
 	health = StatResource.new(baseHealth, baseHealth)
 	zeal = StatResource.new(100, 0)
+	guard = StatResource.new(100, 0)
 
 
 

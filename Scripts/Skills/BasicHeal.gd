@@ -14,7 +14,13 @@ func setup(skill):
 #### RETURN TARGET=TRUE, RETURN NULL=FALSE
 func activate(targets:Array) -> Node:
 	
+	
+	
 	var target = sortByLowestHealth(targets)
+	
+	if healAmount == 0:
+		return target
+	
 	
 	#if target.getHealth() >= target.maxHealth:
 	if target.hasFullHealth():

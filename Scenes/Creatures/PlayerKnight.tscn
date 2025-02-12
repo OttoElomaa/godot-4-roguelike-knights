@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://t6iw2eyutq4j"]
+[gd_scene load_steps=8 format=3 uid="uid://t6iw2eyutq4j"]
 
 [ext_resource type="PackedScene" uid="uid://51k70pdjnr8x" path="res://Scenes/Creatures/Player.tscn" id="1_kxuha"]
 [ext_resource type="Script" path="res://Scenes/Creatures/playerVariant.gd" id="2_sdfor"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Scenes/Skills/Strike.tscn" id="3_lyyhh"]
 [ext_resource type="PackedScene" uid="uid://1nkco862q1po" path="res://Scenes/Skills/BasicHeal.tscn" id="4_m6a37"]
 [ext_resource type="PackedScene" uid="uid://cwkrdlxk2utha" path="res://Scenes/Skills/Strong Strike.tscn" id="5_1krb8"]
+[ext_resource type="PackedScene" uid="uid://dp214645uwxo0" path="res://Scenes/Skills/RaiseGuard.tscn" id="7_72qwi"]
 
 [node name="PlayerKnight" instance=ExtResource("1_kxuha")]
 script = ExtResource("2_sdfor")
@@ -19,3 +20,5 @@ texture = ExtResource("2_shaop")
 [node name="Heal" parent="Skills" index="1" instance=ExtResource("4_m6a37")]
 
 [node name="StrongStrike" parent="Skills" index="2" instance=ExtResource("5_1krb8")]
+
+[node name="Raise Guard" parent="Skills" index="3" instance=ExtResource("7_72qwi")]

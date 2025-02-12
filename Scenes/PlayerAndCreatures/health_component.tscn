@@ -3,10 +3,9 @@
 [ext_resource type="Script" path="res://Scripts/PlayerAndCreatures/health_component.gd" id="1_jqaur"]
 [ext_resource type="StyleBox" uid="uid://ddemw1shpdae2" path="res://Resources/ResourceBarBackground01.tres" id="2_nheb4"]
 [ext_resource type="StyleBox" uid="uid://bp7hh5ftt14iw" path="res://Resources/HealthBarBasic.tres" id="3_l1dc2"]
+[ext_resource type="StyleBox" uid="uid://dpjooy8swasju" path="res://Resources/GuardBarBasicBlue.tres" id="4_am5mg"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2prju"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vgvuu"]
 
 [node name="HealthComponent" type="PanelContainer"]
 offset_left = -20.0
@@ -22,29 +21,23 @@ text = "HealthAmount"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HealthBar" type="ProgressBar" parent="."]
+[node name="HealthBar" type="Panel" parent="."]
 custom_minimum_size = Vector2(32, 5)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-theme_override_styles/background = ExtResource("2_nheb4")
-theme_override_styles/fill = ExtResource("3_l1dc2")
-value = 50.0
-allow_greater = true
-allow_lesser = true
-show_percentage = false
+theme_override_styles/panel = ExtResource("2_nheb4")
 
-[node name="HealthBarRed" type="ProgressBar" parent="."]
-custom_minimum_size = Vector2(0, 5)
+[node name="HealthBarRed" type="Panel" parent="."]
+custom_minimum_size = Vector2(5, 5)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-theme_override_styles/fill = ExtResource("3_l1dc2")
-value = 100.0
-allow_greater = true
-allow_lesser = true
-show_percentage = false
+theme_override_styles/panel = ExtResource("3_l1dc2")
 
-[node name="Panel" type="PanelContainer" parent="."]
+[node name="GuardBarBlue" type="Panel" parent="."]
+custom_minimum_size = Vector2(5, 5)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_vgvuu")
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/panel = ExtResource("4_am5mg")

@@ -19,6 +19,11 @@ var zealGain := 0
 var zealCost := 0
 var zealEnhance := 0
 
+var guardGain := 0
+var guardCost := 0
+var guardEnhance := 0
+
+
 
 func setup(actor:Node):
 	
@@ -93,6 +98,8 @@ func handleSuccess():
 	
 	#### RESOURCE MANAGEMENT
 	actor.stats.zeal.current += zealGain
+	actor.stats.guard.current += guardGain
+	
 	actor.stats.zeal.current -= zealCost
 
 

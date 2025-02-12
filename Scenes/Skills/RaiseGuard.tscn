@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dp214645uwxo0"]
+
+[ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Scenes/Skills/BaseSkill.tscn" id="1_gvus1"]
+[ext_resource type="Texture2D" uid="uid://nce6ksq6qacd" path="res://Sprites/Heroes/heroes-knight.png" id="2_opxhe"]
+[ext_resource type="Script" path="res://Scripts/Skills/skillGuardResourceComponent.gd" id="2_u4j5d"]
+[ext_resource type="Script" path="res://Scripts/Skills/BasicHeal.gd" id="3_qftnc"]
+
+[node name="Raise Guard" instance=ExtResource("1_gvus1")]
+skillIcon = ExtResource("2_opxhe")
+skillName = "Raise Guard"
+
+[node name="Targeting" parent="." index="0"]
+targetingGroup = 0
+
+[node name="Cooldown" parent="." index="1"]
+cooldown = 10
+
+[node name="Node" type="Node" parent="Resources" index="0"]
+script = ExtResource("2_u4j5d")
+guardGain = 10
+
+[node name="Node" type="Node" parent="Scripts" index="0"]
+script = ExtResource("3_qftnc")
