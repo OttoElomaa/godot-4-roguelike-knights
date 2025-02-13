@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://7x5e7cauhthd"]
+
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="1_0lct2"]
+[ext_resource type="Script" path="res://Scripts/MiscUI/lookPanel.gd" id="2_0lonv"]
+
+[node name="LookPanel" type="PanelContainer"]
+theme_override_styles/panel = ExtResource("1_0lct2")
+script = ExtResource("2_0lonv")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="MainVBox" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="StateLabel" type="Label" parent="Margin/MainVBox"]
+layout_mode = 2
+text = "Input Mode"
+
+[node name="LookLabel" type="Label" parent="Margin/MainVBox"]
+layout_mode = 2
+text = "Look status here"
+
+[node name="NameText" type="Label" parent="Margin/MainVBox"]
+layout_mode = 2
+text = "Creature Name Here"
+
+[node name="HBox" type="HBoxContainer" parent="Margin/MainVBox"]
+layout_mode = 2
+
+[node name="StatsHbox" type="VBoxContainer" parent="Margin/MainVBox/HBox"]
+layout_mode = 2
+
+[node name="HealthLabel" type="Label" parent="Margin/MainVBox/HBox/StatsHbox"]
+layout_mode = 2
+text = "Health"
+
+[node name="ArmorLabel" type="Label" parent="Margin/MainVBox/HBox/StatsHbox"]
+layout_mode = 2
+text = "Armor"
+
+[node name="BlockLabel" type="Label" parent="Margin/MainVBox/HBox/StatsHbox"]
+layout_mode = 2
+text = "Block"
+
+[node name="EvasionLabel" type="Label" parent="Margin/MainVBox/HBox/StatsHbox"]
+layout_mode = 2
+text = "Evasion"
+
+[node name="StatsHboxTwo" type="VBoxContainer" parent="Margin/MainVBox/HBox"]
+layout_mode = 2
+
+[node name="GuardLabel" type="Label" parent="Margin/MainVBox/HBox/StatsHboxTwo"]
+layout_mode = 2
+text = "Guard"
+
+[node name="ZealLabel" type="Label" parent="Margin/MainVBox/HBox/StatsHboxTwo"]
+layout_mode = 2
+text = "Zeal"

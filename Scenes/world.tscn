@@ -69,7 +69,7 @@ script = ExtResource("8_v38j4")
 texture = ExtResource("9_lkyqr")
 
 [node name="LookTool" type="Node2D" parent="Utilities"]
-z_index = 3
+z_index = 12
 script = ExtResource("6_qxpnc")
 
 [node name="Sprite2D" type="Sprite2D" parent="Utilities/LookTool"]

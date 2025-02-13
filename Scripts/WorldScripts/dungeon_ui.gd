@@ -14,6 +14,11 @@ var LogMessage = load("res://Scenes/UI/BasicLogMessage.tscn")
 var initialMessage:Node = null
 
 
+
+func setup(world):
+	$LookMargin/VBox/PlayerPanel.setupPlayerView(world.player)
+
+
 func displayPlayerSkills(player):
 	
 	var boxes:Array = skillBar.get_children()
@@ -27,6 +32,7 @@ func displayPlayerSkills(player):
 	
 
 func updateVisualsOnTurn():
+	$LookMargin/VBox/PlayerPanel.updatePlayerStats()
 	updateProgressLabels()
 	
 	for box in skillBar.get_children():

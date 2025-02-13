@@ -83,6 +83,8 @@ func startGame(game:Node, playerScene:Node):
 	$Creatures.add_child(player)
 	#prints("player at start of game: ", player, player.creatureName)
 	player.playerSetup(self, false)
+	
+	ui.setup(self)
 	ui.displayPlayerSkills(player)
 	ui.updateVisualsOnTurn()
 	
