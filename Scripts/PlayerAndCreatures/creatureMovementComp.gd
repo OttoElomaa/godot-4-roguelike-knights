@@ -77,7 +77,8 @@ func resolveCompletedMovement():
 		creature.get_node("MovementInput").resolvePlayerMovement()
 	
 	if creature.isPlayer:
-		world.callNextTurnAction()
+		if not isOverworld:
+			world.callNextTurnAction()
 
 
 		

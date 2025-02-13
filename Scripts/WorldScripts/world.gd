@@ -302,19 +302,33 @@ func callNextTurnAction():
 	turnActorCounter += 1
 	if turnActorCounter > turnActorsList.size() - 1:
 		startNextTurn()
+		return
+	
+		
 	var next = turnActorsList[turnActorCounter]
 	
-	
+	#### CREATURE THAT JUST DIED
 	if not is_instance_valid(next):
+		prints("Creature can't start turn due to death! (%d)" % [turnActorCounter])
 		callNextTurnAction()
+		return
+	elif next.is_queued_for_deletion():
+		prints("%s can't start turn due to death! (%d)" % [next.creatureName, turnActorCounter])
+		callNextTurnAction()
+		return	
+	#### CREATURE IS ALIVE	
 	else:
 		prints("%s :s turn! (%d)" % [next.creatureName, turnActorCounter])
-		next.startTurn()	
+		next.startTurn()
+			
 	
 	#### UPDATE VISUALS ONLY AFTER PLAYER ACTION
+	#### ONLY IF NEXT CREATURE IS ALIVE
 	if next.isPlayer:
 		isTurnActorPlayer = true
+		#lineOfSight.passTurn()
 	elif isTurnActorPlayer:
+		print("This message plays after player turn")
 		updateVisuals()
 		isTurnActorPlayer = false
 
@@ -324,7 +338,7 @@ func updateVisuals():
 	ui.updateVisualsOnTurn()
 	$AStarGridNode.passTurn()
 	#### REMOVE TARGETING LINES FROM SCREEN
-	#lineOfSight.passTurn()
+	lineOfSight.passTurn()
 	
 	if not turnOffLineOfSight:
 		lineOfSightStuff()

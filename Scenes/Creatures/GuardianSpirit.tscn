@@ -15,7 +15,6 @@ texture = ExtResource("2_5mp80")
 
 [node name="Stats" parent="." index="1"]
 baseHealth = 30
-armor = 30
 baseEvasion = 10
 
 [node name="Heal" parent="Skills" index="0" instance=ExtResource("4_7b8u4")]
