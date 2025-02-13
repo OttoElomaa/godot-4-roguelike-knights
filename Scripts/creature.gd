@@ -144,8 +144,11 @@ func creatureMove():
 	#line.queue_free()
 	
 
+func finishTurn():
+	world.callNextTurnAction()
 
-func passTurn():
+
+func startTurn():
 	
 	
 	if isPlayer and not isOverworld:
@@ -165,7 +168,6 @@ func passTurn():
 	
 	#### PLAYER PASSES TURN AFTER TAKING ACTION, SO DO NOTHING NOW
 	if isPlayer:
-		world.passTurn()
 		return
 		
 	
@@ -176,6 +178,7 @@ func passTurn():
 	#### DON'T DO ANYHTHING IF AWAY FROM PLAYER
 	#### SO ALL ALLIES/ENEMIES/ETC FREEZE WHEN FAR AWAY
 	if world.grid.getGridDistance(self, player) > 12:
+		finishTurn()
 		return
 	
 	###################################################
@@ -183,10 +186,12 @@ func passTurn():
 	#chooseTarget()
 	#### TRY TO USE A SKILL
 	if useSkills():
+		finishTurn()
 		return
 		
 	#### TRY TO MOVE	
-	creatureMove()	
+	creatureMove()
+	finishTurn()
 	
 
 

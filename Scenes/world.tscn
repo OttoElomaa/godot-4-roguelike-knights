@@ -19,7 +19,7 @@
 vertices = PackedVector2Array(9504, -9680, 9456, 9424, -9504, 9504, -9552, -9808)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-9552, -9808, 9504, -9680, 9456, 9424, -9504, 9504)])
-parsed_collision_mask = 4294901763
+parsed_collision_mask = 4294901888
 source_geometry_mode = 2
 source_geometry_group_name = &"nav-geometry"
 agent_radius = 0.0
@@ -27,6 +27,7 @@ agent_radius = 0.0
 [node name="World" type="NavigationRegion2D"]
 navigation_polygon = SubResource("NavigationPolygon_akmnp")
 script = ExtResource("1_7s3px")
+debugImmortalPlayer = true
 
 [node name="UI" parent="." instance=ExtResource("2_6sbxi")]
 

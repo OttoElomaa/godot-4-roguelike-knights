@@ -77,7 +77,7 @@ func resolveCompletedMovement():
 		creature.get_node("MovementInput").resolvePlayerMovement()
 	
 	if creature.isPlayer:
-		creature.passTurn()
+		world.callNextTurnAction()
 
 
 		

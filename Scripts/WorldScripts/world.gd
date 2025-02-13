@@ -53,15 +53,13 @@ var voidTilemap:
 
 @onready var lookTool := $Utilities/LookTool
 
-var isFirstTurn := false
+var turnActorsList := {}
+var turnActorCounter := 0
+var isTurnActorPlayer
+
+
+#var isFirstTurn := false
 var isMapKilled := true
-
-var roomsMetaPosArray := []
-
-#var FirstRoom := load("res://Scenes/BaseRoom.tscn")
-#var SecondRoom := load("res://Rooms/Basic/EntranceWest/BasicWestEast01.tscn")
-#var TestRoom := load("res://Rooms/Basic/EntranceWest/TestRoom01.tscn")
-
 
 
 
@@ -243,20 +241,7 @@ func instantiateRoom(roomScene:Node, metaCoords:Vector2i):
 	#newRoom.randomizeTileGraphics()
 	#prints("init success! ", newRoom.position)
 
-func addRoomOffset(room:Node):
-	
-	var metaPos = room.metaGridPos
-	var origin = room.originGridPos
-	var rng = RandomNumberGenerator.new()
-	
-	if not metaPos+Vector2i.UP in roomsMetaPosArray:
-		room.placeOnGrid(origin + Vector2i.UP * rng.randi_range(0,5))
-	if not metaPos+Vector2i.LEFT in roomsMetaPosArray:
-		room.placeOnGrid(origin + Vector2i.LEFT * rng.randi_range(0,5))
-	if not metaPos+Vector2i.RIGHT in roomsMetaPosArray:
-		room.placeOnGrid(origin + Vector2i.RIGHT * rng.randi_range(0,5))
-	if not metaPos+Vector2i.DOWN in roomsMetaPosArray:
-		room.placeOnGrid(origin + Vector2i.DOWN * rng.randi_range(0,5))
+
 
 func _process(delta: float) -> void:
 	
@@ -294,42 +279,63 @@ func _process(delta: float) -> void:
 		processLook()
 		
 
-#### THIS TRIGGERS AFTER PLAYER HAS COMPLETED A VALID ACTION
-func passTurn():
+
+func startNextTurn():
 	
-	if not is_instance_valid(player):
-		return
+	turnActorCounter = 0
+	turnActorsList = {}
+	ui.addMessage("A turn passes…", Color.WHITE)
 	
+	for c in getCreatures(): 
+		turnActorsList[turnActorCounter] = c 
+		turnActorCounter += 1
+	
+	#assert(turnActorsList.size() > 0, "WHY NO CREATURES")
+	turnActorCounter = -1
+	#updateVisuals()
+	callNextTurnAction()
+	
+	
+	
+func callNextTurnAction():
+	
+	turnActorCounter += 1
+	if turnActorCounter > turnActorsList.size() - 1:
+		startNextTurn()
+	var next = turnActorsList[turnActorCounter]
+	
+	
+	if not is_instance_valid(next):
+		callNextTurnAction()
+	else:
+		prints("%s :s turn! (%d)" % [next.creatureName, turnActorCounter])
+		next.startTurn()	
+	
+	#### UPDATE VISUALS ONLY AFTER PLAYER ACTION
+	if next.isPlayer:
+		isTurnActorPlayer = true
+	elif isTurnActorPlayer:
+		updateVisuals()
+		isTurnActorPlayer = false
+
+	
+
+func updateVisuals():
 	ui.updateVisualsOnTurn()
-	
 	$AStarGridNode.passTurn()
-	lineOfSight.passTurn()
+	#### REMOVE TARGETING LINES FROM SCREEN
+	#lineOfSight.passTurn()
 	
-	#bake_navigation_polygon(true)
-	
-	
-	for creature in getCreatures():
-		if creature != player:
-			creature.passTurn()
-	
-	if not is_instance_valid(player):
-		return
-		
 	if not turnOffLineOfSight:
 		lineOfSightStuff()
-	
-	if isFirstTurn:
-		#bake_navigation_polygon(true)
-		isFirstTurn = false
 		
 	#### CREATE LIST OF CURRENT TARGETS
-	await get_tree().process_frame
 	if not is_instance_valid(player):
 		return
 		
 	$Utilities/Targeting.createTargetingDict()
 	$Utilities/Targeting.autoSetTarget()
-	
+
 	
 	
 #### FOG OF WAR STUFF??
@@ -426,3 +432,5 @@ func _on_bake_finished() -> void:
 	$Utilities/Targeting.setup(self)
 	$Utilities/Targeting.createTargetingDict()
 	$Utilities/Targeting.autoSetTarget()
+	
+	startNextTurn()

@@ -107,7 +107,7 @@ func useSkill(index):
 	var skill = self.getSkills()[index]
 	var success = skill.activate()
 	if success:
-		passTurn()
+		finishTurn()
 
 
 
