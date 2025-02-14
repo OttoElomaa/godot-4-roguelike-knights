@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://7x5e7cauhthd"]
+[gd_scene load_steps=5 format=3 uid="uid://7x5e7cauhthd"]
 
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="1_0lct2"]
 [ext_resource type="Script" path="res://Scripts/MiscUI/lookPanel.gd" id="2_0lonv"]
+[ext_resource type="Theme" uid="uid://dnmve288k8de2" path="res://Resources/Fonts/BasicSmallPixelFont.tres" id="3_pxrl6"]
+[ext_resource type="Theme" uid="uid://ctkfud23u7av3" path="res://Resources/Fonts/FancyPixelFontYellow.tres" id="4_66lwf"]
 
 [node name="LookPanel" type="PanelContainer"]
 theme_override_styles/panel = ExtResource("1_0lct2")
@@ -16,49 +18,67 @@ theme_override_constants/margin_bottom = 5
 
 [node name="MainVBox" type="VBoxContainer" parent="Margin"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 15
 
-[node name="StateLabel" type="Label" parent="Margin/MainVBox"]
+[node name="HBoxUpper" type="HBoxContainer" parent="Margin/MainVBox"]
 layout_mode = 2
+
+[node name="StateLabel" type="Label" parent="Margin/MainVBox/HBoxUpper"]
+layout_mode = 2
+theme = ExtResource("3_pxrl6")
 text = "Input Mode"
 
-[node name="LookLabel" type="Label" parent="Margin/MainVBox"]
+[node name="LookLabel" type="Label" parent="Margin/MainVBox/HBoxUpper"]
 layout_mode = 2
-text = "Look status here"
+theme = ExtResource("3_pxrl6")
+text = "Look status"
 
 [node name="NameText" type="Label" parent="Margin/MainVBox"]
 layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_66lwf")
+theme_override_colors/font_color = Color(0.882353, 0.901961, 0.564706, 1)
 text = "Creature Name Here"
 
 [node name="HBox" type="HBoxContainer" parent="Margin/MainVBox"]
 layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
 
 [node name="StatsHbox" type="VBoxContainer" parent="Margin/MainVBox/HBox"]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="HealthLabel" type="Label" parent="Margin/MainVBox/HBox/StatsHbox"]
 layout_mode = 2
+theme = ExtResource("3_pxrl6")
 text = "Health"
 
 [node name="ArmorLabel" type="Label" parent="Margin/MainVBox/HBox/StatsHbox"]
 layout_mode = 2
+theme = ExtResource("3_pxrl6")
 text = "Armor"
 
 [node name="BlockLabel" type="Label" parent="Margin/MainVBox/HBox/StatsHbox"]
 layout_mode = 2
+theme = ExtResource("3_pxrl6")
 text = "Block"
 
 [node name="EvasionLabel" type="Label" parent="Margin/MainVBox/HBox/StatsHbox"]
 layout_mode = 2
+theme = ExtResource("3_pxrl6")
 text = "Evasion"
 
 [node name="StatsHboxTwo" type="VBoxContainer" parent="Margin/MainVBox/HBox"]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="GuardLabel" type="Label" parent="Margin/MainVBox/HBox/StatsHboxTwo"]
 layout_mode = 2
+theme = ExtResource("3_pxrl6")
 text = "Guard"
 
 [node name="ZealLabel" type="Label" parent="Margin/MainVBox/HBox/StatsHboxTwo"]
 layout_mode = 2
+theme = ExtResource("3_pxrl6")
 text = "Zeal"

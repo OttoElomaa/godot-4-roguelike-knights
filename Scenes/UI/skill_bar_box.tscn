@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkaqqpg8dxhsq"]
+[gd_scene load_steps=6 format=3 uid="uid://dkaqqpg8dxhsq"]
 
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="1_uiii7"]
 [ext_resource type="Script" path="res://Scripts/MiscUI/skill_bar_box.gd" id="2_mnnst"]
+[ext_resource type="Theme" uid="uid://ctkfud23u7av3" path="res://Resources/Fonts/FancyPixelFontYellow.tres" id="3_jrgyn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mo8mu"]
 
@@ -18,8 +19,13 @@ layout_mode = 2
 [node name="NameLabel" type="Label" parent="VBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_jrgyn")
+theme_override_font_sizes/font_size = 45
 text = "Skill Name"
 label_settings = SubResource("LabelSettings_mo8mu")
+horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="PanelC" type="PanelContainer" parent="VBoxContainer"]

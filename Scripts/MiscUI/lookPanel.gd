@@ -6,8 +6,8 @@ extends PanelContainer
 @onready var labelsHboxTwo := $Margin/MainVBox/HBox/StatsHboxTwo
 
 
-@onready var stateLabel:Label = mainVbox.get_node("StateLabel")
-@onready var lookLabel:Label = mainVbox.get_node("LookLabel")
+@onready var stateLabel:Label = mainVbox.get_node("HBoxUpper/StateLabel")
+@onready var lookLabel:Label = mainVbox.get_node("HBoxUpper/LookLabel")
 @onready var nameLabel:Label = mainVbox.get_node("NameText")
 
 @onready var healthLabel:Label = labelsHbox.get_node("HealthLabel")

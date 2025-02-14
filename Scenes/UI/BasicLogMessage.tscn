@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://irn8tsvxkxy0"]
+[gd_scene load_steps=4 format=3 uid="uid://irn8tsvxkxy0"]
 
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://Resources/EmptyStyleBox.tres" id="1_sv3t4"]
 [ext_resource type="Script" path="res://Scripts/MiscUI/basic_log_message.gd" id="1_xqjs1"]
+[ext_resource type="FontFile" uid="uid://byafnu4pqy01b" path="res://Resources/Fonts/monaco/monaco.ttf" id="3_cbb7x"]
 
 [node name="Message" type="PanelContainer"]
 theme_override_styles/panel = ExtResource("1_sv3t4")
@@ -10,4 +11,6 @@ script = ExtResource("1_xqjs1")
 [node name="Text" type="Label" parent="."]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_cbb7x")
+theme_override_font_sizes/font_size = 28
 text = "This is a log entry."
