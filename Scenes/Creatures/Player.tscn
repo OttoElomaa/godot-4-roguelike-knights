@@ -19,6 +19,7 @@ baseHealth = 60
 baseArmor = 30
 
 [node name="Camera2D" type="Camera2D" parent="." index="7"]
+offset = Vector2(0, 32)
 zoom = Vector2(2, 2)
 
 [node name="LineOfSightNavigator" type="NavigationAgent2D" parent="." index="8"]

@@ -62,62 +62,6 @@ layout_mode = 2
 [node name="LookPanel" parent="LookMargin/VBox" instance=ExtResource("3_fnthc")]
 layout_mode = 2
 
-[node name="Margin" type="MarginContainer" parent="."]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -332.0
-offset_top = -107.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/margin_bottom = 15
-
-[node name="SkillBar" type="HBoxContainer" parent="Margin"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="SkillBarBox" parent="Margin/SkillBar" instance=ExtResource("3_j24mf")]
-layout_mode = 2
-
-[node name="SkillBarBox2" parent="Margin/SkillBar" instance=ExtResource("3_j24mf")]
-layout_mode = 2
-
-[node name="SkillBarBox3" parent="Margin/SkillBar" instance=ExtResource("3_j24mf")]
-layout_mode = 2
-
-[node name="SkillBarBox4" parent="Margin/SkillBar" instance=ExtResource("3_j24mf")]
-layout_mode = 2
-
-[node name="Margin2" type="MarginContainer" parent="."]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 40.0
-grow_vertical = 0
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
-
-[node name="LogPanel" type="PanelContainer" parent="Margin2"]
-custom_minimum_size = Vector2(200, 300)
-layout_mode = 2
-theme_override_styles/panel = ExtResource("2_0cgky")
-
-[node name="MarginContainer" type="MarginContainer" parent="Margin2/LogPanel"]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="CombatLog" parent="Margin2/LogPanel/MarginContainer" instance=ExtResource("4_e6hou")]
-layout_mode = 2
-
 [node name="LoadingImage" type="TextureRect" parent="."]
 visible = false
 anchors_preset = 15
@@ -129,3 +73,62 @@ size_flags_horizontal = 2
 size_flags_vertical = 3
 texture = ExtResource("5_farj6")
 expand_mode = 1
+
+[node name="BottomPanel" type="PanelContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -172.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = ExtResource("2_0cgky")
+
+[node name="Hbox" type="HBoxContainer" parent="BottomPanel"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="LogMargin" type="MarginContainer" parent="BottomPanel/Hbox"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+
+[node name="LogPanel" type="PanelContainer" parent="BottomPanel/Hbox/LogMargin"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/panel = ExtResource("2_0cgky")
+
+[node name="MarginContainer" type="MarginContainer" parent="BottomPanel/Hbox/LogMargin/LogPanel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="CombatLog" parent="BottomPanel/Hbox/LogMargin/LogPanel/MarginContainer" instance=ExtResource("4_e6hou")]
+layout_mode = 2
+
+[node name="SkillsMargin" type="MarginContainer" parent="BottomPanel/Hbox"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_bottom = 15
+
+[node name="SkillBar" type="HBoxContainer" parent="BottomPanel/Hbox/SkillsMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="SkillBarBox" parent="BottomPanel/Hbox/SkillsMargin/SkillBar" instance=ExtResource("3_j24mf")]
+layout_mode = 2
+
+[node name="SkillBarBox2" parent="BottomPanel/Hbox/SkillsMargin/SkillBar" instance=ExtResource("3_j24mf")]
+layout_mode = 2
+
+[node name="SkillBarBox3" parent="BottomPanel/Hbox/SkillsMargin/SkillBar" instance=ExtResource("3_j24mf")]
+layout_mode = 2
+
+[node name="SkillBarBox4" parent="BottomPanel/Hbox/SkillsMargin/SkillBar" instance=ExtResource("3_j24mf")]
+layout_mode = 2

@@ -1,44 +1,57 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkaqqpg8dxhsq"]
+[gd_scene load_steps=5 format=3 uid="uid://dkaqqpg8dxhsq"]
 
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://Resources/EmptyStyleBox.tres" id="1_tkmai"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="1_uiii7"]
 [ext_resource type="Script" path="res://Scripts/MiscUI/skill_bar_box.gd" id="2_mnnst"]
 [ext_resource type="Theme" uid="uid://ctkfud23u7av3" path="res://Resources/Fonts/FancyPixelFontYellow.tres" id="3_jrgyn"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_mo8mu"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rf56p"]
-
 [node name="SkillBarBox" type="PanelContainer"]
 custom_minimum_size = Vector2(80, 80)
-theme_override_styles/panel = ExtResource("1_uiii7")
+offset_right = 80.0
+offset_bottom = 91.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/panel = ExtResource("1_tkmai")
 script = ExtResource("2_mnnst")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 2
+alignment = 1
 
-[node name="NameLabel" type="Label" parent="VBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
+[node name="NameLabel" type="Label" parent="VBox"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 4
 theme = ExtResource("3_jrgyn")
-theme_override_font_sizes/font_size = 45
+theme_override_font_sizes/font_size = 24
 text = "Skill Name"
-label_settings = SubResource("LabelSettings_mo8mu")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="PanelC" type="PanelContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(32, 32)
+[node name="PanelC" type="PanelContainer" parent="VBox"]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_rf56p")
+theme_override_styles/panel = ExtResource("1_uiii7")
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelC"]
+[node name="Overlay" type="ColorRect" parent="VBox/PanelC"]
+visible = false
+layout_mode = 2
+color = Color(0.00784314, 0.282353, 0.184314, 0.392157)
+
+[node name="SkillIcon" type="TextureRect" parent="VBox/PanelC"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Overlay" type="ColorRect" parent="VBoxContainer/PanelC"]
+[node name="CooldownLabel" type="Label" parent="VBox/PanelC"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-color = Color(0.00784314, 0.282353, 0.184314, 0.392157)
+size_flags_horizontal = 4
+theme = ExtResource("3_jrgyn")
+theme_override_font_sizes/font_size = 24
+text = "CD"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

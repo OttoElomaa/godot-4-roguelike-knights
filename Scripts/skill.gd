@@ -61,14 +61,16 @@ func activate() -> bool:
 	#### RESOURCES - CHECK FOR COST - CAN'T USE IF CAN'T PAY
 	if zealCost > 0:
 		if zealCost > actor.stats.zeal.current:
-			ui.addMessage( "%s can't use %s (Not enough Zeal)" % [actor.creatureName, skillName], Color.WHITE)			
+			print("%s can't use %s (Not enough Zeal)" % [actor.creatureName, skillName])			
 			return false
 	
 	#### COOLDOWN
 	var cool = $Cooldown
 	if cool.isOnCooldown():
+		var cooldownText = "%s can't use %s (Cooldown %d)" % [actor.creatureName, skillName, cool.currentCooldown]
+		print(cooldownText)
 		if actor.isPlayer:
-			ui.addMessage( "%s can't use %s (Cooldown %d)" % [actor.creatureName, skillName, cool.currentCooldown], Color.WHITE)
+			ui.addMessage( cooldownText, Color.WHITE)
 		return false
 	
 	#### TARGETING

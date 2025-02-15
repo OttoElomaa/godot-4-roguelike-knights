@@ -157,7 +157,10 @@ func startTurn():
 			world.resetLevel()
 			return
 			
-			
+	if not is_instance_valid(player):
+		return
+	if player.is_queued_for_deletion():
+		return
 	
 	#### TICK COOLDOWNS ETC ON-TURN EFFECTS ON SKILL NODES
 	for skill in getSkills():

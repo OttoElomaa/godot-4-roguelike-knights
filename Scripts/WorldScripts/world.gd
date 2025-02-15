@@ -84,6 +84,8 @@ func startGame(game:Node, playerScene:Node):
 	#prints("player at start of game: ", player, player.creatureName)
 	player.playerSetup(self, false)
 	
+	$Utilities/LookTool.setup(self)
+	
 	ui.setup(self)
 	ui.displayPlayerSkills(player)
 	ui.updateVisualsOnTurn()
@@ -252,17 +254,6 @@ func _process(delta: float) -> void:
 		for node in $Disposables.get_children():
 			node.queue_free()
 	
-	if Input.is_action_just_pressed("L"):
-		
-		#### ACTUAL LOOK STUFF
-		var isLook = States.handleLook()
-		lookTool.gridPosition = player.gridPosition
-		ui.showLookInfo(self, lookTool)
-		if isLook:
-			grid.placeGridObjectOnMap(lookTool, player.gridPosition)
-		#getUi().updateStateLabel(isLook)
-		
-	
 	#### FOR DEBUG
 	if Input.is_action_just_pressed("u"):
 		for r in getRooms():
@@ -279,8 +270,7 @@ func _process(delta: float) -> void:
 		$Utilities/Targeting.shuffleTargets()
 	
 			
-	if States.GameState == States.InputStates.LOOK:
-		processLook()
+	
 		
 
 
@@ -364,14 +354,6 @@ func lineOfSightStuff():
 	$LineOfSight.lineOfSightInRange(playerPos, coordsToCheck, $Utilities/FogTiles)
 	
 	
-
-#func createPathBetween(creature, target):
-	#return $AStarGridNode.pathStuff(creature, target)
-
-
-func processLook():
-	$Utilities/LookTool.processLook(self)
-
 
 func addCreature(creature:Node):
 	creature.basicSetup(self)

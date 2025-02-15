@@ -5,8 +5,8 @@ extends CanvasLayer
 @onready var goldLabel := $LookMargin/VBox/FloorInfo/Margin/Hbox/GoldLabel
 @onready var enemiesLabel := $LookMargin/VBox/FloorInfo/Margin/Hbox/EnemiesLabel
 
-@onready var skillBar := $Margin/SkillBar
-@onready var combatLog := $Margin2/LogPanel/MarginContainer/CombatLog
+@onready var skillBar := $BottomPanel/Hbox/SkillsMargin/SkillBar
+@onready var combatLog := $BottomPanel/Hbox/LogMargin/LogPanel/MarginContainer/CombatLog
 
 var LogDoubleRow:PackedScene = load("res://Scenes/UI/logDoubleRow.tscn")
 var LogMessage = load("res://Scenes/UI/BasicLogMessage.tscn")
