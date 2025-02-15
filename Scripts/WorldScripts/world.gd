@@ -257,8 +257,10 @@ func _process(delta: float) -> void:
 		#### ACTUAL LOOK STUFF
 		var isLook = States.handleLook()
 		lookTool.gridPosition = player.gridPosition
-	
-		getUi().updateStateLabel(isLook)
+		ui.showLookInfo(self, lookTool)
+		if isLook:
+			grid.placeGridObjectOnMap(lookTool, player.gridPosition)
+		#getUi().updateStateLabel(isLook)
 		
 	
 	#### FOR DEBUG

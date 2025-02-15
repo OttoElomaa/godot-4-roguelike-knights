@@ -22,23 +22,27 @@ theme_override_constants/separation = 15
 
 [node name="HBoxUpper" type="HBoxContainer" parent="Margin/MainVBox"]
 layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
 
 [node name="StateLabel" type="Label" parent="Margin/MainVBox/HBoxUpper"]
 layout_mode = 2
 theme = ExtResource("3_pxrl6")
-text = "Input Mode"
+text = "Mode"
 
 [node name="LookLabel" type="Label" parent="Margin/MainVBox/HBoxUpper"]
 layout_mode = 2
 theme = ExtResource("3_pxrl6")
-text = "Look status"
+text = "LookStatus"
 
 [node name="NameText" type="Label" parent="Margin/MainVBox"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("4_66lwf")
 theme_override_colors/font_color = Color(0.882353, 0.901961, 0.564706, 1)
 text = "Creature Name Here"
+autowrap_mode = 2
 
 [node name="HBox" type="HBoxContainer" parent="Margin/MainVBox"]
 layout_mode = 2

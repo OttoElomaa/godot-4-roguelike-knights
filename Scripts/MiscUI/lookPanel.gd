@@ -25,8 +25,7 @@ func setupPlayerView(player:Player):
 	
 	self.player = player
 	
-	stateLabel.hide()
-	lookLabel.hide()
+	$Margin/MainVBox/HBoxUpper.hide()
 	nameLabel.text = "Character name: %s" % player.creatureName
 
 
@@ -41,11 +40,12 @@ func showMouseLookCreature(creature:Node):
 
 
 func updateView(creature:Node):
-	var labelsBox := $Margin/LookHbox
 	
 	if player == null:
+		stateLabel.text = "Looking at..."
 		lookLabel.text = "%d, %d" % [creature.gridPosition.x, creature.gridPosition.y]
-		nameLabel.text = "It's a creature called %s" % creature.creatureName
+		nameLabel.text = "a creature called %s" % creature.creatureName
+	
 	
 	healthLabel.text = "Health: %d" % creature.stats.health.current
 	armorLabel.text = "Armor: %d" % creature.stats.armor.current
@@ -68,6 +68,8 @@ func toggleStatBlock(toShow:bool):
 func showLookInfo(game:Node, lookTool:Node):
 	
 	var grid = game.getGrid()
+	
+	stateLabel.text = "Looking at..."
 	lookLabel.text = "%d, %d" % [lookTool.gridPosition.x, lookTool.gridPosition.y] 
 	
 	var pos = lookTool.gridPosition
@@ -75,11 +77,11 @@ func showLookInfo(game:Node, lookTool:Node):
 	#### OPTION 2.1: A WALL TILE
 	#if not grid.is_tile_empty(lookTool.gridPosition):
 	if grid.getTileValue(pos) == 2:
-		nameLabel.text = "It's a wall."
+		nameLabel.text = "a wall."
 		toggleStatBlock(false)
 		return
 	elif grid.getTileValue(pos) == 1:
-		nameLabel.text = "It's an impassable void."
+		nameLabel.text = "an impassable void."
 		toggleStatBlock(false)
 		return
 	
@@ -94,15 +96,15 @@ func showLookInfo(game:Node, lookTool:Node):
 		#### OPTION 2.2.2: EMPTY TILE
 		if grid.getTileValue(pos) == -1:
 			toggleStatBlock(false)
-			nameLabel.text = "It's an open space."
+			nameLabel.text = "an open space."
 			return
 			
 		nameLabel.text = "This tile is bugged?"
 		
 		
 		
-func updateStateLabel(isLook):
-	if isLook:
-		stateLabel.text = "Input State = Look"
-	else:
-		stateLabel.text = "Input State = Explore"
+#func updateStateLabel(isLook):
+	#if isLook:
+		#stateLabel.text = "Input State = Look"
+	#else:
+		#stateLabel.text = "Input State = Explore"

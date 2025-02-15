@@ -41,8 +41,8 @@ func updateVisualsOnTurn():
 
 
 
-func updateStateLabel(isLook):
-	$LookMargin/VBox/LookPanel.updateStateLabel(isLook)
+#func updateStateLabel(isLook):
+	#$LookMargin/VBox/LookPanel.updateStateLabel(isLook)
 	
 
 
