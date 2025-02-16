@@ -7,6 +7,9 @@ var game: Node = null
 var player: Node = null
 var grid: Node = null
 
+@onready var floorTilemap = $Tiles/FloorTiles2
+@onready var wallTilemap = $Tiles/WallTiles2
+
 var playerGridPos := Vector2i.ZERO
 
 var originGridPos := Vector2i.ZERO
@@ -115,38 +118,6 @@ func getPlayerStartPos():
 	return GridTools.world_to_grid(position + pos) 
 
 
-func generateOpenPath(paths:Array):
-	
-	var utilTiles := $Tiles/UtilityTiles
-	#var myPath := []
-	#var coolTestArray := []
-	
-	for path in paths:
-		for coord in path:
-			var transformed = coord - Vector2(originGridPos) + Vector2(16,16)
-			
-			#### CONVERT THEM INTO FLOOR TILES	
-			var pos = Vector2i(transformed)
-			if pos in $Tiles/Backdrop2.get_used_cells():
-				if not pos in utilTiles.get_used_cells():
-					#myPath = path
-					$Tiles/WallTiles2.set_cell(transformed, -1)
-					$Tiles/PathTiles.set_cell(transformed, 6, Vector2(0,0))
-				
-	
-	
-	#### SET SOME NICE WALLS AROUND THE PATH - NOT ESSENTIAL
-
-	#### FOR UNPASSABLE VOID TILES CREATION, MAP THE ENTIRE AREA OF THE ROOM VIA BACKDROP LAYER
-	for tilePos:Vector2i in $Tiles/Backdrop2.get_used_cells():
-		var fixedPos = tilePos + originGridPos
-		if not fixedPos in grid.regionTiles:
-			grid.regionTiles.append(fixedPos)
-	
-		
-	finishRoomSetup()
-	
-
 
 func createOpenPathFromArray(path:Array):
 	var utilTiles := $Tiles/UtilityTiles
@@ -161,17 +132,33 @@ func createOpenPathFromArray(path:Array):
 		if pos in $Tiles/WallTiles2.get_used_cells():
 			if not pos in utilTiles.get_used_cells():
 				$Tiles/WallTiles2.set_cell(transformed, -1)
-				
-	for tilePos:Vector2i in $Tiles/Backdrop2.get_used_cells():
-		var fixedPos = tilePos + originGridPos
-		if not fixedPos in grid.regionTiles:
-			grid.regionTiles.append(fixedPos)
+	
+			
+	#### AFTER PUNCHING HOLES IN WALLS, MAKE ALL RELEVANT TILES LOOK LIKE WALL EDGES
+	#### -1 = EMPTY TILE  |  22 = WALL EDGE ID			
+	for wall in wallTilemap.get_used_cells():
+		var vec = Vector2i(wall.x, wall.y + 1)
+		var cellBelowId = wallTilemap.get_cell_source_id(vec)
+		if cellBelowId == -1:
+			
+			match wallTilemap.get_cell_source_id(wall):
+				21:
+					wallTilemap.set_cell(wall, 22, Vector2i(0,0))
+				23:
+					wallTilemap.set_cell(wall, 24, Vector2i(0,0))
+					
 	
 	finishRoomSetup()	
 			
 			
 
 func finishRoomSetup():
+	
+	#### FOR UNPASSABLE VOID TILES CREATION, MAP THE ENTIRE AREA OF THE ROOM VIA BACKDROP LAYER
+	for tilePos:Vector2i in $Tiles/Backdrop2.get_used_cells():
+		var fixedPos = tilePos + originGridPos
+		if not fixedPos in grid.regionTiles:
+			grid.regionTiles.append(fixedPos)
 	
 	$Tiles/UtilityTiles.queue_free()
 	$Tiles/Backdrop2.queue_free()

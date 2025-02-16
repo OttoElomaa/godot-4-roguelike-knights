@@ -9,6 +9,15 @@ var HoundMaster = load("res://Scenes/Creatures/Houndmaster.tscn")
 
 var OrcWarlord = load("res://Scenes/Creatures/OrcWarlord.tscn")
 
+var cavern1 = load("res://Rooms/Detached/Cavern/Cavern01.tscn")
+var cavern2 = load("res://Rooms/Detached/Cavern/Cavern02.tscn")
+var cavern3 = load("res://Rooms/Detached/Cavern/Cavern03.tscn")
+
+var cells1 = load("res://Rooms/Detached/Cells/Cells01.tscn")
+
+var temple1 = load("res://Rooms/Detached/Temple/Temple01.tscn")
+
+
 
 func createRandomCreature() -> Node:
 	
@@ -38,11 +47,16 @@ func createRandomBoss() -> Node:
 func createRandomRoom() -> Node:
 	
 	var scene:PackedScene = null
-	match randi_range(0,2):
+	match randi_range(0,4):
 			0:
-				scene = load("res://Rooms/Detached/Cavern/Cavern02.tscn")
+				scene = cavern1
 			1:
-				scene = load("res://Rooms/Detached/Cavern/Cavern01.tscn")
+				scene = cavern2
 			2:
-				scene = load("res://Rooms/Detached/Cells/Cells01.tscn")
+				scene = cavern3
+			3:
+				scene = cells1
+			4:
+				scene = temple1
+				
 	return scene.instantiate()

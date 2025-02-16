@@ -182,11 +182,9 @@ func generateDungeon():
 	lastRoom = latest
 			
 	#### OPEN UP HOLES IN ROOM WALLS SO THE PATH CAN BE TRAVELED
-	#### GRAPHICS: 0 castle, 1 forest, 2 desert
-	var graphicsValue = randi_range(0,2)
 	for room in getRooms():
 		room.createOpenPathFromArray(pathTiles)
-		room.setTileGraphics(graphicsValue)
+		randomizeLevelTileGraphics()
 		
 	return pathTiles
 
@@ -253,8 +251,7 @@ func _process(delta: float) -> void:
 	
 	#### FOR DEBUG
 	if Input.is_action_just_pressed("u"):
-		for r in getRooms():
-			r.randomizeTileGraphics()
+		randomizeLevelTileGraphics()
 	
 	#### FOR DEBUG TELEPORTING
 	if Input.is_action_just_pressed("X"):
@@ -366,6 +363,14 @@ func resetLevel():
 	game.generateNewLevel(player)
 	self.queue_free()
 
+
+#### RANDOMIZE A GRAPHICS VALUE (It's a TILE ATLAS OFFSET)
+#### 0 = CASTLE  |  1 = FOREST  |  2 = DESERT
+func randomizeLevelTileGraphics():
+	
+	var graphicsValue = randi_range(0,2)
+	for room in getRooms():
+		room.setTileGraphics(graphicsValue)
 
 ###################################################################
 
