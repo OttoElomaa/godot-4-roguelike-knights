@@ -19,6 +19,7 @@
 vertices = PackedVector2Array(9504, -9680, 9456, 9424, -9504, 9504, -9552, -9808)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-9552, -9808, 9504, -9680, 9456, 9424, -9504, 9504)])
+parsed_geometry_type = 1
 parsed_collision_mask = 4294901888
 source_geometry_mode = 2
 source_geometry_group_name = &"nav-geometry"
@@ -36,8 +37,10 @@ script = ExtResource("1_7s3px")
 script = ExtResource("6_ovekx")
 
 [node name="GlobalFloorTiles" type="TileMapLayer" parent="RoomGeneration" groups=["floortiles", "nav-geometry"]]
+z_index = -2
 tile_set = ExtResource("5_5613e")
 collision_enabled = false
+navigation_enabled = false
 
 [node name="GridController" type="Node" parent="." groups=["tilecontroller"]]
 script = ExtResource("2_t5xrp")
@@ -53,6 +56,7 @@ script = ExtResource("5_w2yeh")
 [node name="Disposables" type="Node2D" parent="LineOfSight"]
 
 [node name="Rooms" type="Node2D" parent="."]
+z_index = -2
 
 [node name="Creatures" type="Node2D" parent="."]
 z_index = 10
