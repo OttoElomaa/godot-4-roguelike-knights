@@ -143,10 +143,7 @@ func startGame(game:Node, playerScene:Node):
 			for y in range(-200,200):
 				$Utilities/FogTiles.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
 	
-	
-	
 	$Utilities/DumbTimer.start()
-	
 	#### INPUT MANAGEMENT
 	isMapKilled = false
 	
@@ -413,6 +410,13 @@ func getUi():
 
 
 func _on_dumb_timer_timeout() -> void:
+	
+	var rect = voidTilemap.get_used_rect()
+	rect.position *= 32
+	rect.size *= 32
+	prints("rect: ", rect)  
+	navigation_polygon.baking_rect = rect
+	
 	var pointlessReturn = $AStarGridNode.setupGrid()
 	bake_navigation_polygon(true)
 	
