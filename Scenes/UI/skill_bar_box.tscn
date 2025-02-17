@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkaqqpg8dxhsq"]
+[gd_scene load_steps=6 format=3 uid="uid://dkaqqpg8dxhsq"]
 
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://Resources/EmptyStyleBox.tres" id="1_tkmai"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="1_uiii7"]
 [ext_resource type="Script" path="res://Scripts/MiscUI/skill_bar_box.gd" id="2_mnnst"]
 [ext_resource type="Theme" uid="uid://ctkfud23u7av3" path="res://Resources/Fonts/FancyPixelFontYellow.tres" id="3_jrgyn"]
+[ext_resource type="Theme" uid="uid://dnmve288k8de2" path="res://Resources/Fonts/BasicSmallPixelFont.tres" id="5_udqto"]
 
 [node name="SkillBarBox" type="PanelContainer"]
 custom_minimum_size = Vector2(80, 80)
@@ -55,3 +56,9 @@ text = "CD"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="IndexLabel" type="Label" parent="VBox"]
+layout_mode = 2
+theme = ExtResource("5_udqto")
+text = "Skill Num"
+horizontal_alignment = 1

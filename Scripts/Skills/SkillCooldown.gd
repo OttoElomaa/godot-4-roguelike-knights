@@ -15,7 +15,10 @@ func tickCooldown() -> int:
 
 
 func putOnCooldown() -> int:
-	currentCooldown = cooldown + 1
+	if cooldown == 0:
+		currentCooldown = cooldown
+	else:
+		currentCooldown = cooldown + 1
 	return currentCooldown
 		
 		

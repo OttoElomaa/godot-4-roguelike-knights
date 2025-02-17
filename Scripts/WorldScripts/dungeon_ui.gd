@@ -5,6 +5,9 @@ extends CanvasLayer
 @onready var goldLabel := $LookMargin/VBox/FloorInfo/Margin/Hbox/GoldLabel
 @onready var enemiesLabel := $LookMargin/VBox/FloorInfo/Margin/Hbox/EnemiesLabel
 
+@onready var lookPanel := $LookMargin/VBox/LookPanel
+@onready var playerPanel := $LookMargin/VBox/PlayerPanel
+
 @onready var skillBar := $BottomPanel/Hbox/SkillsMargin/SkillBar
 @onready var combatLog := $BottomPanel/Hbox/LogMargin/LogPanel/MarginContainer/CombatLog
 
@@ -16,7 +19,7 @@ var initialMessage:Node = null
 
 
 func setup(world):
-	$LookMargin/VBox/PlayerPanel.setupPlayerView(world.player)
+	playerPanel.setupPlayerView(world.player)
 
 
 func displayPlayerSkills(player):
@@ -28,11 +31,11 @@ func displayPlayerSkills(player):
 		return
 	#### SET EACH SKILL'S ICON IN SKILL BAR	
 	for i in range(skills.size()):
-		boxes[i].setup(skills[i])
+		boxes[i].setup(skills[i], i)
 	
 
 func updateVisualsOnTurn():
-	$LookMargin/VBox/PlayerPanel.updatePlayerStats()
+	playerPanel.updatePlayerStats()
 	updateProgressLabels()
 	
 	for box in skillBar.get_children():
@@ -52,13 +55,21 @@ func updateProgressLabels():
 
 
 
+func showTargetCreature(creature:Node):
+	if not is_instance_valid(creature):
+		return
+	if creature.is_queued_for_deletion():
+		return
+	lookPanel.showTargetCreature(creature)
+
+
 func showMouseLookCreature(creature:Node):
-	$LookMargin/VBox/LookPanel.showMouseLookCreature(creature)
+	lookPanel.showMouseLookCreature(creature)
 
 
 func showLookInfo(game:Node, lookTool:Node):
 	
-	$LookMargin/VBox/LookPanel.showLookInfo(game, lookTool)
+	lookPanel.showLookInfo(game, lookTool)
 			
 			
 			

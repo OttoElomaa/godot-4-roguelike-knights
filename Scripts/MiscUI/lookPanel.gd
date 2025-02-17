@@ -33,16 +33,26 @@ func setupPlayerView(player:Player):
 func updatePlayerStats():
 	updateView(player)
 	
+	
+	
 func showMouseLookCreature(creature:Node):
+	
+	stateLabel.text = "Looking at..."
 	toggleStatBlock(true)
 	updateView(creature)
 
 
 
+func showTargetCreature(creature:Node):
+	
+	stateLabel.text = "Targeting..."
+	toggleStatBlock(true)
+	updateView(creature)
+
+
 func updateView(creature:Node):
 	
 	if player == null:
-		stateLabel.text = "Looking at..."
 		lookLabel.text = "%d, %d" % [creature.gridPosition.x, creature.gridPosition.y]
 		nameLabel.text = "a creature called %s" % creature.creatureName
 	
@@ -101,10 +111,3 @@ func showLookInfo(game:Node, lookTool:Node):
 			
 		nameLabel.text = "This tile is bugged?"
 		
-		
-		
-#func updateStateLabel(isLook):
-	#if isLook:
-		#stateLabel.text = "Input State = Look"
-	#else:
-		#stateLabel.text = "Input State = Explore"

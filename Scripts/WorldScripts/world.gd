@@ -307,18 +307,23 @@ func callNextTurnAction():
 	#### CREATURE IS ALIVE	
 	else:
 		prints("%s :s turn! (%d)" % [next.creatureName, turnActorCounter])
+		
+		#### UPDATE VISUALS ONLY AFTER PLAYER ACTION
+		#### ONLY IF NEXT CREATURE IS ALIVE
+		if next.isPlayer:
+			isTurnActorPlayer = true
+		
+		elif isTurnActorPlayer:
+			print("This message plays after player turn")
+			updateVisuals()
+			updateTargeting()
+			isTurnActorPlayer = false
+			
 		next.startTurn()
 			
 	
-	#### UPDATE VISUALS ONLY AFTER PLAYER ACTION
-	#### ONLY IF NEXT CREATURE IS ALIVE
-	if next.isPlayer:
-		isTurnActorPlayer = true
-		#lineOfSight.passTurn()
-	elif isTurnActorPlayer:
-		print("This message plays after player turn")
-		updateVisuals()
-		isTurnActorPlayer = false
+	
+	
 
 	
 
@@ -330,14 +335,17 @@ func updateVisuals():
 	
 	if not turnOffLineOfSight:
 		lineOfSightStuff()
-		
+
+
+
+func updateTargeting():		
 	#### CREATE LIST OF CURRENT TARGETS
 	if not is_instance_valid(player):
 		return
 		
 	$Utilities/Targeting.createTargetingDict()
 	$Utilities/Targeting.autoSetTarget()
-
+	ui.showTargetCreature(player.selectedTarget)
 	
 	
 #### FOG OF WAR STUFF??

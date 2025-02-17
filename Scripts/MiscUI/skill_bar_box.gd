@@ -7,8 +7,10 @@ var skill:Node = null
 @onready var overlay := $VBox/PanelC/Overlay
 @onready var cooldownL := $VBox/PanelC/CooldownLabel
 
+@onready var indexL := $VBox/IndexLabel
 
-func setup(skill:Node):
+
+func setup(skill:Node, index:int):
 	
 	self.skill = skill
 	
@@ -16,7 +18,8 @@ func setup(skill:Node):
 	
 	textureR.texture = texture
 	label.text = skill.skillName
-
+	
+	indexL.text = "%d" % (index + 1)
 
 
 func updateVisuals():
