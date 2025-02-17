@@ -304,22 +304,23 @@ func callNextTurnAction():
 		prints("%s can't start turn due to death! (%d)" % [next.creatureName, turnActorCounter])
 		callNextTurnAction()
 		return	
+		
 	#### CREATURE IS ALIVE	
-	else:
-		prints("%s :s turn! (%d)" % [next.creatureName, turnActorCounter])
+	
+	prints("%s :s turn! (%d)" % [next.creatureName, turnActorCounter])
+	
+	#### UPDATE VISUALS ONLY AFTER PLAYER ACTION
+	#### ONLY IF NEXT CREATURE IS ALIVE
+	if next.isPlayer:
+		isTurnActorPlayer = true
+		updateTargeting()
+	elif isTurnActorPlayer:
+		print("This message plays after player turn")
+		updateVisuals()
 		
-		#### UPDATE VISUALS ONLY AFTER PLAYER ACTION
-		#### ONLY IF NEXT CREATURE IS ALIVE
-		if next.isPlayer:
-			isTurnActorPlayer = true
+		isTurnActorPlayer = false
 		
-		elif isTurnActorPlayer:
-			print("This message plays after player turn")
-			updateVisuals()
-			updateTargeting()
-			isTurnActorPlayer = false
-			
-		next.startTurn()
+	next.startTurn()
 			
 	
 	

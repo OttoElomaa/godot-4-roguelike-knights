@@ -157,14 +157,17 @@ func startTurn():
 			world.resetLevel()
 			return
 			
-	if not is_instance_valid(player):
+	if not is_instance_valid(world.player):
 		return
-	if player.is_queued_for_deletion():
+	if world.player.is_queued_for_deletion():
 		return
 	
+	prints(creatureName, " valid, takes action")
 	#### TICK COOLDOWNS ETC ON-TURN EFFECTS ON SKILL NODES
 	for skill in getSkills():
-		skill.passTurn()
+		var pointlessReturn = skill.passTurn()
+		#if isPlayer:
+		prints("tick! ", skill.getCooldown())
 	
 	for effect in $StatusEffects.get_children():
 		effect.tickStatus(self)
@@ -269,7 +272,7 @@ func getNavigator():
 	
 
 func getSkills():
-	return get_node("Skills").get_children()
+	return $Skills.get_children()
 
 
 func getHealth():

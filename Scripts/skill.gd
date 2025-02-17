@@ -47,7 +47,7 @@ func setup(actor:Node):
 
 
 func passTurn():
-	$Cooldown.tickCooldown()
+	return $Cooldown.tickCooldown()
 
 
 
