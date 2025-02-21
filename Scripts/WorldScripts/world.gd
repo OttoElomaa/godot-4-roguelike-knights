@@ -28,25 +28,12 @@ var pathTiles := []
 var pathTurns := []
 
 
-@onready var grid:Node:
-	get:
-		return $GridController
-		
-var lineOfSight:
-	get:
-		return $LineOfSight
+@onready var grid := $GridController
+@onready var lineOfSight := $LineOfSight
+@onready var aStar := $AStarGridNode
+@onready var ui := $UI
 
-var aStar:
-	get:
-		return $AStarGridNode
-
-var ui:
-	get:
-		return $UI
-
-var voidTilemap:
-	get:
-		return $Utilities/VoidTiles
+@onready var voidTilemap := $Utilities/VoidTiles
 
 @onready var player:Player = null
 		
@@ -263,8 +250,10 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("R"):
 		$Utilities/Targeting.shuffleTargets()
 	
-			
 	
+	#### DEBUG CREATE NEW LEVEL	
+	if Input.is_action_just_pressed("B"):
+		resetLevel()
 		
 
 
@@ -424,7 +413,7 @@ func getUi():
 
 
 func _on_dumb_timer_timeout() -> void:
-	
+		
 	var rect = voidTilemap.get_used_rect()
 	rect.position *= 32
 	rect.size *= 32
@@ -440,6 +429,16 @@ func _on_dumb_timer_timeout() -> void:
 func _on_bake_finished() -> void:
 	
 	await get_tree().process_frame
+	
+	#### SOMETIMES THE NAVMESH BAKING FAILS
+	if navigation_polygon.get_vertices().size() <= 0:
+		print("Retrying navmesh bake")
+		#bake_navigation_polygon(true)
+		resetLevel()
+		return
+	
+	#assert(navigation_polygon.get_vertices().size() > 0, "Bake failed??")
+	
 	States.inputModeExplore()
 	ui.toggleLoadingScreen(false)
 	
