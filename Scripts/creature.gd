@@ -30,17 +30,9 @@ var stats:
 		return $Stats
 
 
-
-
-func roomSetup(room:Node, world:Node):
-	
-	#var tree = room.get_tree()
-	#self.world = tree.root.get_node("GameMain/World")
-	self.world = world
-	setupHelp()
 	
 	
-func basicSetup(world):
+func setup(world:Node):
 	
 	self.world = world
 	setupHelp()
@@ -57,7 +49,6 @@ func setupHelp():
 	$HealthBar.setup(self)
 	
 	$CreatureMovement.setup(self)
-	
 	$AnimationComponent.setup(self)
 	
 	for skill in $Skills.get_children():
@@ -138,10 +129,14 @@ func creatureMove():
 			line.remove_point(0)
 			
 	
-	else:
-		push_error("WHAT THE SHIT ASTARGRID")
-				
-	#line.queue_free()
+
+func checkValidity() -> bool:
+	if not is_instance_valid(self):
+		return false
+	if self.is_queued_for_deletion():
+		return false
+	return true
+	
 	
 
 func finishTurn():
@@ -157,10 +152,15 @@ func startTurn():
 			world.resetLevel()
 			return
 			
-	if not is_instance_valid(world.player):
+	if not world.player.checkValidity():
 		return
-	if world.player.is_queued_for_deletion():
-		return
+	if not self.checkValidity():
+		return	
+	
+	$HealthBar.updateVisual(stats.health, stats.guard)
+	if isPlayer:
+		world.ui.updateVisualsOnTurn()
+		
 	
 	prints(creatureName, " valid, takes action")
 	#### TICK COOLDOWNS ETC ON-TURN EFFECTS ON SKILL NODES
@@ -257,7 +257,7 @@ func addStatus(status:Node):
 
 #### THIS RECEIVES A STATRESOURCE, STATS.HEALTH, WITH VALUES 'CURRENT' AND 'MAX'
 func updateHealthBar(health):
-	$HealthBar.updateVisual(health)
+	$HealthBar.updateVisual(health, stats.guard)
 
 
 func playMovementWobble():
@@ -281,6 +281,8 @@ func getHealth():
 
 func _on_mouse_area_mouse_entered() -> void:
 	
+	if not world:
+		return
 	if world.isOverworld:
 		return
 	

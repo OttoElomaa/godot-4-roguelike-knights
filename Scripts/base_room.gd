@@ -63,7 +63,7 @@ func populateCreatures(world) -> Array:
 	
 	for start in $Utilities/CreatureSpawnPoints.get_children():
 		var newCreature = FileLoader.createRandomCreature()
-		newCreature.roomSetup(self, world)
+		newCreature.setup(world)
 		
 		var newPos = $Tiles/FloorTiles2.local_to_map(start.position)
 		var gridPos = newPos + originGridPos

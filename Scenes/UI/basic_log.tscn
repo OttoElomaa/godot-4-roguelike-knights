@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://irn8tsvxkxy0" path="res://Scenes/UI/BasicLogMessage.tscn" id="2_ywuan"]
 
 [node name="CombatLog" type="PanelContainer"]
-custom_minimum_size = Vector2(400, 150)
+custom_minimum_size = Vector2(400, 200)
 offset_right = 8.0
 offset_bottom = 8.0
 script = ExtResource("1_xa3yp")

@@ -18,7 +18,9 @@ func _process(delta: float) -> void:
 	
 	if not player:
 		return
-	elif player.world.isMapKilled:
+	if not player.world:
+		return
+	if player.world.isMapKilled:
 		return
 	
 	#### PLAYER STOPPED PRESSING MOVEMENT

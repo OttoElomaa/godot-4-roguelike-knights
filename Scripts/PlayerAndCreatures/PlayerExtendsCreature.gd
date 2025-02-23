@@ -12,33 +12,21 @@ var selectedTarget:Node = null
 
 
 func playerSetup(world, isThisOverworld):
-	self.world = world
-	grid = world.grid
-	$MovementInput.setup(self)
 	
+	$MovementInput.setup(self)
 	isOverworld = isThisOverworld
 	
 	#### TESTING SETUP STUFF
 	gridPosition = world.grid.world_to_grid(self.position)
 	position = world.grid.grid_to_world(gridPosition)
 	
-	
-	$CreatureMovement.setup(self)
-		
 	if isOverworld:
 		return
+		
+	#### CALLS THE CREATURE SETUP FUNC
+	self.call("setup", world)
+		
 	
-	$Stats.setup(self)
-	$HealthBar.setup(self)
-	
-	
-	$AnimationComponent.setup(self)
-	$CreatureMovement.setup(self)
-	
-	for skill in $Skills.get_children():
-		skill.setup(self)
-
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -149,37 +149,67 @@ func recoverHealth(amount: int):
 
 func handlePhysicalHit(damage:int) -> bool:
 	
-	if tryBlock():
-		var blockString : String =  "%s blocks %d damage without taking any!" % [creature.creatureName, damage] 
-		ui.clearInitialRow()
-		ui.addMessage(blockString, Color.DARK_GRAY)
+	if tryBlock(damage):
 		return false
 		
-	if tryEvade():
-		var evadeString : String =  "%s evades %d damage!" % [creature.creatureName, damage] 
-		ui.clearInitialRow()
-		ui.addMessage(evadeString, Color.DARK_GRAY)
+	if tryEvade(damage):
 		return false
-		
 	
-	var reduced = reduceDamageByArmor(damage)
-	takeDamage(reduced)
+	var reduced := damage	
+	if guard.current > 0:
+		reduced = reduceDamageByGuard(damage)
+	
+	if reduced > 0:
+		reduced = reduceDamageByArmor(damage)
+		takeDamage(reduced)
 	return true
 	
 
-func tryBlock():
+func tryBlock(damage:int):
 	
 	var rand = rng.randi_range(0,100)
 	if rand < block.current:
+		var blockString : String =  "%s blocks %d damage without taking any!" % [creature.creatureName, damage] 
+		ui.clearInitialRow()
+		ui.addMessage(blockString, Color.DARK_GRAY)
+		
 		return true
 	return false
 
-func tryEvade():
+func tryEvade(damage:int):
 	
 	var rand = rng.randi_range(0,100)
 	if rand < evasion.current:
+		var evadeString : String =  "%s evades %d damage!" % [creature.creatureName, damage] 
+		ui.clearInitialRow()
+		ui.addMessage(evadeString, Color.DARK_GRAY)
+		
 		return true
 	return false	
+
+
+func reduceDamageByGuard(damage:int) -> int:
+	
+	var curr := guard.current
+	var afterGuard := damage
+	var reduction := 0
+	
+	if curr < damage:
+		reduction = curr
+	else:
+		reduction = damage
+	afterGuard = damage - reduction
+	
+	var absorbedAmount = afterGuard
+	guard.current -= reduction
+	
+	var blockString : String =  "%s guards against %d damage and avoids %d!" % [creature.creatureName, damage, reduction] 
+	ui.clearInitialRow()
+	ui.addMessage(blockString, Color.LIGHT_BLUE)
+	
+	ui.saveInitialMessage("Guard broken!", Color.LIGHT_BLUE)
+	
+	return afterGuard
 
 
 func reduceDamageByArmor(damage:int) -> int:

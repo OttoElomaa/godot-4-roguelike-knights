@@ -14,13 +14,6 @@ offset_bottom = 16.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_2prju")
 script = ExtResource("1_jqaur")
 
-[node name="HealthLabel" type="Label" parent="."]
-visible = false
-layout_mode = 2
-text = "HealthAmount"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="HealthBar" type="Panel" parent="."]
 custom_minimum_size = Vector2(32, 5)
 layout_mode = 2

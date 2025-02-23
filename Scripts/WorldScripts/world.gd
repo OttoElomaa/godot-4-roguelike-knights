@@ -348,7 +348,7 @@ func lineOfSightStuff():
 	
 
 func addCreature(creature:Node):
-	creature.basicSetup(self)
+	creature.setup(self)
 	$Creatures.add_child(creature)
 	
 

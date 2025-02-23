@@ -28,9 +28,12 @@ func handleTargeting():
 	var targets:Array = getTargetGroup()
 	
 	var targetsInRange := []
+	
+	#### IS IT ALIVE? IS IT IN RANGE?
 	for t in targets:
-		if isInRangedRange(t):
-			targetsInRange.append(t)
+		if t.checkValidity():
+			if isInRangedRange(t):
+				targetsInRange.append(t)
 	
 	var visibleTargets := []
 	for t in targetsInRange:

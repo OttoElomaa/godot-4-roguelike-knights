@@ -32,9 +32,8 @@ func activate(targets:Array) -> Node:
 	skill.ui.saveInitialMessage(skill.actor.creatureName + " uses " + skill.skillName, Color.WHITE)
 	var success = false
 	
-	if attacksCount > 1:
-		skill.ui.clearInitialRow()
-		skill.ui.saveInitialMessage("(%s) " % skill.skillName, Color.LIGHT_BLUE)
+	#### JUST LOG ROW FORMATTING Stuff Atm
+	handleMultiAttack()
 	
 	for i in range(attacksCount):
 		if is_instance_valid(target):
@@ -52,4 +51,8 @@ func activate(targets:Array) -> Node:
 		
 	return target
 	
-	
+
+func handleMultiAttack():
+	if attacksCount > 1:
+		skill.ui.clearInitialRow()
+		skill.ui.saveInitialMessage("(%s) " % skill.skillName, Color.LIGHT_BLUE)
