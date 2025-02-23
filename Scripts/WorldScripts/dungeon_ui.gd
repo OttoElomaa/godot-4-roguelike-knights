@@ -89,7 +89,7 @@ func saveInitialMessage(text:String, color:Color) -> void:
 func addLogRow(text:String, color:Color) -> void:
 	
 	
-	var item1:Node = initialMessage
+	var item1:Node = initialMessage.duplicate()
 	
 	var item2:Node = LogMessage.instantiate()
 	item2.text = text
@@ -104,8 +104,10 @@ func addLogItemHelp(item:Node):
 	combatLog.addItem(item)
 
 
+
 func clearInitialRow():
 	addLogItemHelp(initialMessage)
+
 
 
 func toggleLoadingScreen(visible:bool):

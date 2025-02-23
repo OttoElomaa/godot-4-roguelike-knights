@@ -90,14 +90,12 @@ size_flags_horizontal = 4
 
 [node name="LogMargin" type="MarginContainer" parent="BottomPanel/Hbox"]
 layout_mode = 2
-size_flags_vertical = 8
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_right = 15
 
 [node name="LogPanel" type="PanelContainer" parent="BottomPanel/Hbox/LogMargin"]
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
-size_flags_vertical = 8
 theme_override_styles/panel = ExtResource("2_0cgky")
 
 [node name="MarginContainer" type="MarginContainer" parent="BottomPanel/Hbox/LogMargin/LogPanel"]

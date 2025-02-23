@@ -28,11 +28,13 @@ func activate(targets:Array) -> Node:
 		return null
 	
 	
-	
-	
 	#### CREATE FIRST HALF OF DOUBLE MESSAGE
 	skill.ui.saveInitialMessage(skill.actor.creatureName + " uses " + skill.skillName, Color.WHITE)
 	var success = false
+	
+	if attacksCount > 1:
+		skill.ui.clearInitialRow()
+		skill.ui.saveInitialMessage("(%s) " % skill.skillName, Color.LIGHT_BLUE)
 	
 	for i in range(attacksCount):
 		if is_instance_valid(target):
