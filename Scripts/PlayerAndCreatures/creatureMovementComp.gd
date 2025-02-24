@@ -18,7 +18,7 @@ var movementDir := Vector2i.ZERO
 
 @export var isOverworld := false
 
-signal movementDone
+
 
 
 func setup(creature):
@@ -32,22 +32,14 @@ func overworldSetup(world):
 	creature = get_parent()
 	self.grid = world.grid
 
+
 func dungeonSetup():
 	self.world = creature.world
 	self.grid = world.grid
 	
 	
-#func _process(delta: float) -> void:
-	#### MOVEMENT UNDERWAY, DON'T ACCEPT NEW INPUT
-	
 		
 func _physics_process(delta: float) -> void:
-	
-	#### FOR NOW, ONLY FOR PLAYER
-	#if not creature:
-		#return
-	#if isMoving:
-		#return
 		
 	if not world:
 		return
@@ -68,13 +60,12 @@ func _physics_process(delta: float) -> void:
 #### MOVEMENT DONE, RESOLVE ITS RESULT
 func resolveCompletedMovement():
 	
-	#print("movement goal reached")
-	print(creature.gridPosition)
 	isMoving = false	
 	t = 0.0
 	
-	if creature.isPlayer:
-		creature.get_node("MovementInput").resolvePlayerMovement()
+	#### RESTORE IF BROKEN
+	#if creature.isPlayer:
+		#creature.get_node("MovementInput").resolvePlayerMovement()
 	
 	if creature.isPlayer:
 		if not isOverworld:
@@ -84,7 +75,6 @@ func resolveCompletedMovement():
 		
 
 func continuePlayerMovement():
-	#isMoving = true
 	handleMove(movementDir)
 
 			
@@ -93,9 +83,11 @@ func handleMove(dir):
 	if not grid.is_tile_empty(creature.gridPosition + dir):
 		return
 	
-	#isMoving = true
 	move(dir)
 	movementDir = dir
+	
+	if creature.isPlayer:
+		$MovementTurnTimer.start()
 
 			
 func move(vector):
@@ -109,4 +101,7 @@ func move(vector):
 	creature.playMovementWobble()
 	
 	
-	
+
+#### PLAYER TURN CONTROL	
+func _on_movement_turn_timer_timeout() -> void:
+	creature.get_node("MovementInput").resolvePlayerMovement()

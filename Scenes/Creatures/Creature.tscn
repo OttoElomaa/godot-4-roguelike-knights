@@ -71,6 +71,10 @@ baseBlock = 5
 [node name="CreatureMovement" type="Node" parent="."]
 script = ExtResource("5_hw60m")
 
+[node name="MovementTurnTimer" type="Timer" parent="CreatureMovement"]
+wait_time = 0.4
+one_shot = true
+
 [node name="HealthBar" parent="." instance=ExtResource("3_sgkqn")]
 
 [node name="AnimationComponent" parent="." instance=ExtResource("4_18r3n")]
@@ -91,4 +95,5 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MouseArea"]
 shape = SubResource("RectangleShape2D_vxror")
 
+[connection signal="timeout" from="CreatureMovement/MovementTurnTimer" to="CreatureMovement" method="_on_movement_turn_timer_timeout"]
 [connection signal="mouse_entered" from="MouseArea" to="." method="_on_mouse_area_mouse_entered"]

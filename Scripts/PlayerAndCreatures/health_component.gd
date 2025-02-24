@@ -2,14 +2,15 @@ extends PanelContainer
 
 
 var creature:Node = null
-
-var health = null
-#var maxHealth := 0
-@onready var healthBar := $HealthBar
 var ui: Node = null
+
+@onready var healthBar := $HealthBar
 
 var style1 : StyleBoxFlat = preload("res://Resources/HealthBarBasic.tres")
 var style2 : StyleBoxFlat = preload("res://Resources/HealthBarDarkRed.tres")
+
+var barWidth = 32
+var guardMaxVisual := 20
 
 
 
@@ -26,21 +27,11 @@ func setup(creature):
 
 func updateVisual(health:Object, guard:Object):
 	
-	var barWidth = 32	
-	
-	#### GUARD BAR STUFF		
-	var guardMax := 50
-	
-	#if creature.isPlayer:
-		#prints("show guard? , ", guard.current)
-	
 	#### DISPLAY STUFF
 	if guard.current > 0:
 		self.show()
 		$GuardBarBlue.show()
 	else:
-		#if creature.isPlayer:
-			#prints("no show guard? , ", guard.current)
 		$GuardBarBlue.hide()
 		if health.current >= health.max:
 			self.hide()
@@ -57,15 +48,11 @@ func updateVisual(health:Object, guard:Object):
 	$HealthBarRed.custom_minimum_size.x = alteredWidth
 	
 	
-	
 	if guard.current > 0:		
-		var diffg:float = float(guard.current) / float(guardMax)
+		var diffg:float = float(guard.current) / float(guardMaxVisual)
 		var altWidthG:int = ceil(barWidth * diffg )
 		$GuardBarBlue.custom_minimum_size.x = altWidthG
 	
-	#else:
-		#
-			
 	
 	if health.current < (health.max / 2):
 		$HealthBarRed.add_theme_stylebox_override("fill", style2)
