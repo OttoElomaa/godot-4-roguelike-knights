@@ -302,10 +302,11 @@ func callNextTurnAction():
 	#### ONLY IF NEXT CREATURE IS ALIVE
 	if next.isPlayer:
 		isTurnActorPlayer = true
-		updateTargeting()
+		
 	elif isTurnActorPlayer:
 		print("This message plays after player turn")
 		updateVisuals()
+		lineOfSight.passTurn()
 		
 		isTurnActorPlayer = false
 		
@@ -315,16 +316,16 @@ func callNextTurnAction():
 	
 	
 
-	
 
 func updateVisuals():
 	ui.updateVisualsOnTurn()
 	$AStarGridNode.passTurn()
 	#### REMOVE TARGETING LINES FROM SCREEN
-	lineOfSight.passTurn()
 	
 	if not turnOffLineOfSight:
 		lineOfSightStuff()
+		
+	updateTargeting()
 
 
 

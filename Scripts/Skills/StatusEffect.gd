@@ -46,15 +46,19 @@ func removeStatus():
 	
 
 #### CREATURE PASSES ITSELF AS TARGET, EACH TURN
-func tickStatus(target):
+func tickStatus(target:Node, statusHandler:Node):
 	
+	#### TICK
 	if duration > 0:
 		duration -= 1
+		
+	#### IF REACH ZERO -> DELETE SELF
 	else:
 		var text = "%s recovers from %s..." % [target.creatureName, effectName]
 		ui.addMessage(text, Color.WHITE)
 		self.queue_free()
 		return
-	
+		
+	#### ACTIVATE SCRIPTS
 	for script in $Scripts.get_children():
-		script.tickStatus(target)
+		script.tickStatus(target, statusHandler)

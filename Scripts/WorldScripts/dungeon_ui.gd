@@ -22,6 +22,7 @@ func setup(world):
 	playerPanel.setupPlayerView(world.player)
 
 
+
 func displayPlayerSkills(player):
 	
 	var boxes:Array = skillBar.get_children()
@@ -34,6 +35,7 @@ func displayPlayerSkills(player):
 		boxes[i].setup(skills[i], i)
 	
 
+
 func updateVisualsOnTurn():
 	playerPanel.updatePlayerStats()
 	updateProgressLabels()
@@ -42,11 +44,6 @@ func updateVisualsOnTurn():
 		if box.skill != null:
 			box.updateVisuals()	
 
-
-
-#func updateStateLabel(isLook):
-	#$LookMargin/VBox/LookPanel.updateStateLabel(isLook)
-	
 
 
 func updateProgressLabels():

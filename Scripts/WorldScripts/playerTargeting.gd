@@ -37,9 +37,7 @@ func createTargetingDict():
 			pass
 			
 		#### ONLY CREATURES THAT ARE ALIVE
-		elif not is_instance_valid(creature):
-			pass
-		elif creature.is_queued_for_deletion():
+		elif not creature.checkValidity():
 			pass
 			
 		#### ADD TO LIST

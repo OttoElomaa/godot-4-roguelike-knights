@@ -46,6 +46,8 @@ func setupHelp():
 	self.player = world.player
 	
 	$Stats.setup(self)
+	$StatusEffects.setup(self)
+	
 	$HealthBar.setup(self)
 	
 	$CreatureMovement.setup(self)
@@ -139,8 +141,7 @@ func checkValidity() -> bool:
 	
 	
 
-func finishTurn():
-	world.callNextTurnAction()
+
 
 
 func startTurn():
@@ -159,6 +160,7 @@ func startTurn():
 	
 	$HealthBar.updateVisual(stats.health, stats.guard)
 	if isPlayer:
+		world.updateVisuals()
 		world.ui.updateVisualsOnTurn()
 		
 	
@@ -169,8 +171,10 @@ func startTurn():
 		#if isPlayer:
 		prints("tick! ", skill.getCooldown())
 	
-	for effect in $StatusEffects.get_children():
-		effect.tickStatus(self)
+	$StatusEffects.tickStatus()
+	
+	if $StatusEffects.isStunned:
+		finishTurn()
 	
 	#### PLAYER PASSES TURN AFTER TAKING ACTION, SO DO NOTHING NOW
 	if isPlayer:
@@ -201,8 +205,9 @@ func startTurn():
 	
 
 
-#func chooseTarget():
-	#target = player
+func finishTurn():
+	world.callNextTurnAction()
+
 
 
 func useSkills() -> bool:
@@ -251,7 +256,7 @@ func hasFullHealth():
 
 
 func addStatus(status:Node):
-	$StatusEffects.add_child(status)
+	$StatusEffects.addStatus(status)
 
 
 

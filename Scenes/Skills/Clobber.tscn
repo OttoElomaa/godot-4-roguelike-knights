@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://debjcstrwp3qh"]
+
+[ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Scenes/Skills/BaseSkill.tscn" id="1_k766p"]
+[ext_resource type="Texture2D" uid="uid://bdfti26osccyc" path="res://Sprites/roguelike-look-indicator.png" id="2_4y8jo"]
+[ext_resource type="PackedScene" uid="uid://cij3n60fr0m55" path="res://Scenes/Skills/ComponentZealResource.tscn" id="3_bnqxy"]
+[ext_resource type="Script" path="res://Scripts/Skills/BasicPhysicalAttack.gd" id="4_0rn8h"]
+[ext_resource type="PackedScene" uid="uid://7n5lhpfqoi47" path="res://Scenes/StatusEffects/StunStatus.tscn" id="5_ej5xb"]
+
+[node name="Clobber" instance=ExtResource("1_k766p")]
+skillIcon = ExtResource("2_4y8jo")
+skillName = "Clobber"
+skillType = "melee"
+range = 1
+
+[node name="Cooldown" parent="." index="1"]
+cooldown = 2
+
+[node name="ZealResourceComponent" parent="Resources" index="0" instance=ExtResource("3_bnqxy")]
+zealGain = 1
+zealEnhance = 1
+
+[node name="Script" type="Node" parent="Scripts" index="0"]
+script = ExtResource("4_0rn8h")
+damage = 10
+attacksCount = 1
+
+[node name="StunEffect" parent="StatusEffects" index="0" instance=ExtResource("5_ej5xb")]

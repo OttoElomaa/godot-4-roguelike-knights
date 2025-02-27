@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkaqqpg8dxhsq"]
+[gd_scene load_steps=7 format=3 uid="uid://dkaqqpg8dxhsq"]
 
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://Resources/EmptyStyleBox.tres" id="1_tkmai"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="1_uiii7"]
 [ext_resource type="Script" path="res://Scripts/MiscUI/skill_bar_box.gd" id="2_mnnst"]
 [ext_resource type="Theme" uid="uid://ctkfud23u7av3" path="res://Resources/Fonts/FancyPixelFontYellow.tres" id="3_jrgyn"]
+[ext_resource type="Texture2D" uid="uid://cd1rirf0mh0ad" path="res://Sprites/Heroes/heroes-sorcerer.png" id="5_8vca8"]
 [ext_resource type="Theme" uid="uid://dnmve288k8de2" path="res://Resources/Fonts/BasicSmallPixelFont.tres" id="5_udqto"]
 
 [node name="SkillBarBox" type="PanelContainer"]
@@ -35,16 +36,16 @@ custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("1_uiii7")
 
-[node name="Overlay" type="ColorRect" parent="VBox/PanelC"]
-visible = false
-layout_mode = 2
-color = Color(0.00784314, 0.282353, 0.184314, 0.392157)
-
 [node name="SkillIcon" type="TextureRect" parent="VBox/PanelC"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+texture = ExtResource("5_8vca8")
+
+[node name="Overlay" type="ColorRect" parent="VBox/PanelC"]
+layout_mode = 2
+color = Color(0.0705882, 0.270588, 0.215686, 0.647059)
 
 [node name="CooldownLabel" type="Label" parent="VBox/PanelC"]
 custom_minimum_size = Vector2(50, 0)

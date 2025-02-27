@@ -35,8 +35,10 @@ func activate(targets:Array) -> Node:
 	#### JUST LOG ROW FORMATTING Stuff Atm
 	handleMultiAttack()
 	
+	#### LAUNCH A NUMBER OF ATTACKS (1 or more)
+	#### CHECK If Creature Is Alive EACH TIME
 	for i in range(attacksCount):
-		if is_instance_valid(target):
+		if target.checkValidity():
 			
 			var newSuccess:bool = target.stats.handlePhysicalHit(damage)
 			if newSuccess:
