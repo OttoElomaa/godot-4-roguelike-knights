@@ -173,9 +173,13 @@ func startTurn():
 	
 	$StatusEffects.tickStatus()
 	
+	#### SKIP TURN IF STUNNED. IF PLAYER, PASS SOME TIME
 	if $StatusEffects.isStunned:
-		finishTurn()
-	
+		if isPlayer:
+			$StunnedWaitTimer.start()
+		else:
+			finishTurn()
+		
 	#### PLAYER PASSES TURN AFTER TAKING ACTION, SO DO NOTHING NOW
 	if isPlayer:
 		return
@@ -218,41 +222,27 @@ func useSkills() -> bool:
 	return false
 
 
-func move(vector):
-	#tiles.placeGridObjectOnMap(self, gridPosition)
-	
-	pass
-	#movementComponent.move()
-	
-	#gridPosition += Vector2i(vector)
-	#newPos = grid.grid_to_world(gridPosition)
-	#isMoving = true
-	#$SpriteAnimations.play("MovementWobble")
-
-
-func handleMove(dir:Vector2i):
-	
-	$CreatureMovement.handleMove(dir)
-	
 
 func takeDamage(amount:int):
-	
 	$Stats.takeDamage(amount)
 	$AnimationComponent.playMeleeHit()
+
 
 
 func handlePhysicalHit(damage:int):
 	$Stats.handlePhysicalHit(damage)
 
 
+
 func recoverHealth(amount: int):
 	$Stats.recoverHealth(amount)
-	#$AnimationComponent.playMeleeHit()
+	
 
 
 func hasFullHealth():
 	var he = stats.health
 	return he.current >= he.max	
+
 
 
 func addStatus(status:Node):
@@ -293,3 +283,7 @@ func _on_mouse_area_mouse_entered() -> void:
 	
 	prints("Mouse entered: ", creatureName)
 	world.ui.showMouseLookCreature(self)
+
+
+func _on_stunned_wait_timer_timeout() -> void:
+	finishTurn()

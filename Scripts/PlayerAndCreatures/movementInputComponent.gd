@@ -95,6 +95,5 @@ func resolvePlayerMovement():
 	if holdingKey:
 		player.movementComponent.continuePlayerMovement()
 	
-	if not player.isOverworld:
-		player.world.ui.addMessage("You take a step", Color.WHITE)	
+		
 	

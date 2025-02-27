@@ -97,5 +97,9 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MouseArea"]
 shape = SubResource("RectangleShape2D_vxror")
 
+[node name="StunnedWaitTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="CreatureMovement/MovementTurnTimer" to="CreatureMovement" method="_on_movement_turn_timer_timeout"]
 [connection signal="mouse_entered" from="MouseArea" to="." method="_on_mouse_area_mouse_entered"]
+[connection signal="timeout" from="StunnedWaitTimer" to="." method="_on_stunned_wait_timer_timeout"]

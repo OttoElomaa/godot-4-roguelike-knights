@@ -88,6 +88,8 @@ func handleMove(dir):
 	
 	if creature.isPlayer:
 		$MovementTurnTimer.start()
+		if not creature.isOverworld:
+			world.ui.addMessage("You take a step", Color.WHITE)
 
 			
 func move(vector):
