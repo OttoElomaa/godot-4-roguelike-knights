@@ -12,7 +12,8 @@ creatureName = "Houndmaster"
 texture = ExtResource("2_kd8vu")
 
 [node name="Stats" parent="." index="1"]
-baseHealth = 30
+baseHealth = 15
+baseEvasion = 15
 
 [node name="SummonDogs" parent="Skills" index="0" instance=ExtResource("3_226g2")]
 

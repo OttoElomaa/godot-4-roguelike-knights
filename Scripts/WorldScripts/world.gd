@@ -261,7 +261,7 @@ func startNextTurn():
 	
 	turnActorCounter = 0
 	turnActorsList = {}
-	ui.addMessage("A turn passes…", Color.WHITE)
+	ui.addMessage("A turn passes…", MyColors.fontFaintBrown)
 	
 	for c in getCreatures(): 
 		turnActorsList[turnActorCounter] = c 

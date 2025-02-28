@@ -80,14 +80,9 @@ func resetCurrentToAltered():
 
 func takeDamage(amount: int):
 	
-	var enemyHurtC := Color.DARK_GOLDENROD
-	var allyHurtC := Color.INDIAN_RED
-	
-	var colorToUse: Color = Color.ALICE_BLUE
+	var colorToUse:Color = MyColors.fontAllyHurt
 	if creature.isEnemy:
-		colorToUse = enemyHurtC
-	else:
-		colorToUse = allyHurtC
+		colorToUse = MyColors.fontEnemyHurt
 	
 	health.current -= amount
 	creature.updateHealthBar(health)
@@ -123,14 +118,9 @@ func handleCreatureDeath():
 
 func recoverHealth(amount: int):
 
-	var enemyHealC := Color.CADET_BLUE
-	var allyHealC := Color.GREEN_YELLOW
-	
-	var colorToUse: Color = Color.ALICE_BLUE
+	var colorToUse:Color = MyColors.fontAllyHeal
 	if creature.isEnemy:
-		colorToUse = enemyHealC
-	else:
-		colorToUse = allyHealC
+		colorToUse = MyColors.fontEnemyHeal
 	
 	#### CALCULATE HEALTH CHANGE
 	var afterHeal:int = health.current + amount
