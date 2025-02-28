@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://c04f40l80yoww"]
+
+[ext_resource type="PackedScene" uid="uid://c03effeto5f3m" path="res://Scenes/StatusEffects/StatusEffect.tscn" id="1_1ss2v"]
+
+[node name="HardenStatus" instance=ExtResource("1_1ss2v")]
+targetingGroup = 0
+effectName = "Harden"
+effectedTitle = "Hardened"
+duration = 2
+
+[node name="StatModifier" parent="." index="1"]
+isActive = true
+armorModify = 40

@@ -17,7 +17,7 @@ cooldown = 10
 
 [node name="Node" type="Node" parent="Resources" index="0"]
 script = ExtResource("2_u4j5d")
-guardGain = 10
+guardGain = 20
 
 [node name="Node" type="Node" parent="Scripts" index="0"]
 script = ExtResource("3_qftnc")

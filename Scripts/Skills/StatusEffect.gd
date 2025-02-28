@@ -16,6 +16,7 @@ var actor:Node = null
 var world:Node = null
 var ui:Node = null
 
+var affectedCreature:Node = null
 
 
 func setup(skill:Node):
@@ -24,6 +25,8 @@ func setup(skill:Node):
 	self.actor = skill.actor
 	self.world = actor.world
 	self.ui = world.getUi()
+	
+	$StatModifier.setup(self)
 	
 	for script in $Scripts.get_children():
 		script.setup(self)
@@ -34,15 +37,25 @@ func applyStatus(target:Node):
 	var text = "%s affects %s with %s!" % [actor.creatureName, target.creatureName, effectName]
 	ui.addMessage(text, Color.WHITE)
 	
+	#### CREATE COPY OF SELF
 	var appliedStatus = self.duplicate()
 	appliedStatus.setup(skill)
-	target.addStatus(appliedStatus)
 	
-	#
+	#### ATTACH COPY TO TARGET CREATURE
+	target.addStatus(appliedStatus)
+	appliedStatus.setMyTarget(target)
+
+
+	
+func setMyTarget(creature:Node):
+	self.affectedCreature = creature
+	
 	
 	
 func removeStatus():
-	pass
+	$StatModifier.isActive = false
+	affectedCreature.addStatus(null)
+	self.queue_free()
 	
 
 #### CREATURE PASSES ITSELF AS TARGET, EACH TURN
@@ -56,9 +69,14 @@ func tickStatus(target:Node, statusHandler:Node):
 	else:
 		var text = "%s recovers from %s..." % [target.creatureName, effectName]
 		ui.addMessage(text, Color.WHITE)
-		self.queue_free()
+		removeStatus()
 		return
 		
 	#### ACTIVATE SCRIPTS
 	for script in $Scripts.get_children():
 		script.tickStatus(target, statusHandler)
+
+
+
+func modifyStats(statsHandler:Node):
+	$StatModifier.modifyStats(statsHandler)

@@ -146,18 +146,27 @@ func checkValidity() -> bool:
 
 func startTurn():
 	
-	
-	if isPlayer and not isOverworld:
+	if isOverworld:
+		return
+		
+	#### EXIT REACHED: DO NOTHING
+	if isPlayer:
 		if gridPosition == world.exitGridPos:
 			print("EXIT REACHEDDDDDDDD")
 			world.resetLevel()
 			return
-			
+	
+	#### PLAYER OR SELF DEAD: DO NOTHING		
 	if not world.player.checkValidity():
 		return
 	if not self.checkValidity():
 		return	
 	
+	#### MAINTENANCE ON EACH TURN START
+	#$Stats.turnStartUpdate()    # Reset Stats
+	$StatusEffects.modifyStats(stats)
+	
+	#### VISUAL UPDATES ON TURN START
 	$HealthBar.updateVisual(stats.health, stats.guard)
 	if isPlayer:
 		world.updateVisuals()
@@ -246,7 +255,14 @@ func hasFullHealth():
 
 
 func addStatus(status:Node):
+	#### NULL VALUE USED WHEN STATUS EFFECT DELETES ITSELF
+	if status == null:
+		$StatusEffects.modifyStats(stats)
+		return
+	
+	#### OTHERWISE, ADD STATUS AND UPDATE MY STATS
 	$StatusEffects.addStatus(status)
+	$StatusEffects.modifyStats(stats)
 
 
 

@@ -8,6 +8,36 @@
 [ext_resource type="Script" path="res://Scripts/PlayerAndCreatures/creatureMovementComp.gd" id="5_hw60m"]
 [ext_resource type="Script" path="res://Scripts/PlayerAndCreatures/CreatureStatsComponent.gd" id="6_x3hfw"]
 
+[sub_resource type="Animation" id="Animation_1s4cr"]
+resource_name = "AllyAttack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(15, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_q17g7"]
+resource_name = "EnemyAttack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-15, 0), Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_dxgkf"]
 resource_name = "MovementWobble"
 length = 0.3
@@ -39,36 +69,6 @@ tracks/0/keys = {
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_q17g7"]
-resource_name = "EnemyAttack"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(-15, 0), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_1s4cr"]
-resource_name = "AllyAttack"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(15, 0), Vector2(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5otlx"]
 _data = {
 "AllyAttack": SubResource("Animation_1s4cr"),
@@ -92,8 +92,8 @@ texture = ExtResource("2_6c01f")
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("6_x3hfw")
 baseArmor = 5
-baseEvasion = 5
 baseBlock = 5
+baseEvasion = 5
 
 [node name="Skills" type="Node" parent="."]
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxn8gcr6ya5vo"]
+[gd_scene load_steps=7 format=3 uid="uid://dxn8gcr6ya5vo"]
 
 [ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Scenes/Creatures/Creature.tscn" id="1_pwdb6"]
 [ext_resource type="Texture2D" uid="uid://d2jgliqvedpc5" path="res://Sprites/Enemies/enemy-guardian-spirit-transparent-32px.png" id="2_5mp80"]
 [ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Scenes/Skills/Strike.tscn" id="3_5bgoq"]
 [ext_resource type="PackedScene" uid="uid://1nkco862q1po" path="res://Scenes/Skills/BasicHeal.tscn" id="4_7b8u4"]
 [ext_resource type="PackedScene" uid="uid://bht4bnosjb7ch" path="res://Scenes/Skills/InfectStrike.tscn" id="4_qf74e"]
+[ext_resource type="PackedScene" uid="uid://dhb8f73rg8a83" path="res://Scenes/Skills/Harden.tscn" id="6_6ykrn"]
 
 [node name="Guardian" instance=ExtResource("1_pwdb6")]
 isEnemy = false
@@ -22,3 +23,5 @@ baseEvasion = 10
 [node name="Infect" parent="Skills" index="1" instance=ExtResource("4_qf74e")]
 
 [node name="Strike" parent="Skills" index="2" instance=ExtResource("3_5bgoq")]
+
+[node name="Harden" parent="Skills" index="3" instance=ExtResource("6_6ykrn")]

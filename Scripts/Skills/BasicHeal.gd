@@ -21,8 +21,6 @@ func activate(targets:Array) -> Node:
 	if healAmount == 0:
 		return target
 	
-	
-	#if target.getHealth() >= target.maxHealth:
 	if target.hasFullHealth():
 		return null
 	

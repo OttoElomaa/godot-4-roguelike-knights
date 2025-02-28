@@ -5,10 +5,9 @@ extends Node
 @export var baseHealth := 10
 
 @export var baseArmor := 0
-@export var baseGuard := 0
-@export var baseCrit := 0
-@export var baseEvasion := 0
 @export var baseBlock := 0
+@export var baseEvasion := 0
+@export var baseCrit := 0
 
 
 var health:StatResource = null
@@ -16,6 +15,7 @@ var health:StatResource = null
 var armor:Stat = null
 var block:Stat = null
 var evasion:Stat = null
+var crit:Stat = null
 
 var zeal:StatResource = null
 var guard:StatResource = null
@@ -57,6 +57,7 @@ func setup(creature):
 	armor = Stat.new(baseArmor)
 	block = Stat.new(baseBlock)
 	evasion = Stat.new(baseEvasion)
+	crit = Stat.new(baseCrit)
 	
 	health = StatResource.new(baseHealth, baseHealth)
 	zeal = StatResource.new(100, 0)
@@ -70,8 +71,11 @@ func turnStartUpdate():
 
 func resetCurrentToAltered():
 	   #### RESET each stats' current value to its altered baseline value
-	self.block.current = self.block.altered
-	self.evasion.current = self.evasion.altered
+	
+	armor.current = armor.altered
+	block.current = block.altered
+	evasion.current = evasion.altered
+	
 
 
 ##################################################################################
