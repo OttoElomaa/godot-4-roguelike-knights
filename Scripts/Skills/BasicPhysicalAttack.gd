@@ -47,6 +47,8 @@ func activate(targets:Array) -> Node:
 	#### POST THE FIRST HALF IF LAST HALF FAILS
 	#if not success:
 		#skill.ui.clearInitialRow()
+	if success:
+		actor.playAttackAnimation()
 	
 	if isRanged:
 		skill.world.lineOfSight.createRangedLine(actor.position, target.position)

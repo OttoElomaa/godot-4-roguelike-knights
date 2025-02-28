@@ -257,7 +257,14 @@ func updateHealthBar(health):
 
 func playMovementWobble():
 	$SpriteAnimations.play("MovementWobble")
+
+
+func playAttackAnimation():
 	
+	if isEnemy:
+		$SpriteAnimations.play("EnemyAttack")
+	else:
+		$SpriteAnimations.play("AllyAttack")
 	
 	
 #########################################################################
@@ -272,6 +279,7 @@ func getSkills():
 
 func getHealth():
 	return $Stats.health.current
+
 
 
 func _on_mouse_area_mouse_entered() -> void:
