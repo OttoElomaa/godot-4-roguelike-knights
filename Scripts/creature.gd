@@ -258,11 +258,13 @@ func addStatus(status:Node):
 	#### NULL VALUE USED WHEN STATUS EFFECT DELETES ITSELF
 	if status == null:
 		$StatusEffects.modifyStats(stats)
+		world.ui.updatePlayerPanel()
 		return
 	
 	#### OTHERWISE, ADD STATUS AND UPDATE MY STATS
 	$StatusEffects.addStatus(status)
 	$StatusEffects.modifyStats(stats)
+	world.ui.updatePlayerPanel()
 
 
 

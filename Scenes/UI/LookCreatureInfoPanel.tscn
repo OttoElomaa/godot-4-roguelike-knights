@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://7x5e7cauhthd"]
+[gd_scene load_steps=6 format=3 uid="uid://7x5e7cauhthd"]
 
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="1_0lct2"]
 [ext_resource type="Script" path="res://Scripts/MiscUI/lookPanel.gd" id="2_0lonv"]
+[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Resources/Fonts/LabelSettingSmallFontWhite.tres" id="3_82hgx"]
 [ext_resource type="Theme" uid="uid://dnmve288k8de2" path="res://Resources/Fonts/BasicSmallPixelFont.tres" id="3_pxrl6"]
 [ext_resource type="Theme" uid="uid://ctkfud23u7av3" path="res://Resources/Fonts/FancyPixelFontYellow.tres" id="4_66lwf"]
 
@@ -27,13 +28,13 @@ alignment = 1
 
 [node name="StateLabel" type="Label" parent="Margin/MainVBox/HBoxUpper"]
 layout_mode = 2
-theme = ExtResource("3_pxrl6")
 text = "Mode"
+label_settings = ExtResource("3_82hgx")
 
 [node name="LookLabel" type="Label" parent="Margin/MainVBox/HBoxUpper"]
 layout_mode = 2
-theme = ExtResource("3_pxrl6")
 text = "LookStatus"
+label_settings = ExtResource("3_82hgx")
 
 [node name="NameText" type="Label" parent="Margin/MainVBox"]
 custom_minimum_size = Vector2(200, 0)
@@ -55,8 +56,8 @@ theme_override_constants/separation = 8
 
 [node name="HealthLabel" type="Label" parent="Margin/MainVBox/HBox/StatsHbox"]
 layout_mode = 2
-theme = ExtResource("3_pxrl6")
 text = "Health"
+label_settings = ExtResource("3_82hgx")
 
 [node name="ArmorLabel" type="Label" parent="Margin/MainVBox/HBox/StatsHbox"]
 layout_mode = 2
@@ -79,10 +80,10 @@ theme_override_constants/separation = 8
 
 [node name="GuardLabel" type="Label" parent="Margin/MainVBox/HBox/StatsHboxTwo"]
 layout_mode = 2
-theme = ExtResource("3_pxrl6")
 text = "Guard"
+label_settings = ExtResource("3_82hgx")
 
 [node name="ZealLabel" type="Label" parent="Margin/MainVBox/HBox/StatsHboxTwo"]
 layout_mode = 2
-theme = ExtResource("3_pxrl6")
 text = "Zeal"
+label_settings = ExtResource("3_82hgx")

@@ -36,8 +36,13 @@ func displayPlayerSkills(player):
 	
 
 
-func updateVisualsOnTurn():
+func updatePlayerPanel():
 	playerPanel.updatePlayerStats()
+
+
+
+func updateVisualsOnTurn():
+	updatePlayerPanel()
 	updateProgressLabels()
 	
 	for box in skillBar.get_children():

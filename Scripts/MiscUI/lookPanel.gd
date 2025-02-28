@@ -52,19 +52,38 @@ func showTargetCreature(creature:Node):
 
 func updateView(creature:Node):
 	
+	var s = creature.stats
+	
 	if player == null:
 		lookLabel.text = "%d, %d" % [creature.gridPosition.x, creature.gridPosition.y]
 		nameLabel.text = "a creature called %s" % creature.creatureName
 	
 	
-	healthLabel.text = "Health: %d" % creature.stats.health.current
-	armorLabel.text = "Armor: %d" % creature.stats.armor.current
-	blockLabel.text = "Block: %d" % creature.stats.block.current
-	evasionLabel.text = "Evasion: %d" % creature.stats.evasion.current
+	healthLabel.text = "Health: %d" % s.health.current
 	
-	guardLabel.text = "Guard: %d" % creature.stats.guard.current
-	zealLabel.text = "Zeal: %d" % creature.stats.zeal.current
-
+	armorLabel.text = "Armor: %d" %s.armor.current
+	blockLabel.text = "Block: %d" % s.block.current
+	evasionLabel.text = "Evasion: %d" % s.evasion.current
+	
+	guardLabel.text = "Guard: %d" % s.guard.current
+	zealLabel.text = "Zeal: %d" % s.zeal.current
+	
+	colorLabelIfChange(armorLabel, s.armor)
+	colorLabelIfChange(blockLabel, s.block)
+	colorLabelIfChange(evasionLabel, s.evasion)
+	
+	
+	
+func colorLabelIfChange(label:Label, stat:Object):
+	
+	var color := Color.WHITE
+	if stat.current > stat.altered:
+		color = MyColors.fontAllyHeal
+	elif stat.current < stat.altered:
+		color = MyColors.fontAllyHurt
+		
+	label.set("theme_override_colors/font_color", color)
+	
 
 
 func toggleStatBlock(toShow:bool):
