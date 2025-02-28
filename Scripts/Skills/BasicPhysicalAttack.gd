@@ -57,4 +57,4 @@ func activate(targets:Array) -> Node:
 func handleMultiAttack():
 	if attacksCount > 1:
 		skill.ui.clearInitialRow()
-		skill.ui.saveInitialMessage("(%s) " % skill.skillName, Color.LIGHT_BLUE)
+		skill.ui.saveInitialMessage("(%s) " % skill.skillName, MyColors.fontLightBlue)

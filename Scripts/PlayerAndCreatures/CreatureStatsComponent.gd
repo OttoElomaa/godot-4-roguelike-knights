@@ -161,7 +161,7 @@ func tryBlock(damage:int):
 	if rand < block.current:
 		var blockString : String =  "%s blocks %d damage without taking any!" % [creature.creatureName, damage] 
 		ui.clearInitialRow()
-		ui.addMessage(blockString, Color.DARK_GRAY)
+		ui.addMessage(blockString, MyColors.fontLightBlue)
 		
 		return true
 	return false
@@ -172,7 +172,7 @@ func tryEvade(damage:int):
 	if rand < evasion.current:
 		var evadeString : String =  "%s evades %d damage!" % [creature.creatureName, damage] 
 		ui.clearInitialRow()
-		ui.addMessage(evadeString, Color.DARK_GRAY)
+		ui.addMessage(evadeString, MyColors.fontLightBlue)
 		
 		return true
 	return false	

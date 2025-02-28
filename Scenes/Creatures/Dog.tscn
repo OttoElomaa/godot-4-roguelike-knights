@@ -1,17 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://bu4b5hw22s4am"]
 
 [ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Scenes/Creatures/Creature.tscn" id="1_tt2nr"]
-[ext_resource type="Texture2D" uid="uid://cf1377o6lyn28" path="res://Sprites/Enemies/dog-2-transparent-32px.png" id="2_5umll"]
+[ext_resource type="Texture2D" uid="uid://s5rouduwctr7" path="res://Sprites/Enemies/creature-dog.png" id="2_h71kw"]
 [ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Scenes/Skills/Strike.tscn" id="3_2dns0"]
 
 [node name="Dog" instance=ExtResource("1_tt2nr")]
 creatureName = "Dog"
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("2_5umll")
-
-[node name="Stats" parent="." index="1"]
-baseEvasion = 5
-baseBlock = 5
+texture = ExtResource("2_h71kw")
 
 [node name="Strike" parent="Skills" index="0" instance=ExtResource("3_2dns0")]

@@ -343,8 +343,8 @@ func updateTargeting():
 func lineOfSightStuff():	
 	
 	var playerPos: Vector2i = player.gridPosition
-	var coordsToCheck:Array = grid.getCoordsInRange(playerPos, 15)	
-	$LineOfSight.lineOfSightInRange(playerPos, coordsToCheck, $Utilities/FogTiles)
+	var seeRange := 8
+	$LineOfSight.lineOfSightInRange(playerPos, seeRange, $Utilities/FogTiles)
 	
 	
 

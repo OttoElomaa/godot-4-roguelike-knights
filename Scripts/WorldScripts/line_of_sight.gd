@@ -51,9 +51,10 @@ func createRangedLine(startPos, endPos):
 
 #### COORDS: Grid.getCoordsInRange(gridPos, distance)
 #### PreviouslySeenTiles: WE UPDATE IT IN THIS FUNC
-func lineOfSightInRange(startCoord:Vector2i, coords: Array, tilemap:TileMapLayer):
+func lineOfSightInRange(startCoord:Vector2i, range:int, tilemap:TileMapLayer):
 	
-	#var coords32 := []
+	var coordsToCheck:Array = grid.getCoordsInRange(startCoord, range)
+	
 	var coordsDict := {}
 	var visibleCoords := []
 	var vec16 := Vector2i(16,16)
@@ -64,7 +65,7 @@ func lineOfSightInRange(startCoord:Vector2i, coords: Array, tilemap:TileMapLayer
 	var current_pos = startCoord * 32 + vec16
 	
 	#### SET AS UNSEEN DARK FOG
-	for coord in coords:
+	for coord in coordsToCheck:
 		tilemap.set_cell(coord, 0, Vector2i(0,0))
 		
 	#### SET PREVIOUSLY SEEN TILES AS FOGGY TEXTURE. NOT VOIDTILES (Value 1)
@@ -75,7 +76,7 @@ func lineOfSightInRange(startCoord:Vector2i, coords: Array, tilemap:TileMapLayer
 	#############################################################################
 	#### TRANSFORM EACH COORD FROM GRID TO SPATIAL
 	#### DICTIONARY - KEY:SPATIAL, VALUE: GRID COORD
-	for coord in coords:
+	for coord in coordsToCheck:
 		var spatial = Vector2(coord) * 32 + Vector2(16,16)
 		coordsDict[spatial] = coord
 	
@@ -149,7 +150,7 @@ func lineOfSightInRange(startCoord:Vector2i, coords: Array, tilemap:TileMapLayer
 	
 	
 	#### IF EMPTY VOID TILE, MAKE IT HIDDEN FOG
-	for coord in coords:
+	for coord in coordsToCheck:
 		if grid.getTileValue(coord) == 1:
 			tilemap.set_cell(coord, 0, Vector2i(0,0))
 	

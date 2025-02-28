@@ -26,17 +26,6 @@ func setup(creature):
 	self.world = creature.world
 	self.grid = world.grid
 	
-
-func overworldSetup(world):
-	self.world = world
-	creature = get_parent()
-	self.grid = world.grid
-
-
-func dungeonSetup():
-	self.world = creature.world
-	self.grid = world.grid
-	
 	
 		
 func _physics_process(delta: float) -> void:
@@ -89,7 +78,7 @@ func handleMove(dir):
 	if creature.isPlayer:
 		$MovementTurnTimer.start()
 		if not creature.isOverworld:
-			world.ui.addMessage("You take a step", Color.WHITE)
+			world.ui.addMessage("%s takes a step" % creature.creatureName, Color.WHITE)
 
 			
 func move(vector):
