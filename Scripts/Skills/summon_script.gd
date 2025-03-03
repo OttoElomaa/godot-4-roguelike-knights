@@ -41,5 +41,7 @@ func summonCreature(actorPos:Vector2i):
 	var summonText = "%s summons a %s!" % [skill.actor.creatureName,summonedCreature.creatureName]
 	skill.ui.addMessage(summonText, Color.CYAN)
 	
-	summonedCreature.gridPosition = creaturePos
-	skill.world.grid.placeGridObjectOnMap(summonedCreature, creaturePos)
+	skill.world.putOnGridAndMap(summonedCreature, creaturePos)
+	
+	
+	

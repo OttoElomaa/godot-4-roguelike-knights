@@ -22,8 +22,18 @@ var voidTilemap:TileMapLayer = null
 
 # Called when the node enters the scene tree for the first time.
 func setup(world: Node):
-	
 	self.world = world
+	
+	if world.isOverworld:
+		return
+		
+	self.voidTilemap = world.voidTilemap
+	
+	
+	
+func setupGrid():
+	
+	
 	if world.isOverworld:
 		return
 	
@@ -33,14 +43,21 @@ func setup(world: Node):
 	nonVoidTiles = getWallAndFloorTiles()
 	
 	#### STORE TILE INFO IN A TILEMAP AT WORLD
-	voidTilemap = world.voidTilemap
+	
 	var pointlessReturn = createVoidTiles(voidTilemap)
 	return pointlessReturn
 	
 
 
-func overworldSetup(worldMap:Node):
-	self.world = worldMap
+
+#### THIS IS THE CATCH-ALL FUNCTION FOR PLACING STUFF ON THE GRID AND MAP
+#### INPUT: GRIDPOS CANDIDATE. HANDLES EVERYTHING
+func putOnGridAndMap(object:Node, gridPos:Vector2i):
+	if is_tile_empty(gridPos):
+		object.gridPosition = gridPos
+	else:
+		object.gridPosition = findEmptyTileInRange(gridPos)
+	matchPositionToGridPos(object)
 
 
 
@@ -53,6 +70,11 @@ func placeGridObjectOnMap(object:Node, gridPos:Vector2i):
 	
 	object.position = (gridPos * 32) + Vector2i(16,16)
 
+
+func placeObjectOnTileOrNearbyFree(object:Node, gridPos:Vector2i):
+	if is_tile_empty(gridPos):
+		pass
+		
 
 
 func showTileInfo(grid_pos: Vector2i):
@@ -228,25 +250,7 @@ func findEmptyTileInRange(startingPos:Vector2i):
 		return Vector2i(999,999)
 	return emptyTiles[randIndex - 1]
 	
-	#var newPos = startingPos
-	#var newPosFound := false
-	#var counter = 0
-	#
-	##### WHILE LOOP ######################################
-	#while not newPosFound:
-		#newPos = startingPos
-		#var dir = dirs[randi() % 8]
-		#newPos += dir * rng.randi_range(1,3)
-		#
-		#if getTileValue(newPos) == -1:
-			#if not newPos in getCreatureTiles():
-				#newPosFound = true
-				#
-		#counter += 0
-			#
-	#return newPos
-
-
+	
 
 func getEmptyTilesInRange(startPos:Vector2i):
 	

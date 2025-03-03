@@ -67,9 +67,10 @@ func startGame(game:Node, playerScene:Node):
 	
 	#### SETUP PLAYER
 	player = playerScene
-	$Creatures.add_child(player)
+	addCreature(player)
+	#$Creatures.add_child(player)
 	#prints("player at start of game: ", player, player.creatureName)
-	player.playerSetup(self, false)
+	#player.playerSetup(self, false)
 	
 	$Utilities/LookTool.setup(self)
 	
@@ -81,6 +82,7 @@ func startGame(game:Node, playerScene:Node):
 	#### ROOMS STUFF
 	#### SETUP ASTARGRID TO CREATE PATH BETWEEN ROOM SCENES
 	pointlessReturn = $AStarGridNode.setup(self)
+	$GridController.setup(self)
 	set_navigation_layer_value(2, true)
 	
 	pointlessReturn = generateDungeon()
@@ -88,8 +90,8 @@ func startGame(game:Node, playerScene:Node):
 	#### PLACE THE PLAYER ON THE MAP
 	#### ROOMS[0]: FIRST ROOM PLACED
 	startingGridPos = firstRoom.getStartPosition()
-	player.gridPosition = startingGridPos
-	grid.placeGridObjectOnMap(player, startingGridPos)
+	grid.putOnGridAndMap(player, startingGridPos)
+	
 	
 	#### PLACE EXIT - SAVED DURING ROOMS DICT CREATION
 	exitGridPos = lastRoom.getStartPosition()
@@ -99,14 +101,13 @@ func startGame(game:Node, playerScene:Node):
 	var boss = FileLoader.createRandomBoss()
 	addCreature(boss)
 	var lastRoomSpawnPos = lastRoom.getPlayerStartPos()
-	boss.gridPosition = lastRoomSpawnPos
-	grid.placeGridObjectOnMap(boss, lastRoomSpawnPos)
+	grid.putOnGridAndMap(boss, lastRoomSpawnPos)
 	
 	await get_tree().process_frame
 	await get_tree().process_frame
 	
 	#### CREATE VOID TILES, ETC
-	pointlessReturn = $GridController.setup(self)
+	pointlessReturn = $GridController.setupGrid()
 	##########################################
 	#### NAV STUFF
 	#### SETUP, NOTHING TO WAIT
@@ -346,13 +347,24 @@ func lineOfSightStuff():
 	var seeRange := 8
 	$LineOfSight.lineOfSightInRange(playerPos, seeRange, $Utilities/FogTiles)
 	
-	
+
+
+func putOnGridAndMap(player:Node, startingGridPos:Vector2i):
+	grid.putOnGridAndMap(player, startingGridPos)
+
 
 func addCreature(creature:Node):
-	creature.setup(self)
+	
+	if creature.isPlayer:
+		player.playerSetup(self, false)
+	else:
+		creature.setup(self)
+	
+	#if grid.is_tile_empty()
+		
 	$Creatures.add_child(creature)
 	
-
+	
 
 #### ORDER GAME TO GENERATE NEW DUNGEON LEVEL
 func resetLevel():
