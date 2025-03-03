@@ -144,24 +144,20 @@ func generateDungeon():
 	pathTurns = walkerRoomPositions
 	
 	
-	pathTiles = generatePath(walkerRoomPositions) 
-	for coord in pathTiles:
-		$RoomGeneration/GlobalFloorTiles.set_cell(coord, 6, Vector2i.ZERO)
+	generatePath(walkerRoomPositions) 
+	pathTiles = $RoomGeneration/GlobalFloorTiles.get_used_cells()
 	
 	
 	#### TRY TO CREATE ROOMS ALONG PATH
 	var count := 0
-	var occupiedTiles := []
 	var latest:Node = null
 	
-	for tile in pathTurns:
-		prints("pathtiles worldgen: ", tile)
-		var suitableLocation = true
+	for point in pathTurns:
+		prints("pathtiles worldgen: ", point.gridPosition)
 					
-		if suitableLocation:
+		if point.hasRoom:
 			var scene = FileLoader.createRandomRoom()
-			placeRoom(scene, tile - Vector2i(25,25))
-			occupiedTiles.append(tile)
+			placeRoom(scene, point.gridPosition - Vector2i(25,25))
 			if count == 0:
 				firstRoom = scene
 			count += 1
@@ -186,21 +182,17 @@ func generatePath(dungeonPath:Array) -> Array:
 	#### CREATE ASTAR PATHS BETWEEN EACH OF THEM
 	var paths := []
 	for i in range(1, dungeonPath.size()):
-		paths.append(aStar.createPathManhattan(dungeonPath[i-1], dungeonPath[i]))
+		var prev = dungeonPath[i-1].gridPosition
+		var curr = dungeonPath[i].gridPosition
+		paths.append(aStar.createPathManhattan(prev, curr))
 	
 	#### CONVERT THEM TO GRID COORDINATES
-	var gridPaths := []	
 	for path in paths:
-		var gridPath := []
 		for coord in path:
 			#### CONVERSION FROM REGULAR COORDINATES
 			var converted = coord / 32 - Vector2(16.5, 16.5)
-			if not converted in allPathTiles:
-				gridPath.append(converted)
-				allPathTiles.append(Vector2i(converted))
-		gridPaths.append(gridPath)
-	
-		
+			$RoomGeneration/GlobalFloorTiles.set_cell(converted, 6, Vector2i.ZERO)
+			
 	prints("Path by aStar node: ", allPathTiles )
 	return allPathTiles
 	

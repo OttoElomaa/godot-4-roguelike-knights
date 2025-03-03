@@ -177,7 +177,7 @@ func createVoidTiles(voidTilemap:TileMapLayer):
 	
 	#### MAKE SURE PATHS' AREA IS ALSO IN REGIONTILES
 	for tile in world.pathTurns:
-		for tile2 in getCoordsInRange(tile,20):
+		for tile2 in getCoordsInRange(tile.gridPosition, 20):
 			if not tile2 in regionTiles:
 				regionTiles.append(tile2)
 	
