@@ -1,5 +1,5 @@
 extends Node
-
+class_name CreatureStats
 
 
 @export var baseHealth := 10

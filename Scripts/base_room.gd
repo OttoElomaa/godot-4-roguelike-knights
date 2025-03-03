@@ -66,6 +66,7 @@ func populateCreatures(world) -> Array:
 		newCreature.setup(world)
 		
 		var newPos = $Tiles/FloorTiles2.local_to_map(start.position)
+		#newPos = grid
 		var gridPos = newPos + originGridPos
 		newCreature.gridPosition = gridPos
 		
@@ -110,19 +111,18 @@ func setTileGraphics(setValue:int):
 #### USED MOSTLY FOR CONNECTING ROOMS WITH A PATH. ALSO PLACING EXIT
 func getStartPosition():
 	var pos = $Utilities/Center.position
-	return GridTools.world_to_grid(position + pos) 
+	return GridTools.localToGrid(position + pos) 
 
 
 func getPlayerStartPos():
 	var pos = $Utilities/PlayerStart.position
-	return GridTools.world_to_grid(position + pos) 
+	return GridTools.localToGrid(position + pos) 
 
 
 
 func createOpenPathFromArray(path:Array):
+	
 	var utilTiles := $Tiles/UtilityTiles
-	#var myPath := []
-	#var coolTestArray := []
 	
 	for coord in path:
 		var transformed = coord - Vector2i(originGridPos)

@@ -24,17 +24,12 @@ var voidTilemap:TileMapLayer = null
 func setup(world: Node):
 	
 	self.world = world
-	
 	if world.isOverworld:
 		return
 	
 	#### SETUP WALLS AND FLOORS TILE LISTS HERE
 	roomsList = world.getRooms()
-	createRoomsDictionary(roomsList)
-	
-	#wallTilemapsDict = dicts[0]
-	#floorTilemapsDict = dicts[1]
-	
+	createRoomsDictionary(roomsList)	
 	nonVoidTiles = getWallAndFloorTiles()
 	
 	#### STORE TILE INFO IN A TILEMAP AT WORLD
@@ -43,31 +38,21 @@ func setup(world: Node):
 	return pointlessReturn
 	
 
+
 func overworldSetup(worldMap:Node):
 	self.world = worldMap
+
 
 
 func matchPositionToGridPos(object:Node):
 	placeGridObjectOnMap(object, object.gridPosition)
 
+
+
 func placeGridObjectOnMap(object:Node, gridPos:Vector2i):
 	
 	object.position = (gridPos * 32) + Vector2i(16,16)
 
-
-
-func grid_to_world(grid_pos: Vector2i) -> Vector2i:
-	
-	var halfVector := Vector2i(tileSize/2, tileSize/2)
-	var world_pos: Vector2i = grid_pos * tileSize + halfVector
-	return world_pos
-
-
-
-func world_to_grid(world_pos: Vector2i) -> Vector2i:
-	var grid_pos: Vector2i = world_pos / tileSize
-	return grid_pos
-	
 
 
 func showTileInfo(grid_pos: Vector2i):

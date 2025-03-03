@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/WorldScripts/world.gd" id="1_7s3px"]
 [ext_resource type="PackedScene" uid="uid://cwakr1joaem2j" path="res://Scenes/UI/ui.tscn" id="2_6sbxi"]
-[ext_resource type="Script" path="res://Scripts/WorldScripts/roguelike_tiles.gd" id="2_t5xrp"]
+[ext_resource type="Script" path="res://Scripts/WorldScripts/GridController.gd" id="2_t5xrp"]
 [ext_resource type="Script" path="res://Scripts/WorldScripts/a_star_grid_node.gd" id="3_8ljqm"]
 [ext_resource type="TileSet" uid="uid://rqvrx1aog7gv" path="res://Resources/Tilemaps/FloorTileset.tres" id="5_5613e"]
 [ext_resource type="Script" path="res://Scripts/WorldScripts/line_of_sight.gd" id="5_w2yeh"]
@@ -52,6 +52,7 @@ script = ExtResource("3_8ljqm")
 
 [node name="LineOfSight" type="Node2D" parent="."]
 script = ExtResource("5_w2yeh")
+debugShowLOSLines = true
 
 [node name="Disposables" type="Node2D" parent="LineOfSight"]
 
@@ -94,8 +95,11 @@ navigation_enabled = false
 wait_time = 0.4
 one_shot = true
 
+[node name="TurnWaitTimer" type="Timer" parent="Utilities"]
+
 [node name="ExitSprite" type="Sprite2D" parent="."]
 texture = ExtResource("12_hyajq")
 
 [connection signal="bake_finished" from="." to="." method="_on_bake_finished"]
 [connection signal="timeout" from="Utilities/DumbTimer" to="." method="_on_dumb_timer_timeout"]
+[connection signal="timeout" from="Utilities/TurnWaitTimer" to="." method="_on_turn_wait_timer_timeout"]

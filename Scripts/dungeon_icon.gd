@@ -10,8 +10,8 @@ func setup(world):
 	
 	self.world = world
 	
-	gridPosition = world.grid.world_to_grid(self.position)
-	position = world.grid.grid_to_world(gridPosition)
+	gridPosition = GridTools.localToGrid(self.position)
+	position = GridTools.gridToWorld(gridPosition)
 	
 	startButton.hide()
 	prints("dungeon pos: ", gridPosition)

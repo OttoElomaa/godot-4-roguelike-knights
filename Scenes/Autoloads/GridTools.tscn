@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8ic0eaurnr03"]
+[gd_scene load_steps=3 format=3 uid="uid://c8ic0eaurnr03"]
 
 [ext_resource type="Script" path="res://Scenes/Autoloads/grid_tools.gd" id="1_gc7en"]
+[ext_resource type="TileSet" uid="uid://7slev8tg8jyu" path="res://Resources/Tilemaps/VoidDebugTiles.tres" id="2_2jtl1"]
 
 [node name="GridTools" type="Node2D"]
 script = ExtResource("1_gc7en")
+
+[node name="JustForFunctions" type="TileMapLayer" parent="."]
+tile_set = ExtResource("2_2jtl1")

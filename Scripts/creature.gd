@@ -9,7 +9,7 @@ var aStarGrid:AStarGrid2D = null
 var player:Node = null
 
 var gridPosition := Vector2i.ZERO
-#var target:Node = null
+
 
 @export var isEnemy := true
 @export var isPlayer := false
@@ -25,11 +25,10 @@ var isOverworld := false
 
 @onready var movementComponent := $CreatureMovement
 
-var stats:
+@onready var stats:CreatureStats:
 	get:
 		return $Stats
-
-
+	
 	
 	
 func setup(world:Node):

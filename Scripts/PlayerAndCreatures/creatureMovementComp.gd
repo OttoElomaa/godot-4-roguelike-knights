@@ -52,17 +52,8 @@ func resolveCompletedMovement():
 	isMoving = false	
 	t = 0.0
 	
-	#### RESTORE IF BROKEN
-	#if creature.isPlayer:
-		#creature.get_node("MovementInput").resolvePlayerMovement()
 	
-	if creature.isPlayer:
-		if not isOverworld:
-			world.callNextTurnAction()
-
-
-		
-
+	
 func continuePlayerMovement():
 	handleMove(movementDir)
 
@@ -72,25 +63,30 @@ func handleMove(dir):
 	if not grid.is_tile_empty(creature.gridPosition + dir):
 		return
 	
-	move(dir)
+	var idk = move(dir)
 	movementDir = dir
 	
 	if creature.isPlayer:
+		if not isOverworld:
+			world.callNextTurnAction()
+		
 		$MovementTurnTimer.start()
 		if not creature.isOverworld:
 			world.ui.addMessage("%s takes a step" % creature.creatureName, Color.WHITE)
 
 			
-func move(vector):
+func move(vector) -> bool:
 	
-	#### MOVE TOWARD NEW POSITION WHILE ISMOVING (SEE PHYSICS PROCESS)
-	oldPos = grid.grid_to_world(creature.gridPosition)
+	#### PHYSICS ISMOVING STUFF
+	oldPos = GridTools.gridToWorld(creature.gridPosition)
+	#### SET NEW GRID POSITION
 	creature.gridPosition += vector
 	
-	newPos = grid.grid_to_world(creature.gridPosition)
+	#### MOVE TOWARD NEW POSITION WHILE ISMOVING (SEE PHYSICS PROCESS)
+	newPos = GridTools.gridToWorld(creature.gridPosition)
 	isMoving = true
 	creature.playMovementWobble()
-	
+	return true
 	
 
 #### PLAYER TURN CONTROL	

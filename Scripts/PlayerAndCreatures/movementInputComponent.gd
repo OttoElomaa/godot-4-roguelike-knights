@@ -85,12 +85,11 @@ func handleMove(dir:Vector2i):
 	player.movementComponent.handleMove(dir)
 	
 	
+	
 #### MOVEMENT DONE, RESOLVE ITS RESULT
 func resolvePlayerMovement():
 	
-	#### RESOLVE THE PREVIOUS, NOW COMPLETED MOVEMENT
-	#player.movementComponent.resolveCompletedMovement()
-	
+	States.GameState = States.InputStates.EXPLORE
 	#### IF PLAYER STILL PRESSING MOVE KEY, START A NEW MOVEMENT
 	if holdingKey:
 		player.movementComponent.continuePlayerMovement()

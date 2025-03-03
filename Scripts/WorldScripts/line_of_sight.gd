@@ -1,6 +1,8 @@
 extends Node2D
 
 
+@export var debugShowLOSLines := false
+
 var RangedLine = load("res://Scenes/UI/RangedShotLine.tscn")
 
 var previouslySeenTiles := []
@@ -34,9 +36,7 @@ func lineOfSightBetweenObjects(object1:Node, object2:Node) -> bool:
 		
 	#### IF PATH IS DIRECT STRAIGHT LINE, RETURN TRUE
 	if next_path_point == finalPoint:
-		#var line:Line2D = RangedLine.instantiate()
-		#line.points = [current_pos, finalPoint]
-		#$Disposables.add_child(line)
+		
 		return true
 		
 	return false
@@ -87,29 +87,10 @@ func lineOfSightInRange(startCoord:Vector2i, range:int, tilemap:TileMapLayer):
 		
 		if grid.getTileValue(coordsDict[coord]) == -1:
 			if coordsDict[coord] in grid.regionTiles:
-				#### IF PATH IS STRAIGHT LINE, TARGET IS VISIBLE
-				navigator.target_position = coord
-				var next_path_point = navigator.get_next_path_position()
-				var finalPoint = navigator.get_final_position()
+				#### PROCESS EACH TILE'S SIGHT LINE HERE - IMPORTANT
+				inRangeHelp(coordsDict, coord, navigator, tilemap, visibleCoords)
 				
-				#### CALCULATE PATH LENGTH, COMPARE TO SEE IS IT LINEAR
-				var points = navigator.get_current_navigation_path()
-				var dist := 0
-				for i in range(1, points.size()):
-					
-					var new:Vector2 = points[i]
-					var prev = points[i-1]
-					dist += new.distance_to(prev)
 				
-				var straightDistance = navigator.get_parent().position.distance_to(coord)
-				
-				if dist <= straightDistance:
-					tilemap.set_cell(coordsDict[coord], -1, Vector2i(0,0))
-					visibleCoords.append(coordsDict[coord])
-			
-		
-			
-	
 	###################################################################################
 	#### STORE INFO ON COORDS THAT ARE ADJACENT TO PATHABLE COORDS		
 	var adjacentCoords := []
@@ -155,8 +136,36 @@ func lineOfSightInRange(startCoord:Vector2i, range:int, tilemap:TileMapLayer):
 			tilemap.set_cell(coord, 0, Vector2i(0,0))
 	
 	
+
+func inRangeHelp(coordsDict:Dictionary, coord:Vector2, navigator:NavigationAgent2D, 
+tilemap:TileMapLayer, visibleCoords:Array):
 	
+	#### IF PATH IS STRAIGHT LINE, TARGET IS VISIBLE
+	navigator.target_position = coord
+	var startingPoint = GridTools.gridToWorld( world.player.gridPosition )
+	var finalPoint = navigator.get_final_position()
+	
+	#### LINEAR DISTANCE:
+	var straightDistance = startingPoint.distance_to(coord)
+	
+	#### CALCULATE PATH LENGTH, COMPARE TO SEE IS IT LINEAR
+	var points = navigator.get_current_navigation_path()
+	var dist := 0
+	for i in range(1, points.size()):
+		
+		var new:Vector2 = points[i]
+		var prev = points[i-1]
+		dist += new.distance_to(prev)
 
 	
-	
-	
+	#### IF LINE IS STRAIGHT, IT'S IN LINE OF SIGHT
+	if dist <= straightDistance:
+		tilemap.set_cell(coordsDict[coord], -1, Vector2i(0,0))
+		visibleCoords.append(coordsDict[coord])
+		
+		#### DEBUG TO SEE Successful SIGHT LINES
+		if debugShowLOSLines:
+			var line:Line2D = RangedLine.instantiate()
+			#line.points = [startingPoint, finalPoint]
+			line.points = points
+			$Disposables.add_child(line)

@@ -17,6 +17,7 @@ var guardMaxVisual := 20
 func setup(creature):
 	
 	self.creature = creature
+	var s = creature.stats
 	var health = creature.stats.health
 	var guard = creature.stats.guard
 	

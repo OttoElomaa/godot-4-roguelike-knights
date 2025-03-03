@@ -17,8 +17,8 @@ func playerSetup(world, isThisOverworld):
 	isOverworld = isThisOverworld
 	
 	#### TESTING SETUP STUFF
-	gridPosition = world.grid.world_to_grid(self.position)
-	position = world.grid.grid_to_world(gridPosition)
+	gridPosition = GridTools.localToGrid(self.position)
+	position = GridTools.gridToWorld(gridPosition)
 	
 	if isOverworld:
 		return

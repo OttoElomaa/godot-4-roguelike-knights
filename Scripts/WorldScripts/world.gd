@@ -305,9 +305,7 @@ func callNextTurnAction():
 		
 	elif isTurnActorPlayer:
 		print("This message plays after player turn")
-		updateVisuals()
-		lineOfSight.passTurn()
-		
+		$Utilities/TurnWaitTimer.start()
 		isTurnActorPlayer = false
 		
 	next.startTurn()
@@ -452,3 +450,10 @@ func _on_bake_finished() -> void:
 	$Utilities/Targeting.autoSetTarget()
 	
 	startNextTurn()
+
+
+#### AFTER PLAYER TURN, DO VISUAL STUFF
+func _on_turn_wait_timer_timeout() -> void:
+	
+	updateVisuals()
+	lineOfSight.passTurn()
