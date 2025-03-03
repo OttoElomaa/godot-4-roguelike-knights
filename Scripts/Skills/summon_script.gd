@@ -16,32 +16,43 @@ func setup(skill):
 #### RETURN TARGET=TRUE, RETURN NULL=FALSE
 func activate(targets:Array) -> Node:
 	
+	var count := 0
 	var actorPos = skill.actor.gridPosition
+	
 	for i in range(summonsAmount):
-		summonCreature(actorPos)
+		if summonCreature(actorPos):
+			count += 1
 	
-	return skill.actor
-
-
-
-func summonCreature(actorPos:Vector2i):
-	
-	var creaturePos = skill.world.grid.findEmptyTileInRange(actorPos)
-	
-	if creaturePos == Vector2i(999,999):
-		var summonText = "%s failed to summon a creature!" % skill.actor.creatureName
-		skill.ui.addMessage(summonText, Color.WHITE)
+	#### IF AT LEAST ONE SUMMONED CREATURE, RETURN SUCCESS VALUE
+	if count > 0:
+		return skill.actor
+	else:
 		return null
+
+
+
+func summonCreature(actorPos:Vector2i) -> bool:
 	
 	var summonedCreature = SummonCreatureScene.instantiate()
-	skill.world.addCreature(summonedCreature)
-	prints("Summoned: ", summonedCreature)
-	prints("Pos: ",creaturePos)
+	var emptyTileFound:bool = skill.world.putOnGridAndMap(summonedCreature, actorPos)
 	
-	var summonText = "%s summons a %s!" % [skill.actor.creatureName,summonedCreature.creatureName]
-	skill.ui.addMessage(summonText, Color.CYAN)
+	#### SPAWN CREATURE  <--GRID FUNC FOUND EMPTY TILE
+	if emptyTileFound:
+		skill.world.addCreature(summonedCreature)
+		var summonText = "%s summons a %s!" % [skill.actor.creatureName,summonedCreature.creatureName]
+		skill.ui.addMessage(summonText, Color.CYAN)
+		return true
 	
-	skill.world.putOnGridAndMap(summonedCreature, creaturePos)
+	#### DELETE CREATURE  <--NO FREE TILE FOUND
+	else:
+		var summonText = "%s failed to summon a creature!" % skill.actor.creatureName
+		skill.ui.addMessage(summonText, Color.WHITE)
+		summonedCreature.queue_free()
+		return false
+	
+	
+	
+	
 	
 	
 	

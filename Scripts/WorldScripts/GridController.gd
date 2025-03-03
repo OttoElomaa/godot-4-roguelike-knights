@@ -52,12 +52,27 @@ func setupGrid():
 
 #### THIS IS THE CATCH-ALL FUNCTION FOR PLACING STUFF ON THE GRID AND MAP
 #### INPUT: GRIDPOS CANDIDATE. HANDLES EVERYTHING
-func putOnGridAndMap(object:Node, gridPos:Vector2i):
+func putOnGridAndMap(object:Node, gridPos:Vector2i) -> bool:
+	
+	#### PLACE DIRECTLY ON TILE
 	if is_tile_empty(gridPos):
+		print("Spawned at the original position")
 		object.gridPosition = gridPos
+	#### TRY PLACING IN RANDOM NEARBY LOCATION
 	else:
-		object.gridPosition = findEmptyTileInRange(gridPos)
+		print("Spawned near the origin position")
+		object.gridPosition = findEmptyTileInRange(gridPos)	
+	
 	matchPositionToGridPos(object)
+	
+	
+	#### RETURN BOOL TO INDICATE IF SUMMON ETC. WAS SUCCESSFUL
+	if object.gridPosition == Vector2i(999,999):
+		prints("FAIL - Spawned: ", object, " at ", object.gridPosition)
+		return false
+		
+	prints("Spawned: ", object, " at ", object.gridPosition)
+	return true
 
 
 
@@ -89,19 +104,20 @@ func is_tile_empty(grid_pos: Vector2i) -> bool:
 	if world.isOverworld:
 		return true
 	
-	var targetTileValue = getTileValue(grid_pos)
-	match targetTileValue:
+	#### CHECK IF WALL OR VOID TILE BLOCKS THE TILE
+	match getTileValue(grid_pos):
 		1,2:
 			return false
-	return true	
 	
-	#if grid_pos in wallTiles:
-		#return false
-	#if not grid_pos in floorTiles:
-		#return false
+	#### ELSE, DOES CREATURE BLOCK IT		
+	for creature in world.getCreatures():
+		if grid_pos == creature.gridPosition:
+			return false
+			
+	#### TILE IS EMPTY
+	return true
 	
 	
-
 	
 #### GET ALL ROOMS IN THE CURRENT WORLD STATE
 #### STORE EACH WALLS-TYPE TILEMAP AND ITS ROOM'S META POSITION IN A DICT	

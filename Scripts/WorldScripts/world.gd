@@ -349,8 +349,8 @@ func lineOfSightStuff():
 	
 
 
-func putOnGridAndMap(player:Node, startingGridPos:Vector2i):
-	grid.putOnGridAndMap(player, startingGridPos)
+func putOnGridAndMap(player:Node, startingGridPos:Vector2i) -> bool:
+	return grid.putOnGridAndMap(player, startingGridPos)
 
 
 func addCreature(creature:Node):
