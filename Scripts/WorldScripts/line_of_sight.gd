@@ -59,9 +59,6 @@ func lineOfSightInRange(startCoord:Vector2i, range:int, tilemap:TileMapLayer):
 	var visibleCoords := []
 	var vec16 := Vector2i(16,16)
 	
-	var navigator:NavigationAgent2D = world.player.getNavigator()
-	
-	
 	var current_pos = startCoord * 32 + vec16
 	
 	#### SET AS UNSEEN DARK FOG
@@ -88,7 +85,7 @@ func lineOfSightInRange(startCoord:Vector2i, range:int, tilemap:TileMapLayer):
 		if grid.getTileValue(coordsDict[coord]) == -1:
 			if coordsDict[coord] in grid.regionTiles:
 				#### PROCESS EACH TILE'S SIGHT LINE HERE - IMPORTANT
-				inRangeHelp(coordsDict, coord, navigator, tilemap, visibleCoords)
+				inRangeHelp(coordsDict, coord, tilemap, visibleCoords)
 				
 				
 	###################################################################################
@@ -137,8 +134,9 @@ func lineOfSightInRange(startCoord:Vector2i, range:int, tilemap:TileMapLayer):
 	
 	
 
-func inRangeHelp(coordsDict:Dictionary, coord:Vector2, navigator:NavigationAgent2D, 
-tilemap:TileMapLayer, visibleCoords:Array):
+func inRangeHelp(coordsDict:Dictionary, coord:Vector2, tilemap:TileMapLayer, visibleCoords:Array):
+	
+	var navigator:NavigationAgent2D = world.player.getNavigator()
 	
 	#### IF PATH IS STRAIGHT LINE, TARGET IS VISIBLE
 	navigator.target_position = coord

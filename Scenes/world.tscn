@@ -52,7 +52,6 @@ script = ExtResource("3_8ljqm")
 
 [node name="LineOfSight" type="Node2D" parent="."]
 script = ExtResource("5_w2yeh")
-debugShowLOSLines = true
 
 [node name="Disposables" type="Node2D" parent="LineOfSight"]
 
@@ -96,6 +95,8 @@ wait_time = 0.4
 one_shot = true
 
 [node name="TurnWaitTimer" type="Timer" parent="Utilities"]
+wait_time = 0.4
+one_shot = true
 
 [node name="ExitSprite" type="Sprite2D" parent="."]
 texture = ExtResource("12_hyajq")

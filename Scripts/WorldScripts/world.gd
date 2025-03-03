@@ -302,9 +302,11 @@ func callNextTurnAction():
 	#### ONLY IF NEXT CREATURE IS ALIVE
 	if next.isPlayer:
 		isTurnActorPlayer = true
-		
+	
+	#### AFTER PLAYER ACTION	
 	elif isTurnActorPlayer:
 		print("This message plays after player turn")
+		lineOfSight.passTurn()
 		$Utilities/TurnWaitTimer.start()
 		isTurnActorPlayer = false
 		
@@ -318,11 +320,7 @@ func callNextTurnAction():
 func updateVisuals():
 	ui.updateVisualsOnTurn()
 	$AStarGridNode.passTurn()
-	#### REMOVE TARGETING LINES FROM SCREEN
-	
-	if not turnOffLineOfSight:
-		lineOfSightStuff()
-		
+	#### REMOVE TARGETING LINES FROM SCREEN		
 	updateTargeting()
 
 
@@ -338,8 +336,12 @@ func updateTargeting():
 	
 	
 #### FOG OF WAR STUFF??
-func lineOfSightStuff():	
-	
+func lineOfSightStuff():
+	if not player:
+		return	
+	if not player.checkValidity():
+		return
+		
 	var playerPos: Vector2i = player.gridPosition
 	var seeRange := 8
 	$LineOfSight.lineOfSightInRange(playerPos, seeRange, $Utilities/FogTiles)
@@ -455,5 +457,8 @@ func _on_bake_finished() -> void:
 #### AFTER PLAYER TURN, DO VISUAL STUFF
 func _on_turn_wait_timer_timeout() -> void:
 	
-	updateVisuals()
-	lineOfSight.passTurn()
+	if not turnOffLineOfSight:
+		lineOfSightStuff()
+		
+	#updateVisuals()
+	#lineOfSight.passTurn()
