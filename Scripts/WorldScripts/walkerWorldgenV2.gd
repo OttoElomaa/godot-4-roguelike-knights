@@ -10,6 +10,8 @@ var direction = Vector2i.RIGHT
 
 var stepsTaken := 0
 var turnPoints := []
+var roomsPlaced := 0
+
 #### TRACK HOW MANY UNSUCCESSFUL STEPS AFTER LAST TURN
 var faultyStepsCount := 0
 
@@ -30,7 +32,7 @@ func walk(walkAmount, grid):
 	
 	#### MULTIPLE WALKS???
 	self.grid = grid
-	for i in range(3):
+	for i in range(5):
 		walkTwo(walkAmount)
 	return turnPoints
 	
@@ -38,10 +40,15 @@ func walk(walkAmount, grid):
 	
 func walkTwo(walkAmount):
 	
-	walkerPos.x = randi_range(-20,20)
-	walkerPos.y = randi_range(-20,20)
+	walkerPos.x = randi_range(-5,5)
+	walkerPos.y = randi_range(-5,5)
 	
+	#### WALK FOR THE SPECIFIED AMOUNT OF STEPS
 	while stepsTaken < walkAmount:
+		
+		#### QUIT IF WE GOT ENOUGH ROOMS
+		if roomsPlaced > 6:
+			return turnPoints
 		
 		#### GO THROUGH, SEE IF IT'S TOO CLOSE TO OTHER POINTS
 		var tooClose := false
@@ -55,16 +62,18 @@ func walkTwo(walkAmount):
 				
 		#### IF NOT TOO CLOSE TO EXISTING ROOM POSITIONS
 		if not tooClose:
+			prints("successful step at ", walkerPos)
 			
 			#### ADD TO ROOM POSITIONS, STEP'S BEEN TAKEN
 			turnPoints.append(TurningPoint.new(walkerPos, true))
 			stepsTaken += 1
+			roomsPlaced += 1
 			faultyStepsCount = 0
 			
 			#### MOVE WALKER BY RANDOM AMOUNT, THEN GO AWAY FROM NEAREST ROOM
 			walkerPos.x += randi_range(-12,12)
 			walkerPos.y += randi_range(-12,12)
-			direction = goAwayFromPoints(walkerPos)
+			goAwayFromPoints(walkerPos)
 			
 		#### IF TOO CLOSE TO EXISTING ROOM POSITIONS
 		else:
@@ -74,11 +83,12 @@ func walkTwo(walkAmount):
 		walkerPos += direction
 		
 		if faultyStepsCount > 4:
-			direction = goAwayFromPoints(walkerPos)
-			walkerPos += direction
+			prints("faulty step, course correcting now at: ", walkerPos)
+			goAwayFromPoints(walkerPos)
+			walkerPos += direction * 3
 			faultyStepsCount = 0
 			stepsTaken += 1
-			#turnPoints.append(TurningPoint.new(walkerPos, false))
+			turnPoints.append(TurningPoint.new(walkerPos, false))
 		
 		#### TRY TO MOVE WALKER BACK TO WITHIN BOUNDARIES	
 		distX = abs(walkerPos.x)
@@ -86,9 +96,6 @@ func walkTwo(walkAmount):
 		if restoreToWithinBoundary():
 			walkerPos.x += randi_range(-5,5)
 			walkerPos.y += randi_range(-5,5)
-		
-		if turnPoints.size() > 6:
-			return turnPoints
 		
 	prints("turning points, walker 2: ", turnPoints)			
 	return turnPoints		
@@ -120,19 +127,20 @@ func goAwayFromPoints(pos:Vector2i):
 	prints("closest room pos: ", closestPoint)
 	prints("direction to it: ", dir)
 	
-	#### MOVE AWAY FROM IT
-	match dir:
-		Vector2.UP, Vector2(1, -1), Vector2(-1, -1):
-			return Vector2i.DOWN
-		Vector2.DOWN, Vector2(1, 1), Vector2(-1, 1):
-			return Vector2i.UP
-		Vector2.LEFT:
-			return Vector2i.RIGHT
-		Vector2.RIGHT:
-			return Vector2i.LEFT
-				
-	return direction
-
+	var oppositesDict := {}
+	oppositesDict[Vector2.UP] = Vector2.DOWN
+	oppositesDict[Vector2.DOWN] = Vector2.UP
+	oppositesDict[Vector2.LEFT] = Vector2.RIGHT
+	oppositesDict[Vector2.RIGHT] = Vector2.LEFT
+	
+	oppositesDict[Vector2(-1,-1)] = Vector2(1,1)
+	oppositesDict[Vector2(1,1)] = Vector2(-1,-1)
+	oppositesDict[Vector2(-1,1)] = Vector2(1,-1)
+	oppositesDict[Vector2(1,-1)] = Vector2(-1,1)
+	
+	if dir in oppositesDict.keys():
+		direction = Vector2i( oppositesDict[dir] )
+	
 
 
 #### ENFORCE MAP BORDERS
