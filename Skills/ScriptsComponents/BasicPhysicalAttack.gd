@@ -51,7 +51,9 @@ func activate(targets:Array) -> Node:
 		actor.playAttackAnimation()
 	
 	if isRanged:
-		skill.world.lineOfSight.createRangedLine(actor.position, target.position)
+		var start = GridTools.gridToWorld(actor.gridPosition)
+		var end = GridTools.gridToWorld(target.gridPosition)
+		skill.world.lineOfSight.createRangedLine(start, end)
 		
 	return target
 	
