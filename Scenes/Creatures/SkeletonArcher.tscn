@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Scenes/Creatures/Creature.tscn" id="1_xh7s2"]
 [ext_resource type="Texture2D" uid="uid://cf5s8r7g1xw1j" path="res://Sprites/Enemies/creature-skeleton.png" id="2_nsoa4"]
-[ext_resource type="PackedScene" uid="uid://0o5uveeqmtnk" path="res://Scenes/Skills/Shoot.tscn" id="3_b8w02"]
+[ext_resource type="PackedScene" uid="uid://0o5uveeqmtnk" path="res://Skills/Shoot.tscn" id="3_b8w02"]
 
 [node name="SkeletonArcher" instance=ExtResource("1_xh7s2")]
 creatureName = "Skeleton Archer"

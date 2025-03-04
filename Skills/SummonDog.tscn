@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bgn3tn8gncvs"]
 
-[ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Scenes/Skills/BaseSkill.tscn" id="1_tg1yl"]
+[ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Skills/BaseSkill.tscn" id="1_tg1yl"]
 [ext_resource type="Texture2D" uid="uid://d2jgliqvedpc5" path="res://Sprites/Enemies/enemy-guardian-spirit-transparent-32px.png" id="2_a4d8i"]
-[ext_resource type="Script" path="res://Scripts/Skills/summon_script.gd" id="3_dopcm"]
+[ext_resource type="Script" path="res://Skills/ScriptsComponents/summon_script.gd" id="3_dopcm"]
 [ext_resource type="PackedScene" uid="uid://bu4b5hw22s4am" path="res://Scenes/Creatures/Dog.tscn" id="4_d6ivv"]
 
 [node name="SummonDogs" instance=ExtResource("1_tg1yl")]

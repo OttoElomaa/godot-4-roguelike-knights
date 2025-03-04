@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://d21u4j6yuyimo"]
 
 [ext_resource type="Script" path="res://Scripts/skill.gd" id="1_xpeuu"]
-[ext_resource type="Script" path="res://Scripts/Skills/SkillTargeting.gd" id="2_ibixw"]
-[ext_resource type="Script" path="res://Scripts/Skills/SkillCooldown.gd" id="3_jjqw8"]
+[ext_resource type="Script" path="res://Skills/ScriptsComponents/SkillTargeting.gd" id="2_ibixw"]
+[ext_resource type="Script" path="res://Skills/ScriptsComponents/SkillCooldown.gd" id="3_jjqw8"]
 
 [node name="BaseSkill" type="Node"]
 script = ExtResource("1_xpeuu")

@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Scenes/Creatures/Creature.tscn" id="1_i5ohc"]
 [ext_resource type="Texture2D" uid="uid://b7wpnuw1nsyg3" path="res://Sprites/Enemies/creature-orc.png" id="2_40b0y"]
-[ext_resource type="PackedScene" uid="uid://cwkrdlxk2utha" path="res://Scenes/Skills/Strong Strike.tscn" id="3_w4nll"]
-[ext_resource type="PackedScene" uid="uid://debjcstrwp3qh" path="res://Scenes/Skills/Clobber.tscn" id="4_d03mn"]
-[ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Scenes/Skills/Strike.tscn" id="4_luom8"]
+[ext_resource type="PackedScene" uid="uid://cwkrdlxk2utha" path="res://Skills/Strong Strike.tscn" id="3_w4nll"]
+[ext_resource type="PackedScene" uid="uid://debjcstrwp3qh" path="res://Skills/Clobber.tscn" id="4_d03mn"]
+[ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Skills/Strike.tscn" id="4_luom8"]
 
 [node name="Orc" instance=ExtResource("1_i5ohc")]
 creatureName = "Orc"

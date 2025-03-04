@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=4 uid="uid://bwpi8ic3tesb8"]
 
 [ext_resource type="TileSet" uid="uid://ddl5lqa65tlur" path="res://Resources/RoguesEnvironsTiles.tres" id="1_40nn7"]
-[ext_resource type="Script" path="res://Scripts/base_room.gd" id="1_yqo0s"]
+[ext_resource type="Script" path="res://Rooms/base_room.gd" id="1_yqo0s"]
 [ext_resource type="TileSet" uid="uid://rqvrx1aog7gv" path="res://Resources/Tilemaps/FloorTileset.tres" id="3_4c7c5"]
 [ext_resource type="TileSet" uid="uid://wkwq25lgytw2" path="res://Resources/Tilemaps/WallTileset.tres" id="4_4nfaq"]
 

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dav2j8d0nekym"]
 
-[ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Scenes/Skills/BaseSkill.tscn" id="1_cm60j"]
+[ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Skills/BaseSkill.tscn" id="1_cm60j"]
 [ext_resource type="Texture2D" uid="uid://d2jgliqvedpc5" path="res://Sprites/Enemies/enemy-guardian-spirit-transparent-32px.png" id="2_sm7j4"]
-[ext_resource type="Script" path="res://Scripts/Skills/summon_script.gd" id="3_mmq5u"]
+[ext_resource type="Script" path="res://Skills/ScriptsComponents/summon_script.gd" id="3_mmq5u"]
 [ext_resource type="PackedScene" uid="uid://dxn8gcr6ya5vo" path="res://Scenes/Creatures/GuardianSpirit.tscn" id="4_tbrbx"]
 
 [node name="Summon" instance=ExtResource("1_cm60j")]

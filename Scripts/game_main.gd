@@ -2,7 +2,7 @@ extends Node2D
 
 
 
-var World = load("res://Scenes/world.tscn")
+var World = load("res://WorldNodes/world.tscn")
 
 var storedPlayer:Node = null
 var currentDungeon:Node = null

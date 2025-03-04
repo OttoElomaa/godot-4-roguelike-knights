@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://51k70pdjnr8x" path="res://Scenes/Creatures/Player.tscn" id="1_kxuha"]
 [ext_resource type="Script" path="res://Scenes/Creatures/playerVariant.gd" id="2_sdfor"]
 [ext_resource type="Texture2D" uid="uid://nce6ksq6qacd" path="res://Sprites/Heroes/heroes-knight.png" id="2_shaop"]
-[ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Scenes/Skills/Strike.tscn" id="3_lyyhh"]
-[ext_resource type="PackedScene" uid="uid://1nkco862q1po" path="res://Scenes/Skills/BasicHeal.tscn" id="4_m6a37"]
-[ext_resource type="PackedScene" uid="uid://cwkrdlxk2utha" path="res://Scenes/Skills/Strong Strike.tscn" id="5_1krb8"]
-[ext_resource type="PackedScene" uid="uid://dp214645uwxo0" path="res://Scenes/Skills/RaiseGuard.tscn" id="7_72qwi"]
+[ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Skills/Strike.tscn" id="3_lyyhh"]
+[ext_resource type="PackedScene" uid="uid://1nkco862q1po" path="res://Skills/BasicHeal.tscn" id="4_m6a37"]
+[ext_resource type="PackedScene" uid="uid://cwkrdlxk2utha" path="res://Skills/Strong Strike.tscn" id="5_1krb8"]
+[ext_resource type="PackedScene" uid="uid://dp214645uwxo0" path="res://Skills/RaiseGuard.tscn" id="7_72qwi"]
 
 [node name="PlayerKnight" instance=ExtResource("1_kxuha")]
 script = ExtResource("2_sdfor")

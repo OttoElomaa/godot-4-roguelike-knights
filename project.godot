@@ -17,11 +17,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-States="*res://Scenes/Autoloads/States.tscn"
-FileLoader="*res://Scenes/Autoloads/FileLoader.tscn"
-GridTools="*res://Scenes/Autoloads/GridTools.tscn"
-ProgressData="*res://Scenes/Autoloads/ProgressData.tscn"
-MyColors="*res://Scenes/Autoloads/MyColors.tscn"
+States="*res://Autoloads/States.tscn"
+FileLoader="*res://Autoloads/FileLoader.tscn"
+GridTools="*res://Autoloads/GridTools.tscn"
+ProgressData="*res://Autoloads/ProgressData.tscn"
+MyColors="*res://Autoloads/MyColors.tscn"
 
 [display]
 

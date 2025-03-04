@@ -63,14 +63,14 @@ func populateCreatures(world) -> Array:
 	
 	for start in $Utilities/CreatureSpawnPoints.get_children():
 		var newCreature = FileLoader.createRandomCreature()
-		newCreature.setup(world)
+		#newCreature.setup(world)
 		
 		var newPos = $Tiles/FloorTiles2.local_to_map(start.position)
 		#newPos = grid
 		var gridPos = newPos + originGridPos
 		newCreature.gridPosition = gridPos
 		
-		grid.placeGridObjectOnMap(newCreature, gridPos)
+		#grid.placeGridObjectOnMap(newCreature, gridPos)
 		creatures.append(newCreature)
 		
 	return creatures

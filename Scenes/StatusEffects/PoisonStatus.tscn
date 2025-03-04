@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://djfujunj6y26e"]
 
 [ext_resource type="PackedScene" uid="uid://c03effeto5f3m" path="res://Scenes/StatusEffects/StatusEffect.tscn" id="1_xobrl"]
-[ext_resource type="Script" path="res://Scripts/Skills/StatusPoison.gd" id="2_6hyxx"]
+[ext_resource type="Script" path="res://StatusEffects/StatusPoison.gd" id="2_6hyxx"]
 
 [node name="PoisonEffect" instance=ExtResource("1_xobrl")]
 effectName = "Poison"

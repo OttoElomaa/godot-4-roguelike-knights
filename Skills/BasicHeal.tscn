@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://1nkco862q1po"]
 
-[ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Scenes/Skills/BaseSkill.tscn" id="1_qa0ru"]
+[ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Skills/BaseSkill.tscn" id="1_qa0ru"]
 [ext_resource type="Texture2D" uid="uid://b7wpnuw1nsyg3" path="res://Sprites/Enemies/creature-orc.png" id="2_gorog"]
-[ext_resource type="Script" path="res://Scripts/Skills/BasicHeal.gd" id="2_n7q23"]
+[ext_resource type="Script" path="res://Skills/ScriptsComponents/BasicHeal.gd" id="2_n7q23"]
 
 [node name="Heal" instance=ExtResource("1_qa0ru")]
 skillIcon = ExtResource("2_gorog")

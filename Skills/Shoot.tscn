@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://0o5uveeqmtnk"]
 
-[ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Scenes/Skills/BaseSkill.tscn" id="1_vko4m"]
+[ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Skills/BaseSkill.tscn" id="1_vko4m"]
 [ext_resource type="Texture2D" uid="uid://cf5s8r7g1xw1j" path="res://Sprites/Enemies/creature-skeleton.png" id="2_wn2nx"]
-[ext_resource type="Script" path="res://Scripts/Skills/BasicPhysicalAttack.gd" id="3_ofo0r"]
+[ext_resource type="Script" path="res://Skills/ScriptsComponents/BasicPhysicalAttack.gd" id="3_ofo0r"]
 
 [node name="Shoot" instance=ExtResource("1_vko4m")]
 skillIcon = ExtResource("2_wn2nx")

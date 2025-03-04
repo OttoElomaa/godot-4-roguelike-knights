@@ -4,7 +4,7 @@
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="4_gh64h"]
 [ext_resource type="Theme" uid="uid://knljw27a4uiu" path="res://Resources/Fonts/FancyPixelFontWhite.tres" id="5_ljaf8"]
 [ext_resource type="Script" path="res://Scripts/file_loader.gd" id="6_t2g5i"]
-[ext_resource type="PackedScene" uid="uid://6k45i4rxp5o4" path="res://Scenes/world_map.tscn" id="10_o3ock"]
+[ext_resource type="PackedScene" uid="uid://6k45i4rxp5o4" path="res://WorldNodes/world_map.tscn" id="10_o3ock"]
 
 [node name="GameMain" type="Node2D"]
 script = ExtResource("1_hxft8")

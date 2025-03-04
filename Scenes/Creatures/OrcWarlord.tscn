@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Scenes/Creatures/Creature.tscn" id="1_bs4ux"]
 [ext_resource type="Texture2D" uid="uid://djhu8g6oew0nk" path="res://Sprites/Enemies/boss-orc-warlord.png" id="2_of1cj"]
-[ext_resource type="PackedScene" uid="uid://j84ahsk1aocg" path="res://Scenes/Skills/DoubleStrike.tscn" id="3_jg8vv"]
-[ext_resource type="PackedScene" uid="uid://cwkrdlxk2utha" path="res://Scenes/Skills/Strong Strike.tscn" id="4_rwbg3"]
-[ext_resource type="PackedScene" uid="uid://bht4bnosjb7ch" path="res://Scenes/Skills/InfectStrike.tscn" id="5_52m6y"]
-[ext_resource type="PackedScene" uid="uid://1nkco862q1po" path="res://Scenes/Skills/BasicHeal.tscn" id="6_tweun"]
-[ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Scenes/Skills/Strike.tscn" id="7_aeina"]
+[ext_resource type="PackedScene" uid="uid://j84ahsk1aocg" path="res://Skills/DoubleStrike.tscn" id="3_jg8vv"]
+[ext_resource type="PackedScene" uid="uid://cwkrdlxk2utha" path="res://Skills/Strong Strike.tscn" id="4_rwbg3"]
+[ext_resource type="PackedScene" uid="uid://bht4bnosjb7ch" path="res://Skills/InfectStrike.tscn" id="5_52m6y"]
+[ext_resource type="PackedScene" uid="uid://1nkco862q1po" path="res://Skills/BasicHeal.tscn" id="6_tweun"]
+[ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Skills/Strike.tscn" id="7_aeina"]
 
 [node name="Orc Warlord" instance=ExtResource("1_bs4ux")]
 creatureName = "Orc Warlord"

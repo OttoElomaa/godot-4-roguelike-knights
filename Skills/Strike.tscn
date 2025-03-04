@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://d4g5rogm106cr"]
 
-[ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Scenes/Skills/BaseSkill.tscn" id="1_v4852"]
+[ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Skills/BaseSkill.tscn" id="1_v4852"]
 [ext_resource type="Texture2D" uid="uid://ctpg7lgwh3fea" path="res://Sprites/skill-icon-melee-sword.png" id="2_ov67u"]
-[ext_resource type="Script" path="res://Scripts/Skills/BasicPhysicalAttack.gd" id="3_vij5f"]
-[ext_resource type="PackedScene" uid="uid://cij3n60fr0m55" path="res://Scenes/Skills/ComponentZealResource.tscn" id="4_y72uy"]
+[ext_resource type="Script" path="res://Skills/ScriptsComponents/BasicPhysicalAttack.gd" id="3_vij5f"]
+[ext_resource type="PackedScene" uid="uid://cij3n60fr0m55" path="res://Skills/ScriptsComponents/ComponentZealResource.tscn" id="4_y72uy"]
 
 [node name="Strike" instance=ExtResource("1_v4852")]
 skillIcon = ExtResource("2_ov67u")

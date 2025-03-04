@@ -1,19 +1,19 @@
 [gd_scene load_steps=16 format=3 uid="uid://6rirwqrl30jg"]
 
-[ext_resource type="Script" path="res://Scripts/WorldScripts/world.gd" id="1_7s3px"]
-[ext_resource type="PackedScene" uid="uid://cwakr1joaem2j" path="res://Scenes/UI/ui.tscn" id="2_6sbxi"]
-[ext_resource type="Script" path="res://Scripts/WorldScripts/GridController.gd" id="2_t5xrp"]
-[ext_resource type="Script" path="res://Scripts/WorldScripts/a_star_grid_node.gd" id="3_8ljqm"]
-[ext_resource type="TileSet" uid="uid://rqvrx1aog7gv" path="res://Resources/Tilemaps/FloorTileset.tres" id="5_5613e"]
-[ext_resource type="Script" path="res://Scripts/WorldScripts/line_of_sight.gd" id="5_w2yeh"]
-[ext_resource type="Script" path="res://Scripts/WorldScripts/walkerWorldgenV2.gd" id="6_ovekx"]
-[ext_resource type="Script" path="res://Scripts/WorldScripts/look_tool.gd" id="6_qxpnc"]
-[ext_resource type="Texture2D" uid="uid://bdfti26osccyc" path="res://Sprites/roguelike-look-indicator.png" id="7_taxir"]
-[ext_resource type="Script" path="res://Scripts/WorldScripts/playerTargeting.gd" id="8_v38j4"]
-[ext_resource type="Texture2D" uid="uid://dilvg23aedefe" path="res://Sprites/roguelike-indicator-targeting.png" id="9_lkyqr"]
-[ext_resource type="TileSet" uid="uid://d1ktl1xbf2yy8" path="res://Resources/Tilemaps/FogTileset.tres" id="10_6haoq"]
-[ext_resource type="TileSet" uid="uid://7slev8tg8jyu" path="res://Resources/Tilemaps/VoidDebugTiles.tres" id="11_qblsd"]
-[ext_resource type="Texture2D" uid="uid://5bjgdk2y721r" path="res://Sprites/stairs-down-monochrome-transparent-32px.png" id="12_hyajq"]
+[ext_resource type="Script" path="res://WorldNodes/world.gd" id="1_fx20f"]
+[ext_resource type="PackedScene" uid="uid://cwakr1joaem2j" path="res://Scenes/UI/ui.tscn" id="2_wgef7"]
+[ext_resource type="Script" path="res://WorldNodes/walkerWorldgenV2.gd" id="3_ua0t6"]
+[ext_resource type="TileSet" uid="uid://rqvrx1aog7gv" path="res://Resources/Tilemaps/FloorTileset.tres" id="4_085pr"]
+[ext_resource type="Script" path="res://WorldNodes/GridController.gd" id="5_stjdu"]
+[ext_resource type="Script" path="res://WorldNodes/a_star_grid_node.gd" id="6_bcmm6"]
+[ext_resource type="Script" path="res://WorldNodes/line_of_sight.gd" id="7_7nmn7"]
+[ext_resource type="Script" path="res://WorldNodes/playerTargeting.gd" id="8_52j1m"]
+[ext_resource type="Texture2D" uid="uid://dilvg23aedefe" path="res://Sprites/roguelike-indicator-targeting.png" id="9_il066"]
+[ext_resource type="Script" path="res://WorldNodes/look_tool.gd" id="10_akh64"]
+[ext_resource type="Texture2D" uid="uid://bdfti26osccyc" path="res://Sprites/roguelike-look-indicator.png" id="11_nh211"]
+[ext_resource type="TileSet" uid="uid://d1ktl1xbf2yy8" path="res://Resources/Tilemaps/FogTileset.tres" id="12_ehidn"]
+[ext_resource type="TileSet" uid="uid://7slev8tg8jyu" path="res://Resources/Tilemaps/VoidDebugTiles.tres" id="13_njn17"]
+[ext_resource type="Texture2D" uid="uid://5bjgdk2y721r" path="res://Sprites/stairs-down-monochrome-transparent-32px.png" id="14_k44we"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_akmnp"]
 vertices = PackedVector2Array(9504, -9680, 9456, 9424, -9504, 9504, -9552, -9808)
@@ -27,31 +27,31 @@ agent_radius = 0.0
 
 [node name="World" type="NavigationRegion2D"]
 navigation_polygon = SubResource("NavigationPolygon_akmnp")
-script = ExtResource("1_7s3px")
+script = ExtResource("1_fx20f")
 
-[node name="UI" parent="." instance=ExtResource("2_6sbxi")]
+[node name="UI" parent="." instance=ExtResource("2_wgef7")]
 
 [node name="RoomGeneration" type="Node2D" parent="."]
 
 [node name="Walker2" type="Node" parent="RoomGeneration"]
-script = ExtResource("6_ovekx")
+script = ExtResource("3_ua0t6")
 
 [node name="GlobalFloorTiles" type="TileMapLayer" parent="RoomGeneration" groups=["floortiles", "nav-geometry"]]
 z_index = -2
-tile_set = ExtResource("5_5613e")
+tile_set = ExtResource("4_085pr")
 collision_enabled = false
 navigation_enabled = false
 
 [node name="GridController" type="Node" parent="." groups=["tilecontroller"]]
-script = ExtResource("2_t5xrp")
+script = ExtResource("5_stjdu")
 
 [node name="AStarGridNode" type="Node2D" parent="."]
-script = ExtResource("3_8ljqm")
+script = ExtResource("6_bcmm6")
 
 [node name="Disposables" type="Node2D" parent="AStarGridNode"]
 
 [node name="LineOfSight" type="Node2D" parent="."]
-script = ExtResource("5_w2yeh")
+script = ExtResource("7_7nmn7")
 
 [node name="Disposables" type="Node2D" parent="LineOfSight"]
 
@@ -66,28 +66,28 @@ y_sort_enabled = true
 [node name="Utilities" type="Node2D" parent="."]
 
 [node name="Targeting" type="Node2D" parent="Utilities"]
-script = ExtResource("8_v38j4")
+script = ExtResource("8_52j1m")
 
 [node name="TargetingIcon" type="Sprite2D" parent="Utilities/Targeting"]
-texture = ExtResource("9_lkyqr")
+texture = ExtResource("9_il066")
 
 [node name="LookTool" type="Node2D" parent="Utilities"]
 z_index = 12
-script = ExtResource("6_qxpnc")
+script = ExtResource("10_akh64")
 
 [node name="Sprite2D" type="Sprite2D" parent="Utilities/LookTool"]
-texture = ExtResource("7_taxir")
+texture = ExtResource("11_nh211")
 
 [node name="FogTiles" type="TileMapLayer" parent="Utilities"]
 z_index = 8
 z_as_relative = false
-tile_set = ExtResource("10_6haoq")
+tile_set = ExtResource("12_ehidn")
 collision_enabled = false
 navigation_enabled = false
 
 [node name="VoidTiles" type="TileMapLayer" parent="Utilities" groups=["nav-geometry"]]
 z_index = 10
-tile_set = ExtResource("11_qblsd")
+tile_set = ExtResource("13_njn17")
 navigation_enabled = false
 
 [node name="DumbTimer" type="Timer" parent="Utilities"]
@@ -99,7 +99,7 @@ wait_time = 0.4
 one_shot = true
 
 [node name="ExitSprite" type="Sprite2D" parent="."]
-texture = ExtResource("12_hyajq")
+texture = ExtResource("14_k44we")
 
 [connection signal="bake_finished" from="." to="." method="_on_bake_finished"]
 [connection signal="timeout" from="Utilities/DumbTimer" to="." method="_on_dumb_timer_timeout"]

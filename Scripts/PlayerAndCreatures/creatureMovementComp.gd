@@ -67,13 +67,12 @@ func handleMove(dir):
 	movementDir = dir
 	
 	if creature.isPlayer:
-		if not isOverworld:
-			world.callNextTurnAction()
-		
-		$MovementTurnTimer.start()
 		if not creature.isOverworld:
+			$MovementTurnTimer.start()
 			world.ui.addMessage("%s takes a step" % creature.creatureName, Color.WHITE)
-
+			world.callNextTurnAction()
+			
+			
 			
 func move(vector) -> bool:
 	

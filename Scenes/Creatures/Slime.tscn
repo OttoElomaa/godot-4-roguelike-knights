@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Scenes/Creatures/Creature.tscn" id="1_clxqf"]
 [ext_resource type="Texture2D" uid="uid://5u6pajxqu6we" path="res://Sprites/Enemies/creature-slime.png" id="2_5dk1v"]
-[ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Scenes/Skills/Strike.tscn" id="3_5jfn3"]
+[ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Skills/Strike.tscn" id="3_5jfn3"]
 
 [node name="Slime" instance=ExtResource("1_clxqf")]
 creatureName = "Slime"

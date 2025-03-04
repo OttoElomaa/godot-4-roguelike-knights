@@ -67,16 +67,12 @@ func startGame(game:Node, playerScene:Node):
 	
 	#### SETUP PLAYER
 	player = playerScene
-	addCreature(player)
-	#$Creatures.add_child(player)
+	
 	#prints("player at start of game: ", player, player.creatureName)
-	#player.playerSetup(self, false)
 	
 	$Utilities/LookTool.setup(self)
 	
-	ui.setup(self)
-	ui.displayPlayerSkills(player)
-	ui.updateVisualsOnTurn()
+	
 	
 	#####################################################
 	#### ROOMS STUFF
@@ -90,8 +86,16 @@ func startGame(game:Node, playerScene:Node):
 	#### PLACE THE PLAYER ON THE MAP
 	#### ROOMS[0]: FIRST ROOM PLACED
 	startingGridPos = firstRoom.getStartPosition()
+	
+	addCreature(player)
 	grid.putOnGridAndMap(player, startingGridPos)
 	
+	await get_tree().process_frame
+	await get_tree().process_frame
+	
+	ui.setup(self)
+	ui.displayPlayerSkills(player)
+	ui.updateVisualsOnTurn()
 	
 	#### PLACE EXIT - SAVED DURING ROOMS DICT CREATION
 	exitGridPos = lastRoom.getStartPosition()
@@ -103,16 +107,12 @@ func startGame(game:Node, playerScene:Node):
 	var lastRoomSpawnPos = lastRoom.getPlayerStartPos()
 	grid.putOnGridAndMap(boss, lastRoomSpawnPos)
 	
-	await get_tree().process_frame
-	await get_tree().process_frame
+	
 	
 	#### CREATE VOID TILES, ETC
 	pointlessReturn = $GridController.setupGrid()
-	##########################################
-	#### NAV STUFF
-	#### SETUP, NOTHING TO WAIT
+	#### LOS STUFF SETUP, NOTHING TO WAIT
 	pointlessReturn = $LineOfSight.setup(self)
-	
 	
 	
 	######################################################
@@ -122,7 +122,8 @@ func startGame(game:Node, playerScene:Node):
 	for room in getRooms():
 		creatures.append_array(room.populateCreatures(self) )
 	for creature in creatures:
-		$Creatures.add_child(creature)
+		addCreature(creature)
+		grid.putOnGridAndMap(creature, creature.gridPosition)
 	
 	
 	#### SHROUD THE WHOLE MAP IN FOG PRE- LINE OF SIGHT CHECKS

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cij3n60fr0m55"]
 
-[ext_resource type="Script" path="res://Scripts/Skills/skillZealResourceComponent.gd" id="1_vux1t"]
+[ext_resource type="Script" path="res://Skills/ScriptsComponents/skillZealResourceComponent.gd" id="1_vux1t"]
 
 [node name="ZealResourceComponent" type="Node"]
 script = ExtResource("1_vux1t")

@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://debjcstrwp3qh"]
 
-[ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Scenes/Skills/BaseSkill.tscn" id="1_k766p"]
+[ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Skills/BaseSkill.tscn" id="1_k766p"]
 [ext_resource type="Texture2D" uid="uid://bdfti26osccyc" path="res://Sprites/roguelike-look-indicator.png" id="2_4y8jo"]
-[ext_resource type="PackedScene" uid="uid://cij3n60fr0m55" path="res://Scenes/Skills/ComponentZealResource.tscn" id="3_bnqxy"]
-[ext_resource type="Script" path="res://Scripts/Skills/BasicPhysicalAttack.gd" id="4_0rn8h"]
+[ext_resource type="PackedScene" uid="uid://cij3n60fr0m55" path="res://Skills/ScriptsComponents/ComponentZealResource.tscn" id="3_bnqxy"]
+[ext_resource type="Script" path="res://Skills/ScriptsComponents/BasicPhysicalAttack.gd" id="4_0rn8h"]
 [ext_resource type="PackedScene" uid="uid://7n5lhpfqoi47" path="res://Scenes/StatusEffects/StunStatus.tscn" id="5_ej5xb"]
 
 [node name="Clobber" instance=ExtResource("1_k766p")]
