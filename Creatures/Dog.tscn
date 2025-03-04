@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bu4b5hw22s4am"]
 
-[ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Scenes/Creatures/Creature.tscn" id="1_tt2nr"]
+[ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Creatures/Creature.tscn" id="1_tt2nr"]
 [ext_resource type="Texture2D" uid="uid://s5rouduwctr7" path="res://Sprites/Enemies/creature-dog.png" id="2_h71kw"]
 [ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Skills/Strike.tscn" id="3_2dns0"]
 

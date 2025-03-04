@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://6rirwqrl30jg"]
 
 [ext_resource type="Script" path="res://WorldNodes/world.gd" id="1_fx20f"]
-[ext_resource type="PackedScene" uid="uid://cwakr1joaem2j" path="res://Scenes/UI/ui.tscn" id="2_wgef7"]
+[ext_resource type="PackedScene" uid="uid://cwakr1joaem2j" path="res://Dungeon-UI/ui.tscn" id="2_wgef7"]
 [ext_resource type="Script" path="res://WorldNodes/walkerWorldgenV2.gd" id="3_ua0t6"]
 [ext_resource type="TileSet" uid="uid://rqvrx1aog7gv" path="res://Resources/Tilemaps/FloorTileset.tres" id="4_085pr"]
 [ext_resource type="Script" path="res://WorldNodes/GridController.gd" id="5_stjdu"]

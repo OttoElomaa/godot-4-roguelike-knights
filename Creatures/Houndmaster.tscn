@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b3sgsr785g1p1"]
 
-[ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Scenes/Creatures/Creature.tscn" id="1_7g7m4"]
+[ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Creatures/Creature.tscn" id="1_7g7m4"]
 [ext_resource type="Texture2D" uid="uid://bnut6as3xry7a" path="res://Sprites/Enemies/creature-houndmaster.png" id="2_kd8vu"]
 [ext_resource type="PackedScene" uid="uid://bgn3tn8gncvs" path="res://Skills/SummonDog.tscn" id="3_226g2"]
 [ext_resource type="PackedScene" uid="uid://0o5uveeqmtnk" path="res://Skills/Shoot.tscn" id="4_35vdw"]

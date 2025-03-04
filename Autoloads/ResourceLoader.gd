@@ -1,13 +1,13 @@
 extends Node2D
 
 
-var Orc = load("res://Scenes/Creatures/Orc.tscn")
-var Slime = load("res://Scenes/Creatures/Slime.tscn")
-var SkeletonArcher = load("res://Scenes/Creatures/SkeletonArcher.tscn")
-var DarkHealer = load("res://Scenes/Creatures/DarkHealer.tscn")
-var HoundMaster = load("res://Scenes/Creatures/Houndmaster.tscn")
+var Orc = load("res://Creatures/Orc.tscn")
+var Slime = load("res://Creatures/Slime.tscn")
+var SkeletonArcher = load("res://Creatures/SkeletonArcher.tscn")
+var DarkHealer = load("res://Creatures/DarkHealer.tscn")
+var HoundMaster = load("res://Creatures/Houndmaster.tscn")
 
-var OrcWarlord = load("res://Scenes/Creatures/OrcWarlord.tscn")
+var OrcWarlord = load("res://Creatures/OrcWarlord.tscn")
 
 var cavern1 = load("res://Rooms/Detached/Cavern/Cavern01.tscn")
 var cavern2 = load("res://Rooms/Detached/Cavern/Cavern02.tscn")

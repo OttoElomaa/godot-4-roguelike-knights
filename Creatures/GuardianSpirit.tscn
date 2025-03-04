@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dxn8gcr6ya5vo"]
 
-[ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Scenes/Creatures/Creature.tscn" id="1_pwdb6"]
+[ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Creatures/Creature.tscn" id="1_pwdb6"]
 [ext_resource type="Texture2D" uid="uid://d2jgliqvedpc5" path="res://Sprites/Enemies/enemy-guardian-spirit-transparent-32px.png" id="2_5mp80"]
 [ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Skills/Strike.tscn" id="3_5bgoq"]
 [ext_resource type="PackedScene" uid="uid://1nkco862q1po" path="res://Skills/BasicHeal.tscn" id="4_7b8u4"]

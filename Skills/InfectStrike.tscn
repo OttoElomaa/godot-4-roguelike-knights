@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Skills/BaseSkill.tscn" id="1_y4w4k"]
 [ext_resource type="Texture2D" uid="uid://ctpg7lgwh3fea" path="res://Sprites/skill-icon-melee-sword.png" id="2_nydpa"]
 [ext_resource type="Script" path="res://Skills/ScriptsComponents/BasicPhysicalAttack.gd" id="3_tufjf"]
-[ext_resource type="PackedScene" uid="uid://djfujunj6y26e" path="res://Scenes/StatusEffects/PoisonStatus.tscn" id="4_d2gbv"]
+[ext_resource type="PackedScene" uid="uid://djfujunj6y26e" path="res://StatusEffects/PoisonStatus.tscn" id="4_d2gbv"]
 
 [node name="Infect" instance=ExtResource("1_y4w4k")]
 skillIcon = ExtResource("2_nydpa")

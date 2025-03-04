@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://t6iw2eyutq4j"]
 
-[ext_resource type="PackedScene" uid="uid://51k70pdjnr8x" path="res://Scenes/Creatures/Player.tscn" id="1_kxuha"]
-[ext_resource type="Script" path="res://Scenes/Creatures/playerVariant.gd" id="2_sdfor"]
+[ext_resource type="PackedScene" uid="uid://51k70pdjnr8x" path="res://Creatures/Player.tscn" id="1_kxuha"]
+[ext_resource type="Script" path="res://Creatures/playerVariant.gd" id="2_sdfor"]
 [ext_resource type="Texture2D" uid="uid://nce6ksq6qacd" path="res://Sprites/Heroes/heroes-knight.png" id="2_shaop"]
 [ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Skills/Strike.tscn" id="3_lyyhh"]
 [ext_resource type="PackedScene" uid="uid://1nkco862q1po" path="res://Skills/BasicHeal.tscn" id="4_m6a37"]

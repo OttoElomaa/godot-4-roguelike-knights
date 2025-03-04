@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://WorldNodes/dungeon_ui.gd" id="1_wy0uv"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="2_0cgky"]
-[ext_resource type="PackedScene" uid="uid://7x5e7cauhthd" path="res://Scenes/UI/LookCreatureInfoPanel.tscn" id="3_fnthc"]
-[ext_resource type="PackedScene" uid="uid://dkaqqpg8dxhsq" path="res://Scenes/UI/skill_bar_box.tscn" id="3_j24mf"]
+[ext_resource type="PackedScene" uid="uid://7x5e7cauhthd" path="res://Dungeon-UI/LookCreatureInfoPanel.tscn" id="3_fnthc"]
+[ext_resource type="PackedScene" uid="uid://dkaqqpg8dxhsq" path="res://Dungeon-UI/skill_bar_box.tscn" id="3_j24mf"]
 [ext_resource type="Theme" uid="uid://knljw27a4uiu" path="res://Resources/Fonts/FancyPixelFontWhite.tres" id="3_vrvsg"]
 [ext_resource type="Theme" uid="uid://dnmve288k8de2" path="res://Resources/Fonts/BasicSmallPixelFont.tres" id="4_4h5xh"]
-[ext_resource type="PackedScene" uid="uid://bbx4lxn5g5ryb" path="res://Scenes/UI/basic_log.tscn" id="4_e6hou"]
+[ext_resource type="PackedScene" uid="uid://bbx4lxn5g5ryb" path="res://Dungeon-UI/basic_log.tscn" id="4_e6hou"]
 [ext_resource type="Texture2D" uid="uid://dgf0gnmb68l05" path="res://Sprites/loading-screen-temp.png" id="5_farj6"]
 
 [node name="UI" type="CanvasLayer"]

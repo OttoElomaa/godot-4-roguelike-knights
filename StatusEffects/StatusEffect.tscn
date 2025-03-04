@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c03effeto5f3m"]
+
+[ext_resource type="Script" path="res://StatusEffects/StatusEffect.gd" id="1_bgk4h"]
+[ext_resource type="Script" path="res://StatusEffects/StatusEffect-StatModifier.gd" id="2_fa6oq"]
+
+[node name="StatusEffect" type="Node"]
+script = ExtResource("1_bgk4h")
+
+[node name="Scripts" type="Node" parent="."]
+
+[node name="StatModifier" type="Node" parent="."]
+script = ExtResource("2_fa6oq")

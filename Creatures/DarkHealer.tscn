@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bmcfrrddl4txy"]
 
-[ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Scenes/Creatures/Creature.tscn" id="1_5rka5"]
+[ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Creatures/Creature.tscn" id="1_5rka5"]
 [ext_resource type="Texture2D" uid="uid://bnhrqy1c0eihc" path="res://Sprites/Enemies/enemy-dark-healer-transparent-32px.png" id="2_5yg5m"]
 [ext_resource type="PackedScene" uid="uid://1nkco862q1po" path="res://Skills/BasicHeal.tscn" id="3_yo8tq"]
 [ext_resource type="PackedScene" uid="uid://dhb8f73rg8a83" path="res://Skills/Harden.tscn" id="4_aau6t"]

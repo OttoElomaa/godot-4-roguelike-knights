@@ -1,7 +1,7 @@
 extends PanelContainer
 
 
-var LogMessage = load("res://Scenes/UI/BasicLogMessage.tscn")
+var LogMessage = load("res://Dungeon-UI/BasicLogMessage.tscn")
 
 
 func addMessage(text:String, color:Color) -> void:

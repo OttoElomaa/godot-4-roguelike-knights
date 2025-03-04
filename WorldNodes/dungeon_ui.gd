@@ -11,8 +11,8 @@ extends CanvasLayer
 @onready var skillBar := $BottomPanel/Hbox/SkillsMargin/SkillBar
 @onready var combatLog := $BottomPanel/Hbox/LogMargin/LogPanel/MarginContainer/CombatLog
 
-var LogDoubleRow:PackedScene = load("res://Scenes/UI/logDoubleRow.tscn")
-var LogMessage = load("res://Scenes/UI/BasicLogMessage.tscn")
+var LogDoubleRow:PackedScene = load("res://Dungeon-UI/logDoubleRow.tscn")
+var LogMessage = load("res://Dungeon-UI/BasicLogMessage.tscn")
 
 var initialMessage:Node = null
 

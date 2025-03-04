@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cbu18kyqxrpvs"]
 
-[ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Scenes/Creatures/Creature.tscn" id="1_i5ohc"]
+[ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Creatures/Creature.tscn" id="1_i5ohc"]
 [ext_resource type="Texture2D" uid="uid://b7wpnuw1nsyg3" path="res://Sprites/Enemies/creature-orc.png" id="2_40b0y"]
 [ext_resource type="PackedScene" uid="uid://cwkrdlxk2utha" path="res://Skills/Strong Strike.tscn" id="3_w4nll"]
 [ext_resource type="PackedScene" uid="uid://debjcstrwp3qh" path="res://Skills/Clobber.tscn" id="4_d03mn"]

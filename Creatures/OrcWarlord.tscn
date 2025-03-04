@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://drr6x5762e2r0"]
 
-[ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Scenes/Creatures/Creature.tscn" id="1_bs4ux"]
+[ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Creatures/Creature.tscn" id="1_bs4ux"]
 [ext_resource type="Texture2D" uid="uid://djhu8g6oew0nk" path="res://Sprites/Enemies/boss-orc-warlord.png" id="2_of1cj"]
 [ext_resource type="PackedScene" uid="uid://j84ahsk1aocg" path="res://Skills/DoubleStrike.tscn" id="3_jg8vv"]
 [ext_resource type="PackedScene" uid="uid://cwkrdlxk2utha" path="res://Skills/Strong Strike.tscn" id="4_rwbg3"]

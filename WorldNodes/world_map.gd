@@ -10,7 +10,7 @@ var game:Node = null
 @onready var ui := $UI
 @onready var startButton := $UI/MarginContainer/StartButton
 
-var PlayerScene :PackedScene = load("res://Scenes/Creatures/PlayerKnight.tscn")
+var PlayerScene :PackedScene = load("res://Creatures/PlayerKnight.tscn")
 
 var isMapKilled := false
 

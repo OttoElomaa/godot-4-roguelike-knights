@@ -1,12 +1,12 @@
 [gd_scene load_steps=14 format=3 uid="uid://bjncipjr144kf"]
 
-[ext_resource type="Script" path="res://Scripts/creature.gd" id="1_22wni"]
-[ext_resource type="Texture2D" uid="uid://cq8503ln6m6hc" path="res://Sprites/Heroes/heroes-thief.png" id="2_6c01f"]
-[ext_resource type="PackedScene" uid="uid://c88p26kmuj5fw" path="res://Scenes/PlayerAndCreatures/health_component.tscn" id="3_sgkqn"]
-[ext_resource type="PackedScene" uid="uid://bq678nwpus50l" path="res://Scenes/PlayerAndCreatures/animation_component.tscn" id="4_18r3n"]
-[ext_resource type="Script" path="res://Scripts/PlayerAndCreatures/StatusEffectsComponent.gd" id="4_m5w7w"]
-[ext_resource type="Script" path="res://Scripts/PlayerAndCreatures/creatureMovementComp.gd" id="5_hw60m"]
-[ext_resource type="Script" path="res://Scripts/PlayerAndCreatures/CreatureStatsComponent.gd" id="6_x3hfw"]
+[ext_resource type="Script" path="res://Creatures/creature.gd" id="1_7vqxp"]
+[ext_resource type="Texture2D" uid="uid://cq8503ln6m6hc" path="res://Sprites/Heroes/heroes-thief.png" id="2_ojbkc"]
+[ext_resource type="Script" path="res://Creatures/Components-Scripts/CreatureStatsComponent.gd" id="3_4xke1"]
+[ext_resource type="Script" path="res://Creatures/Components-Scripts/StatusEffectsComponent.gd" id="4_q2ty8"]
+[ext_resource type="Script" path="res://Creatures/Components-Scripts/creatureMovementComp.gd" id="5_unpd6"]
+[ext_resource type="PackedScene" uid="uid://c88p26kmuj5fw" path="res://Creatures/Components-Scripts/health_component.tscn" id="6_hpeqo"]
+[ext_resource type="PackedScene" uid="uid://bq678nwpus50l" path="res://Creatures/Components-Scripts/animation_component.tscn" id="7_a2bjn"]
 
 [sub_resource type="Animation" id="Animation_1s4cr"]
 resource_name = "AllyAttack"
@@ -83,14 +83,14 @@ size = Vector2(30, 30)
 [node name="Creature" type="Node2D"]
 z_index = 1
 y_sort_enabled = true
-script = ExtResource("1_22wni")
+script = ExtResource("1_7vqxp")
 creatureName = "BaseCreature"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_6c01f")
+texture = ExtResource("2_ojbkc")
 
 [node name="Stats" type="Node" parent="."]
-script = ExtResource("6_x3hfw")
+script = ExtResource("3_4xke1")
 baseArmor = 5
 baseBlock = 5
 baseEvasion = 5
@@ -98,20 +98,20 @@ baseEvasion = 5
 [node name="Skills" type="Node" parent="."]
 
 [node name="StatusEffects" type="Node" parent="."]
-script = ExtResource("4_m5w7w")
+script = ExtResource("4_q2ty8")
 
 [node name="Items" type="Node" parent="."]
 
 [node name="CreatureMovement" type="Node" parent="."]
-script = ExtResource("5_hw60m")
+script = ExtResource("5_unpd6")
 
 [node name="MovementTurnTimer" type="Timer" parent="CreatureMovement"]
 wait_time = 0.4
 one_shot = true
 
-[node name="HealthBar" parent="." instance=ExtResource("3_sgkqn")]
+[node name="HealthBar" parent="." instance=ExtResource("6_hpeqo")]
 
-[node name="AnimationComponent" parent="." instance=ExtResource("4_18r3n")]
+[node name="AnimationComponent" parent="." instance=ExtResource("7_a2bjn")]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 simplify_path = true
