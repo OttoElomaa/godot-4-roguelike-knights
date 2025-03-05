@@ -66,11 +66,16 @@ func handleMove(dir):
 	var idk = move(dir)
 	movementDir = dir
 	
-	if creature.isPlayer:
-		if not creature.isOverworld:
-			$MovementTurnTimer.start()
-			world.ui.addMessage("%s takes a step" % creature.creatureName, Color.WHITE)
-			world.callNextTurnAction()
+	if creature.isPlayer and not creature.isOverworld:
+		$MovementTurnTimer.start()
+		world.ui.addMessage("%s takes a step" % creature.creatureName, Color.WHITE)
+			
+	#### BOONS
+	creature.triggerBoonSelfStep()
+	
+	#### PASS THE TURN HERE, IF PLAYER
+	if creature.isPlayer and not creature.isOverworld:		
+		world.callNextTurnAction()	
 			
 			
 			
@@ -81,7 +86,8 @@ func move(vector) -> bool:
 	#### SET NEW GRID POSITION
 	creature.gridPosition += vector
 	
-	#### MOVE TOWARD NEW POSITION WHILE ISMOVING (SEE PHYSICS PROCESS)
+	
+	#### ANIMATION - MOVE TOWARD NEW POSITION WHILE ISMOVING (SEE PHYSICS PROCESS)
 	newPos = GridTools.gridToWorld(creature.gridPosition)
 	isMoving = true
 	creature.playMovementWobble()

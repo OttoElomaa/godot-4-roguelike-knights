@@ -10,6 +10,10 @@ var isStunned := false
 func setup(creature):
 	self.creature = creature
 	self.world = creature.world
+	
+	for boon in get_children():
+		if boon.isBoon:
+			boon.setup(null, creature)
 
 
 #### CALLED IN Creature.StartTurn
@@ -17,7 +21,8 @@ func tickStatus():
 	isStunned = false
 	
 	for effect in get_children():
-		effect.tickStatus(creature, self)
+		if not effect.isBoon:
+			effect.tickStatus(creature, self)
 
 
 #### ADD STATUS DURING SKILL USE

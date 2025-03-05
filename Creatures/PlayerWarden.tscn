@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://buwcv3cj51l34"]
+[gd_scene load_steps=7 format=3 uid="uid://buwcv3cj51l34"]
 
 [ext_resource type="PackedScene" uid="uid://51k70pdjnr8x" path="res://Creatures/Player.tscn" id="1_2lpdc"]
 [ext_resource type="Script" path="res://Creatures/playerVariant.gd" id="2_8hymd"]
 [ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Skills/Strike.tscn" id="2_guxo3"]
 [ext_resource type="PackedScene" uid="uid://dav2j8d0nekym" path="res://Skills/SummonFox.tscn" id="3_svb3u"]
 [ext_resource type="PackedScene" uid="uid://j84ahsk1aocg" path="res://Skills/DoubleStrike.tscn" id="4_uohwb"]
+[ext_resource type="PackedScene" uid="uid://dgw2koqf2taj1" path="res://StatusEffects/Boons/BoonReach.tscn" id="6_m6ovs"]
 
 [node name="PlayerWarden" instance=ExtResource("1_2lpdc")]
 script = ExtResource("2_8hymd")
@@ -15,3 +16,5 @@ creatureName = "Warden"
 [node name="Summon" parent="Skills" index="1" instance=ExtResource("3_svb3u")]
 
 [node name="DoubleStrike" parent="Skills" index="2" instance=ExtResource("4_uohwb")]
+
+[node name="ReachBoon" parent="StatusEffects" index="0" instance=ExtResource("6_m6ovs")]

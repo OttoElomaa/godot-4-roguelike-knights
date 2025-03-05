@@ -5,6 +5,7 @@ enum BoonTypes {
 	NONE, SELF_STEP, ADJACENT_STEP, RECEIVE_PHYS_ATTACK, CREATURE_DEATH
 }
 
+@export var isBoon := false
 @export var boonType := BoonTypes.NONE
 
 enum targetingGroupEnum {
@@ -25,17 +26,31 @@ var ui:Node = null
 var affectedCreature:Node = null
 
 
-func setup(skill:Node):
+#### BOON'S OWNER IS THE CREATURE IT'S ATTACHED TO
+func setup(skill:Node, owner:Node):
 	
-	self.skill = skill
-	self.actor = skill.actor
-	self.world = actor.world
+	#BASIC SETUP
+	self.actor = owner
+	self.world = owner.world
 	self.ui = world.ui
 	
 	$StatModifier.setup(self)
-	
 	for script in $Scripts.get_children():
 		script.setup(self)
+	for scene in $Skills.get_children():
+		scene.setup(owner)	
+	
+	#### END OF BOON SETUP - NO SKILL ATTACHED
+	if boonType != BoonTypes.NONE:
+		return
+	
+	#### SKILL STATUS EFFECTS, ATTACHED TO SKILL
+	self.skill = skill
+	
+	
+	
+	
+	
 	
 
 func applyStatus(target:Node):
@@ -45,7 +60,7 @@ func applyStatus(target:Node):
 	
 	#### CREATE COPY OF SELF
 	var appliedStatus = self.duplicate()
-	appliedStatus.setup(skill)
+	appliedStatus.setup(skill, actor)
 	
 	#### ATTACH COPY TO TARGET CREATURE
 	target.addStatus(appliedStatus)
@@ -84,9 +99,11 @@ func tickStatus(target:Node, statusHandler:Node):
 	
 
 func tickScripts(target:Node, statusHandler:Node):
+	#### GO THROUGH EACH SCRIPT. SKILL SCRIPTS ARE ACTIVATED. STATUS SCRIPTS ARE TICKED
 	for script in $Scripts.get_children():
 		script.tickStatus(target, statusHandler)
-
+	for scene in $Skills.get_children():
+		scene.activate()
 
 
 func modifyStats(statsHandler:Node):
@@ -95,6 +112,11 @@ func modifyStats(statsHandler:Node):
 
 
 func triggerBoons(boonType:BoonTypes, target:Node):
+	
+	prints(actor.creatureName, " trigger Boon: ",effectName)
+	
+	var text = "%s triggers %s!" % [target.creatureName, effectName]
+	ui.addMessage(text, Color.WHITE)
 	
 	if boonType == self.boonType:
 		tickScripts(target, target.status)

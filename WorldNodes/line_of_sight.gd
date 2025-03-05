@@ -3,7 +3,7 @@ extends Node2D
 
 @export var debugShowLOSLines := false
 
-var RangedLine = load("res://Scenes/UI/RangedShotLine.tscn")
+var RangedLine = load("res://MiscUI/RangedShotLine.tscn")
 
 var previouslySeenTiles := []
 var world:Node = null

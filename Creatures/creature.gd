@@ -3,6 +3,11 @@ extends Node2D
 class_name Creature
 
 
+enum BoonTypes {
+	NONE, SELF_STEP, ADJACENT_STEP, RECEIVE_PHYS_ATTACK, CREATURE_DEATH
+}
+
+
 var world:Node = null
 var grid:Node = null
 var aStarGrid:AStarGrid2D = null
@@ -277,6 +282,13 @@ func playAttackAnimation():
 	
 	
 #########################################################################
+func triggerBoonSelfStep():
+	for boon in status.get_children():
+		if boon.isBoon:
+			boon.triggerBoons(BoonTypes.SELF_STEP, self)
+
+
+######################################################################
 	
 func getNavigator():
 	return $NavigationAgent2D

@@ -37,7 +37,7 @@ func setup(actor:Node):
 		script.setup(self)
 		
 	for e in $StatusEffects.get_children():
-		e.setup(self)
+		e.setup(self, actor)
 	
 	#### ALSO SETS UP	
 	for script in $Resources.get_children():
