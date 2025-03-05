@@ -72,7 +72,7 @@ func createPathBetween(creature, target):
 
 func createDebugLine(path) -> Line2D:
 	
-	var debugLine: Line2D = load("res://Scenes/UI/DebugLine.tscn").instantiate()
+	var debugLine: Line2D = load("res://MiscUI/DebugLine.tscn").instantiate()
 	$Disposables.add_child(debugLine)
 	debugLine.points = []
 	for point in path:

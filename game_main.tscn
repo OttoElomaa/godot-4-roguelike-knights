@@ -1,18 +1,18 @@
 [gd_scene load_steps=6 format=3 uid="uid://bckhqa15oogpo"]
 
-[ext_resource type="Script" path="res://Scripts/game_main.gd" id="1_hxft8"]
-[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="4_gh64h"]
-[ext_resource type="Theme" uid="uid://knljw27a4uiu" path="res://Resources/Fonts/FancyPixelFontWhite.tres" id="5_ljaf8"]
-[ext_resource type="Script" path="res://Scripts/file_loader.gd" id="6_t2g5i"]
-[ext_resource type="PackedScene" uid="uid://6k45i4rxp5o4" path="res://WorldNodes/world_map.tscn" id="10_o3ock"]
+[ext_resource type="Script" path="res://game_main.gd" id="1_sbe32"]
+[ext_resource type="Script" path="res://file_loader.gd" id="2_s4e6f"]
+[ext_resource type="PackedScene" uid="uid://6k45i4rxp5o4" path="res://WorldNodes/world_map.tscn" id="3_6jgvx"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="4_np8ec"]
+[ext_resource type="Theme" uid="uid://knljw27a4uiu" path="res://Resources/Fonts/FancyPixelFontWhite.tres" id="5_pbyug"]
 
 [node name="GameMain" type="Node2D"]
-script = ExtResource("1_hxft8")
+script = ExtResource("1_sbe32")
 
 [node name="FileLoader" type="Node" parent="."]
-script = ExtResource("6_t2g5i")
+script = ExtResource("2_s4e6f")
 
-[node name="WorldMap" parent="." instance=ExtResource("10_o3ock")]
+[node name="WorldMap" parent="." instance=ExtResource("3_6jgvx")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -30,11 +30,11 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("4_gh64h")
+theme_override_styles/panel = ExtResource("4_np8ec")
 
 [node name="Label" type="Label" parent="CanvasLayer/DeathMessage"]
 layout_mode = 2
-theme = ExtResource("5_ljaf8")
+theme = ExtResource("5_pbyug")
 theme_override_font_sizes/font_size = 40
 text = "You died........"
 horizontal_alignment = 1

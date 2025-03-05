@@ -1,6 +1,12 @@
 extends Node
 
 
+enum BoonTypes {
+	NONE, SELF_STEP, ADJACENT_STEP, RECEIVE_PHYS_ATTACK, CREATURE_DEATH
+}
+
+@export var boonType := BoonTypes.NONE
+
 enum targetingGroupEnum {
 	SELF, ENEMY, ALL_ENEMIES, ALLY, ALL_ALLIES
 }	
@@ -24,7 +30,7 @@ func setup(skill:Node):
 	self.skill = skill
 	self.actor = skill.actor
 	self.world = actor.world
-	self.ui = world.getUi()
+	self.ui = world.ui
 	
 	$StatModifier.setup(self)
 	
@@ -73,6 +79,11 @@ func tickStatus(target:Node, statusHandler:Node):
 		return
 		
 	#### ACTIVATE SCRIPTS
+	tickScripts(target, statusHandler)
+	
+	
+
+func tickScripts(target:Node, statusHandler:Node):
 	for script in $Scripts.get_children():
 		script.tickStatus(target, statusHandler)
 
@@ -80,3 +91,11 @@ func tickStatus(target:Node, statusHandler:Node):
 
 func modifyStats(statsHandler:Node):
 	$StatModifier.modifyStats(statsHandler)
+
+
+
+func triggerBoons(boonType:BoonTypes, target:Node):
+	
+	if boonType == self.boonType:
+		tickScripts(target, target.status)
+			

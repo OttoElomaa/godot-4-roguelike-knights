@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dsli2mbg5pnea"]
 
-[ext_resource type="PackedScene" uid="uid://bedqd1giwm1pl" path="res://Scenes/UI/DebugLine.tscn" id="1_1f38v"]
+[ext_resource type="PackedScene" uid="uid://bedqd1giwm1pl" path="res://MiscUI/DebugLine.tscn" id="1_1f38v"]
 
 [node name="RangedShotLine" instance=ExtResource("1_1f38v")]
 width = 2.0

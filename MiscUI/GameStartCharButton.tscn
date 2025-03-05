@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://qxc2qwv3njt4"]
 
-[ext_resource type="Script" path="res://Scripts/MiscUI/gameStartCharButton.gd" id="1_3gw6w"]
+[ext_resource type="Script" path="res://MiscUI/gameStartCharButton.gd" id="1_3gw6w"]
 [ext_resource type="Texture2D" uid="uid://nce6ksq6qacd" path="res://Sprites/Heroes/heroes-knight.png" id="2_gub75"]
 
 [node name="CharButton" type="PanelContainer"]

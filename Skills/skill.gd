@@ -29,7 +29,7 @@ func setup(actor:Node):
 	
 	self.actor = actor
 	self.world = actor.world
-	self.ui = actor.world.getUi()
+	self.ui = actor.world.ui
 	
 	$Targeting.setup(self)
 	

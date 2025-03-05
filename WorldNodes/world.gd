@@ -376,15 +376,12 @@ func randomizeLevelTileGraphics():
 	for room in getRooms():
 		room.setTileGraphics(graphicsValue)
 
+
+############################################################
+
+
+
 ###################################################################
-
-
-	
-func getGrid():
-	return $GridController
-
-func getAStar():
-	return $AStarGridNode
 		
 func getRooms():
 	return $Rooms.get_children()
@@ -413,10 +410,6 @@ func getEnemies():
 	return returnCreatures
 	
 	
-	
-func getUi():
-	return $UI
-
 
 func _on_dumb_timer_timeout() -> void:
 		

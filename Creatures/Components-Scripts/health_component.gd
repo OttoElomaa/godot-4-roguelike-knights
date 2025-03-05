@@ -22,7 +22,7 @@ func setup(creature):
 	var guard = creature.stats.guard
 	
 	updateVisual(health, guard)
-	ui = creature.world.getUi()
+	ui = creature.world.ui
 	
 
 

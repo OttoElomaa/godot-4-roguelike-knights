@@ -28,7 +28,8 @@ var isOverworld := false
 @onready var stats:CreatureStats:
 	get:
 		return $Stats
-	
+
+@onready var status := $StatusEffects
 	
 	
 func setup(world:Node):
@@ -57,12 +58,6 @@ func setupHelp():
 
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-	
-	
-	
-	
 func _physics_process(delta: float) -> void:
 	
 	if not world:
@@ -139,9 +134,6 @@ func checkValidity() -> bool:
 	return true
 	
 	
-
-
-
 
 func startTurn():
 	

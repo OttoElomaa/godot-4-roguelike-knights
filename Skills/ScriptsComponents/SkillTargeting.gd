@@ -19,7 +19,7 @@ func setup(skill:Node):
 	self.skill = skill
 	self.actor = skill.actor
 	self.world = actor.world
-	self.ui = world.getUi()
+	self.ui = world.ui
 	
 	
 
