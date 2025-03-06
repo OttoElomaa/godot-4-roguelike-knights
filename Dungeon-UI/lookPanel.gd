@@ -50,6 +50,12 @@ func showTargetCreature(creature:Node):
 	updateView(creature)
 
 
+func showNotarget():
+	stateLabel.text = "Targeting..."
+	nameLabel.text = "You see no foes"
+	toggleStatBlock(false)
+
+
 func updateView(creature:Node):
 	
 	var s = creature.stats

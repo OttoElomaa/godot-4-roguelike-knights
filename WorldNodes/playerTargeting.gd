@@ -30,21 +30,22 @@ func createTargetingDict():
 	
 	var counter = 0
 	for creature:Node in creatures:
-		#### THIS FUNC ONLY TARGETS ENEMIES
-		if creature == player:
-			pass
-		elif not creature.isEnemy:
-			pass
-			
-		#### ONLY CREATURES THAT ARE ALIVE
-		elif not creature.checkValidity():
-			pass
-			
-		#### ADD TO LIST
-		elif lineOfSight.lineOfSightBetweenObjects(player, creature):
-			
-				targetsDict[counter] = creature
-				counter += 1
+		counter = addToDictHelp(creature, counter)
+	
+
+func addToDictHelp(creature:Node, counter:int):	
+	#### THIS FUNC ONLY TARGETS ENEMIES
+	if not creature.isEnemy:
+		return counter
+	#### ONLY CREATURES THAT ARE ALIVE
+	if not creature.checkValidity():
+		return counter
+	#### ADD TO LIST
+	if lineOfSight.lineOfSightBetweenObjects(player, creature):
+		targetsDict[counter] = creature
+		counter += 1
+	return counter
+
 			
 
 func autoSetTarget():

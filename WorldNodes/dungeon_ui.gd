@@ -58,6 +58,11 @@ func updateProgressLabels():
 
 
 func showTargetCreature(creature:Node):
+	
+	if creature == null:
+		lookPanel.showNotarget()
+		return
+		
 	if not is_instance_valid(creature):
 		return
 	if creature.is_queued_for_deletion():

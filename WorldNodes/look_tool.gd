@@ -66,7 +66,7 @@ func processLook(world):
 		return
 	
 	else:
-		world.getUi().showLookInfo(world, self)
+		world.ui.showLookInfo(world, self)
 		
 
 
