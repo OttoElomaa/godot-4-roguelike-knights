@@ -142,6 +142,9 @@ func checkValidity() -> bool:
 
 func startTurn():
 	
+	#### DELETES INITIAL MESSAGES AT TURN START
+	world.ui.deleteInitialRow()
+	
 	if isOverworld:
 		return
 		
@@ -210,6 +213,8 @@ func startTurn():
 		
 	#### TRY TO MOVE	
 	creatureMove()
+	
+	#### FINISH TURN IF NOTHING WAS DONE??
 	finishTurn()
 	
 

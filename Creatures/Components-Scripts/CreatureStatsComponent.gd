@@ -164,7 +164,7 @@ func tryBlock(damage:int):
 	var rand = rng.randi_range(0,100)
 	if rand < block.current:
 		var blockString : String =  "%s blocks %d damage without taking any!" % [creature.creatureName, damage] 
-		ui.clearInitialRow()
+		ui.addInitialRow()
 		ui.addMessage(blockString, MyColors.fontLightBlue)
 		
 		return true
@@ -175,7 +175,7 @@ func tryEvade(damage:int):
 	var rand = rng.randi_range(0,100)
 	if rand < evasion.current:
 		var evadeString : String =  "%s evades %d damage!" % [creature.creatureName, damage] 
-		ui.clearInitialRow()
+		ui.addInitialRow()
 		ui.addMessage(evadeString, MyColors.fontLightBlue)
 		
 		return true
@@ -198,7 +198,7 @@ func reduceDamageByGuard(damage:int) -> int:
 	guard.current -= reduction
 	
 	var blockString : String =  "%s guards against %d damage and avoids %d!" % [creature.creatureName, damage, reduction] 
-	ui.clearInitialRow()
+	ui.addInitialRow()
 	ui.addMessage(blockString, Color.LIGHT_BLUE)
 	
 	ui.saveInitialMessage("Guard broken!", Color.LIGHT_BLUE)

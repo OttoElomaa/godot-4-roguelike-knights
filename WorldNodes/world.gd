@@ -116,11 +116,14 @@ func startGame(game:Node, playerScene:Node):
 	
 	
 	######################################################
-	#### ADD CREATURES TO SPAWN LOCATIONS
-	#### CREATURES ARE SETUP IN PopulateCreatures()
+	
 	var creatures: Array = []
+	#### ADD CREATURES TO SPAWN LOCATIONS IN EACH ROOM
 	for room in getRooms():
-		creatures.append_array(room.populateCreatures(self) )
+		if not room == firstRoom:  ## SKIP FIRST ROOM
+			#### CREATURES ARE SETUP IN PopulateCreatures()
+			creatures.append_array(room.populateCreatures(self) )
+		
 	for creature in creatures:
 		addCreature(creature)
 		grid.putOnGridAndMap(creature, creature.gridPosition)

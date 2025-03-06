@@ -96,7 +96,7 @@ func toggleStatBlock(toShow:bool):
 
 func showLookInfo(game:Node, lookTool:Node):
 	
-	var grid = game.getGrid()
+	var grid = game.grid
 	
 	stateLabel.text = "Looking at..."
 	lookLabel.text = "%d, %d" % [lookTool.gridPosition.x, lookTool.gridPosition.y] 

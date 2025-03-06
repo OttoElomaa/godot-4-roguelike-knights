@@ -18,8 +18,13 @@ func activate(targets:Array) -> Node:
 	
 	var target = sortByLowestHealth(targets)
 	
+	#### IF NO HEAL AMOUNT, THIS SCRIPT HANDLES STATUS EFFECT BUFFS
 	if healAmount == 0:
-		return target
+		var returned = target
+		if not target:
+			returned = skill.actor
+		skill.ui.addMessage(skill.actor.creatureName + " uses " + skill.skillName, Color.WHITE)
+		return returned
 	
 	if target.hasFullHealth():
 		return null

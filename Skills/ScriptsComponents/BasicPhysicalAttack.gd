@@ -27,6 +27,8 @@ func activate(targets:Array) -> Node:
 	if not target:
 		return null
 	
+	#### POST TRIGGER MESSAGE, FOR EXAMPLE
+	skill.ui.addInitialRow()
 	
 	#### CREATE FIRST HALF OF DOUBLE MESSAGE
 	skill.ui.saveInitialMessage(skill.actor.creatureName + " uses " + skill.skillName, Color.WHITE)
@@ -60,5 +62,5 @@ func activate(targets:Array) -> Node:
 
 func handleMultiAttack():
 	if attacksCount > 1:
-		skill.ui.clearInitialRow()
+		skill.ui.addInitialRow()
 		skill.ui.saveInitialMessage("(%s) " % skill.skillName, MyColors.fontLightBlue)

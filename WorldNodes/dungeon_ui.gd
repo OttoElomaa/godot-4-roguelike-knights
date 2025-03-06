@@ -106,10 +106,16 @@ func addLogItemHelp(item:Node):
 	combatLog.addItem(item)
 
 
-
-func clearInitialRow():
+#### THIS COMMAND ADDS THE INITIAL MESSAGE AS A ROW WITHOUT CLEARING IT
+func addInitialRow():
+	if initialMessage == null:
+		return
 	addLogItemHelp(initialMessage)
 
+
+func deleteInitialRow():
+	initialMessage = null
+	
 
 
 func toggleLoadingScreen(visible:bool):
