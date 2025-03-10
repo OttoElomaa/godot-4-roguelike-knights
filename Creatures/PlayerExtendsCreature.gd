@@ -68,15 +68,9 @@ func processExplore():
 				$Camera2D.zoom = Vector2(2, 2)
 				zoomLevel = 0
 		
-	
-	
-	
 	#### NO SKILL PICKED	
 	if skillToUse == 0:
 		return
-	
-
-	
 	match skillToUse:
 		#### USE SKILL	
 		1,2,3,4:
