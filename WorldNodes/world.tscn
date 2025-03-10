@@ -55,8 +55,8 @@ script = ExtResource("7_7nmn7")
 
 [node name="Disposables" type="Node2D" parent="LineOfSight"]
 
-[node name="TurnWaitTimer" type="Timer" parent="LineOfSight"]
-wait_time = 0.05
+[node name="FogOfWarTimer" type="Timer" parent="LineOfSight"]
+wait_time = 0.1
 one_shot = true
 
 [node name="Mover" type="Node2D" parent="LineOfSight"]
@@ -111,5 +111,5 @@ one_shot = true
 texture = ExtResource("14_k44we")
 
 [connection signal="bake_finished" from="." to="." method="_on_bake_finished"]
-[connection signal="timeout" from="LineOfSight/TurnWaitTimer" to="." method="_on_turn_wait_timer_timeout"]
+[connection signal="timeout" from="LineOfSight/FogOfWarTimer" to="." method="_on_fog_of_war_timer_timeout"]
 [connection signal="timeout" from="Utilities/DumbTimer" to="." method="_on_dumb_timer_timeout"]

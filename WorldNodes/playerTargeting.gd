@@ -44,9 +44,9 @@ func addToDictHelp(creature:Node, counter:int):
 		return counter
 		
 	#### ADD TO LIST
-	if lineOfSight.lineOfSightBetweenObjects(player, creature):
-		targetsDict[counter] = creature
-		counter += 1
+	#if lineOfSight.lineOfSightBetweenObjects(player, creature):
+	targetsDict[counter] = creature
+	counter += 1
 	return counter
 
 			
@@ -106,6 +106,8 @@ func shuffleTargets():
 	print("target %d out of %d" % [selectionNum, dictSize])
 	prints("Target name: ", targetsDict[selectionNum].creatureName)
 	setTarget(targetsDict[selectionNum])
+	world.ui.showTargetCreature(player.selectedTarget)
+	
 				
 			
 			

@@ -75,7 +75,7 @@ func handleMove(dir):
 	
 	#### PASS THE TURN HERE, IF PLAYER
 	if creature.isPlayer and not creature.isOverworld:		
-		world.callNextTurnAction()	
+		world.callNextTurnAction(creature)	
 			
 			
 			

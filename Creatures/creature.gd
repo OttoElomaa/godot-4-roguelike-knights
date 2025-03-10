@@ -223,7 +223,7 @@ func startTurn():
 
 
 func finishTurn():
-	world.callNextTurnAction()
+	world.callNextTurnAction(self)
 
 
 

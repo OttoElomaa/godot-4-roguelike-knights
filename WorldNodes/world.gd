@@ -267,11 +267,11 @@ func startNextTurn():
 	#assert(turnActorsList.size() > 0, "WHY NO CREATURES")
 	turnActorCounter = -1
 	#updateVisuals()
-	callNextTurnAction()
+	callNextTurnAction(null)
 	
 	
 	
-func callNextTurnAction():
+func callNextTurnAction(previous:Node):
 	
 	turnActorCounter += 1
 	if turnActorCounter > turnActorsList.size() - 1:
@@ -284,11 +284,11 @@ func callNextTurnAction():
 	#### CREATURE THAT JUST DIED
 	if not is_instance_valid(next):
 		prints("Creature can't start turn due to death! (%d)" % [turnActorCounter])
-		callNextTurnAction()
+		callNextTurnAction(null)
 		return
 	elif next.is_queued_for_deletion():
 		prints("%s can't start turn due to death! (%d)" % [next.creatureName, turnActorCounter])
-		callNextTurnAction()
+		callNextTurnAction(null)
 		return	
 		
 	#### CREATURE IS ALIVE	
@@ -298,14 +298,15 @@ func callNextTurnAction():
 	#### UPDATE VISUALS ONLY AFTER PLAYER ACTION
 	#### ONLY IF NEXT CREATURE IS ALIVE
 	if next.isPlayer:
-		isTurnActorPlayer = true
+		#### WAIT 0.1 sec, so LINE OF SIGHT CHECKS HAVE COMPLETED. THEN TARGETING STUFF
+		handleFogOfWar()
+		$LineOfSight/FogOfWarTimer.start()
 	
 	#### AFTER PLAYER ACTION	
-	elif isTurnActorPlayer:
-		print("This message plays after player turn")
-		lineOfSight.passTurn()
-		$LineOfSight/TurnWaitTimer.start()
-		isTurnActorPlayer = false
+	if previous != null:
+		if previous.isPlayer:
+			print("This message plays after player turn")
+			lineOfSight.passTurn()  #### Deletes Visual Ranged Shoot Lines
 		
 	next.startTurn()
 			
@@ -333,7 +334,10 @@ func updateTargeting():
 	
 	
 #### FOG OF WAR STUFF??
-func lineOfSightStuff():
+func handleFogOfWar():
+	
+	if turnOffLineOfSight:
+		return
 	if not player:
 		return	
 	if not player.checkValidity():
@@ -341,7 +345,7 @@ func lineOfSightStuff():
 		
 	var playerPos: Vector2i = player.gridPosition
 	var seeRange := 8
-	$LineOfSight.lineOfSightInRange(playerPos, seeRange, $Utilities/FogTiles)
+	$LineOfSight.handleFogOfWar(playerPos, seeRange, $Utilities/FogTiles)
 	
 
 
@@ -444,8 +448,8 @@ func _on_bake_finished() -> void:
 	States.inputModeExplore()
 	ui.toggleLoadingScreen(false)
 	
-	if not turnOffLineOfSight:
-		lineOfSightStuff()
+	
+	handleFogOfWar()
 	
 	#### CREATE LIST OF CURRENT TARGETS
 	$Utilities/Targeting.setup(self)
@@ -455,11 +459,10 @@ func _on_bake_finished() -> void:
 	startNextTurn()
 
 
-#### AFTER PLAYER TURN, DO VISUAL STUFF
-func _on_turn_wait_timer_timeout() -> void:
 	
-	if not turnOffLineOfSight:
-		lineOfSightStuff()
-		
-	#updateVisuals()
-	#lineOfSight.passTurn()
+#### AFTER PLAYER TURN, DO VISUAL STUFF	
+func _on_fog_of_war_timer_timeout() -> void:
+	
+	#if not turnOffLineOfSight:
+		#handleFogOfWar()
+	updateTargeting()

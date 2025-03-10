@@ -51,7 +51,7 @@ func createRangedLine(startPos, endPos):
 
 #### COORDS: Grid.getCoordsInRange(gridPos, distance)
 #### PreviouslySeenTiles: WE UPDATE IT IN THIS FUNC
-func lineOfSightInRange(startCoord:Vector2i, range:int, tilemap:TileMapLayer):
+func handleFogOfWar(startCoord:Vector2i, range:int, tilemap:TileMapLayer):
 	
 	#### PUT NAVIGATOR TO PLAYER'S CURRENT GRID POSITION (Where player stands / is moving to)
 	$Mover.position = GridTools.gridToWorld(startCoord)
