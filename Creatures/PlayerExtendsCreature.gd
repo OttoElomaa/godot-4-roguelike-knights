@@ -82,11 +82,8 @@ func processExplore():
 		1,2,3,4:
 			self.useSkill(skillToUse-1)
 			
-		#2:
-			#self.useSkill(1)
-		
-
 	
+			
 func useSkill(index):
 	
 	if index > getSkills().size() - 1:
@@ -96,8 +93,3 @@ func useSkill(index):
 	var success = skill.activate()
 	if success:
 		finishTurn()
-
-
-
-func getNavigator():
-	return $LineOfSightNavigator

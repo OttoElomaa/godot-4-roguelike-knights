@@ -304,7 +304,7 @@ func callNextTurnAction():
 	elif isTurnActorPlayer:
 		print("This message plays after player turn")
 		lineOfSight.passTurn()
-		$Utilities/TurnWaitTimer.start()
+		$LineOfSight/TurnWaitTimer.start()
 		isTurnActorPlayer = false
 		
 	next.startTurn()
@@ -318,7 +318,7 @@ func updateVisuals():
 	ui.updateVisualsOnTurn()
 	$AStarGridNode.passTurn()
 	#### REMOVE TARGETING LINES FROM SCREEN		
-	updateTargeting()
+	#updateTargeting()
 
 
 

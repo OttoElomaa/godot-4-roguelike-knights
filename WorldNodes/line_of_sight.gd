@@ -53,6 +53,9 @@ func createRangedLine(startPos, endPos):
 #### PreviouslySeenTiles: WE UPDATE IT IN THIS FUNC
 func lineOfSightInRange(startCoord:Vector2i, range:int, tilemap:TileMapLayer):
 	
+	#### PUT NAVIGATOR TO PLAYER'S CURRENT GRID POSITION (Where player stands / is moving to)
+	$Mover.position = GridTools.gridToWorld(startCoord)
+	
 	var coordsToCheck:Array = grid.getCoordsInRange(startCoord, range)
 	
 	var coordsDict := {}
@@ -61,7 +64,7 @@ func lineOfSightInRange(startCoord:Vector2i, range:int, tilemap:TileMapLayer):
 	
 	var current_pos = startCoord * 32 + vec16
 	
-	#### SET AS UNSEEN DARK FOG
+	#### SET AS UNSEEN DARK FOG (Value 0)
 	for coord in coordsToCheck:
 		tilemap.set_cell(coord, 0, Vector2i(0,0))
 		
@@ -120,10 +123,14 @@ func lineOfSightInRange(startCoord:Vector2i, range:int, tilemap:TileMapLayer):
 	########################################
 	#### CREATURE VISIBILITY
 	for creature in world.getCreatures():
+		#### IS IN SEEN TILES -> VISIBLE
 		if creature.gridPosition in allSeenTiles:
 			creature.show()
+			creature.isVisible = true
+		#### NOT IN SEEN TILES, NOT PLAYER -> HIDE
 		elif creature != world.player:
 			creature.hide()
+			creature.isVisible = false
 
 	
 	
@@ -136,7 +143,7 @@ func lineOfSightInRange(startCoord:Vector2i, range:int, tilemap:TileMapLayer):
 
 func inRangeHelp(coordsDict:Dictionary, coord:Vector2, tilemap:TileMapLayer, visibleCoords:Array):
 	
-	var navigator:NavigationAgent2D = world.player.getNavigator()
+	var navigator := $Mover/LineOfSightNavigator
 	
 	#### IF PATH IS STRAIGHT LINE, TARGET IS VISIBLE
 	navigator.target_position = coord

@@ -40,6 +40,9 @@ func addToDictHelp(creature:Node, counter:int):
 	#### ONLY CREATURES THAT ARE ALIVE
 	if not creature.checkValidity():
 		return counter
+	if not creature.isVisible:
+		return counter
+		
 	#### ADD TO LIST
 	if lineOfSight.lineOfSightBetweenObjects(player, creature):
 		targetsDict[counter] = creature

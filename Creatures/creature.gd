@@ -18,6 +18,8 @@ var gridPosition := Vector2i.ZERO
 
 @export var isEnemy := true
 @export var isPlayer := false
+var isVisible := false
+
 @export var creatureName := ""	
 
 
@@ -169,6 +171,7 @@ func startTurn():
 	$HealthBar.updateVisual(stats.health, stats.guard)
 	if isPlayer:
 		world.updateVisuals()
+		world.updateTargeting()
 		world.ui.updateVisualsOnTurn()
 		
 	
