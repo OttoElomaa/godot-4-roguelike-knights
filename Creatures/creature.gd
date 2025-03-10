@@ -90,46 +90,34 @@ func creatureMove():
 	
 	var movementTarget = world.player
 	
-	#### ENEMIES VERY FAR FROM PLAYER WILL NOT CHASE PLAYER
-	#if world.grid.getGridDistance(self, movementTarget) > 7:
-		#return
-	
 	#### ADJACENT CREATURES DON'T MOVE	
 	if world.grid.getGridDistance(self, movementTarget) < 2:
 		return
 	
 	#### CREATURE CAN MOVE IN THESE DIRECTIONS
-	var allowedDirs := [Vector2i.UP,Vector2i.DOWN,Vector2i.LEFT, Vector2i.RIGHT]
-	allowedDirs.append_array([ Vector2i(1,1),Vector2i(-1,-1),Vector2i(-1,1),Vector2i(1,-1) ] )
+	var allowedDirs := [Vector2i.UP,Vector2i.DOWN,Vector2i.LEFT, Vector2i.RIGHT,
+	 Vector2i(1,1),Vector2i(-1,-1),Vector2i(-1,1),Vector2i(1,-1) ] 
 
 	#### GET A LINE OF THE PATH FROM SELF TO TARGET (PLAYER)
 	var line: Line2D = world.aStar.createPathBetween(self, movementTarget)
 	
-	#### DEBUG: SHOW/HIDE LINE
-	line.hide()
+	line.hide()  ## DEBUG: SHOW/HIDE LINE
 	
-	#assert(line.points.size() < 2, "WHAT THE-- PATHING ERROR")
-	if line.points.size() < 2:
+	if line.points.size() < 2:  ## NO LINE WAS MADE -> STOP
 		return
 	
 	#### COMPARE TARGET POSITION TO CREATURE POSITIONS
-	#### ROUND FROM 0.777... TO 1
+	#### ROUND FROM 0.777..-> 1, 0.23412..-> ZERO
 	var dir = position.direction_to(line.points[1])
-	dir = Vector2i(round(dir.x), round(dir.y))
+	dir = Vector2i(round(dir.x), round(dir.y)) 
 	
-	#print(dir)
-	var creaturePositions : Array = grid.getCreatureTiles()
+	#### TARGET GRID POSITION IS CURRENT POS + DIR
+	if not dir in allowedDirs:
+		return
+	var targetGridPos = gridPosition + Vector2i(dir)
 	
-	if dir in allowedDirs:
-		var targetGridPos = gridPosition + Vector2i(dir)
-		
-		#### IF TARGET POSITION IS OCCUPIED BY CREATURE, DON'T MOVE
-		if targetGridPos in creaturePositions:
-			return
-			
-		else:
-			movementComponent.move(dir)
-			line.remove_point(0)
+	movementComponent.handleMove(dir)  ## MOVE
+	line.remove_point(0)
 			
 	
 
@@ -290,10 +278,31 @@ func playAttackAnimation():
 	
 	
 #########################################################################
+#### BOONS
+
+#### CALLED FROM CreatureMovement.HandleMove
 func triggerBoonSelfStep():
 	for boon in status.get_children():
 		if boon.isBoon:
 			boon.triggerBoons(BoonTypes.SELF_STEP, self)
+
+#### CALLED FROM CreatureMovement.HandleMove
+#### VIA WORLD SCENE -> To All Creatures			
+func triggerBoonAdjacentStep(creature:Node):
+	
+	#### LOGIC: IF CREATURE IS ADJACENT
+	var myAdjacentC:Array = grid.getAdjacentCreatures(self)
+	if myAdjacentC.is_empty():
+		return
+	#prints("%s checks adjacent creatures: " % creatureName, myAdjacentC)	
+	if creature in myAdjacentC:
+		
+		#### PASS IT TO BOONS
+		for boon in status.get_children():
+			if boon.isBoon:
+				prints("Adjacent step. Boon haver %s finds adjacent creatures: " % creatureName, myAdjacentC)
+				boon.triggerBoons(BoonTypes.ADJACENT_STEP, self)
+		
 
 
 ######################################################################

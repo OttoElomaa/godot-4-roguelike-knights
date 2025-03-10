@@ -112,13 +112,11 @@ func modifyStats(statsHandler:Node):
 
 
 func triggerBoons(boonType:BoonTypes, target:Node):
-	
-	prints(actor.creatureName, " trigger Boon: ",effectName)
-	
-	var text = "%s triggers %s!" % [target.creatureName, effectName]
-	#ui.addMessage(text, Color.WHITE)
-	ui.saveInitialMessage(text, Color.DARK_ORANGE)
-	
+		
 	if boonType == self.boonType:
+		var text = "%s triggers %s!" % [target.creatureName, effectName]
+		print(text)
+		ui.saveInitialMessage(text, Color.DARK_ORANGE)
+		
 		tickScripts(target, target.status)
 			

@@ -63,15 +63,18 @@ func handleMove(dir):
 	if not grid.is_tile_empty(creature.gridPosition + dir):
 		return
 	
+	#### MOVE! AND SET ANIMATION MOVE DIRECTION
 	var idk = move(dir)
 	movementDir = dir
 	
+	#### PLAYER TURN STUFF -> Press key Continuous movement
 	if creature.isPlayer and not creature.isOverworld:
 		$MovementTurnTimer.start()
 		world.ui.addMessage("%s takes a step" % creature.creatureName, Color.WHITE)
 			
 	#### BOONS
 	creature.triggerBoonSelfStep()
+	world.triggerBoonAdjacentStep(creature)
 	
 	#### PASS THE TURN HERE, IF PLAYER
 	if creature.isPlayer and not creature.isOverworld:		

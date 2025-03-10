@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://t6iw2eyutq4j"]
+[gd_scene load_steps=9 format=3 uid="uid://t6iw2eyutq4j"]
 
 [ext_resource type="PackedScene" uid="uid://51k70pdjnr8x" path="res://Creatures/Player.tscn" id="1_kxuha"]
 [ext_resource type="Script" path="res://Creatures/playerVariant.gd" id="2_sdfor"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://1nkco862q1po" path="res://Skills/BasicHeal.tscn" id="4_m6a37"]
 [ext_resource type="PackedScene" uid="uid://cwkrdlxk2utha" path="res://Skills/Strong Strike.tscn" id="5_1krb8"]
 [ext_resource type="PackedScene" uid="uid://dp214645uwxo0" path="res://Skills/RaiseGuard.tscn" id="7_72qwi"]
+[ext_resource type="PackedScene" uid="uid://cbcm2y6qqvcia" path="res://StatusEffects/Boons/BoonSentinel.tscn" id="8_0gy4h"]
 
 [node name="PlayerKnight" instance=ExtResource("1_kxuha")]
 script = ExtResource("2_sdfor")
@@ -22,3 +23,5 @@ texture = ExtResource("2_shaop")
 [node name="StrongStrike" parent="Skills" index="2" instance=ExtResource("5_1krb8")]
 
 [node name="Raise Guard" parent="Skills" index="3" instance=ExtResource("7_72qwi")]
+
+[node name="SentinelBoon" parent="StatusEffects" index="0" instance=ExtResource("8_0gy4h")]

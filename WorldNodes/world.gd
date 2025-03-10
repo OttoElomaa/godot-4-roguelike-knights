@@ -385,7 +385,14 @@ func randomizeLevelTileGraphics():
 
 
 ############################################################
+#### BOONS
 
+#### CALLED FROM CreatureMovement.HandleMove
+#### VIA WORLD SCENE -> To All Creatures
+func triggerBoonAdjacentStep(creature:Node):
+	for c in getCreatures():
+		if not c == creature:
+			c.triggerBoonAdjacentStep(creature)
 
 
 ###################################################################
