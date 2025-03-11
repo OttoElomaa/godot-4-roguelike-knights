@@ -80,12 +80,16 @@ func walkTwo(walkAmount):
 			faultyStepsCount += 1
 		
 		#### NORMAL STEP ACTION
+		goAwayFromPoints(walkerPos)
 		walkerPos += direction
 		
 		if faultyStepsCount > 4:
 			prints("faulty step, course correcting now at: ", walkerPos)
-			goAwayFromPoints(walkerPos)
-			walkerPos += direction * 3
+			#goAwayFromPoints(walkerPos)
+			#walkerPos += direction * 3
+			walkerPos.x += randi_range(-5,5)
+			walkerPos.y += randi_range(-5,5)
+			
 			faultyStepsCount = 0
 			stepsTaken += 1
 			turnPoints.append(TurningPoint.new(walkerPos, false))

@@ -144,7 +144,7 @@ func startGame(game:Node, playerScene:Node):
 func generateDungeon():
 	
 	#### TRYING NEW PATH STUFF
-	var walkerRoomPositions = $RoomGeneration/Walker2.walk(50,grid)
+	var walkerRoomPositions = $RoomGeneration/Walker2.walk(20,grid)
 	pathTurns = walkerRoomPositions
 	
 	
