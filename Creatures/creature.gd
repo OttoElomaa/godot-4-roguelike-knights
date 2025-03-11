@@ -18,7 +18,9 @@ var gridPosition := Vector2i.ZERO
 
 @export var isEnemy := true
 @export var isPlayer := false
+
 var isVisible := false
+var isStationary := true
 
 @export var creatureName := ""	
 
@@ -113,6 +115,7 @@ func creatureMove():
 	
 	#### TARGET GRID POSITION IS CURRENT POS + DIR
 	if not dir in allowedDirs:
+		assert(1==2,"WHAT THE SHIT, MOVEMENT")
 		return
 	var targetGridPos = gridPosition + Vector2i(dir)
 	
@@ -134,6 +137,7 @@ func startTurn():
 	
 	#### DELETES INITIAL MESSAGES AT TURN START
 	world.ui.deleteInitialRow()
+	isStationary = true
 	
 	if isOverworld:
 		return
@@ -290,13 +294,17 @@ func triggerBoonSelfStep():
 #### VIA WORLD SCENE -> To All Creatures			
 func triggerBoonAdjacentStep(creature:Node):
 	
+	#### YOU CAN'T TRIGGER ADJACENT STEP ACTION IF YOU MOVED
+	#### Maybe temp. To stop player from cheesing by retreating and hitting constantly
+	if not isStationary:
+		return
+	
 	#### LOGIC: IF CREATURE IS ADJACENT
 	var myAdjacentC:Array = grid.getAdjacentCreatures(self)
 	if myAdjacentC.is_empty():
 		return
-	#prints("%s checks adjacent creatures: " % creatureName, myAdjacentC)	
+			
 	if creature in myAdjacentC:
-		
 		#### PASS IT TO BOONS
 		for boon in status.get_children():
 			if boon.isBoon:

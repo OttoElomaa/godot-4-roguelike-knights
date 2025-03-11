@@ -64,8 +64,9 @@ func handleMove(dir):
 		return
 	
 	#### MOVE! AND SET ANIMATION MOVE DIRECTION
-	var idk = move(dir)
+	move(dir)
 	movementDir = dir
+	creature.isStationary = false
 	
 	#### PLAYER TURN STUFF -> Press key Continuous movement
 	if creature.isPlayer and not creature.isOverworld:
