@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ubb1mie87222"
-path="res://.godot/imported/roguelike-tiles-fog-of-war-fullhidden.png-aa121623ed3244d627b5872c0f08f87c.ctex"
+uid="uid://c4ui7ril20pm"
+path="res://.godot/imported/roguelike-tiles-fog-of-war-old1.png-8e2dedd161ad179eb85b540008a1653f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/roguelike-tiles-fog-of-war-fullhidden.png"
-dest_files=["res://.godot/imported/roguelike-tiles-fog-of-war-fullhidden.png-aa121623ed3244d627b5872c0f08f87c.ctex"]
+source_file="res://Sprites/roguelike-tiles-fog-of-war-old1.png"
+dest_files=["res://.godot/imported/roguelike-tiles-fog-of-war-old1.png-8e2dedd161ad179eb85b540008a1653f.ctex"]
 
 [params]
 
