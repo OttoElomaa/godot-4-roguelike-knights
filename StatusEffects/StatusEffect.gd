@@ -56,7 +56,7 @@ func setup(skill:Node, owner:Node):
 func applyStatus(target:Node):
 	
 	var text = "%s affects %s with %s!" % [actor.creatureName, target.creatureName, effectName]
-	ui.addMessage(text, Color.WHITE)
+	ui.addMessage(text, MyColors.fontStatusC)
 	
 	#### CREATE COPY OF SELF
 	var appliedStatus = self.duplicate()
@@ -88,8 +88,8 @@ func tickStatus(target:Node, statusHandler:Node):
 		
 	#### IF REACH ZERO -> DELETE SELF
 	else:
-		var text = "%s recovers from %s..." % [target.creatureName, effectName]
-		ui.addMessage(text, Color.WHITE)
+		var text = "%s is no longer %s..." % [target.creatureName, effectedTitle]
+		ui.addMessage(text, MyColors.fontStatusC)
 		removeStatus()
 		return
 		
@@ -106,12 +106,17 @@ func tickScripts(target:Node, statusHandler:Node):
 		scene.activate()
 
 
+
 func modifyStats(statsHandler:Node):
 	$StatModifier.modifyStats(statsHandler)
 
 
 
 func triggerBoons(boonType:BoonTypes, target:Node):
+	
+	#### DON'T TRIGGER IF IT'S AGAINST RESTRICTIONS (Must stand still, Etc...)
+	if not $Restrictions.checkRestrictions(target):
+		return
 		
 	if boonType == self.boonType:
 		var text = "%s triggers %s!" % [target.creatureName, effectName]

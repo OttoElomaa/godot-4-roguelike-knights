@@ -10,3 +10,6 @@ effectName = "Sentinel"
 effectedTitle = "Sentineling"
 
 [node name="Strike" parent="Skills" index="0" instance=ExtResource("2_2qtvi")]
+
+[node name="Restrictions" parent="." index="3"]
+mustStandStill = true

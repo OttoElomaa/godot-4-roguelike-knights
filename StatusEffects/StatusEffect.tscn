@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c03effeto5f3m"]
+[gd_scene load_steps=4 format=3 uid="uid://c03effeto5f3m"]
 
 [ext_resource type="Script" path="res://StatusEffects/StatusEffect.gd" id="1_bgk4h"]
 [ext_resource type="Script" path="res://StatusEffects/StatusEffect-StatModifier.gd" id="2_fa6oq"]
+[ext_resource type="Script" path="res://StatusEffects/statusRestrictions.gd" id="3_f6bot"]
 
 [node name="StatusEffect" type="Node"]
 script = ExtResource("1_bgk4h")
@@ -12,3 +13,6 @@ script = ExtResource("1_bgk4h")
 
 [node name="StatModifier" type="Node" parent="."]
 script = ExtResource("2_fa6oq")
+
+[node name="Restrictions" type="Node" parent="."]
+script = ExtResource("3_f6bot")

@@ -294,26 +294,22 @@ func triggerBoonSelfStep():
 #### VIA WORLD SCENE -> To All Creatures			
 func triggerBoonAdjacentStep(creature:Node):
 	
-	#### YOU CAN'T TRIGGER ADJACENT STEP ACTION IF YOU MOVED
-	#### Maybe temp. To stop player from cheesing by retreating and hitting constantly
-	if not isStationary:
-		return
-	
 	#### LOGIC: IF CREATURE IS ADJACENT
 	var myAdjacentC:Array = grid.getAdjacentCreatures(self)
 	if myAdjacentC.is_empty():
+		return		
+	if not creature in myAdjacentC:
 		return
-			
-	if creature in myAdjacentC:
-		#### PASS IT TO BOONS
-		for boon in status.get_children():
-			if boon.isBoon:
-				prints("Adjacent step. Boon haver %s finds adjacent creatures: " % creatureName, myAdjacentC)
-				boon.triggerBoons(BoonTypes.ADJACENT_STEP, self)
+	
+	#### PASS IT TO BOONS
+	for boon in status.get_children():
+		if boon.isBoon:
+			prints("Adjacent step. Boon haver %s finds adjacent creatures: " % creatureName, myAdjacentC)
+			boon.triggerBoons(BoonTypes.ADJACENT_STEP, self)
 		
 
-
 ######################################################################
+	
 	
 func getNavigator():
 	return $NavigationAgent2D
