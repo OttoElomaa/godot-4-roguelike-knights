@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://WorldNodes/world_map.gd" id="1_4qp7q"]
 [ext_resource type="Texture2D" uid="uid://bh5055qxfdx57" path="res://Sprites/worldmap-tiles-plains.png" id="1_qshja"]
-[ext_resource type="PackedScene" uid="uid://qxc2qwv3njt4" path="res://MiscUI/GameStartCharButton.tscn" id="2_hm6rm"]
+[ext_resource type="PackedScene" uid="uid://qxc2qwv3njt4" path="res://WorldMapNodes/GameStartCharButton.tscn" id="2_hm6rm"]
 [ext_resource type="Script" path="res://WorldNodes/GridController.gd" id="3_2wxbk"]
 [ext_resource type="PackedScene" uid="uid://t6iw2eyutq4j" path="res://Creatures/PlayerKnight.tscn" id="3_vcrdl"]
 [ext_resource type="Texture2D" uid="uid://nce6ksq6qacd" path="res://Sprites/Heroes/heroes-knight.png" id="4_chujc"]

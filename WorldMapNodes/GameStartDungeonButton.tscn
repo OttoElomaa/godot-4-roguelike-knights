@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtrsaqfh6mpaf"]
+
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="1_6p2sd"]
+[ext_resource type="Script" path="res://WorldMapNodes/gameStartDungeonButton.gd" id="2_qp3jv"]
+[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Resources/Fonts/LabelSettingSmallFontWhite.tres" id="3_t0m45"]
+[ext_resource type="Texture2D" uid="uid://dvi7npudqaxm8" path="res://Sprites/dungeon-entrance-transparent-32px.png" id="4_obhjq"]
+
+[node name="DungeonButton" type="PanelContainer"]
+theme_override_styles/panel = ExtResource("1_6p2sd")
+script = ExtResource("2_qp3jv")
+dungeonName = "Cool Dungeon"
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBox" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="Margin/VBox"]
+layout_mode = 2
+text = "Dungeon Name"
+label_settings = ExtResource("3_t0m45")
+
+[node name="DungeonIcon" type="TextureRect" parent="Margin/VBox"]
+layout_mode = 2
+texture = ExtResource("4_obhjq")
+expand_mode = 4
+stretch_mode = 3
+
+[node name="Button" type="Button" parent="Margin"]
+layout_mode = 2
+flat = true
+
+[connection signal="pressed" from="Margin/Button" to="." method="_on_button_pressed"]

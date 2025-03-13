@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://lwjyjcutnpcs"]
+
+[ext_resource type="FontFile" uid="uid://bbravl5syvs5u" path="res://Resources/Fonts/stepalange-font/Stepalange-x3BLm.otf" id="1_3qih1"]
+[ext_resource type="Script" path="res://WorldMapNodes/dungeonSelection.gd" id="1_dteh5"]
+[ext_resource type="PackedScene" uid="uid://dtrsaqfh6mpaf" path="res://WorldMapNodes/GameStartDungeonButton.tscn" id="3_i6sg3"]
+
+[node name="DungeonSelection" type="Node2D"]
+script = ExtResource("1_dteh5")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Vbox" type="VBoxContainer" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.0
+offset_top = -123.5
+offset_right = 179.0
+offset_bottom = 123.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UI/Vbox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_3qih1")
+theme_override_font_sizes/font_size = 30
+text = "You see a number of dungeons ahead..."
+horizontal_alignment = 1
+
+[node name="Dungeons_Hbox" type="HBoxContainer" parent="UI/Vbox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="DungeonButton" parent="UI/Vbox/Dungeons_Hbox" instance=ExtResource("3_i6sg3")]
+layout_mode = 2
+
+[node name="DungeonButton2" parent="UI/Vbox/Dungeons_Hbox" instance=ExtResource("3_i6sg3")]
+layout_mode = 2
