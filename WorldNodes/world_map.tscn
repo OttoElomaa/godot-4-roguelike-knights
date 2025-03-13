@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://iouh024wqtl4" path="res://Sprites/Heroes/heroes-warden.png" id="6_iuaeq"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="7_m8t6f"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q8jxy"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bnfc8"]
 texture = ExtResource("1_qshja")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -21,7 +21,7 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_0k3il"]
 tile_size = Vector2i(32, 32)
-sources/1 = SubResource("TileSetAtlasSource_q8jxy")
+sources/1 = SubResource("TileSetAtlasSource_bnfc8")
 
 [node name="WorldMap" type="Node2D"]
 script = ExtResource("1_4qp7q")

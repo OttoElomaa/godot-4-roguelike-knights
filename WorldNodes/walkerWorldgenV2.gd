@@ -3,7 +3,6 @@ extends Node
 
 const DIRECTIONS = [Vector2i.RIGHT, Vector2i.UP, Vector2i.LEFT, Vector2i.DOWN]
 
-var grid:Node = null
 
 var walkerPos = Vector2i.ZERO
 var direction = Vector2i.RIGHT
@@ -28,10 +27,58 @@ class TurningPoint:
 		self.hasRoom = hasRoom
 		
 
-func walk(walkAmount, grid):
+
+func walkMiniworld(walkAmount:int):
+	
+	for i in range(5):
+		walkMiniTwo(walkAmount)
+	return turnPoints
+		
+
+func walkMiniTwo(walkAmount:int):
+	walkerPos.x = randi_range(-5,5)
+	walkerPos.y = randi_range(-5,5)
+	
+	#### WALK FOR THE SPECIFIED AMOUNT OF STEPS
+	while stepsTaken < walkAmount:
+		
+		prints("successful step at ", walkerPos)
+		
+		#### ADD TO ROOM POSITIONS, STEP'S BEEN TAKEN
+		turnPoints.append(TurningPoint.new(walkerPos, true))
+		stepsTaken += 1
+		roomsPlaced += 1
+		faultyStepsCount = 0
+		
+		#### MOVE WALKER BY RANDOM AMOUNT, THEN GO AWAY FROM NEAREST ROOM
+		walkerPos.x += randi_range(-5,5)
+		walkerPos.y += randi_range(-5,5)
+		goAwayFromPoints(walkerPos)
+			
+		#### NORMAL STEP ACTION
+		walkerPos += direction * randi_range(1,5)
+		
+		#### TRY TO MOVE WALKER BACK TO WITHIN BOUNDARIES	
+		distX = abs(walkerPos.x)
+		distY = abs(walkerPos.y)
+		if restoreToWithinBoundary():
+			walkerPos.x += randi_range(-5,5)
+			walkerPos.y += randi_range(-5,5)
+		
+	prints("turning points, walker 2: ")
+	for p in turnPoints:
+		print(p.gridPosition)			
+	return turnPoints		
+
+
+
+
+
+
+
+func walk(walkAmount:int):
 	
 	#### MULTIPLE WALKS???
-	self.grid = grid
 	for i in range(5):
 		walkTwo(walkAmount)
 	return turnPoints
@@ -55,7 +102,7 @@ func walkTwo(walkAmount):
 		for point:TurningPoint in turnPoints:
 			if not tooClose:
 				if point.hasRoom:
-					var dist = grid.getGridDistanceOfCoords(walkerPos, point.gridPosition)
+					var dist = GridTools.getGridDistanceOfCoords(walkerPos, point.gridPosition)
 					if dist < 14:
 						prints("too close, distance: ", dist)
 						tooClose = true
@@ -101,11 +148,14 @@ func walkTwo(walkAmount):
 			walkerPos.x += randi_range(-5,5)
 			walkerPos.y += randi_range(-5,5)
 		
-	prints("turning points, walker 2: ", turnPoints)			
+	prints("turning points, walker 2: ")
+	for p in turnPoints:
+		print(p.gridPosition)			
 	return turnPoints		
 
 
-
+func step():
+	pass
 
 				
 

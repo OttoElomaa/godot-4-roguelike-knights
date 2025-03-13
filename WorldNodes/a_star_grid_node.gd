@@ -11,9 +11,10 @@ var aStarManhattan := AStarGrid2D.new()
 @export var debugKeepDisposables := false
 
 
-func setup(world):
+func setup(world:Node):
 	self.world = world
-	self.grid = world.grid
+	if world.has_method("generateDungeon"):
+		self.grid = world.grid
 	
 	aStarGrid.region = Rect2i(-300,-300, 600,600)
 	aStarGrid.cell_size = Vector2i(32,32)
@@ -101,7 +102,7 @@ func createPathManhattan(start: Vector2i, end:Vector2i):
 	
 	for coord in path:
 		debugPath.append(coord)
-	createDebugLine(debugPath)
+	#createDebugLine(debugPath)
 	
 	return path
 

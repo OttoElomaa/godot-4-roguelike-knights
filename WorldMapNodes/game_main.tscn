@@ -1,13 +1,67 @@
-[gd_scene load_steps=6 format=3 uid="uid://bckhqa15oogpo"]
+[gd_scene load_steps=17 format=3 uid="uid://bckhqa15oogpo"]
 
 [ext_resource type="Script" path="res://WorldMapNodes/game_main.gd" id="1_sbe32"]
+[ext_resource type="Texture2D" uid="uid://okbarnnlo02g" path="res://Sprites/worldmap-tiles-water.png" id="2_4lvc5"]
+[ext_resource type="Texture2D" uid="uid://bh5055qxfdx57" path="res://Sprites/worldmap-tiles-plains.png" id="2_kvkpm"]
 [ext_resource type="Script" path="res://file_loader.gd" id="2_s4e6f"]
+[ext_resource type="Texture2D" uid="uid://68h5r0pnli3t" path="res://Sprites/worldmap-tiles-highlights.png" id="4_jlb41"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="4_np8ec"]
+[ext_resource type="Texture2D" uid="uid://gdtfngupufrv" path="res://Sprites/worldmap-tiles-village.png" id="5_aa7ta"]
 [ext_resource type="PackedScene" uid="uid://k0em0rdf8bbx" path="res://WorldMapNodes/characterCreation.tscn" id="5_keji2"]
 [ext_resource type="Theme" uid="uid://knljw27a4uiu" path="res://Resources/Fonts/FancyPixelFontWhite.tres" id="5_pbyug"]
+[ext_resource type="Script" path="res://WorldNodes/walkerWorldgenV2.gd" id="6_3kdy8"]
+[ext_resource type="Script" path="res://WorldNodes/a_star_grid_node.gd" id="7_mnc6u"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mcbur"]
+texture = ExtResource("2_4lvc5")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_62fcv"]
+texture = ExtResource("2_kvkpm")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0j2jy"]
+texture = ExtResource("4_jlb41")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_322fg"]
+texture = ExtResource("5_aa7ta")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_1ifsn"]
+tile_size = Vector2i(32, 32)
+sources/1 = SubResource("TileSetAtlasSource_62fcv")
+sources/0 = SubResource("TileSetAtlasSource_mcbur")
+sources/2 = SubResource("TileSetAtlasSource_0j2jy")
+sources/3 = SubResource("TileSetAtlasSource_322fg")
 
 [node name="GameMain" type="Node2D"]
 script = ExtResource("1_sbe32")
+
+[node name="LilWorld" type="Node2D" parent="."]
+
+[node name="GroundTiles" type="TileMapLayer" parent="LilWorld"]
+tile_set = SubResource("TileSet_1ifsn")
+
+[node name="HighlightTiles" type="TileMapLayer" parent="LilWorld"]
+tile_set = SubResource("TileSet_1ifsn")
+
+[node name="Camera2D" type="Camera2D" parent="LilWorld"]
+
+[node name="Walker" type="Node" parent="LilWorld"]
+script = ExtResource("6_3kdy8")
+
+[node name="AStarGridNode" type="Node2D" parent="LilWorld"]
+script = ExtResource("7_mnc6u")
+
+[node name="Disposables" type="Node2D" parent="LilWorld/AStarGridNode"]
 
 [node name="FileLoader" type="Node" parent="."]
 script = ExtResource("2_s4e6f")

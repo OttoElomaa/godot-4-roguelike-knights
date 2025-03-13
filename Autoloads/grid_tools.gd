@@ -23,3 +23,9 @@ func gridToWorld(grid_pos: Vector2i) -> Vector2i:
 func worldToGrid(world_pos: Vector2i) -> Vector2i:
 	var grid_pos: Vector2i = world_pos / tileSize
 	return grid_pos
+	
+	
+func getGridDistanceOfCoords(coord1:Vector2i, coord2:Vector2i):
+	var distanceX = abs(coord1.x - coord2.x)
+	var distanceY = abs(coord1.y - coord2.y)
+	return max(distanceX, distanceY)
