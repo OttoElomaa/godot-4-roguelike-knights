@@ -30,7 +30,7 @@ class TurningPoint:
 
 func walkMiniworld(walkAmount:int):
 	
-	for i in range(5):
+	for i in range(10):
 		walkMiniTwo(walkAmount)
 	return turnPoints
 		
@@ -51,12 +51,12 @@ func walkMiniTwo(walkAmount:int):
 		faultyStepsCount = 0
 		
 		#### MOVE WALKER BY RANDOM AMOUNT, THEN GO AWAY FROM NEAREST ROOM
-		walkerPos.x += randi_range(-5,5)
-		walkerPos.y += randi_range(-5,5)
+		walkerPos.x += randi_range(-2,2)
+		walkerPos.y += randi_range(-2,2)
 		goAwayFromPoints(walkerPos)
 			
 		#### NORMAL STEP ACTION
-		walkerPos += direction * randi_range(1,5)
+		walkerPos += direction * randi_range(1,3)
 		
 		#### TRY TO MOVE WALKER BACK TO WITHIN BOUNDARIES	
 		distX = abs(walkerPos.x)

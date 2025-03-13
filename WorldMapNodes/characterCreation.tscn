@@ -1,17 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://k0em0rdf8bbx"]
+[gd_scene load_steps=9 format=3 uid="uid://k0em0rdf8bbx"]
 
 [ext_resource type="FontFile" uid="uid://bbravl5syvs5u" path="res://Resources/Fonts/stepalange-font/Stepalange-x3BLm.otf" id="1_bijxy"]
+[ext_resource type="Script" path="res://WorldMapNodes/characterCreation.gd" id="1_wi0ip"]
 [ext_resource type="PackedScene" uid="uid://qxc2qwv3njt4" path="res://WorldMapNodes/GameStartCharButton.tscn" id="2_6kmw4"]
+[ext_resource type="StyleBox" uid="uid://cuau5auulqx2j" path="res://Resources/SelectBoxTransparent.tres" id="2_fbe35"]
 [ext_resource type="PackedScene" uid="uid://t6iw2eyutq4j" path="res://Creatures/PlayerKnight.tscn" id="3_yvxih"]
 [ext_resource type="Texture2D" uid="uid://nce6ksq6qacd" path="res://Sprites/Heroes/heroes-knight.png" id="4_ut8o6"]
 [ext_resource type="PackedScene" uid="uid://buwcv3cj51l34" path="res://Creatures/PlayerWarden.tscn" id="5_qg772"]
 [ext_resource type="Texture2D" uid="uid://iouh024wqtl4" path="res://Sprites/Heroes/heroes-warden.png" id="6_radq5"]
 
 [node name="CharacterCreation" type="Node2D"]
+script = ExtResource("1_wi0ip")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Vbox" type="VBoxContainer" parent="UI"]
+[node name="PanelContainer" type="PanelContainer" parent="UI"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -23,30 +26,41 @@ offset_right = 179.0
 offset_bottom = 123.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_fbe35")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Vbox" type="VBoxContainer" parent="UI/PanelContainer/MarginContainer"]
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="UI/Vbox"]
+[node name="Label" type="Label" parent="UI/PanelContainer/MarginContainer/Vbox"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_bijxy")
 theme_override_font_sizes/font_size = 30
 text = "Choose your character!"
 horizontal_alignment = 1
 
-[node name="Chars_Hbox" type="HBoxContainer" parent="UI/Vbox"]
+[node name="Chars_Hbox" type="HBoxContainer" parent="UI/PanelContainer/MarginContainer/Vbox"]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="CharButton" parent="UI/Vbox/Chars_Hbox" instance=ExtResource("2_6kmw4")]
+[node name="CharButton" parent="UI/PanelContainer/MarginContainer/Vbox/Chars_Hbox" instance=ExtResource("2_6kmw4")]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 characterScene = ExtResource("3_yvxih")
 characterName = "Knight"
 characterSprite = ExtResource("4_ut8o6")
 
-[node name="CharButton2" parent="UI/Vbox/Chars_Hbox" instance=ExtResource("2_6kmw4")]
+[node name="CharButton2" parent="UI/PanelContainer/MarginContainer/Vbox/Chars_Hbox" instance=ExtResource("2_6kmw4")]
 layout_mode = 2
 characterScene = ExtResource("5_qg772")
 characterName = "Warden"
