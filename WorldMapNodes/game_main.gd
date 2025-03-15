@@ -9,11 +9,13 @@ var DungeonSelect:PackedScene = load("res://WorldMapNodes/dungeonSelection.tscn"
 var storedPlayer:Node = null
 var currentDungeon:Node = null
 
-var currentStageNum := 1
+var currentDungeonInfo:Object = null
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	ProgressData.currentWorldStage = 1
 	
 	$CharacterCreation.setup(self)
 	
@@ -29,7 +31,6 @@ func _ready() -> void:
 	
 func startGame():
 	
-	#storedPlayer = playerScene.instantiate()
 	$LilWorld.queue_free()
 	generateNewLevel(storedPlayer)
 	
@@ -47,7 +48,10 @@ func startGameFromPlayerScene(playerPacked:PackedScene):
 	
 	#startGame(playerPacked)
 
-func startGameFromDungeonIcon():
+func startGameFromDungeonIcon(dungeonInfo):
+	
+	currentDungeonInfo = dungeonInfo
+	
 	startGame()
 
 	
@@ -59,7 +63,7 @@ func generateNewLevel(player:Node):
 	
 	await get_tree().process_frame
 	await get_tree().process_frame
-	world.startGame(self, player)
+	world.startGame(self, player, currentDungeonInfo)
 
 
 

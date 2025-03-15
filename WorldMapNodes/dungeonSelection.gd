@@ -9,7 +9,7 @@ var game:Node = null
 func setup(game:Node):
 	self.game = game
 	
-	stageLabel.text = "You've reached Stage %d of the journey" % game.currentStageNum
+	stageLabel.text = "You've reached Stage %d of the journey" % ProgressData.currentWorldStage
 	
 	for dungeonIcon in $UI/DungeonsPanel/Margin/Vbox/Dungeons_Hbox.get_children():
 		dungeonIcon.setup(game, self)

@@ -36,8 +36,8 @@ func walkMiniworld(walkAmount:int):
 		
 
 func walkMiniTwo(walkAmount:int):
-	walkerPos.x = randi_range(-5,5)
-	walkerPos.y = randi_range(-5,5)
+	walkerPos.x = randi_range(10, 20)
+	walkerPos.y = randi_range(10, 20)
 	
 	#### WALK FOR THE SPECIFIED AMOUNT OF STEPS
 	while stepsTaken < walkAmount:

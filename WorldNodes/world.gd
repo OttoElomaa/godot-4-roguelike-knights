@@ -50,7 +50,7 @@ var isMapKilled := true
 
 
 
-func startGame(game:Node, playerScene:Node):
+func startGame(game:Node, playerScene:Node, dungeonInfo:Object):
 
 	#### SETUP SELF AND UI
 	self.game = game
