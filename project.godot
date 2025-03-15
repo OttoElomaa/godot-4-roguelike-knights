@@ -22,6 +22,7 @@ FileLoader="*res://Autoloads/ResourceLoader.tscn"
 GridTools="*res://Autoloads/GridTools.tscn"
 ProgressData="*res://Autoloads/ProgressData.tscn"
 MyColors="*res://Autoloads/MyColors.tscn"
+NameGenerator="*res://Autoloads/NameGenerator.tscn"
 
 [display]
 

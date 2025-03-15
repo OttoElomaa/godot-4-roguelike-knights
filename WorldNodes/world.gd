@@ -3,9 +3,7 @@ extends NavigationRegion2D
 
 @export var isOverworld := false
 
-
-
-@export var dungeonName := "Cool Dungeon Name"
+#@export var dungeonName := "Cool Dungeon Name"
 
 @export var roomSize := 16
 
@@ -16,7 +14,10 @@ extends NavigationRegion2D
 
 
 var game:Node = null
-var currentRoom: Node = null
+var dungeonInfo:Object = null
+var dungeonName := "Dungeon Name"
+
+#var currentRoom: Node = null
 
 var exitGridPos := Vector2i.ZERO
 var startingGridPos := Vector2i.ZERO
@@ -54,6 +55,9 @@ func startGame(game:Node, playerScene:Node, dungeonInfo:Object):
 
 	#### SETUP SELF AND UI
 	self.game = game
+	self.dungeonInfo = dungeonInfo
+	dungeonName = dungeonInfo.dungeonName
+	
 	ui.toggleLoadingScreen(true)
 	States.inputModeOff()
 	var pointlessReturn = null
@@ -172,7 +176,7 @@ func generateDungeon():
 	#### OPEN UP HOLES IN ROOM WALLS SO THE PATH CAN BE TRAVELED
 	for room in getRooms():
 		room.createOpenPathFromArray(pathTiles)
-		randomizeLevelTileGraphics()
+		setLevelTileGraphics()
 		
 	return pathTiles
 
@@ -235,7 +239,7 @@ func _process(delta: float) -> void:
 	
 	#### FOR DEBUG
 	if Input.is_action_just_pressed("u"):
-		randomizeLevelTileGraphics()
+		setLevelTileGraphics()
 	
 	#### FOR DEBUG TELEPORTING
 	if Input.is_action_just_pressed("X"):
@@ -377,11 +381,11 @@ func resetLevel():
 
 #### RANDOMIZE A GRAPHICS VALUE (It's a TILE ATLAS OFFSET)
 #### 0 = CASTLE  |  1 = FOREST  |  2 = DESERT
-func randomizeLevelTileGraphics():
+func setLevelTileGraphics():
 	
-	var graphicsValue = randi_range(0,2)
+	#var graphicsValue = randi_range(0,2)
 	for room in getRooms():
-		room.setTileGraphics(graphicsValue)
+		room.setTileGraphics(dungeonInfo.biome)
 
 
 ############################################################

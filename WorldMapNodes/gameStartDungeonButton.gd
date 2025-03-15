@@ -25,7 +25,29 @@ func setup(game:Node, selector:Node):
 	self.game = game
 	self.dungeonSelector = selector
 	
+	dungeonName = NameGenerator.generate_dungeon_name()
+	biome = randi_range(0,2)
+	
 	$Margin/VBox/NameLabel.text = dungeonName
+	
+	var difficultyText := ""
+	match difficulty:
+		1:
+			difficultyText = "This is an early-level dungeon."
+		2:
+			difficultyText = "This is a medium difficult dungeon."
+	
+	var biomeText := ""
+	match biome:
+		0:
+			biomeText = "A ruined castle."
+		1:
+			biomeText = "An ancient grove."
+		2:
+			biomeText = "A desert ruin."
+	
+	$Margin/VBox/DifficultyLabel.text = difficultyText
+	$Margin/VBox/BiomeLabel.text = biomeText
 	#$Margin/VBox/DungeonIcon.texture = characterSprite
 
 

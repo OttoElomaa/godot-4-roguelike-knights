@@ -19,6 +19,8 @@ var initialMessage:Node = null
 
 
 func setup(world):
+	
+	floorLabel.text = world.dungeonName
 	playerPanel.setupPlayerView(world.player)
 
 
