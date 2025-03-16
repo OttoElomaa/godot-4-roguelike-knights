@@ -74,6 +74,7 @@ position = Vector2(260, 219)
 script = ExtResource("8_dntog")
 
 [node name="DebugCamera" type="Camera2D" parent="DebugNodes" index="0"]
+zoom = Vector2(1.5, 1.5)
 
 [node name="DebugTimer" type="Timer" parent="DebugNodes" index="1"]
 wait_time = 0.3
