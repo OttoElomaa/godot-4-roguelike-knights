@@ -49,7 +49,7 @@ func addToDictHelp(creature:Node, counter:int):
 	counter += 1
 	return counter
 
-			
+
 
 func autoSetTarget():
 	
@@ -63,16 +63,8 @@ func autoSetTarget():
 	else:
 		$TargetingIcon.show()
 	
-	#### PICK CLOSEST TARGET
-	var closest:Node = targetsDict.values()[0]
-	for creature in targetsDict.values():
-		var distCre = grid.getGridDistance(player, creature)
-		var distClose = grid.getGridDistance(player, closest)
-		
-		if distCre <= distClose:
-			closest = creature
-	
-	setTarget(closest)
+	var closestCreature = GridTools.findclosestCreature(player, targetsDict.values())
+	setTarget(closestCreature)
 		
 	#self.position = closest.position
 		

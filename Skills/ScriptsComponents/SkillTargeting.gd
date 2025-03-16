@@ -38,7 +38,7 @@ func handleTargeting():
 	var visibleTargets := []
 	for t in targetsInRange:
 		#### ADJACENT = VISIBLE
-		if world.grid.getGridDistance(actor, t) == 1:
+		if GridTools.getEntityGridDistance(actor, t) == 1:
 			visibleTargets.append(t)
 		#### LINE OF SIGHT CONFIRMED
 		elif world.lineOfSight.lineOfSightBetweenObjects(actor, t):
@@ -77,7 +77,7 @@ func getTargetGroup() -> Array:
 
 func isInRangedRange(target:Node) -> bool:
 	
-	if world.grid.getGridDistance(actor, target) <= skill.range:
+	if GridTools.getEntityGridDistance(actor, target) <= skill.range:
 		return true
 	return false		
 			

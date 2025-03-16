@@ -216,17 +216,7 @@ func getCreatureTiles() -> Array:
 
 
 
-func getGridDistance(object1:Node, object2:Node) -> int:
-	
-	var distanceX = abs(object1.gridPosition.x - object2.gridPosition.x)
-	var distanceY = abs(object1.gridPosition.y - object2.gridPosition.y)
-	return max(distanceX, distanceY)
 
-
-func getGridDistanceOfCoords(coord1:Vector2i, coord2:Vector2i):
-	var distanceX = abs(coord1.x - coord2.x)
-	var distanceY = abs(coord1.y - coord2.y)
-	return max(distanceX, distanceY)
 
 
 func getAdjacentCreatures(actor) -> Array:

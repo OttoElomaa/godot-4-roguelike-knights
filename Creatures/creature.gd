@@ -90,10 +90,17 @@ func _physics_process(delta: float) -> void:
 	
 func creatureMove():
 	
-	var movementTarget = world.player
+	#### TARGETING: ALLIES TARGET ENEMIES, AND VICE VERSA
+	var targets = world.getEnemies()
+	if isEnemy:
+		targets = world.getAllies()
+		
+	var movementTarget = GridTools.findclosestCreature(self, targets)
+	if movementTarget == null:
+		movementTarget = world.player
 	
 	#### ADJACENT CREATURES DON'T MOVE	
-	if world.grid.getGridDistance(self, movementTarget) < 2:
+	if GridTools.getEntityGridDistance(self, movementTarget) < 2:
 		return
 	
 	#### CREATURE CAN MOVE IN THESE DIRECTIONS
@@ -194,7 +201,7 @@ func startTurn():
 	
 	#### DON'T DO ANYHTHING IF AWAY FROM PLAYER
 	#### SO ALL ALLIES/ENEMIES/ETC FREEZE WHEN FAR AWAY
-	if world.grid.getGridDistance(self, player) > 12:
+	if GridTools.getEntityGridDistance(self, player) > 12:
 		finishTurn()
 		return
 	
