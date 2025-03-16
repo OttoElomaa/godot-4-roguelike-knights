@@ -98,3 +98,7 @@ layout_mode = 2
 
 [node name="DungeonButton2" parent="UI/DungeonsPanel/Margin/Vbox/Dungeons_Hbox" instance=ExtResource("3_i6sg3")]
 layout_mode = 2
+
+[node name="DebugIcon" parent="UI/DungeonsPanel/Margin/Vbox/Dungeons_Hbox" instance=ExtResource("3_i6sg3")]
+layout_mode = 2
+isDebugMap = true

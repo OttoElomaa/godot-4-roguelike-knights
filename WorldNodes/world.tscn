@@ -46,6 +46,7 @@ navigation_enabled = false
 script = ExtResource("5_stjdu")
 
 [node name="AStarGridNode" type="Node2D" parent="."]
+z_index = 10
 script = ExtResource("6_bcmm6")
 
 [node name="Disposables" type="Node2D" parent="AStarGridNode"]

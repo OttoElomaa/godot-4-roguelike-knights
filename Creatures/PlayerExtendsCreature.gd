@@ -87,3 +87,8 @@ func useSkill(index):
 	var success = skill.activate()
 	if success:
 		finishTurn()
+
+
+
+func toggleCamera(isEnabled:bool):
+	$Camera2D.enabled = isEnabled

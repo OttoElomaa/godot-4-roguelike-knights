@@ -133,6 +133,15 @@ func createOpenPathFromArray(path:Array):
 				$Tiles/WallTiles2.set_cell(transformed, -1)
 	
 			
+
+					
+	
+	finishRoomSetup()	
+			
+			
+
+func finishRoomSetup():
+	
 	#### AFTER PUNCHING HOLES IN WALLS, MAKE ALL RELEVANT TILES LOOK LIKE WALL EDGES
 	#### -1 = EMPTY TILE  |  22 = WALL EDGE ID			
 	for wall in wallTilemap.get_used_cells():
@@ -145,13 +154,7 @@ func createOpenPathFromArray(path:Array):
 					wallTilemap.set_cell(wall, 22, Vector2i(0,0))
 				23:
 					wallTilemap.set_cell(wall, 24, Vector2i(0,0))
-					
 	
-	finishRoomSetup()	
-			
-			
-
-func finishRoomSetup():
 	
 	#### FOR UNPASSABLE VOID TILES CREATION, MAP THE ENTIRE AREA OF THE ROOM VIA BACKDROP LAYER
 	for tilePos:Vector2i in $Tiles/Backdrop2.get_used_cells():

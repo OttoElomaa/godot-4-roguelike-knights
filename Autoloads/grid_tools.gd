@@ -38,7 +38,7 @@ func getGridDistanceOfCoords(coord1:Vector2i, coord2:Vector2i):
 
 
 #### PICK CLOSEST TARGET FROM ARRAY
-func findclosestCreature(firstC:Node, creatureArray:Array) -> Node:
+func findClosestCreature(firstC:Node, creatureArray:Array) -> Node:
 	if creatureArray.is_empty(): ## EMPTY ARRAY
 		return null
 		

@@ -3,8 +3,9 @@ extends Node2D
 
 
 var World:PackedScene = load("res://WorldNodes/world.tscn")
-
 var DungeonSelect:PackedScene = load("res://WorldMapNodes/dungeonSelection.tscn")
+
+var DebugWorld:PackedScene = load("res://WorldNodes/DebugWorld.tscn")
 
 var storedPlayer:Node = null
 var currentDungeon:Node = null
@@ -48,11 +49,15 @@ func startGameFromPlayerScene(playerPacked:PackedScene):
 	
 	#startGame(playerPacked)
 
-func startGameFromDungeonIcon(dungeonInfo):
-	
+func startGameFromDungeonIcon(dungeonInfo:Object, isDebugMap:bool):
+	#### SET INFO OF CURRENT DUNGEON
 	currentDungeonInfo = dungeonInfo
 	
-	startGame()
+	#### START GAME
+	if isDebugMap:
+		loadDebugLevel()
+	else:
+		startGame()
 
 	
 
@@ -64,6 +69,14 @@ func generateNewLevel(player:Node):
 	await get_tree().process_frame
 	await get_tree().process_frame
 	world.startGame(self, player, currentDungeonInfo)
+
+
+func loadDebugLevel():
+	
+	$LilWorld.queue_free()
+	var world = DebugWorld.instantiate()
+	add_child(world)
+	world.startDebugLevel(self, storedPlayer, currentDungeonInfo)
 
 
 

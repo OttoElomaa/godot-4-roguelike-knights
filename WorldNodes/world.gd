@@ -57,41 +57,34 @@ func startGame(game:Node, playerScene:Node, dungeonInfo:Object):
 	self.game = game
 	self.dungeonInfo = dungeonInfo
 	dungeonName = dungeonInfo.dungeonName
+	player = playerScene
 	
 	ui.toggleLoadingScreen(true)
 	States.inputModeOff()
-	var pointlessReturn = null
 	
+	var pointlessReturn = null
 	
 	if debugShowVoidTiles:
 		$Utilities/VoidTiles.show()
 	else:
 		$Utilities/VoidTiles.hide()
-	
-	
-	#### SETUP PLAYER
-	player = playerScene
-	
-	#prints("player at start of game: ", player, player.creatureName)
-	
+			
 	$Utilities/LookTool.setup(self)
 	
 	
-	
-	#####################################################
-	#### ROOMS STUFF
 	#### SETUP ASTARGRID TO CREATE PATH BETWEEN ROOM SCENES
 	pointlessReturn = $AStarGridNode.setup(self)
 	$GridController.setup(self)
 	set_navigation_layer_value(2, true)
 	
+	
+	#####################################################
+	#### ROOMS STUFF - GENERATE DUNGEON WITH PREFAB ROOMS
 	pointlessReturn = generateDungeon()
-	
-	#### PLACE THE PLAYER ON THE MAP
-	#### ROOMS[0]: FIRST ROOM PLACED
-	startingGridPos = firstRoom.getStartPosition()
-	
 	addCreature(player)
+	
+	#### PLACE THE PLAYER ON THE MAP -- ROOMS[0]: FIRST PLACED ROOM
+	startingGridPos = firstRoom.getStartPosition()
 	grid.putOnGridAndMap(player, startingGridPos)
 	
 	await get_tree().process_frame
@@ -110,8 +103,6 @@ func startGame(game:Node, playerScene:Node, dungeonInfo:Object):
 	addCreature(boss)
 	var lastRoomSpawnPos = lastRoom.getPlayerStartPos()
 	grid.putOnGridAndMap(boss, lastRoomSpawnPos)
-	
-	
 	
 	#### CREATE VOID TILES, ETC
 	pointlessReturn = $GridController.setupGrid()
@@ -143,7 +134,70 @@ func startGame(game:Node, playerScene:Node, dungeonInfo:Object):
 	#### INPUT MANAGEMENT
 	isMapKilled = false
 	
+
+
+func startDebugLevel(game:Node, playerScene:Node, dungeonInfo:Object):
 	
+	#### SETUP SELF AND UI
+	self.game = game
+	self.dungeonInfo = dungeonInfo
+	dungeonName = dungeonInfo.dungeonName
+	player = playerScene
+	
+	ui.toggleLoadingScreen(true)
+	States.inputModeOff()
+	
+	var pointlessReturn = null
+	
+	if debugShowVoidTiles:
+		$Utilities/VoidTiles.show()
+	else:
+		$Utilities/VoidTiles.hide()
+			
+	$Utilities/LookTool.setup(self)
+	
+	
+	#### SETUP ASTARGRID TO CREATE PATH BETWEEN ROOM SCENES
+	pointlessReturn = $AStarGridNode.setup(self)
+	$GridController.setup(self)
+	set_navigation_layer_value(2, true)
+	
+	
+	#####################################################
+	#### ROOMS STUFF - GENERATE DUNGEON WITH PREFAB ROOMS
+	for r in getRooms():
+		r.setup(self)
+		r.finishRoomSetup()
+	
+	addCreature(player)
+	player.toggleCamera(false)
+	
+	for c in getCreatures():
+		c.setup(self)
+		var newPos = GridTools.localToGrid(c.position)
+		grid.putOnGridAndMap(c, newPos)
+	
+	#### PLACE THE PLAYER ON THE MAP -- ROOMS[0]: FIRST PLACED ROOM
+	firstRoom = getRooms()[0]
+	startingGridPos = firstRoom.getStartPosition()
+	grid.putOnGridAndMap(player, startingGridPos)
+	
+	$Utilities/Targeting.setup(self)
+		
+	ui.setup(self)
+	ui.displayPlayerSkills(player)
+	ui.updateVisualsOnTurn()
+		
+	#### CREATE VOID TILES, ETC
+	pointlessReturn = $GridController.setupGrid()
+	#### LOS STUFF SETUP, NOTHING TO WAIT
+	pointlessReturn = $LineOfSight.setup(self)
+		
+	$Utilities/DumbTimer.start()
+	#### INPUT MANAGEMENT
+	isMapKilled = false
+
+
 	
 func generateDungeon():
 	
@@ -311,6 +365,7 @@ func callNextTurnAction(previous:Node):
 		if previous.isPlayer:
 			print("This message plays after player turn")
 			lineOfSight.passTurn()  #### Deletes Visual Ranged Shoot Lines
+			$AStarGridNode.passTurn() #### Deletes Navigation Lines
 		
 	next.startTurn()
 			
@@ -321,11 +376,8 @@ func callNextTurnAction(previous:Node):
 
 func updateVisuals():
 	ui.updateVisualsOnTurn()
-	$AStarGridNode.passTurn()
-	#### REMOVE TARGETING LINES FROM SCREEN		
-	#updateTargeting()
-
-
+	
+	
 
 func updateTargeting():		
 	#### CREATE LIST OF CURRENT TARGETS

@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://2bwbwfmgo5lm"]
+
+[ext_resource type="PackedScene" uid="uid://6rirwqrl30jg" path="res://WorldNodes/world.tscn" id="1_ekxxw"]
+[ext_resource type="PackedScene" uid="uid://caracmo5e6vy1" path="res://Rooms/DebugTestArena01.tscn" id="2_elxjj"]
+[ext_resource type="PackedScene" uid="uid://dpq65e6pf8358" path="res://Creatures/SkeletonArcher.tscn" id="3_soe7g"]
+[ext_resource type="PackedScene" uid="uid://bmcfrrddl4txy" path="res://Creatures/DarkHealer.tscn" id="4_rv0sr"]
+[ext_resource type="PackedScene" uid="uid://b3sgsr785g1p1" path="res://Creatures/Houndmaster.tscn" id="5_6usrl"]
+[ext_resource type="PackedScene" uid="uid://cbu18kyqxrpvs" path="res://Creatures/Orc.tscn" id="6_qffis"]
+[ext_resource type="PackedScene" uid="uid://drr6x5762e2r0" path="res://Creatures/OrcWarlord.tscn" id="7_1dpor"]
+[ext_resource type="Script" path="res://WorldNodes/debugNodes.gd" id="8_dntog"]
+[ext_resource type="PackedScene" uid="uid://dxn8gcr6ya5vo" path="res://Creatures/GuardianSpirit.tscn" id="8_v4bki"]
+[ext_resource type="PackedScene" uid="uid://c3nup8qw8wgmx" path="res://Creatures/Slime.tscn" id="9_1qux1"]
+
+[node name="DebugWorld" instance=ExtResource("1_ekxxw")]
+turnOffLineOfSight = true
+debugImmortalPlayer = true
+
+[node name="TestArena" parent="Rooms" index="0" instance=ExtResource("2_elxjj")]
+
+[node name="SkeletonArcher" parent="Creatures" index="0" instance=ExtResource("3_soe7g")]
+position = Vector2(-203, 77)
+isEnemy = false
+
+[node name="SkeletonArcher2" parent="Creatures" index="1" instance=ExtResource("3_soe7g")]
+position = Vector2(-165, 160)
+isEnemy = false
+
+[node name="SkeletonArcher3" parent="Creatures" index="2" instance=ExtResource("3_soe7g")]
+position = Vector2(-240, 139)
+isEnemy = false
+
+[node name="Healer" parent="Creatures" index="3" instance=ExtResource("4_rv0sr")]
+position = Vector2(-169, 305)
+isEnemy = false
+
+[node name="Healer2" parent="Creatures" index="4" instance=ExtResource("4_rv0sr")]
+position = Vector2(-216, 310)
+isEnemy = false
+
+[node name="Healer3" parent="Creatures" index="5" instance=ExtResource("4_rv0sr")]
+position = Vector2(-200, 364)
+isEnemy = false
+
+[node name="Houndmaster" parent="Creatures" index="6" instance=ExtResource("5_6usrl")]
+position = Vector2(430, 123)
+
+[node name="Houndmaster2" parent="Creatures" index="7" instance=ExtResource("5_6usrl")]
+position = Vector2(459, 274)
+
+[node name="Orc" parent="Creatures" index="8" instance=ExtResource("6_qffis")]
+position = Vector2(476, 172)
+
+[node name="Orc Warlord" parent="Creatures" index="9" instance=ExtResource("7_1dpor")]
+position = Vector2(434, 224)
+
+[node name="Guardian" parent="Creatures" index="10" instance=ExtResource("8_v4bki")]
+position = Vector2(366, 140)
+isEnemy = true
+
+[node name="Guardian2" parent="Creatures" index="11" instance=ExtResource("8_v4bki")]
+position = Vector2(399, 283)
+isEnemy = true
+
+[node name="Slime" parent="Creatures" index="12" instance=ExtResource("9_1qux1")]
+position = Vector2(-98, 206)
+isEnemy = false
+
+[node name="Slime2" parent="Creatures" index="13" instance=ExtResource("9_1qux1")]
+position = Vector2(-142, 240)
+isEnemy = false
+
+[node name="DebugNodes" type="Node2D" parent="." index="9"]
+position = Vector2(260, 219)
+script = ExtResource("8_dntog")
+
+[node name="DebugCamera" type="Camera2D" parent="DebugNodes" index="0"]
+
+[node name="DebugTimer" type="Timer" parent="DebugNodes" index="1"]
+wait_time = 0.3
+autostart = true
+
+[connection signal="timeout" from="DebugNodes/DebugTimer" to="DebugNodes" method="_on_debug_timer_timeout"]

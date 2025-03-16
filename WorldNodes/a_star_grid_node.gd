@@ -79,6 +79,8 @@ func createDebugLine(path) -> Line2D:
 	for point in path:
 		#prints("points:",point)
 		debugLine.add_point(point)
+		
+	debugLine.z_index = 10
 	return debugLine
 
 

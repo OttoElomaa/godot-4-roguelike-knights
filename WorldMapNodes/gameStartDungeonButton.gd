@@ -8,6 +8,9 @@ var dungeonSelector:Node = null
 @export var difficulty := 1
 @export var biome := 1
 
+@export var isDebugMap := false
+
+
 
 class DungeonInfo:
 	var dungeonName := ""
@@ -26,6 +29,9 @@ func setup(game:Node, selector:Node):
 	self.dungeonSelector = selector
 	
 	dungeonName = NameGenerator.generate_dungeon_name()
+	if isDebugMap:
+		dungeonName = "Debug Dungeon"
+	
 	biome = randi_range(0,2)
 	
 	$Margin/VBox/NameLabel.text = dungeonName
@@ -56,5 +62,5 @@ func _on_button_pressed() -> void:
 	
 	var infoObject = DungeonInfo.new(dungeonName, difficulty, biome)
 	
-	game.startGameFromDungeonIcon(infoObject)
+	game.startGameFromDungeonIcon(infoObject, isDebugMap)
 	dungeonSelector.queue_free()

@@ -95,7 +95,7 @@ func creatureMove():
 	if isEnemy:
 		targets = world.getAllies()
 		
-	var movementTarget = GridTools.findclosestCreature(self, targets)
+	var movementTarget = GridTools.findClosestCreature(self, targets)
 	if movementTarget == null:
 		movementTarget = world.player
 	
@@ -201,9 +201,10 @@ func startTurn():
 	
 	#### DON'T DO ANYHTHING IF AWAY FROM PLAYER
 	#### SO ALL ALLIES/ENEMIES/ETC FREEZE WHEN FAR AWAY
-	if GridTools.getEntityGridDistance(self, player) > 12:
-		finishTurn()
-		return
+	if not world.debugImmortalPlayer:
+		if GridTools.getEntityGridDistance(self, player) > 12:
+			finishTurn()
+			return
 	
 	###################################################
 	#### PICK TARGET
