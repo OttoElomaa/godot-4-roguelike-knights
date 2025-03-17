@@ -366,6 +366,7 @@ func callNextTurnAction(previous:Node):
 			print("This message plays after player turn")
 			lineOfSight.passTurn()  #### Deletes Visual Ranged Shoot Lines
 			$AStarGridNode.passTurn() #### Deletes Navigation Lines
+			ui.toggleHelp(false)
 		
 	next.startTurn()
 			

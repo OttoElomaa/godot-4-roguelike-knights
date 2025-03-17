@@ -55,6 +55,13 @@ func processExplore():
 	elif Input.is_action_just_pressed("4"):
 		skillToUse = 4
 	
+	
+		#### STANDING STILL
+	elif Input.is_action_just_pressed("Space"):
+		world.ui.addMessage("%s stands still." % creatureName, Color.WHITE)
+		finishTurn()
+	
+	
 	elif Input.is_action_just_pressed("Z"):
 		
 		match zoomLevel:

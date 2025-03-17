@@ -25,6 +25,23 @@ func setup(world):
 
 
 
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("H"):
+		toggleHelp(true)
+
+
+
+func toggleHelp(cycle:bool):
+	if not cycle:
+		$HelpScreen.hide()
+		return
+		
+	var h := $HelpScreen
+	if not h.visible:
+		$HelpScreen.show()
+	else:
+		$HelpScreen.hide()
+
 func displayPlayerSkills(player):
 	
 	var boxes:Array = skillBar.get_children()

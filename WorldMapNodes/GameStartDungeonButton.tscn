@@ -42,6 +42,12 @@ text = "Biome"
 label_settings = ExtResource("3_t0m45")
 horizontal_alignment = 1
 
+[node name="FloorsLabel" type="Label" parent="Margin/VBox"]
+layout_mode = 2
+text = "Floors count"
+label_settings = ExtResource("3_t0m45")
+horizontal_alignment = 1
+
 [node name="DungeonIcon" type="TextureRect" parent="Margin/VBox"]
 layout_mode = 2
 texture = ExtResource("4_obhjq")

@@ -63,7 +63,7 @@ func autoSetTarget():
 	else:
 		$TargetingIcon.show()
 	
-	var closestCreature = GridTools.findclosestCreature(player, targetsDict.values())
+	var closestCreature = GridTools.findClosestCreature(player, targetsDict.values())
 	setTarget(closestCreature)
 		
 	#self.position = closest.position

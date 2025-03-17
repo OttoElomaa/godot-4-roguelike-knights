@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 	
 	if States.GameState == States.InputStates.EXPLORE:
 		
-		#### STOP MOVEMENT IF MOVEMENT KEY IS PRESSED
+		#### STOP MOVEMENT IF MOVEMENT KEY IS RELEASED
 		processExploreRelease()
 		
 		#### MOVEMENT UNDERWAY, DON'T ACCEPT NEW INPUT
@@ -38,8 +38,6 @@ func _process(delta: float) -> void:
 			processMovementPress()
 		
 		
-	
-	
 	
 func processMovementPress():
 	
