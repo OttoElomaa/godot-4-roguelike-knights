@@ -32,12 +32,15 @@ func _ready() -> void:
 	
 func startGame():
 	
+	ProgressData.maxDungeonFloor = currentDungeonInfo.floorsCount
+	ProgressData.dungeonFloorLevel = 0
+	
 	$LilWorld.queue_free()
 	generateNewLevel(storedPlayer)
 	
 	
 
-func startGameFromPlayerScene(playerPacked:PackedScene):
+func startDungeonSelect(playerPacked:PackedScene):
 	
 	storedPlayer = playerPacked.instantiate()
 	$CharacterCreation.queue_free()
@@ -65,6 +68,8 @@ func generateNewLevel(player:Node):
 	
 	var world = World.instantiate()
 	add_child(world)
+	
+	ProgressData.dungeonFloorLevel += 1
 	
 	await get_tree().process_frame
 	await get_tree().process_frame

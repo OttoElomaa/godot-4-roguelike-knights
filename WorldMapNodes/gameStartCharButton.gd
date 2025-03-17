@@ -20,4 +20,4 @@ func setup(world):
 func _on_button_pressed() -> void:
 	print("Character select button pressed")
 	prints("button char scene: ", self.characterScene)
-	game.startGameFromPlayerScene(self.characterScene)
+	game.startDungeonSelect(self.characterScene)

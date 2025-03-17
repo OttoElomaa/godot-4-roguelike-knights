@@ -1,7 +1,9 @@
 extends CanvasLayer
 
 
-@onready var floorLabel := $LookMargin/VBox/FloorInfo/Margin/Hbox/FloorLabel
+@onready var dungeonNameLabel := $LookMargin/VBox/FloorInfo/Margin/Hbox/DungeonName
+@onready var floorsLabel := $LookMargin/VBox/FloorInfo/Margin/Hbox/FloorLabel
+
 @onready var goldLabel := $LookMargin/VBox/FloorInfo/Margin/Hbox/GoldLabel
 @onready var enemiesLabel := $LookMargin/VBox/FloorInfo/Margin/Hbox/EnemiesLabel
 
@@ -20,7 +22,9 @@ var initialMessage:Node = null
 
 func setup(world):
 	
-	floorLabel.text = world.dungeonName
+	dungeonNameLabel.text = world.dungeonName
+	floorsLabel.text = "Floor %d of %d" % [ProgressData.dungeonFloorLevel, ProgressData.maxDungeonFloor]
+	
 	playerPanel.setupPlayerView(world.player)
 
 
