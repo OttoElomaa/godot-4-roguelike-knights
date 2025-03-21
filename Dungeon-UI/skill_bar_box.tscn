@@ -43,9 +43,14 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("5_8vca8")
 
-[node name="Overlay" type="ColorRect" parent="VBox/PanelC"]
+[node name="CooldownOverlay" type="ColorRect" parent="VBox/PanelC"]
+visible = false
 layout_mode = 2
 color = Color(0.0705882, 0.270588, 0.215686, 0.647059)
+
+[node name="CostOverlay" type="ColorRect" parent="VBox/PanelC"]
+layout_mode = 2
+color = Color(0.185756, 0.177261, 0.490305, 0.647059)
 
 [node name="CooldownLabel" type="Label" parent="VBox/PanelC"]
 custom_minimum_size = Vector2(50, 0)

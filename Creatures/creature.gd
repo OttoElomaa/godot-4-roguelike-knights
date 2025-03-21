@@ -320,7 +320,7 @@ func triggerBoonAdjacentStep(creature:Node):
 	
 	
 func getNavigator():
-	return $NavigationAgent2D
+	return $RangedNavigator
 	
 
 func getSkills():

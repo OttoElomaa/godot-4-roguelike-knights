@@ -118,3 +118,13 @@ func isOnCooldown() -> bool:
 
 func getCooldown():
 	return $Cooldown.currentCooldown	
+
+
+func getCostString() -> String:
+	
+	#### STRING MEANS SKILL CAN'T BE USED
+	if zealCost > actor.stats.zeal.current:
+		return "%d Zeal" % zealCost
+	
+	#### EMPTY STRING = IS USABLE	
+	return ""

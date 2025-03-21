@@ -113,9 +113,11 @@ one_shot = true
 
 [node name="AnimationComponent" parent="." instance=ExtResource("7_a2bjn")]
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="RangedNavigator" type="NavigationAgent2D" parent="."]
+path_desired_distance = 5.0
+target_desired_distance = 5.0
 simplify_path = true
-simplify_epsilon = 10.0
+simplify_epsilon = 5.0
 
 [node name="SpriteAnimations" type="AnimationPlayer" parent="."]
 libraries = {

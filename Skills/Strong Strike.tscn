@@ -11,9 +11,6 @@ skillName = "Strong Strike"
 skillType = "melee"
 range = 1
 
-[node name="Cooldown" parent="." index="1"]
-cooldown = 2
-
 [node name="ZealResourceComponent" parent="Resources" index="0" instance=ExtResource("3_d2bwv")]
 zealCost = 2
 zealEnhance = 2
