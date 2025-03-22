@@ -14,6 +14,9 @@ var ui:Node = null
 
 var selectedTarget: Node = null
 
+#### THIS SKILL CAN BE ATTACHED TO AN EFFECT, like a boon
+var myEffect: Node = null
+
 #### RESOURCE STUFF
 var zealGain := 0
 var zealCost := 0

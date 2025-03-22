@@ -37,10 +37,10 @@ func handleTargeting():
 	
 	var visibleTargets := []
 	for t in targetsInRange:
-		#### ADJACENT = VISIBLE
-		if GridTools.getEntityGridDistance(actor, t) == 1:
-			visibleTargets.append(t)
 		#### LINE OF SIGHT CONFIRMED
+		if actor.isPlayer:
+			if t.isVisible:
+				visibleTargets.append(t)
 		elif world.lineOfSight.lineOfSightBetweenObjects(actor, t):
 			visibleTargets.append(t)
 			#world.aStar.createDebugLine([actor.position, t.position]) ##DEBUG

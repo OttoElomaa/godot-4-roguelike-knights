@@ -42,6 +42,8 @@ func setup(skill:Node, owner:Node):
 	
 	#### END OF BOON SETUP - NO SKILL ATTACHED
 	if boonType != BoonTypes.NONE:
+		for scene in $Skills.get_children():
+			scene.myEffect = self
 		return
 	
 	#### SKILL STATUS EFFECTS, ATTACHED TO SKILL

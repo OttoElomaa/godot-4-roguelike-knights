@@ -20,10 +20,14 @@ func setup(skill):
 func activate(targets:Array) -> Node:
 	
 	#### NPC's GET TARGET FROM FILTERED LIST
-	#### PLAYER HAS ITS OWN TARGETING SYSTEM
+	#### ALSO AUTO-TARGETING SKILLS VIA BOONS ETC
 	var target = targets[0]
+	
+	#### MANUAL TARGET SELECTION - FOR MANUAL SKILL USE ONLY
 	if actor.isPlayer:
-		target = actor.selectedTarget
+		if skill.myEffect == null:
+			target = actor.selectedTarget
+	#### IDK
 	if not target:
 		return null
 	

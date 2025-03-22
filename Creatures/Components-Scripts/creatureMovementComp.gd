@@ -72,6 +72,10 @@ func handleMove(dir):
 	if creature.isPlayer and not creature.isOverworld:
 		$MovementTurnTimer.start()
 		world.ui.addMessage("%s takes a step" % creature.creatureName, Color.WHITE)
+	
+	#### CHANGE CREATURE VISIBILITY STATUS
+	if creature.gridPosition in world.getVisibleTiles():
+		creature.isVisible = true
 			
 	#### BOONS
 	creature.triggerBoonSelfStep()

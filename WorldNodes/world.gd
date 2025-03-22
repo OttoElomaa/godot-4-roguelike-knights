@@ -130,8 +130,8 @@ func startGame(game:Node, playerScene:Node, dungeonInfo:Object):
 	
 	#### SHROUD THE WHOLE MAP IN FOG PRE- LINE OF SIGHT CHECKS
 	if not turnOffLineOfSight:
-		for x in range(-200,200):
-			for y in range(-200,200):
+		for x in range(-100,100):
+			for y in range(-100,100):
 				$Utilities/FogTiles.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
 	
 	$Utilities/DumbTimer.start()
@@ -489,6 +489,11 @@ func getEnemies():
 		if c.isEnemy:
 			returnCreatures.append(c)
 	return returnCreatures
+
+
+func getVisibleTiles():
+	return lineOfSight.visibleTiles
+
 	
 	
 

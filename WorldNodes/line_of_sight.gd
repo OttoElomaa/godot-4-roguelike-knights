@@ -6,6 +6,7 @@ extends Node2D
 var RangedLine = load("res://MiscUI/RangedShotLine.tscn")
 
 var previouslySeenTiles := []
+var visibleTiles := []
 var world:Node = null
 var grid:Node = null
 
@@ -25,6 +26,10 @@ func passTurn():
 
 func lineOfSightBetweenObjects(object1:Node, object2:Node) -> bool:
 	
+	#### ADJACENT = VISIBLE
+	if GridTools.getEntityGridDistance(object1, object2) < 2:
+		return true
+	
 	#### OBJECT 1'S NAVIGATION AGENT SETS OBJECT 2 AS ITS TARGET
 	#### THEN CREATE PATH
 	var navigator = object1.getNavigator()
@@ -36,7 +41,6 @@ func lineOfSightBetweenObjects(object1:Node, object2:Node) -> bool:
 		
 	#### IF PATH IS DIRECT STRAIGHT LINE, RETURN TRUE
 	if next_path_point == finalPoint:
-		
 		return true
 		
 	return false
@@ -55,6 +59,7 @@ func handleFogOfWar(startCoord:Vector2i, range:int, tilemap:TileMapLayer):
 	
 	#### PUT NAVIGATOR TO PLAYER'S CURRENT GRID POSITION (Where player stands / is moving to)
 	$Mover.position = GridTools.gridToWorld(startCoord)
+	visibleTiles = []
 	
 	var coordsToCheck:Array = grid.getCoordsInRange(startCoord, range)
 	
@@ -90,7 +95,10 @@ func handleFogOfWar(startCoord:Vector2i, range:int, tilemap:TileMapLayer):
 				#### PROCESS EACH TILE'S SIGHT LINE HERE - IMPORTANT
 				inRangeHelp(coordsDict, coord, tilemap, visibleCoords)
 				
-				
+	
+	#### STORE THIS TURN'S VISIBLE COORDS TO LIST THAT'S AVAILABLE VIA WORLD
+	visibleTiles = visibleCoords
+			
 	###################################################################################
 	#### STORE INFO ON COORDS THAT ARE ADJACENT TO PATHABLE COORDS		
 	var adjacentCoords := []

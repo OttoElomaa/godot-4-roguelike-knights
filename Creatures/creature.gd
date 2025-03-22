@@ -109,7 +109,6 @@ func creatureMove():
 
 	#### GET A LINE OF THE PATH FROM SELF TO TARGET (PLAYER)
 	var line: Line2D = world.aStar.createPathBetween(self, movementTarget)
-	
 	line.hide()  ## DEBUG: SHOW/HIDE LINE
 	
 	if line.points.size() < 2:  ## NO LINE WAS MADE -> STOP
@@ -128,6 +127,8 @@ func creatureMove():
 	
 	movementComponent.handleMove(dir)  ## MOVE
 	line.remove_point(0)
+	
+	
 			
 	
 
