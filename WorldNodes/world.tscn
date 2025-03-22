@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://6rirwqrl30jg"]
+[gd_scene load_steps=17 format=3 uid="uid://6rirwqrl30jg"]
 
 [ext_resource type="Script" path="res://WorldNodes/world.gd" id="1_fx20f"]
 [ext_resource type="PackedScene" uid="uid://cwakr1joaem2j" path="res://Dungeon-UI/ui.tscn" id="2_wgef7"]
@@ -14,6 +14,7 @@
 [ext_resource type="TileSet" uid="uid://d1ktl1xbf2yy8" path="res://Resources/Tilemaps/FogTileset.tres" id="12_ehidn"]
 [ext_resource type="TileSet" uid="uid://7slev8tg8jyu" path="res://Resources/Tilemaps/VoidDebugTiles.tres" id="13_njn17"]
 [ext_resource type="Texture2D" uid="uid://5bjgdk2y721r" path="res://Sprites/stairs-down-monochrome-transparent-32px.png" id="14_k44we"]
+[ext_resource type="Script" path="res://gridObject.gd" id="15_h6cfj"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_akmnp"]
 vertices = PackedVector2Array(9504, -9680, 9456, 9424, -9504, 9504, -9552, -9808)
@@ -111,6 +112,7 @@ one_shot = true
 
 [node name="ExitSprite" type="Sprite2D" parent="."]
 texture = ExtResource("14_k44we")
+script = ExtResource("15_h6cfj")
 
 [connection signal="bake_finished" from="." to="." method="_on_bake_finished"]
 [connection signal="timeout" from="LineOfSight/FogOfWarTimer" to="." method="_on_fog_of_war_timer_timeout"]

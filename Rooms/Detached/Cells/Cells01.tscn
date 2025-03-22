@@ -17,10 +17,10 @@ tile_map_data = PackedByteArray("AAACAAUAFgAAAAAAAAALAAwAFQAAAAAAAAAMAAgAFgAAAAA
 tile_map_data = PackedByteArray("AAAFAAkAAAAAAAAAAAACAAEAAAAAAAAAAAACAAQAAAAAAAAAAAACAAYAAAAAAAAAAAADAAkAAAAAAAAAAAABAAsAAAAAAAAAAAAFAA0AAAAAAAAAAAAKAA0AAAAAAAAAAAAHAAcAAAAAAAAAAAAMAAcAAAAAAAAAAAAKAAEAAAAAAAAAAAA=")
 
 [node name="PlayerStart" parent="Utilities" index="0"]
-position = Vector2(304, 192)
+position = Vector2(141, 330)
 
 [node name="Center" parent="Utilities" index="1"]
-position = Vector2(80, 400)
+position = Vector2(205, 273)
 
 [node name="CreatureStart" parent="Utilities/CreatureSpawnPoints" index="0"]
 position = Vector2(272, 400)

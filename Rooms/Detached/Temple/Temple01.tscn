@@ -15,3 +15,9 @@ tile_map_data = PackedByteArray("AAACAAUAFgAAAAAAAAACAAkAFgAAAAAAAAAFAAwAFQAAAAA
 
 [node name="ClutterTiles2" parent="Tiles" index="4"]
 tile_map_data = PackedByteArray("AAAGAAIAAAAAAAAAAAAKAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAACAAYAAAAAAAAAAAAGAAwAAAAAAAAAAAAKAAoAAAAAAAAAAAAGAAgAAAAAAAAAAAA=")
+
+[node name="PlayerStart" parent="Utilities" index="0"]
+position = Vector2(271, 243)
+
+[node name="Center" parent="Utilities" index="1"]
+position = Vector2(241, 241)

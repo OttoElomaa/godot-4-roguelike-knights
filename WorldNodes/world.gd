@@ -81,10 +81,14 @@ func startGame(game:Node, playerScene:Node, dungeonInfo:Object):
 	#####################################################
 	#### ROOMS STUFF - GENERATE DUNGEON WITH PREFAB ROOMS
 	pointlessReturn = generateDungeon()
+	
+	#### CREATE VOID TILES, ETC
+	pointlessReturn = $GridController.setupGrid()
+	
 	addCreature(player)
 	
 	#### PLACE THE PLAYER ON THE MAP -- ROOMS[0]: FIRST PLACED ROOM
-	startingGridPos = firstRoom.getStartPosition()
+	startingGridPos = firstRoom.getPlayerStartPos()
 	grid.putOnGridAndMap(player, startingGridPos)
 	
 	await get_tree().process_frame
@@ -96,7 +100,8 @@ func startGame(game:Node, playerScene:Node, dungeonInfo:Object):
 	
 	#### PLACE EXIT - SAVED DURING ROOMS DICT CREATION
 	exitGridPos = lastRoom.getStartPosition()
-	grid.placeGridObjectOnMap($ExitSprite, exitGridPos)
+
+	grid.putOnGridAndMap($ExitSprite, exitGridPos)
 	
 	#### PLACE BOSS
 	var boss = FileLoader.createRandomBoss()
@@ -104,8 +109,7 @@ func startGame(game:Node, playerScene:Node, dungeonInfo:Object):
 	var lastRoomSpawnPos = lastRoom.getPlayerStartPos()
 	grid.putOnGridAndMap(boss, lastRoomSpawnPos)
 	
-	#### CREATE VOID TILES, ETC
-	pointlessReturn = $GridController.setupGrid()
+	
 	#### LOS STUFF SETUP, NOTHING TO WAIT
 	pointlessReturn = $LineOfSight.setup(self)
 	
@@ -308,7 +312,7 @@ func _process(delta: float) -> void:
 	
 	#### DEBUG CREATE NEW LEVEL	
 	if Input.is_action_just_pressed("B"):
-		resetLevel()
+		resetLevel(true)
 		
 
 
@@ -424,11 +428,17 @@ func addCreature(creature:Node):
 	
 
 #### ORDER GAME TO GENERATE NEW DUNGEON LEVEL
-func resetLevel():
+func resetLevel(isValidClear:bool):
+	
 	isMapKilled = true
 	game.storedPlayer = player
 	$Creatures.remove_child(player)
-	game.generateNewLevel(player)
+	
+	if isValidClear:
+		game.startNewLevel()
+	else:
+		game.generateLevel()
+		
 	self.queue_free()
 
 
@@ -504,7 +514,7 @@ func _on_bake_finished() -> void:
 	if navigation_polygon.get_vertices().size() <= 0:
 		print("Retrying navmesh bake")
 		#bake_navigation_polygon(true)
-		resetLevel()
+		resetLevel(false)
 		return
 	
 	#assert(navigation_polygon.get_vertices().size() > 0, "Bake failed??")

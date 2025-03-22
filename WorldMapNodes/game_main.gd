@@ -36,7 +36,7 @@ func startGame():
 	ProgressData.dungeonFloorLevel = 0
 	
 	$LilWorld.queue_free()
-	generateNewLevel(storedPlayer)
+	startNewLevel()
 	
 	
 
@@ -64,16 +64,19 @@ func startGameFromDungeonIcon(dungeonInfo:Object, isDebugMap:bool):
 
 	
 
-func generateNewLevel(player:Node):
+func startNewLevel():
+	ProgressData.dungeonFloorLevel += 1
+	generateLevel()
+
+
+func generateLevel():
 	
 	var world = World.instantiate()
 	add_child(world)
-	
-	ProgressData.dungeonFloorLevel += 1
-	
 	await get_tree().process_frame
-	await get_tree().process_frame
-	world.startGame(self, player, currentDungeonInfo)
+	
+	world.startGame(self, storedPlayer, currentDungeonInfo)
+
 
 
 func loadDebugLevel():
