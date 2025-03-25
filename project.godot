@@ -23,6 +23,7 @@ GridTools="*res://Autoloads/GridTools.tscn"
 ProgressData="*res://Autoloads/ProgressData.tscn"
 MyColors="*res://Autoloads/MyColors.tscn"
 NameGenerator="*res://Autoloads/NameGenerator.tscn"
+PlayerInventory="*res://Autoloads/PlayerInventory.tscn"
 
 [display]
 

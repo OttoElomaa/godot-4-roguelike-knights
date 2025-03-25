@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3m5ds2usal6o"]
+
+[ext_resource type="Script" path="res://Autoloads/player_inventory.gd" id="1_qlkmu"]
+
+[node name="PlayerInventory" type="Node2D"]
+script = ExtResource("1_qlkmu")

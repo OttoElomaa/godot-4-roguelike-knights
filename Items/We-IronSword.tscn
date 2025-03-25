@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://w633ci1oelc2"]
+
+[ext_resource type="PackedScene" uid="uid://d2gp3fn6hevgq" path="res://Items/EquipItem.tscn" id="1_sejqt"]
+[ext_resource type="Texture2D" uid="uid://ctpg7lgwh3fea" path="res://Sprites/skill-icon-melee-sword.png" id="2_vy7h6"]
+
+[node name="Iron Sword" instance=ExtResource("1_sejqt")]
+itemName = "Iron Sword"
+itemIcon = ExtResource("2_vy7h6")
+equipType = 1
+topDamage = 10
+midDamage = 6
+lowDamage = 2

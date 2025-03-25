@@ -33,20 +33,21 @@ var isMoving := false
 var isOverworld := false
 
 @onready var movementComponent := $CreatureMovement
+@onready var status := $StatusEffects
 
 @onready var stats:CreatureStats:
 	get:
 		return $Stats
 
-@onready var status := $StatusEffects
-	
+var UnarmedWeapon:PackedScene = load("res://Items/We-Unarmed.tscn")
+
+
 	
 func setup(world:Node):
 	
 	self.world = world
 	setupHelp()
 	
-
 
 
 func setupHelp():
@@ -62,9 +63,15 @@ func setupHelp():
 	$CreatureMovement.setup(self)
 	$AnimationComponent.setup(self)
 	
+	#### SKILLS SETUP
 	for skill in $Skills.get_children():
 		skill.setup(self)
-
+	
+	#### EQUIPMENT SETUP
+	$Equipment.setup(self)
+	if $Equipment/Weapons.get_child_count() == 0:
+		var unarmedW = UnarmedWeapon.instantiate()
+		equip(unarmedW, true)
 
 
 func _physics_process(delta: float) -> void:
@@ -273,6 +280,16 @@ func addStatus(status:Node):
 
 
 
+func equip(item: Node, toWear: bool):
+	$Equipment.equip(item, toWear)
+
+
+#### FOR NOW, JUST GET WEAPON IN FIRST SPOT
+func getWeapon():
+	return $Equipment/Weapons.get_child(0)
+
+
+##########################################################################################
 #### THIS RECEIVES A STATRESOURCE, STATS.HEALTH, WITH VALUES 'CURRENT' AND 'MAX'
 func updateHealthBar(health):
 	$HealthBar.updateVisual(health, stats.guard)

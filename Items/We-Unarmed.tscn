@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3onp5qu1pav1"]
+
+[ext_resource type="PackedScene" uid="uid://d2gp3fn6hevgq" path="res://Items/EquipItem.tscn" id="1_1222m"]
+[ext_resource type="Texture2D" uid="uid://cqweeatyqdsof" path="res://Sprites/roguelike-tiles-debug-triangle.png" id="2_4heag"]
+
+[node name="UnarmedWeapon" instance=ExtResource("1_1222m")]
+itemName = "Unarmed"
+itemIcon = ExtResource("2_4heag")
+equipType = 1
+topDamage = 6
+midDamage = 3
+lowDamage = 1

@@ -35,8 +35,11 @@ func activate(targets:Array) -> Node:
 	skill.ui.addInitialRow()
 	
 	#### CREATE FIRST HALF OF DOUBLE MESSAGE
-	skill.ui.saveInitialMessage(skill.actor.creatureName + " uses " + skill.skillName, Color.WHITE)
+	var actorWeapon = actor.getWeapon()
+	skill.ui.saveInitialMessage("%s uses %s (%s)" % [skill.actor.creatureName,skill.skillName, actorWeapon.itemName], Color.WHITE)
 	var success = false
+	
+	
 	
 	#### JUST LOG ROW FORMATTING Stuff Atm
 	handleMultiAttack()
@@ -46,7 +49,9 @@ func activate(targets:Array) -> Node:
 	for i in range(attacksCount):
 		if target.checkValidity():
 			
-			var newSuccess:bool = target.stats.handlePhysicalHit(damage)
+			var weaponDamage = actorWeapon.getRealDamage(actor)
+			
+			var newSuccess:bool = target.stats.handlePhysicalHit(weaponDamage)
 			if newSuccess:
 				success = true
 	
