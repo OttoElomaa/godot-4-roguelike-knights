@@ -16,6 +16,7 @@ extends PanelContainer
 @onready var evasionLabel:Label = labelsHbox.get_node("EvasionLabel")
 
 @onready var guardLabel:Label = labelsHboxTwo.get_node("GuardLabel")
+@onready var critLabel:Label = labelsHboxTwo.get_node("CritLabel")
 @onready var zealLabel:Label = labelsHboxTwo.get_node("ZealLabel")
 
 var player:Node = null
@@ -71,6 +72,7 @@ func updateView(creature:Node):
 	blockLabel.text = "Block: %d" % s.block.current
 	evasionLabel.text = "Evasion: %d" % s.evasion.current
 	
+	critLabel.text = "Crit: %d" % s.crit.current
 	guardLabel.text = "Guard: %d" % s.guard.current
 	zealLabel.text = "Zeal: %d" % s.zeal.current
 	

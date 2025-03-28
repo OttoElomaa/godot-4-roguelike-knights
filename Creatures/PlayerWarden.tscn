@@ -12,6 +12,9 @@
 script = ExtResource("2_8hymd")
 creatureName = "Warden"
 
+[node name="Stats" parent="." index="1"]
+baseCrit = 30
+
 [node name="Strike" parent="Skills" index="0" instance=ExtResource("2_guxo3")]
 
 [node name="Summon" parent="Skills" index="1" instance=ExtResource("3_svb3u")]

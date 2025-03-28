@@ -17,6 +17,9 @@ creatureName = "Knight"
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_shaop")
 
+[node name="Stats" parent="." index="1"]
+baseCrit = 20
+
 [node name="Strike" parent="Skills" index="0" instance=ExtResource("3_lyyhh")]
 
 [node name="Heal" parent="Skills" index="1" instance=ExtResource("4_m6a37")]

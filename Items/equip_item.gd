@@ -25,5 +25,26 @@ func setup(creature:Node):
 func getRealDamage(actor:Node) -> int:
 	
 	var crit = actor.stats.crit.current
+	var highLimit = clamp(crit, 0, 50)
+	var midLimit = clamp(crit * 2, 0, 80)
+		
+	var randCrit = randi_range(0,100)
+	var critText := "(Crit roll %d" % randCrit
 	
-	return topDamage
+	randCrit = 100 - randCrit
+	var realDamage := lowDamage
+	
+	if randCrit < highLimit:
+		realDamage = topDamage
+		critText += " <- high)"
+		
+	elif randCrit < midLimit:
+		realDamage = midDamage
+		critText += " <- mid)"
+	
+	else:
+		critText += " <- low)"
+		
+	actor.world.ui.addCaveat(critText)
+	return realDamage
+	

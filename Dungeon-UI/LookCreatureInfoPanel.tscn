@@ -78,6 +78,11 @@ text = "Evasion"
 layout_mode = 2
 theme_override_constants/separation = 8
 
+[node name="CritLabel" type="Label" parent="Margin/MainVBox/HBox/StatsHboxTwo"]
+layout_mode = 2
+text = "Guard"
+label_settings = ExtResource("3_82hgx")
+
 [node name="GuardLabel" type="Label" parent="Margin/MainVBox/HBox/StatsHboxTwo"]
 layout_mode = 2
 text = "Guard"

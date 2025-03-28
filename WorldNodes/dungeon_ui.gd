@@ -17,7 +17,7 @@ var LogDoubleRow:PackedScene = load("res://Dungeon-UI/logDoubleRow.tscn")
 var LogMessage = load("res://Dungeon-UI/BasicLogMessage.tscn")
 
 var initialMessage:Node = null
-
+var caveats := []
 
 
 func setup(world):
@@ -101,6 +101,11 @@ func showLookInfo(game:Node, lookTool:Node):
 	
 	lookPanel.showLookInfo(game, lookTool)
 			
+
+##############################################################################
+#### MESSAGE STUFF
+#### ROW = INITIAL MESSAGE + 2nd LOG MESSAGE
+#### ( SaveInitialMessage + AddLogRow()   )
 			
 			
 func addMessage(text:String, color:Color) -> void:
@@ -110,19 +115,22 @@ func addMessage(text:String, color:Color) -> void:
 
 
 func saveInitialMessage(text:String, color:Color) -> void:
-
 	initialMessage = LogMessage.instantiate()
 	initialMessage.text = text
 	initialMessage.color = color
 
 
 func addLogRow(text:String, color:Color) -> void:
-	
-	
 	var item1:Node = initialMessage.duplicate()
 	
 	var item2:Node = LogMessage.instantiate()
-	item2.text = text
+	
+	var textWithCaveats := text
+	for c in caveats:
+		textWithCaveats += " %s" % c
+	caveats = []
+		
+	item2.text = textWithCaveats
 	item2.color = color
 	
 	var row = LogDoubleRow.instantiate()
@@ -143,7 +151,13 @@ func addInitialRow():
 
 func deleteInitialRow():
 	initialMessage = null
+
+
+func addCaveat(text:String):
+	caveats.append(text)
 	
+
+####################################################################################
 
 
 func toggleLoadingScreen(visible:bool):

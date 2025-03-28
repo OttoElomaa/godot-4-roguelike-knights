@@ -95,6 +95,7 @@ script = ExtResource("3_4xke1")
 baseArmor = 5
 baseBlock = 5
 baseEvasion = 5
+baseCrit = 10
 
 [node name="Skills" type="Node" parent="."]
 
