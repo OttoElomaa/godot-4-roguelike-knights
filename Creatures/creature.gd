@@ -136,9 +136,7 @@ func creatureMove():
 	line.remove_point(0)
 	
 	
-			
 	
-
 func checkValidity() -> bool:
 	if not is_instance_valid(self):
 		return false
@@ -150,8 +148,10 @@ func checkValidity() -> bool:
 
 func startTurn():
 	
-	#### DELETES INITIAL MESSAGES AT TURN START
-	world.ui.deleteInitialRow()
+	world.ui.deleteInitialRow()  ## DELETES INITIAL MESSAGES AT TURN START
+	world.ui.clearCaveats()    ## Caveats are SKILL SPECIFIC
+	
+	#### FOR STAND-STILL BOONS
 	isStationary = true
 	
 	if isOverworld:
@@ -234,10 +234,11 @@ func finishTurn():
 	world.callNextTurnAction(self)
 
 
-
+#### TRY USING EACH SKILL IN SKILLS NODE
 func useSkills() -> bool:
 	
 	for skill in $Skills.get_children():
+		world.ui.clearCaveats() ## Caveats are SKILL SPECIFIC
 		if skill.activate() == true:
 			return true
 	return false

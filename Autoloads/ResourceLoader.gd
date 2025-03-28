@@ -1,21 +1,24 @@
 extends Node2D
 
 
-var Orc = load("res://Creatures/Orc.tscn")
-var Slime = load("res://Creatures/Slime.tscn")
-var SkeletonArcher = load("res://Creatures/SkeletonArcher.tscn")
-var DarkHealer = load("res://Creatures/DarkHealer.tscn")
-var HoundMaster = load("res://Creatures/Houndmaster.tscn")
+var Orc: PackedScene = load("res://Creatures/Orc.tscn")
+var Slime: PackedScene = load("res://Creatures/Slime.tscn")
+var SkeletonArcher: PackedScene = load("res://Creatures/SkeletonArcher.tscn")
+var DarkHealer: PackedScene = load("res://Creatures/DarkHealer.tscn")
+var HoundMaster: PackedScene = load("res://Creatures/Houndmaster.tscn")
 
-var OrcWarlord = load("res://Creatures/OrcWarlord.tscn")
+var OrcWarlord: PackedScene = load("res://Creatures/OrcWarlord.tscn")
 
-var cavern1 = load("res://Rooms/Detached/Cavern/Cavern01.tscn")
-var cavern2 = load("res://Rooms/Detached/Cavern/Cavern02.tscn")
-var cavern3 = load("res://Rooms/Detached/Cavern/Cavern03.tscn")
+var cavern1: PackedScene = load("res://Rooms/Detached/Cavern/Cavern01.tscn")
+var cavern2: PackedScene = load("res://Rooms/Detached/Cavern/Cavern02.tscn")
+var cavern3: PackedScene = load("res://Rooms/Detached/Cavern/Cavern03.tscn")
 
-var cells1 = load("res://Rooms/Detached/Cells/Cells01.tscn")
+var cells1: PackedScene = load("res://Rooms/Detached/Cells/Cells01.tscn")
 
-var temple1 = load("res://Rooms/Detached/Temple/Temple01.tscn")
+var temple1: PackedScene = load("res://Rooms/Detached/Temple/Temple01.tscn")
+
+var InteractObj: PackedScene = load("res://RoomItems/InteractObject.tscn")
+
 
 
 
@@ -60,3 +63,9 @@ func createRandomRoom() -> Node:
 				scene = temple1
 				
 	return scene.instantiate()
+
+
+
+func createRandomInteractObj():
+	
+	return InteractObj.instantiate()

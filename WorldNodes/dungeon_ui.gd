@@ -155,6 +155,10 @@ func deleteInitialRow():
 
 func addCaveat(text:String):
 	caveats.append(text)
+
+
+func clearCaveats():
+	caveats = []
 	
 
 ####################################################################################

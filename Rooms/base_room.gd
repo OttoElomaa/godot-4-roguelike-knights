@@ -51,6 +51,8 @@ func startGameAtRoom(setPlayer) -> void:
 
 
 
+
+
 func populateCreatures(world) -> Array:
 	
 	#### BOSS IS SPAWNED IN WORLD SCRIPT. NO OTHER ENEMIES IN BOSS ROOM
@@ -60,20 +62,32 @@ func populateCreatures(world) -> Array:
 	#### SPAWN AN ENEMY IN EACH START LOCATION
 	var creatures := []
 	
-	for start in $Utilities/CreatureSpawnPoints.get_children():
+	for start in getCreatureStartPositions():
+		
 		var newCreature = FileLoader.createRandomCreature()
-		#newCreature.setup(world)
+		var gridPos = GridTools.localToGrid(start.position) + originGridPos
 		
-		var newPos = $Tiles/FloorTiles2.local_to_map(start.position)
-		#newPos = grid
-		var gridPos = newPos + originGridPos
 		newCreature.gridPosition = gridPos
-		
-		#grid.placeGridObjectOnMap(newCreature, gridPos)
 		creatures.append(newCreature)
 		
 	return creatures
 
+
+
+func populateRoomItems() -> Array:
+	
+	var items := []
+	
+	for start in getCreatureStartPositions():
+		if randi_range(1,10) > 8:
+			
+			var item = FileLoader.createRandomInteractObj()
+			var gridPos = GridTools.localToGrid(start.position) + originGridPos
+		
+			item.gridPosition = gridPos
+			items.append(item)
+	
+	return items
 
 
 
@@ -106,6 +120,13 @@ func setTileGraphics(setValue:int):
 				
 
 
+#######################################################################
+
+func getCreatureStartPositions() -> Array:
+	return $Utilities/CreatureSpawnPoints.get_children()
+
+
+
 #### GET GLOBAL POSITION OF ROOM'S "CENTER" POSITION
 #### USED MOSTLY FOR CONNECTING ROOMS WITH A PATH. ALSO PLACING EXIT
 func getStartPosition():
@@ -117,6 +138,8 @@ func getPlayerStartPos():
 	var pos = $Utilities/PlayerStart.position
 	return GridTools.localToGrid(position + pos) 
 
+
+#####################################################################
 
 
 func createOpenPathFromArray(path:Array):
@@ -131,10 +154,6 @@ func createOpenPathFromArray(path:Array):
 		if pos in $Tiles/WallTiles2.get_used_cells():
 			if not pos in utilTiles.get_used_cells():
 				$Tiles/WallTiles2.set_cell(transformed, -1)
-	
-			
-
-					
 	
 	finishRoomSetup()	
 			

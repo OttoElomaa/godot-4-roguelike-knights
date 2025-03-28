@@ -29,6 +29,7 @@ agent_radius = 0.0
 [node name="World" type="NavigationRegion2D"]
 navigation_polygon = SubResource("NavigationPolygon_akmnp")
 script = ExtResource("1_fx20f")
+turnOffLineOfSight = true
 
 [node name="UI" parent="." instance=ExtResource("2_wgef7")]
 
@@ -75,6 +76,11 @@ simplify_epsilon = 5.0
 z_index = -2
 
 [node name="Creatures" type="Node2D" parent="."]
+z_index = 10
+z_as_relative = false
+y_sort_enabled = true
+
+[node name="Objects" type="Node2D" parent="."]
 z_index = 10
 z_as_relative = false
 y_sort_enabled = true

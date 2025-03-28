@@ -115,18 +115,27 @@ func startGame(game:Node, playerScene:Node, dungeonInfo:Object):
 	
 	
 	######################################################
+	#### PLACE CREATURES AND OBJECTS IN EACH ROOM
 	
 	var creatures: Array = []
+	var items: Array = []
 	#### ADD CREATURES TO SPAWN LOCATIONS IN EACH ROOM
 	for room in getRooms():
 		if not room == firstRoom:  ## SKIP FIRST ROOM
 			#### CREATURES ARE SETUP IN PopulateCreatures()
 			creatures.append_array(room.populateCreatures(self) )
+			items.append_array(room.populateRoomItems())
 		
 	for creature in creatures:
 		addCreature(creature)
 		grid.putOnGridAndMap(creature, creature.gridPosition)
-	
+		
+	for obj in items:
+		print("placing room object")
+		$Objects.add_child(obj)
+		grid.putOnGridAndMap(obj, obj.gridPosition)
+		
+		
 	
 	#### SHROUD THE WHOLE MAP IN FOG PRE- LINE OF SIGHT CHECKS
 	if not turnOffLineOfSight:
