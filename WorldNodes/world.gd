@@ -133,6 +133,7 @@ func startGame(game:Node, playerScene:Node, dungeonInfo:Object):
 	for obj in items:
 		print("placing room object")
 		$Objects.add_child(obj)
+		obj.setup(self)
 		grid.putOnGridAndMap(obj, obj.gridPosition)
 		
 		
@@ -372,6 +373,9 @@ func callNextTurnAction(previous:Node):
 		#### WAIT 0.1 sec, so LINE OF SIGHT CHECKS HAVE COMPLETED. THEN TARGETING STUFF
 		handleFogOfWar()
 		$LineOfSight/FogOfWarTimer.start()
+		
+		for obj in getObjects():
+			obj.startTurn()
 	
 	#### AFTER PLAYER ACTION	
 	if previous != null:
@@ -478,6 +482,10 @@ func getRooms():
 
 func getCreatures():
 	return $Creatures.get_children()
+
+
+func getObjects():
+	return $Objects.get_children()
 
 
 func getAllies():

@@ -1,10 +1,41 @@
-[gd_scene load_steps=3 format=3 uid="uid://bywsg41j5npg1"]
+[gd_scene load_steps=5 format=3 uid="uid://bywsg41j5npg1"]
 
 [ext_resource type="Texture2D" uid="uid://e8n26chq37ad" path="res://Sprites/roguelike-chest-closed.png" id="1_kbiro"]
 [ext_resource type="Script" path="res://RoomItems/interact_object.gd" id="1_sr8op"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="3_g05wo"]
+[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Resources/Fonts/LabelSettingSmallFontWhite.tres" id="4_04go3"]
 
 [node name="InteractObject" type="Node2D"]
 script = ExtResource("1_sr8op")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_kbiro")
+
+[node name="Canvas" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="PanelContainer" parent="Canvas"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.0
+offset_top = -130.0
+offset_right = 101.0
+offset_bottom = -74.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("3_g05wo")
+
+[node name="Margin" type="MarginContainer" parent="Canvas/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Label" type="Label" parent="Canvas/Panel/Margin"]
+layout_mode = 2
+text = "Open Chest -  E"
+label_settings = ExtResource("4_04go3")
+horizontal_alignment = 1
