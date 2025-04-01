@@ -29,9 +29,10 @@ func handleLook() -> bool:
 		return true
 
 
-func activateInteractObject():
+func activateInteractObject(world:Node):
 	
 	if not currentInteractObject:
+		world.ui.addMessage("Can't interact with any object.", Color.WHITE)
 		return
 	
 	currentInteractObject.activate()

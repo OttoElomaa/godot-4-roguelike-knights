@@ -323,8 +323,12 @@ func _process(delta: float) -> void:
 	#### DEBUG CREATE NEW LEVEL	
 	if Input.is_action_just_pressed("B"):
 		resetLevel(true)
+	
+	
+	#### IF PLAYER HAS NEARBY INTERACT OBJECT, ACTIVATE IT
+	if Input.is_action_just_pressed("E"):
+		States.activateInteractObject(self)
 		
-
 
 func startNextTurn():
 	

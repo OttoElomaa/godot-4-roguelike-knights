@@ -24,3 +24,14 @@ func startTurn():
 	containerPanel.show()
 	States.setInteractObject(self)
 		
+
+func activate():
+	
+	if isContainer:
+		activateContainer()
+	
+	
+
+func activateContainer():
+	
+	world.ui.addMessage("Opening the %s" % objectName, Color.WHITE)

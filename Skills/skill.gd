@@ -131,3 +131,8 @@ func getCostString() -> String:
 	
 	#### EMPTY STRING = IS USABLE	
 	return ""
+
+
+func getZealEnhanceAmount() -> int:
+	
+	return zealEnhance * actor.stats.zeal.current

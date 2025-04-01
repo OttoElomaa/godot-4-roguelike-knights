@@ -29,7 +29,6 @@ agent_radius = 0.0
 [node name="World" type="NavigationRegion2D"]
 navigation_polygon = SubResource("NavigationPolygon_akmnp")
 script = ExtResource("1_fx20f")
-turnOffLineOfSight = true
 
 [node name="UI" parent="." instance=ExtResource("2_wgef7")]
 

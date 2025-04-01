@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bywsg41j5npg1"]
 
-[ext_resource type="Texture2D" uid="uid://e8n26chq37ad" path="res://Sprites/roguelike-chest-closed.png" id="1_kbiro"]
-[ext_resource type="Script" path="res://RoomItems/interact_object.gd" id="1_sr8op"]
+[ext_resource type="Script" path="res://Interactables/interact_object.gd" id="1_sr8op"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="3_g05wo"]
-[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Resources/Fonts/LabelSettingSmallFontWhite.tres" id="4_04go3"]
+[ext_resource type="FontFile" uid="uid://byafnu4pqy01b" path="res://Resources/Fonts/monaco/monaco.ttf" id="3_r3nit"]
+[ext_resource type="Texture2D" uid="uid://ctpg7lgwh3fea" path="res://Sprites/skill-icon-melee-sword.png" id="4_ivd2g"]
 
 [node name="InteractObject" type="Node2D"]
 script = ExtResource("1_sr8op")
@@ -14,10 +14,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -89.0
-offset_top = -90.0
-offset_right = 89.0
-offset_bottom = -34.0
+offset_left = -73.5
+offset_top = -80.0
+offset_right = 73.5
+offset_bottom = -27.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -33,9 +33,10 @@ theme_override_constants/margin_bottom = 15
 
 [node name="Label" type="Label" parent="Panel/Margin"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_r3nit")
+theme_override_font_sizes/font_size = 25
 text = "Open Chest -  E"
-label_settings = ExtResource("4_04go3")
 horizontal_alignment = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_kbiro")
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("4_ivd2g")

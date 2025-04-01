@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://crb1qr0kdnd8g"]
+
+[ext_resource type="PackedScene" uid="uid://bywsg41j5npg1" path="res://Interactables/InteractObject.tscn" id="1_i0mjk"]
+[ext_resource type="Texture2D" uid="uid://e8n26chq37ad" path="res://Sprites/roguelike-chest-closed.png" id="2_2je51"]
+
+[node name="Chest" instance=ExtResource("1_i0mjk")]
+isContainer = true
+objectName = "Chest"
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("2_2je51")

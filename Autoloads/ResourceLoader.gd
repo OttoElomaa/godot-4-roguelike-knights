@@ -1,6 +1,9 @@
 extends Node2D
 
 
+
+#### CREATURES
+
 var Orc: PackedScene = load("res://Creatures/Orc.tscn")
 var Slime: PackedScene = load("res://Creatures/Slime.tscn")
 var SkeletonArcher: PackedScene = load("res://Creatures/SkeletonArcher.tscn")
@@ -8,6 +11,8 @@ var DarkHealer: PackedScene = load("res://Creatures/DarkHealer.tscn")
 var HoundMaster: PackedScene = load("res://Creatures/Houndmaster.tscn")
 
 var OrcWarlord: PackedScene = load("res://Creatures/OrcWarlord.tscn")
+
+#### ROOMS
 
 var cavern1: PackedScene = load("res://Rooms/Detached/Cavern/Cavern01.tscn")
 var cavern2: PackedScene = load("res://Rooms/Detached/Cavern/Cavern02.tscn")
@@ -17,7 +22,9 @@ var cells1: PackedScene = load("res://Rooms/Detached/Cells/Cells01.tscn")
 
 var temple1: PackedScene = load("res://Rooms/Detached/Temple/Temple01.tscn")
 
-var InteractObj: PackedScene = load("res://RoomItems/InteractObject.tscn")
+#### OBJECTS
+
+var ChestObj: PackedScene = load("res://Interactables/Chest.tscn")
 
 
 
@@ -68,4 +75,4 @@ func createRandomRoom() -> Node:
 
 func createRandomInteractObj():
 	
-	return InteractObj.instantiate()
+	return ChestObj.instantiate()

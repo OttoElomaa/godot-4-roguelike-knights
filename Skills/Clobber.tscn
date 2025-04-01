@@ -13,10 +13,10 @@ skillType = "melee"
 range = 1
 
 [node name="Cooldown" parent="." index="1"]
-cooldown = 2
+cooldown = 4
 
 [node name="ZealResourceComponent" parent="Resources" index="0" instance=ExtResource("3_bnqxy")]
-zealGain = 1
+zealCost = 1
 zealEnhance = 1
 
 [node name="Script" type="Node" parent="Scripts" index="0"]
