@@ -3,6 +3,7 @@ extends GridObject
 
 
 @export var isContainer := false
+@export var objectName := "Object Name"
 
 var world: Node = null
 var player: Node = null
@@ -15,8 +16,11 @@ func setup(world: Node):
 	
 
 func startTurn():
-	var containerPanel = $Canvas/Panel
-	if GridTools.getEntityGridDistance(self, player) < 2:
-		containerPanel.show()
-	else:
+	var containerPanel = $Panel
+	if not GridTools.getEntityGridDistance(self, player) < 2:
 		containerPanel.hide()
+		return
+		
+	containerPanel.show()
+	States.setInteractObject(self)
+		

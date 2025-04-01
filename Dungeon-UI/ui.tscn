@@ -14,6 +14,7 @@
 script = ExtResource("1_wy0uv")
 
 [node name="LookMargin" type="MarginContainer" parent="."]
+z_index = 1
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
@@ -66,6 +67,41 @@ layout_mode = 2
 
 [node name="LookPanel" parent="LookMargin/VBox" instance=ExtResource("3_fnthc")]
 layout_mode = 2
+
+[node name="ItemInfo" type="PanelContainer" parent="LookMargin/VBox"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_0cgky")
+
+[node name="Margin" type="MarginContainer" parent="LookMargin/VBox/ItemInfo"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Hbox" type="VBoxContainer" parent="LookMargin/VBox/ItemInfo/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ItemStateLabel" type="Label" parent="LookMargin/VBox/ItemInfo/Margin/Hbox"]
+layout_mode = 2
+text = "You see..."
+label_settings = ExtResource("4_grdv0")
+
+[node name="ItemName" type="Label" parent="LookMargin/VBox/ItemInfo/Margin/Hbox"]
+layout_mode = 2
+text = "Item name"
+label_settings = ExtResource("3_j6j3s")
+
+[node name="Label" type="Label" parent="LookMargin/VBox/ItemInfo/Margin/Hbox"]
+layout_mode = 2
+theme = ExtResource("4_4h5xh")
+text = "Idk"
+
+[node name="Label2" type="Label" parent="LookMargin/VBox/ItemInfo/Margin/Hbox"]
+layout_mode = 2
+theme = ExtResource("4_4h5xh")
+text = "Text"
 
 [node name="LoadingImage" type="TextureRect" parent="."]
 visible = false

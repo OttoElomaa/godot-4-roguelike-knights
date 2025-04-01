@@ -374,8 +374,11 @@ func callNextTurnAction(previous:Node):
 		handleFogOfWar()
 		$LineOfSight/FogOfWarTimer.start()
 		
+		#### INTERACT OBJECT VISUAL STUFF ON TURN
+		States.clearInteractObject() ## CLEAR
 		for obj in getObjects():
-			obj.startTurn()
+			obj.startTurn() ## SET CURRENT OBJ
+		ui.showInteractObjectInfo() ## SHOW CURRENT
 	
 	#### AFTER PLAYER ACTION	
 	if previous != null:

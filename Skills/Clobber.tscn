@@ -21,7 +21,7 @@ zealEnhance = 1
 
 [node name="Script" type="Node" parent="Scripts" index="0"]
 script = ExtResource("4_0rn8h")
-damage = 10
+damage = 1
 attacksCount = 1
 
 [node name="StunEffect" parent="StatusEffects" index="0" instance=ExtResource("5_ej5xb")]

@@ -35,6 +35,16 @@ func _process(delta: float) -> void:
 
 
 
+func updateVisualsOnTurn():
+	updatePlayerPanel()
+	updateProgressLabels()
+	
+	for box in skillBar.get_children():
+		if box.skill != null:
+			box.updateVisuals()	
+
+
+
 func toggleHelp(cycle:bool):
 	if not cycle:
 		$HelpScreen.hide()
@@ -45,6 +55,8 @@ func toggleHelp(cycle:bool):
 		$HelpScreen.show()
 	else:
 		$HelpScreen.hide()
+
+
 
 func displayPlayerSkills(player):
 	
@@ -59,24 +71,18 @@ func displayPlayerSkills(player):
 	
 
 
-func updatePlayerPanel():
-	playerPanel.updatePlayerStats()
-
-
-
-func updateVisualsOnTurn():
-	updatePlayerPanel()
-	updateProgressLabels()
-	
-	for box in skillBar.get_children():
-		if box.skill != null:
-			box.updateVisuals()	
 
 
 
 func updateProgressLabels():
 	goldLabel.text = "Gold: %d" % ProgressData.gold
 	enemiesLabel.text = "Enemies killed: %d" % ProgressData.enemiesKilled
+
+#########################################################################################
+#### LOOK STUFF
+
+func updatePlayerPanel():
+	playerPanel.updatePlayerStats()
 
 
 
@@ -101,6 +107,16 @@ func showLookInfo(game:Node, lookTool:Node):
 	
 	lookPanel.showLookInfo(game, lookTool)
 			
+
+func showInteractObjectInfo():
+	
+	var itemInfo = $LookMargin/VBox/ItemInfo/Margin/Hbox
+	var itemNameLabel = itemInfo.get_node("ItemName")
+	if States.currentInteractObject:
+		itemNameLabel.text = States.currentInteractObject.objectName
+		
+	else:
+		itemNameLabel.text = "No items nearby."
 
 ##############################################################################
 #### MESSAGE STUFF

@@ -49,7 +49,7 @@ func activate(targets:Array) -> Node:
 	for i in range(attacksCount):
 		if target.checkValidity():
 			
-			var weaponDamage = actorWeapon.getRealDamage(actor)
+			var weaponDamage = damage + actorWeapon.getRealDamage(actor)
 			
 			var newSuccess:bool = target.stats.handlePhysicalHit(weaponDamage)
 			if newSuccess:

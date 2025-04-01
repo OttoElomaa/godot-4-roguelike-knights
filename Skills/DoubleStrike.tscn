@@ -15,5 +15,5 @@ cooldown = 3
 
 [node name="Script" type="Node" parent="Scripts" index="0"]
 script = ExtResource("3_cyjos")
-damage = 5
+damage = 1
 attacksCount = 2

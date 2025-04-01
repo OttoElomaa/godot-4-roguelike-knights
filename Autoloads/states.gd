@@ -7,6 +7,8 @@ enum InputStates {
 
 var GameState: InputStates = InputStates.EXPLORE
 
+var currentInteractObject: Node = null
+
 
 
 func inputModeOff():
@@ -25,3 +27,21 @@ func handleLook() -> bool:
 	else:
 		GameState = InputStates.LOOK
 		return true
+
+
+func activateInteractObject():
+	
+	if not currentInteractObject:
+		return
+	
+	currentInteractObject.activate()
+	
+
+func clearInteractObject():
+	
+	currentInteractObject = null
+
+
+func setInteractObject(object:Node):
+	currentInteractObject = object
+	
