@@ -2,7 +2,7 @@ extends Node
 
 
 enum InputStates {
-	NONE, EXPLORE, LOOK,
+	NONE, EXPLORE, LOOK, INVENTORY
 }
 
 var GameState: InputStates = InputStates.EXPLORE
@@ -18,6 +18,17 @@ func inputModeOff():
 func inputModeExplore():
 	GameState = InputStates.EXPLORE
 
+
+func toggleModeInventory() -> bool:
+	
+	if GameState == InputStates.INVENTORY:
+		GameState = InputStates.EXPLORE
+		return false
+	else:
+		GameState = InputStates.INVENTORY
+		return true
+
+		
 
 func handleLook() -> bool:
 	

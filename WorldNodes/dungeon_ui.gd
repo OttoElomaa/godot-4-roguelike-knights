@@ -13,6 +13,8 @@ extends CanvasLayer
 @onready var skillBar := $BottomPanel/Hbox/SkillsMargin/SkillBar
 @onready var combatLog := $BottomPanel/Hbox/LogMargin/LogPanel/MarginContainer/CombatLog
 
+@onready var inventory := $InventoryScreen
+
 var LogDoubleRow:PackedScene = load("res://Dungeon-UI/logDoubleRow.tscn")
 var LogMessage = load("res://Dungeon-UI/BasicLogMessage.tscn")
 
@@ -22,6 +24,7 @@ var caveats := []
 
 func setup(world):
 	
+	toggleInventory(false)
 	dungeonNameLabel.text = world.dungeonName
 	floorsLabel.text = "Floor %d of %d" % [ProgressData.dungeonFloorLevel, ProgressData.maxDungeonFloor]
 	
@@ -32,6 +35,13 @@ func setup(world):
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("H"):
 		toggleHelp(true)
+		
+	if Input.is_action_just_pressed("I"):
+		States.toggleModeInventory()
+		if States.GameState == States.InputStates.INVENTORY:
+			displayInventory()
+		else:
+			toggleInventory(false)
 
 
 
@@ -106,7 +116,10 @@ func showMouseLookCreature(creature:Node):
 func showLookInfo(game:Node, lookTool:Node):
 	
 	lookPanel.showLookInfo(game, lookTool)
-			
+
+
+#####################################################################################			
+#### ITEMS & INVENTORY STUFF
 
 func showInteractObjectInfo():
 	
@@ -117,6 +130,21 @@ func showInteractObjectInfo():
 		
 	else:
 		itemNameLabel.text = "No items nearby."
+
+
+func toggleInventory(toShow: bool):
+	
+	if toShow:
+		inventory.show()
+	else:
+		inventory.hide()
+
+
+func displayInventory():
+	
+	toggleInventory(true)
+	inventory.updateItemList()
+
 
 ##############################################################################
 #### MESSAGE STUFF
