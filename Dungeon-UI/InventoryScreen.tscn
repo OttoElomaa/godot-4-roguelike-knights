@@ -1,3 +1,95 @@
-[gd_scene format=3 uid="uid://dgmemnbsptnoj"]
+[gd_scene load_steps=6 format=3 uid="uid://dgmemnbsptnoj"]
 
-[node name="InventoryScreen" type="MarginContainer"]
+[ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="1_pj7s2"]
+[ext_resource type="StyleBox" uid="uid://ddemw1shpdae2" path="res://Resources/ResourceBarBackground01.tres" id="2_lwodh"]
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://Resources/EmptyStyleBox.tres" id="3_d8pn3"]
+[ext_resource type="Texture2D" uid="uid://e8n26chq37ad" path="res://Sprites/roguelike-chest-closed.png" id="4_g3q0o"]
+[ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Resources/Fonts/LabelSettingSmallFontWhite.tres" id="5_xg6l3"]
+
+[node name="InventoryScreen" type="PanelContainer"]
+custom_minimum_size = Vector2(400, 300)
+offset_right = 400.0
+offset_bottom = 300.0
+theme_override_styles/panel = ExtResource("1_pj7s2")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="Margin/VBox"]
+layout_mode = 2
+
+[node name="ItemList" type="PanelContainer" parent="Margin/VBox/HBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_lwodh")
+
+[node name="Scroll" type="ScrollContainer" parent="Margin/VBox/HBox/ItemList"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="Hbox" type="VBoxContainer" parent="Margin/VBox/HBox/ItemList/Scroll"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="ItemListScene" type="PanelContainer" parent="Margin/VBox/HBox/ItemList/Scroll/Hbox"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_d8pn3")
+
+[node name="Margin" type="MarginContainer" parent="Margin/VBox/HBox/ItemList/Scroll/Hbox/ItemListScene"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBox" type="HBoxContainer" parent="Margin/VBox/HBox/ItemList/Scroll/Hbox/ItemListScene/Margin"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Margin/VBox/HBox/ItemList/Scroll/Hbox/ItemListScene/Margin/HBox"]
+layout_mode = 2
+texture = ExtResource("4_g3q0o")
+
+[node name="Name" type="Label" parent="Margin/VBox/HBox/ItemList/Scroll/Hbox/ItemListScene/Margin/HBox"]
+layout_mode = 2
+text = "Item Name"
+label_settings = ExtResource("5_xg6l3")
+
+[node name="ItemView" type="PanelContainer" parent="Margin/VBox/HBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_lwodh")
+
+[node name="Margin" type="MarginContainer" parent="Margin/VBox/HBox/ItemView"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBox" type="VBoxContainer" parent="Margin/VBox/HBox/ItemView/Margin"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Margin/VBox/HBox/ItemView/Margin/VBox"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+texture = ExtResource("4_g3q0o")
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Margin/VBox/HBox/ItemView/Margin/VBox"]
+layout_mode = 2
+text = "Item Name"
+label_settings = ExtResource("5_xg6l3")
+
+[node name="Description" type="Label" parent="Margin/VBox/HBox/ItemView/Margin/VBox"]
+layout_mode = 2
+text = "Item Description"
+label_settings = ExtResource("5_xg6l3")
