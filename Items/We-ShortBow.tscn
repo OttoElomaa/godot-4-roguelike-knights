@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://rxr0ciqejie2"]
+
+[ext_resource type="PackedScene" uid="uid://d2gp3fn6hevgq" path="res://Items/EquipItem.tscn" id="1_le0qw"]
+[ext_resource type="Texture2D" uid="uid://dehmjl5rrvswd" path="res://Sprites/skill-icon-ranged-bow.png" id="2_u7hnp"]
+
+[node name="ShortBow" instance=ExtResource("1_le0qw")]
+itemName = "Short Bow"
+itemIcon = ExtResource("2_u7hnp")
+equipType = 1
+topDamage = 8
+midDamage = 8
+lowDamage = 4

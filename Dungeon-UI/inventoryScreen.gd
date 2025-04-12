@@ -52,11 +52,16 @@ func _on_mini_wait_timer_timeout() -> void:
 	if getRowItems().size() == 0:
 		return
 	
-	itemViewName.text = getRowItems()[0].itemName	
-	itemViewIcon.texture = getRowItems()[0].itemIcon
+	updateItemView(0)
 	
 	selectedItem = getRowItems()[0]
 	selectedItem.toggleFocus(true)
+
+
+func updateItemView(index:int):
+	var items:Array = getRowItems()
+	itemViewName.text = items[index].itemName	
+	itemViewIcon.texture = items[index].itemIcon
 
 
 func cycleItems(amount:int):
@@ -79,5 +84,8 @@ func cycleItems(amount:int):
 	
 	selectedItem = getRowItems()[selectionNum]
 	selectedItem.toggleFocus(true)
+	updateItemView(selectionNum)
 	
+	var scrollPosition = selectionNum * selectedItem.size.x
+	$Margin/VBox/HBox/ItemList/Scroll.scroll_vertical = scrollPosition
 	
