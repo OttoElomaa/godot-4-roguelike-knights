@@ -482,6 +482,11 @@ func triggerBoonAdjacentStep(creature:Node):
 			c.triggerBoonAdjacentStep(creature)
 
 
+func triggerBoonCreatureDeath(creature:Node):
+	for c in getCreatures():
+		if not c == creature:
+			c.triggerBoonCreatureDeath(creature)
+
 ###################################################################
 		
 func getRooms():

@@ -112,6 +112,8 @@ func handleCreatureDeath():
 			ProgressData.enemiesKilled += 1
 			ProgressData.gold += 5
 		
+		#### TRIGGER DEATH BOONS, DELETE CREATURE
+		creature.world.triggerBoonCreatureDeath(creature)
 		creature.queue_free()
 	
 	if creature.isPlayer:

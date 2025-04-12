@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://d25bf0dax3p13"]
+
+[ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Creatures/Creature.tscn" id="1_goei0"]
+[ext_resource type="Texture2D" uid="uid://b2g4he6ciw07p" path="res://Sprites/Enemies/creature-necromancer-basic.png" id="2_rgo8k"]
+[ext_resource type="PackedScene" uid="uid://bqvlykk486ylk" path="res://StatusEffects/Boons/BoonNecromancy.tscn" id="4_72g2k"]
+[ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Skills/Strike.tscn" id="5_5ujmk"]
+
+[node name="SkullMage" instance=ExtResource("1_goei0")]
+creatureName = "Skull Mage"
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_rgo8k")
+
+[node name="Strike" parent="Skills" index="0" instance=ExtResource("5_5ujmk")]
+
+[node name="BoonNecromancy" parent="StatusEffects" index="0" instance=ExtResource("4_72g2k")]

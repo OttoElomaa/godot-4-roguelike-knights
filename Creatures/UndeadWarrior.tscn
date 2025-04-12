@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://4g6f66o5hoeh"]
+
+[ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Creatures/Creature.tscn" id="1_tvk7k"]
+[ext_resource type="Texture2D" uid="uid://beuoolonhp1eq" path="res://Sprites/Enemies/creature-undead-warrior.png" id="2_gfvrp"]
+[ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Skills/Strike.tscn" id="3_hd7i5"]
+
+[node name="UndeadWarrior" instance=ExtResource("1_tvk7k")]
+creatureName = "Undead Warrior"
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_gfvrp")
+
+[node name="Strike" parent="Skills" index="0" instance=ExtResource("3_hd7i5")]

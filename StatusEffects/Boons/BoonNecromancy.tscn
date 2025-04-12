@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqvlykk486ylk"]
+
+[ext_resource type="PackedScene" uid="uid://c03effeto5f3m" path="res://StatusEffects/StatusEffect.tscn" id="1_bb84b"]
+[ext_resource type="PackedScene" uid="uid://brfsdx0o31c04" path="res://Skills/RaiseUndead.tscn" id="2_3pmnj"]
+
+[node name="BoonNecromancy" instance=ExtResource("1_bb84b")]
+isBoon = true
+boonType = 4
+effectName = "Necromancy"
+effectedTitle = "Practicing Necromancy"
+
+[node name="RaiseUndead" parent="Skills" index="0" instance=ExtResource("2_3pmnj")]

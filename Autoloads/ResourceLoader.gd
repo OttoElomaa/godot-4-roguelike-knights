@@ -9,6 +9,7 @@ var Slime: PackedScene = load("res://Creatures/Slime.tscn")
 var SkeletonArcher: PackedScene = load("res://Creatures/SkeletonArcher.tscn")
 var DarkHealer: PackedScene = load("res://Creatures/DarkHealer.tscn")
 var HoundMaster: PackedScene = load("res://Creatures/Houndmaster.tscn")
+var SkullMage: PackedScene = load("res://Creatures/SkullMage.tscn")
 
 var OrcWarlord: PackedScene = load("res://Creatures/OrcWarlord.tscn")
 
@@ -31,7 +32,7 @@ var ChestObj: PackedScene = load("res://Interactables/Chest.tscn")
 
 func createRandomCreature() -> Node:
 	
-	var rng = randi_range(1,5)
+	var rng = randi_range(1,6)
 	match rng:
 		1:
 			return Orc.instantiate()
@@ -43,6 +44,8 @@ func createRandomCreature() -> Node:
 			return DarkHealer.instantiate()
 		5:
 			return HoundMaster.instantiate()
+		6:
+			return SkullMage.instantiate()
 			
 	return Orc.instantiate()
 	

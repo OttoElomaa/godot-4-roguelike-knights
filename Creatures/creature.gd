@@ -98,9 +98,10 @@ func _physics_process(delta: float) -> void:
 func creatureMove():
 	
 	#### TARGETING: ALLIES TARGET ENEMIES, AND VICE VERSA
-	var targets = world.getEnemies()
-	if isEnemy:
-		targets = world.getAllies()
+	var targets = world.getAllies()
+	if not isEnemy:
+		targets = world.getEnemies()
+		
 		
 	var movementTarget = GridTools.findClosestCreature(self, targets)
 	if movementTarget == null:
@@ -121,7 +122,6 @@ func creatureMove():
 	if line.points.size() < 2:  ## NO LINE WAS MADE -> STOP
 		return
 	
-	#### COMPARE TARGET POSITION TO CREATURE POSITIONS
 	#### ROUND FROM 0.777..-> 1, 0.23412..-> ZERO
 	var dir = position.direction_to(line.points[1])
 	dir = Vector2i(round(dir.x), round(dir.y)) 
@@ -333,6 +333,18 @@ func triggerBoonAdjacentStep(creature:Node):
 		if boon.isBoon:
 			prints("Adjacent step. Boon haver %s finds adjacent creatures: " % creatureName, myAdjacentC)
 			boon.triggerBoons(BoonTypes.ADJACENT_STEP, self)
+
+
+func triggerBoonCreatureDeath(creature:Node):
+	
+	if GridTools.getEntityGridDistance(self, world.player) > 12:
+		return
+	
+	#### PASS IT TO BOONS
+	for boon in status.get_children():
+		if boon.isBoon:
+			prints("Creature death of %s. Boon haver %s tries... " % [creature.creatureName, creatureName])
+			boon.triggerBoons(BoonTypes.CREATURE_DEATH, self)
 		
 
 ######################################################################

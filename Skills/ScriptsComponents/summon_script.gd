@@ -16,6 +16,12 @@ func setup(skill):
 #### RETURN TARGET=TRUE, RETURN NULL=FALSE
 func activate(targets:Array) -> Node:
 	
+	#### POST TRIGGER MESSAGE, FOR EXAMPLE
+	skill.ui.addInitialRow()
+	
+	skill.ui.saveInitialMessage("%s uses %s" % [skill.actor.creatureName,skill.skillName], Color.WHITE)
+	
+	
 	var count := 0
 	var actorPos = skill.actor.gridPosition
 	
@@ -40,7 +46,7 @@ func summonCreature(actorPos:Vector2i) -> bool:
 	if emptyTileFound:
 		skill.world.addCreature(summonedCreature)
 		var summonText = "%s summons a %s!" % [skill.actor.creatureName,summonedCreature.creatureName]
-		skill.ui.addMessage(summonText, Color.CYAN)
+		skill.ui.addLogRow(summonText, Color.CYAN)
 		return true
 	
 	#### DELETE CREATURE  <--NO FREE TILE FOUND
