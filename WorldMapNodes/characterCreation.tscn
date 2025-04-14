@@ -4,9 +4,9 @@
 [ext_resource type="Script" path="res://WorldMapNodes/characterCreation.gd" id="1_wi0ip"]
 [ext_resource type="PackedScene" uid="uid://qxc2qwv3njt4" path="res://WorldMapNodes/GameStartCharButton.tscn" id="2_6kmw4"]
 [ext_resource type="StyleBox" uid="uid://cuau5auulqx2j" path="res://Resources/SelectBoxTransparent.tres" id="2_fbe35"]
-[ext_resource type="PackedScene" uid="uid://t6iw2eyutq4j" path="res://Creatures/PlayerKnight.tscn" id="3_yvxih"]
+[ext_resource type="PackedScene" uid="uid://t6iw2eyutq4j" path="res://Creatures/PlayerCharacters/PlayerKnight.tscn" id="3_yvxih"]
 [ext_resource type="Texture2D" uid="uid://nce6ksq6qacd" path="res://Sprites/Heroes/heroes-knight.png" id="4_ut8o6"]
-[ext_resource type="PackedScene" uid="uid://buwcv3cj51l34" path="res://Creatures/PlayerWarden.tscn" id="5_qg772"]
+[ext_resource type="PackedScene" uid="uid://buwcv3cj51l34" path="res://Creatures/PlayerCharacters/PlayerWarden.tscn" id="5_qg772"]
 [ext_resource type="Texture2D" uid="uid://iouh024wqtl4" path="res://Sprites/Heroes/heroes-warden.png" id="6_radq5"]
 
 [node name="CharacterCreation" type="Node2D"]

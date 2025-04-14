@@ -2,14 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://6rirwqrl30jg" path="res://WorldNodes/world.tscn" id="1_ekxxw"]
 [ext_resource type="PackedScene" uid="uid://caracmo5e6vy1" path="res://Rooms/DebugTestArena01.tscn" id="2_elxjj"]
-[ext_resource type="PackedScene" uid="uid://dpq65e6pf8358" path="res://Creatures/SkeletonArcher.tscn" id="3_soe7g"]
-[ext_resource type="PackedScene" uid="uid://bmcfrrddl4txy" path="res://Creatures/DarkHealer.tscn" id="4_rv0sr"]
-[ext_resource type="PackedScene" uid="uid://b3sgsr785g1p1" path="res://Creatures/Houndmaster.tscn" id="5_6usrl"]
-[ext_resource type="PackedScene" uid="uid://cbu18kyqxrpvs" path="res://Creatures/Orc.tscn" id="6_qffis"]
-[ext_resource type="PackedScene" uid="uid://drr6x5762e2r0" path="res://Creatures/OrcWarlord.tscn" id="7_1dpor"]
+[ext_resource type="PackedScene" uid="uid://dpq65e6pf8358" path="res://Creatures/Enemies/SkeletonArcher.tscn" id="3_soe7g"]
+[ext_resource type="PackedScene" uid="uid://bmcfrrddl4txy" path="res://Creatures/Enemies/DarkHealer.tscn" id="4_rv0sr"]
+[ext_resource type="PackedScene" uid="uid://b3sgsr785g1p1" path="res://Creatures/Enemies/Houndmaster.tscn" id="5_6usrl"]
+[ext_resource type="PackedScene" uid="uid://cbu18kyqxrpvs" path="res://Creatures/Enemies/Orc.tscn" id="6_qffis"]
+[ext_resource type="PackedScene" uid="uid://drr6x5762e2r0" path="res://Creatures/Bosses/OrcWarlord.tscn" id="7_1dpor"]
 [ext_resource type="Script" path="res://WorldNodes/debugNodes.gd" id="8_dntog"]
-[ext_resource type="PackedScene" uid="uid://dxn8gcr6ya5vo" path="res://Creatures/GuardianSpirit.tscn" id="8_v4bki"]
-[ext_resource type="PackedScene" uid="uid://c3nup8qw8wgmx" path="res://Creatures/Slime.tscn" id="9_1qux1"]
+[ext_resource type="PackedScene" uid="uid://dxn8gcr6ya5vo" path="res://Creatures/Summons/GuardianSpirit.tscn" id="8_v4bki"]
+[ext_resource type="PackedScene" uid="uid://c3nup8qw8wgmx" path="res://Creatures/Enemies/Slime.tscn" id="9_1qux1"]
 
 [node name="DebugWorld" instance=ExtResource("1_ekxxw")]
 turnOffLineOfSight = true

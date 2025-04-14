@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=3 uid="uid://buwcv3cj51l34"]
+
+[ext_resource type="PackedScene" uid="uid://51k70pdjnr8x" path="res://Creatures/Player.tscn" id="1_sy2uo"]
+[ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Skills/Strike.tscn" id="2_0wq6l"]
+[ext_resource type="PackedScene" uid="uid://dav2j8d0nekym" path="res://Skills/SummonFox.tscn" id="3_5c4ki"]
+[ext_resource type="PackedScene" uid="uid://j84ahsk1aocg" path="res://Skills/DoubleStrike.tscn" id="4_vvasi"]
+[ext_resource type="PackedScene" uid="uid://dgw2koqf2taj1" path="res://StatusEffects/Boons/BoonReach.tscn" id="5_s8ayf"]
+[ext_resource type="PackedScene" uid="uid://w633ci1oelc2" path="res://Items/We-IronSword.tscn" id="6_pt2k8"]
+
+[node name="PlayerWarden" instance=ExtResource("1_sy2uo")]
+creatureName = "Warden"
+
+[node name="Stats" parent="." index="1"]
+baseCrit = 30
+
+[node name="Strike" parent="Skills" index="0" instance=ExtResource("2_0wq6l")]
+
+[node name="Summon" parent="Skills" index="1" instance=ExtResource("3_5c4ki")]
+
+[node name="DoubleStrike" parent="Skills" index="2" instance=ExtResource("4_vvasi")]
+
+[node name="ReachBoon" parent="StatusEffects" index="0" instance=ExtResource("5_s8ayf")]
+
+[node name="Iron Sword" parent="Equipment/Weapons" index="0" instance=ExtResource("6_pt2k8")]

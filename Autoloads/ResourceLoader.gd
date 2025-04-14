@@ -4,15 +4,6 @@ extends Node2D
 
 #### CREATURES
 
-var Orc: PackedScene = load("res://Creatures/Orc.tscn")
-var Slime: PackedScene = load("res://Creatures/Slime.tscn")
-var SkeletonArcher: PackedScene = load("res://Creatures/SkeletonArcher.tscn")
-var DarkHealer: PackedScene = load("res://Creatures/DarkHealer.tscn")
-var HoundMaster: PackedScene = load("res://Creatures/Houndmaster.tscn")
-var SkullMage: PackedScene = load("res://Creatures/SkullMage.tscn")
-
-var OrcWarlord: PackedScene = load("res://Creatures/OrcWarlord.tscn")
-
 #### ROOMS
 
 var cavern1: PackedScene = load("res://Rooms/Detached/Cavern/Cavern01.tscn")
@@ -29,31 +20,30 @@ var ChestObj: PackedScene = load("res://Interactables/Chest.tscn")
 
 
 
+func loadRandomScene(folderPath:String) -> Node:
+	
+	var dir := DirAccess.open(folderPath)
+
+	var file_names := dir.get_files()
+	
+	var size = file_names.size()
+	var rng = randi_range(0, size - 1)
+	var random_file := file_names[rng]
+	
+	var creature:PackedScene = load(folderPath + random_file)
+	return creature.instantiate()
+
 
 func createRandomCreature() -> Node:
 	
-	var rng = randi_range(1,6)
-	match rng:
-		1:
-			return Orc.instantiate()
-		2:
-			return Slime.instantiate()
-		3:
-			return SkeletonArcher.instantiate()
-		4:
-			return DarkHealer.instantiate()
-		5:
-			return HoundMaster.instantiate()
-		6:
-			return SkullMage.instantiate()
-			
-	return Orc.instantiate()
-	
+	var folderPath := "res://Creatures/Enemies/"
+	return loadRandomScene(folderPath)
 
 
 func createRandomBoss() -> Node:
 	
-	return OrcWarlord.instantiate()
+	var folderPath := "res://Creatures/Bosses/"
+	return loadRandomScene(folderPath)
 
 
 

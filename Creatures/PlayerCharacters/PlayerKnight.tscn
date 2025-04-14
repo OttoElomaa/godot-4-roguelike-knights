@@ -1,0 +1,31 @@
+[gd_scene load_steps=9 format=3 uid="uid://t6iw2eyutq4j"]
+
+[ext_resource type="PackedScene" uid="uid://51k70pdjnr8x" path="res://Creatures/Player.tscn" id="1_6kjyu"]
+[ext_resource type="Texture2D" uid="uid://nce6ksq6qacd" path="res://Sprites/Heroes/heroes-knight.png" id="2_tsr83"]
+[ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Skills/Strike.tscn" id="3_j8wu7"]
+[ext_resource type="PackedScene" uid="uid://1nkco862q1po" path="res://Skills/BasicHeal.tscn" id="4_4vtkg"]
+[ext_resource type="PackedScene" uid="uid://cwkrdlxk2utha" path="res://Skills/Strong Strike.tscn" id="5_5gq00"]
+[ext_resource type="PackedScene" uid="uid://dp214645uwxo0" path="res://Skills/RaiseGuard.tscn" id="6_lja03"]
+[ext_resource type="PackedScene" uid="uid://cbcm2y6qqvcia" path="res://StatusEffects/Boons/BoonSentinel.tscn" id="7_6ciuq"]
+[ext_resource type="PackedScene" uid="uid://w633ci1oelc2" path="res://Items/We-IronSword.tscn" id="8_ro2v5"]
+
+[node name="PlayerKnight" instance=ExtResource("1_6kjyu")]
+creatureName = "Knight"
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_tsr83")
+
+[node name="Stats" parent="." index="1"]
+baseCrit = 20
+
+[node name="Strike" parent="Skills" index="0" instance=ExtResource("3_j8wu7")]
+
+[node name="Heal" parent="Skills" index="1" instance=ExtResource("4_4vtkg")]
+
+[node name="StrongStrike" parent="Skills" index="2" instance=ExtResource("5_5gq00")]
+
+[node name="Raise Guard" parent="Skills" index="3" instance=ExtResource("6_lja03")]
+
+[node name="SentinelBoon" parent="StatusEffects" index="0" instance=ExtResource("7_6ciuq")]
+
+[node name="Iron Sword" parent="Equipment/Weapons" index="0" instance=ExtResource("8_ro2v5")]
