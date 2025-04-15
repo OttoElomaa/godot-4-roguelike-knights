@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://f2b571pb5pwt"]
+
+[ext_resource type="PackedScene" uid="uid://d2gp3fn6hevgq" path="res://Items/EquipItem.tscn" id="1_856un"]
+[ext_resource type="Texture2D" uid="uid://bl68k7m3bsarp" path="res://Sprites/item-eq-head-helm01.png" id="2_wk24p"]
+
+[node name="Chain Helmet" instance=ExtResource("1_856un")]
+itemName = "Chain Helmet"
+itemIcon = ExtResource("2_wk24p")
+equipType = 2
+armor = 20

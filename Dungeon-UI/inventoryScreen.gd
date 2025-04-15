@@ -11,6 +11,7 @@ extends PanelContainer
 @onready var itemViewName: Label = itemView.get_node("Margin/VBox/Name")
 @onready var itemViewDesc: Label = itemView.get_node("Margin/VBox/Description")
 
+@onready var itemReplaceView: Control = itemView.get_node("Margin/VBox/ReplaceVBox") 
 @onready var itemViewReplaceName: Label = itemView.get_node("Margin/VBox/ReplaceVBox/Name") 
 @onready var itemViewReplaceDesc: Label = itemView.get_node("Margin/VBox/ReplaceVBox/Description") 
 
@@ -93,8 +94,11 @@ func updateItemView():
 		
 	var replaceItem = player.getEquipItemInSameSlot(selItemScene)
 	if replaceItem:
+		itemReplaceView.show()
 		itemViewReplaceName.text = replaceItem.itemName
 		itemViewReplaceDesc.text = replaceItem.getInfoString()
+	else:
+		itemReplaceView.hide()
 
 
 ################################################################

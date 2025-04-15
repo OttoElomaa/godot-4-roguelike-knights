@@ -1,19 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3m5ds2usal6o"]
+[gd_scene load_steps=6 format=3 uid="uid://b3m5ds2usal6o"]
 
 [ext_resource type="Script" path="res://Autoloads/player_inventory.gd" id="1_qlkmu"]
 [ext_resource type="PackedScene" uid="uid://w633ci1oelc2" path="res://Items/We-IronSword.tscn" id="2_lmjef"]
+[ext_resource type="PackedScene" uid="uid://f2b571pb5pwt" path="res://Items/He-ChainHelmet.tscn" id="3_i3oeu"]
 [ext_resource type="PackedScene" uid="uid://rxr0ciqejie2" path="res://Items/We-ShortBow.tscn" id="3_owckr"]
 [ext_resource type="PackedScene" uid="uid://cavug3tjd0y8i" path="res://Items/We-WoodenStaff.tscn" id="4_joclx"]
 
 [node name="PlayerInventory" type="Node2D"]
 script = ExtResource("1_qlkmu")
 
-[node name="Iron Sword" parent="." instance=ExtResource("2_lmjef")]
-
 [node name="ShortBow" parent="." instance=ExtResource("3_owckr")]
 
-[node name="Iron Sword2" parent="." instance=ExtResource("2_lmjef")]
+[node name="Chain Helmet" parent="." instance=ExtResource("3_i3oeu")]
 
 [node name="WoodenStaff" parent="." instance=ExtResource("4_joclx")]
+
+[node name="Chain Helmet2" parent="." instance=ExtResource("3_i3oeu")]
 
 [node name="Iron Sword3" parent="." instance=ExtResource("2_lmjef")]

@@ -15,6 +15,8 @@ enum EquipTypes {
 @export var midDamage := 0
 @export var lowDamage := 0
 
+@export var armor := 0
+
 
 var creature:Node = null
 
@@ -53,6 +55,9 @@ func getRealDamage(actor:Node) -> int:
 func getInfoString():
 	if equipType == EquipTypes.WEAPON:
 		return "Damage: %d / %d / %d" % [lowDamage, midDamage, topDamage]
+	
+	elif equipType != EquipTypes.NONE:
+		return "Armor: %d" % armor
 		
 	return "Item description string"
 
