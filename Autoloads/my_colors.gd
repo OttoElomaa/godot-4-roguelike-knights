@@ -15,4 +15,5 @@ var fontLightBlue := Color.CADET_BLUE
 
 var fontStatusC := Color.PALE_GREEN
 
+var fontBrightOrange := Color.DARK_ORANGE
 var fontFaintBrown := Color.html("827058")

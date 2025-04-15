@@ -24,7 +24,9 @@ var caveats := []
 
 func setup(world):
 	
+	inventory.setup(world)
 	toggleInventory(false)
+	
 	dungeonNameLabel.text = world.dungeonName
 	floorsLabel.text = "Floor %d of %d" % [ProgressData.dungeonFloorLevel, ProgressData.maxDungeonFloor]
 	
@@ -35,11 +37,12 @@ func setup(world):
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("H"):
 		toggleHelp(true)
-		
+	
+	#### SWITCH STATE, THEN CHECK CURRENT STATE AND SHOW/HIDE INVENTORY	
 	if Input.is_action_just_pressed("I"):
 		States.toggleModeInventory()
 		if States.GameState == States.InputStates.INVENTORY:
-			displayInventory()
+			toggleInventory(true)
 		else:
 			toggleInventory(false)
 
@@ -136,14 +139,12 @@ func toggleInventory(toShow: bool):
 	
 	if toShow:
 		inventory.show()
+		inventory.updateInfo()
 	else:
 		inventory.hide()
 
 
-func displayInventory():
-	
-	toggleInventory(true)
-	inventory.updateItemList()
+
 
 
 ##############################################################################

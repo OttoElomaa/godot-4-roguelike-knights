@@ -3,13 +3,32 @@ extends PanelContainer
 
 @onready var ItemListScene: PackedScene = load("res://Dungeon-UI/ItemListScene.tscn")
 
-@onready var itemRows := $Margin/VBox/HBox/ItemList/Scroll/Items
-@onready var itemView := $Margin/VBox/HBox/ItemView
-@onready var itemViewIcon := $Margin/VBox/HBox/ItemView/Margin/VBox/Icon
-@onready var itemViewName := $Margin/VBox/HBox/ItemView/Margin/VBox/Name
+@onready var scroll := $Margin/MainHbox/InventoryVbox/HBox/ItemList/Scroll
+@onready var itemRows = scroll.get_node("Items")
+
+@onready var itemView := $Margin/MainHbox/InventoryVbox/HBox/ItemView
+@onready var itemViewIcon: TextureRect = itemView.get_node("Margin/VBox/Icon")
+@onready var itemViewName: Label = itemView.get_node("Margin/VBox/Name") 
+
+@onready var equipmentView := $Margin/MainHbox/EquipmentVbox/EquipRows
+@onready var weaponInfo: Control = equipmentView.get_node("WeaponInfo")
+@onready var headInfo: Control = equipmentView.get_node("HeadInfo")
+@onready var bodyInfo: Control = equipmentView.get_node("BodyInfo")
+@onready var handsInfo: Control = equipmentView.get_node("HandsInfo")
+
+
 
 var selectionNum := 0
 var selectedItem:Node = null
+
+var world:Node = null
+var player:Node = null
+
+
+func setup(world):
+	self.world = world
+	self.player = world.player
+
 
 
 func _process(delta: float) -> void:
@@ -25,6 +44,13 @@ func processInventory():
 		cycleItems(-1)
 
 
+############################################################3
+
+func updateInfo():
+	updateItemList()
+	updateEquipmentView()
+
+
 func updateItemList():
 	
 	for i in getRowItems():
@@ -34,6 +60,17 @@ func updateItemList():
 		addItemListScene(i)
 	
 	$MiniWaitTimer.start()
+
+
+func updateEquipmentView():
+	var weapon = player.getWeapon()
+	weaponInfo.setup(weapon)
+		
+	for v in [headInfo, bodyInfo, handsInfo]:
+		v.setup(null)
+	
+################################################################
+
 		
 		
 func getRowItems() -> Array:
@@ -52,16 +89,25 @@ func _on_mini_wait_timer_timeout() -> void:
 	if getRowItems().size() == 0:
 		return
 	
-	updateItemView(0)
 	
-	selectedItem = getRowItems()[0]
+	selectionNum = 0
+	selectedItem = getRowItems()[selectionNum]
+	handleSelectedItem()
+	
+
+func handleSelectedItem():
 	selectedItem.toggleFocus(true)
+	updateItemView()
+	
+	
 
-
-func updateItemView(index:int):
-	var items:Array = getRowItems()
-	itemViewName.text = items[index].itemName	
-	itemViewIcon.texture = items[index].itemIcon
+func updateItemView():
+	
+	itemViewName.text = selectedItem.itemName	
+	itemViewIcon.texture = selectedItem.itemIcon
+	
+	#var replaceItem = player.getEquipItemInSameSlot(selectedItem)
+	#var infoString = replaceItem.getInfoString()
 
 
 func cycleItems(amount:int):
@@ -83,9 +129,8 @@ func cycleItems(amount:int):
 		selectionNum = 0
 	
 	selectedItem = getRowItems()[selectionNum]
-	selectedItem.toggleFocus(true)
-	updateItemView(selectionNum)
+	handleSelectedItem()
 	
 	var scrollPosition = selectionNum * selectedItem.size.x
-	$Margin/VBox/HBox/ItemList/Scroll.scroll_vertical = scrollPosition
+	scroll.scroll_vertical = scrollPosition
 	

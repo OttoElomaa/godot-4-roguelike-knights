@@ -123,7 +123,7 @@ func triggerBoons(boonType:BoonTypes, target:Node):
 	if boonType == self.boonType:
 		var text = "%s triggers %s!" % [target.creatureName, effectName]
 		print(text)
-		ui.saveInitialMessage(text, Color.DARK_ORANGE)
+		ui.saveInitialMessage(text, MyColors.fontBrightOrange)
 		
 		tickScripts(target, target.status)
 			

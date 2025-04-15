@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgmemnbsptnoj"]
+[gd_scene load_steps=9 format=3 uid="uid://dgmemnbsptnoj"]
 
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="1_pj7s2"]
 [ext_resource type="Script" path="res://Dungeon-UI/inventoryScreen.gd" id="2_g6ep0"]
 [ext_resource type="StyleBox" uid="uid://ddemw1shpdae2" path="res://Resources/ResourceBarBackground01.tres" id="2_lwodh"]
+[ext_resource type="LabelSettings" uid="uid://df882tsfd50yb" path="res://Resources/Fonts/LabelSettingYellowHeaderFont.tres" id="3_oblao"]
 [ext_resource type="PackedScene" uid="uid://d86hcstp7f2l" path="res://Dungeon-UI/ItemListScene.tscn" id="4_buqgk"]
 [ext_resource type="Texture2D" uid="uid://e8n26chq37ad" path="res://Sprites/roguelike-chest-closed.png" id="4_g3q0o"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Resources/Fonts/LabelSettingSmallFontWhite.tres" id="5_xg6l3"]
+[ext_resource type="LabelSettings" uid="uid://c1s8rbhy5ftgg" path="res://Resources/Fonts/LabelSettingSmallFontOrange.tres" id="8_l5m3x"]
 
 [node name="InventoryScreen" type="PanelContainer"]
 custom_minimum_size = Vector2(400, 300)
@@ -21,57 +23,131 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBox" type="VBoxContainer" parent="Margin"]
+[node name="MainHbox" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="EquipmentVbox" type="VBoxContainer" parent="Margin/MainHbox"]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 
-[node name="HBox" type="HBoxContainer" parent="Margin/VBox"]
+[node name="Title" type="Label" parent="Margin/MainHbox/EquipmentVbox"]
+layout_mode = 2
+text = "Equipped items"
+label_settings = ExtResource("3_oblao")
+
+[node name="EquipRows" type="VBoxContainer" parent="Margin/MainHbox/EquipmentVbox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Weapon" type="Label" parent="Margin/MainHbox/EquipmentVbox/EquipRows"]
+layout_mode = 2
+text = "Weapon"
+label_settings = ExtResource("5_xg6l3")
+
+[node name="WeaponInfo" parent="Margin/MainHbox/EquipmentVbox/EquipRows" instance=ExtResource("4_buqgk")]
 layout_mode = 2
 
-[node name="ItemList" type="PanelContainer" parent="Margin/VBox/HBox"]
+[node name="Head" type="Label" parent="Margin/MainHbox/EquipmentVbox/EquipRows"]
+layout_mode = 2
+text = "Head"
+label_settings = ExtResource("5_xg6l3")
+
+[node name="HeadInfo" parent="Margin/MainHbox/EquipmentVbox/EquipRows" instance=ExtResource("4_buqgk")]
+layout_mode = 2
+
+[node name="Body" type="Label" parent="Margin/MainHbox/EquipmentVbox/EquipRows"]
+layout_mode = 2
+text = "Body"
+label_settings = ExtResource("5_xg6l3")
+
+[node name="BodyInfo" parent="Margin/MainHbox/EquipmentVbox/EquipRows" instance=ExtResource("4_buqgk")]
+layout_mode = 2
+
+[node name="Hands" type="Label" parent="Margin/MainHbox/EquipmentVbox/EquipRows"]
+layout_mode = 2
+text = "Hands"
+label_settings = ExtResource("5_xg6l3")
+
+[node name="HandsInfo" parent="Margin/MainHbox/EquipmentVbox/EquipRows" instance=ExtResource("4_buqgk")]
+layout_mode = 2
+
+[node name="InventoryVbox" type="VBoxContainer" parent="Margin/MainHbox"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Title" type="Label" parent="Margin/MainHbox/InventoryVbox"]
+layout_mode = 2
+text = "Inventory"
+label_settings = ExtResource("3_oblao")
+
+[node name="HBox" type="HBoxContainer" parent="Margin/MainHbox/InventoryVbox"]
+layout_mode = 2
+
+[node name="ItemList" type="PanelContainer" parent="Margin/MainHbox/InventoryVbox/HBox"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_lwodh")
 
-[node name="Scroll" type="ScrollContainer" parent="Margin/VBox/HBox/ItemList"]
+[node name="Scroll" type="ScrollContainer" parent="Margin/MainHbox/InventoryVbox/HBox/ItemList"]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 follow_focus = true
 horizontal_scroll_mode = 0
 
-[node name="Items" type="VBoxContainer" parent="Margin/VBox/HBox/ItemList/Scroll"]
+[node name="Items" type="VBoxContainer" parent="Margin/MainHbox/InventoryVbox/HBox/ItemList/Scroll"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="ItemListScene" parent="Margin/VBox/HBox/ItemList/Scroll/Items" instance=ExtResource("4_buqgk")]
+[node name="ItemListScene" parent="Margin/MainHbox/InventoryVbox/HBox/ItemList/Scroll/Items" instance=ExtResource("4_buqgk")]
 layout_mode = 2
 
-[node name="ItemView" type="PanelContainer" parent="Margin/VBox/HBox"]
+[node name="ItemView" type="PanelContainer" parent="Margin/MainHbox/InventoryVbox/HBox"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_lwodh")
 
-[node name="Margin" type="MarginContainer" parent="Margin/VBox/HBox/ItemView"]
+[node name="Margin" type="MarginContainer" parent="Margin/MainHbox/InventoryVbox/HBox/ItemView"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBox" type="VBoxContainer" parent="Margin/VBox/HBox/ItemView/Margin"]
+[node name="VBox" type="VBoxContainer" parent="Margin/MainHbox/InventoryVbox/HBox/ItemView/Margin"]
 layout_mode = 2
+theme_override_constants/separation = 20
 
-[node name="Icon" type="TextureRect" parent="Margin/VBox/HBox/ItemView/Margin/VBox"]
+[node name="Icon" type="TextureRect" parent="Margin/MainHbox/InventoryVbox/HBox/ItemView/Margin/VBox"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 texture = ExtResource("4_g3q0o")
 stretch_mode = 5
 
-[node name="Name" type="Label" parent="Margin/VBox/HBox/ItemView/Margin/VBox"]
+[node name="Name" type="Label" parent="Margin/MainHbox/InventoryVbox/HBox/ItemView/Margin/VBox"]
 layout_mode = 2
 text = "Item Name"
 label_settings = ExtResource("5_xg6l3")
 
-[node name="Description" type="Label" parent="Margin/VBox/HBox/ItemView/Margin/VBox"]
+[node name="Description" type="Label" parent="Margin/MainHbox/InventoryVbox/HBox/ItemView/Margin/VBox"]
+layout_mode = 2
+text = "Item Description"
+label_settings = ExtResource("5_xg6l3")
+
+[node name="ReplaceVBox" type="VBoxContainer" parent="Margin/MainHbox/InventoryVbox/HBox/ItemView/Margin/VBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Margin/MainHbox/InventoryVbox/HBox/ItemView/Margin/VBox/ReplaceVBox"]
+layout_mode = 2
+text = "Replaces:"
+label_settings = ExtResource("8_l5m3x")
+
+[node name="Name" type="Label" parent="Margin/MainHbox/InventoryVbox/HBox/ItemView/Margin/VBox/ReplaceVBox"]
+layout_mode = 2
+text = "Item Name"
+label_settings = ExtResource("5_xg6l3")
+
+[node name="Description" type="Label" parent="Margin/MainHbox/InventoryVbox/HBox/ItemView/Margin/VBox/ReplaceVBox"]
 layout_mode = 2
 text = "Item Description"
 label_settings = ExtResource("5_xg6l3")

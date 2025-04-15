@@ -13,11 +13,21 @@ var itemIcon:Texture:
 
 func setup(item:Node):
 	
+	toggleFocus(false)
+	
+	#### NO ITEM? DISPLAY EMPTY SLOT INFO
+	if not item:
+		displayEmptySlot()
+		return
+	
 	$Margin/HBox/Icon.texture = item.itemIcon
 	$Margin/HBox/Name.text = item.itemName
 	
-	toggleFocus(false)
 	
+
+func setEquipmentFontColor(item):
+	
+	pass	
 	
 
 func toggleFocus(toHighlight:bool):
@@ -28,5 +38,8 @@ func toggleFocus(toHighlight:bool):
 		$HighlightPanel.hide()
 	
 	
-	
+
+func displayEmptySlot():
+	$Margin/HBox/Icon.texture = null
+	$Margin/HBox/Name.text = "No items"	
 	

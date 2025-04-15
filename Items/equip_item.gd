@@ -47,4 +47,14 @@ func getRealDamage(actor:Node) -> int:
 		
 	actor.world.ui.addCaveat(critText)
 	return realDamage
+
+
+
+func getInfoString():
+	if equipType == EquipTypes.WEAPON:
+		return "Damage: %d / %d / %d" % [lowDamage, midDamage, topDamage]
+		
+	return "Item description string"
+
+
 	
