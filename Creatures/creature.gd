@@ -285,10 +285,19 @@ func equip(item: Node, toWear: bool):
 	$Equipment.equip(item, toWear)
 
 
+#################################################################
 #### FOR NOW, JUST GET WEAPON IN FIRST SPOT
 func getWeapon():
 	return $Equipment/Weapons.get_child(0)
 
+
+#### FOR COMPARING ITEM IN INVENTORY TO EQUIPPED ITEM
+func getEquipItemInSameSlot(item:Node) -> Node:
+	
+	for i in [getWeapon()]:
+		if i.equipType == item.equipType:
+			return i
+	return null
 
 ##########################################################################################
 #### THIS RECEIVES A STATRESOURCE, STATS.HEALTH, WITH VALUES 'CURRENT' AND 'MAX'

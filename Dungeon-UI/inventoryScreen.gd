@@ -8,7 +8,11 @@ extends PanelContainer
 
 @onready var itemView := $Margin/MainHbox/InventoryVbox/HBox/ItemView
 @onready var itemViewIcon: TextureRect = itemView.get_node("Margin/VBox/Icon")
-@onready var itemViewName: Label = itemView.get_node("Margin/VBox/Name") 
+@onready var itemViewName: Label = itemView.get_node("Margin/VBox/Name")
+@onready var itemViewDesc: Label = itemView.get_node("Margin/VBox/Description")
+
+@onready var itemViewReplaceName: Label = itemView.get_node("Margin/VBox/ReplaceVBox/Name") 
+@onready var itemViewReplaceDesc: Label = itemView.get_node("Margin/VBox/ReplaceVBox/Description") 
 
 @onready var equipmentView := $Margin/MainHbox/EquipmentVbox/EquipRows
 @onready var weaponInfo: Control = equipmentView.get_node("WeaponInfo")
@@ -68,7 +72,31 @@ func updateEquipmentView():
 		
 	for v in [headInfo, bodyInfo, handsInfo]:
 		v.setup(null)
+
+
+func handleSelectedItem():
+	selectedItem.toggleFocus(true)
+	updateItemView()
 	
+	
+
+func updateItemView():
+	
+	itemViewName.text = selectedItem.itemName	
+	itemViewIcon.texture = selectedItem.itemIcon
+	
+	var selItemScene = selectedItem.itemScene
+	if not selItemScene:
+		return
+	
+	itemViewDesc.text = selItemScene.getInfoString()
+		
+	var replaceItem = player.getEquipItemInSameSlot(selItemScene)
+	if replaceItem:
+		itemViewReplaceName.text = replaceItem.itemName
+		itemViewReplaceDesc.text = replaceItem.getInfoString()
+
+
 ################################################################
 
 		
@@ -95,19 +123,7 @@ func _on_mini_wait_timer_timeout() -> void:
 	handleSelectedItem()
 	
 
-func handleSelectedItem():
-	selectedItem.toggleFocus(true)
-	updateItemView()
-	
-	
 
-func updateItemView():
-	
-	itemViewName.text = selectedItem.itemName	
-	itemViewIcon.texture = selectedItem.itemIcon
-	
-	#var replaceItem = player.getEquipItemInSameSlot(selectedItem)
-	#var infoString = replaceItem.getInfoString()
 
 
 func cycleItems(amount:int):

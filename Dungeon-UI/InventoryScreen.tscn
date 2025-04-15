@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dgmemnbsptnoj"]
+[gd_scene load_steps=10 format=3 uid="uid://dgmemnbsptnoj"]
 
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="1_pj7s2"]
 [ext_resource type="Script" path="res://Dungeon-UI/inventoryScreen.gd" id="2_g6ep0"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://e8n26chq37ad" path="res://Sprites/roguelike-chest-closed.png" id="4_g3q0o"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Resources/Fonts/LabelSettingSmallFontWhite.tres" id="5_xg6l3"]
 [ext_resource type="LabelSettings" uid="uid://c1s8rbhy5ftgg" path="res://Resources/Fonts/LabelSettingSmallFontOrange.tres" id="8_l5m3x"]
+[ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Resources/Fonts/LabelSettingSmallFontFaintGrey.tres" id="9_733eu"]
 
 [node name="InventoryScreen" type="PanelContainer"]
 custom_minimum_size = Vector2(400, 300)
@@ -132,7 +133,7 @@ label_settings = ExtResource("5_xg6l3")
 [node name="Description" type="Label" parent="Margin/MainHbox/InventoryVbox/HBox/ItemView/Margin/VBox"]
 layout_mode = 2
 text = "Item Description"
-label_settings = ExtResource("5_xg6l3")
+label_settings = ExtResource("9_733eu")
 
 [node name="ReplaceVBox" type="VBoxContainer" parent="Margin/MainHbox/InventoryVbox/HBox/ItemView/Margin/VBox"]
 layout_mode = 2
@@ -150,7 +151,7 @@ label_settings = ExtResource("5_xg6l3")
 [node name="Description" type="Label" parent="Margin/MainHbox/InventoryVbox/HBox/ItemView/Margin/VBox/ReplaceVBox"]
 layout_mode = 2
 text = "Item Description"
-label_settings = ExtResource("5_xg6l3")
+label_settings = ExtResource("9_733eu")
 
 [node name="MiniWaitTimer" type="Timer" parent="."]
 wait_time = 0.05
