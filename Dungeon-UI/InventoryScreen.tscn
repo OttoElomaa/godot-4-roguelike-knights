@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dgmemnbsptnoj"]
+[gd_scene load_steps=11 format=3 uid="uid://dgmemnbsptnoj"]
 
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="1_pj7s2"]
 [ext_resource type="Script" path="res://Dungeon-UI/inventoryScreen.gd" id="2_g6ep0"]
@@ -9,6 +9,7 @@
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Resources/Fonts/LabelSettingSmallFontWhite.tres" id="5_xg6l3"]
 [ext_resource type="LabelSettings" uid="uid://c1s8rbhy5ftgg" path="res://Resources/Fonts/LabelSettingSmallFontOrange.tres" id="8_l5m3x"]
 [ext_resource type="LabelSettings" uid="uid://bybi82ik7ric5" path="res://Resources/Fonts/LabelSettingSmallFontFaintGrey.tres" id="9_733eu"]
+[ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://Resources/EmptyStyleBox.tres" id="10_4ork1"]
 
 [node name="InventoryScreen" type="PanelContainer"]
 custom_minimum_size = Vector2(400, 300)
@@ -153,8 +154,25 @@ layout_mode = 2
 text = "Item Description"
 label_settings = ExtResource("9_733eu")
 
+[node name="ButtonPanel" type="PanelContainer" parent="Margin/MainHbox/InventoryVbox"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_pj7s2")
+
+[node name="Label" type="Label" parent="Margin/MainHbox/InventoryVbox/ButtonPanel"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Equip ( spacebar )"
+label_settings = ExtResource("5_xg6l3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EquipButton" type="Button" parent="Margin/MainHbox/InventoryVbox/ButtonPanel"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("10_4ork1")
+
 [node name="MiniWaitTimer" type="Timer" parent="."]
 wait_time = 0.05
 one_shot = true
 
+[connection signal="pressed" from="Margin/MainHbox/InventoryVbox/ButtonPanel/EquipButton" to="." method="_on_equip_button_pressed"]
 [connection signal="timeout" from="MiniWaitTimer" to="." method="_on_mini_wait_timer_timeout"]

@@ -68,11 +68,14 @@ func updateItemList():
 
 
 func updateEquipmentView():
-	var weapon = player.getWeapon()
-	weaponInfo.setup(weapon)
-		
-	for v in [headInfo, bodyInfo, handsInfo]:
-		v.setup(null)
+	
+	prints("Player's equipped items: ", player.getEquippedItems() )
+	
+	weaponInfo.setup(player.getWeapon() )
+	headInfo.setup(player.getHead() )
+	bodyInfo.setup(player.getBody() )	
+	handsInfo.setup(player.getHands() )	
+	
 
 
 func handleSelectedItem():
@@ -116,19 +119,6 @@ func addItemListScene(item:Node):
 	listItem.setup(item)
 	
 
-func _on_mini_wait_timer_timeout() -> void:
-	
-	if getRowItems().size() == 0:
-		return
-	
-	
-	selectionNum = 0
-	selectedItem = getRowItems()[selectionNum]
-	handleSelectedItem()
-	
-
-
-
 
 func cycleItems(amount:int):
 	
@@ -153,4 +143,23 @@ func cycleItems(amount:int):
 	
 	var scrollPosition = selectionNum * selectedItem.size.x
 	scroll.scroll_vertical = scrollPosition
+
+
+#########################################################
+
+func _on_mini_wait_timer_timeout() -> void:
 	
+	if getRowItems().size() == 0:
+		return
+	
+	
+	selectionNum = 0
+	selectedItem = getRowItems()[selectionNum]
+	handleSelectedItem()
+	
+
+
+func _on_equip_button_pressed() -> void:
+	
+	PlayerInventory.playerEquip(selectedItem.itemScene)
+	updateInfo()

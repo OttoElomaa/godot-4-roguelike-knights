@@ -57,8 +57,12 @@ func startGame(game:Node, playerScene:Node, dungeonInfo:Object):
 	self.game = game
 	self.dungeonInfo = dungeonInfo
 	dungeonName = dungeonInfo.dungeonName
-	player = playerScene
 	
+	#### SETUP PLAYER AND INVENTORY
+	player = playerScene
+	PlayerInventory.setup(self)
+	
+	#### TURN OFF INPUTS WHILE MAP GENERATES
 	ui.toggleLoadingScreen(true)
 	States.inputModeOff()
 	
@@ -91,8 +95,8 @@ func startGame(game:Node, playerScene:Node, dungeonInfo:Object):
 	startingGridPos = firstRoom.getPlayerStartPos()
 	grid.putOnGridAndMap(player, startingGridPos)
 	
-	await get_tree().process_frame
-	await get_tree().process_frame
+	#await get_tree().process_frame
+	#await get_tree().process_frame
 	
 	ui.setup(self)
 	ui.displayPlayerSkills(player)

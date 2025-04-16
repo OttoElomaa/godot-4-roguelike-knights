@@ -9,12 +9,14 @@
 [node name="PlayerInventory" type="Node2D"]
 script = ExtResource("1_qlkmu")
 
-[node name="ShortBow" parent="." instance=ExtResource("3_owckr")]
+[node name="Items" type="Node2D" parent="."]
 
-[node name="Chain Helmet" parent="." instance=ExtResource("3_i3oeu")]
+[node name="ShortBow" parent="Items" instance=ExtResource("3_owckr")]
 
-[node name="WoodenStaff" parent="." instance=ExtResource("4_joclx")]
+[node name="Chain Helmet" parent="Items" instance=ExtResource("3_i3oeu")]
 
-[node name="Chain Helmet2" parent="." instance=ExtResource("3_i3oeu")]
+[node name="WoodenStaff" parent="Items" instance=ExtResource("4_joclx")]
 
-[node name="Iron Sword3" parent="." instance=ExtResource("2_lmjef")]
+[node name="Chain Helmet2" parent="Items" instance=ExtResource("3_i3oeu")]
+
+[node name="Iron Sword3" parent="Items" instance=ExtResource("2_lmjef")]

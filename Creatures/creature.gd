@@ -288,16 +288,59 @@ func equip(item: Node, toWear: bool):
 #################################################################
 #### FOR NOW, JUST GET WEAPON IN FIRST SPOT
 func getWeapon():
-	return $Equipment/Weapons.get_child(0)
+	var slot = $Equipment.get_node("Weapons")
+	if slot.get_child_count() == 1:
+		return slot.get_child(0)
+
+func getHead():
+	var slot = $Equipment.get_node("Head")
+	if slot.get_child_count() == 1:
+		return slot.get_child(0)
+	
+func getBody():
+	var slot = $Equipment.get_node("Body")
+	if slot.get_child_count() == 1:
+		return slot.get_child(0)
+func getHands():
+	var slot = $Equipment.get_node("Hands")
+	if slot.get_child_count() == 1:
+		return slot.get_child(0)
+
+
+
+func getEquippedItems():
+	
+	var items := []
+	for slot in $Equipment.get_children():
+		if slot.get_child_count() > 0:
+			items.append(slot.get_child(0))
+	return items
 
 
 #### FOR COMPARING ITEM IN INVENTORY TO EQUIPPED ITEM
 func getEquipItemInSameSlot(item:Node) -> Node:
-	
-	for i in [getWeapon()]:
+		
+	for i in getEquippedItems():
 		if i.equipType == item.equipType:
 			return i
 	return null
+
+
+func getSameSlotAsItem(item:Node):
+	
+	var types = item.EquipTypes
+	
+	match item.equipType:
+		types.WEAPON:
+			return $Equipment/Weapons
+		types.HEAD:
+			return $Equipment/Head
+		types.BODY:
+			return $Equipment/Body
+		types.HANDS:
+			return $Equipment/Hands
+	
+
 
 ##########################################################################################
 #### THIS RECEIVES A STATRESOURCE, STATS.HEALTH, WITH VALUES 'CURRENT' AND 'MAX'
