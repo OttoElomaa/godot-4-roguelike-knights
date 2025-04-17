@@ -353,6 +353,8 @@ func startNextTurn():
 	
 func callNextTurnAction(previous:Node):
 	
+	print("________________")
+	
 	turnActorCounter += 1
 	if turnActorCounter > turnActorsList.size() - 1:
 		startNextTurn()

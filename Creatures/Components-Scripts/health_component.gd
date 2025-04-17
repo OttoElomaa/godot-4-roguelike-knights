@@ -44,8 +44,8 @@ func updateVisual(health:Object, guard:Object):
 	#if health.current < health.max:	
 	var diff:float = float(health.current) / float(health.max)
 	var alteredWidth:int = ceil(barWidth * diff )
-	prints("diff: ", diff)
-	prints("health width: ", alteredWidth)
+	#prints("diff: ", diff)
+	#prints("health width: ", alteredWidth)
 	$HealthBarRed.custom_minimum_size.x = alteredWidth
 	
 	

@@ -182,12 +182,11 @@ func startTurn():
 		world.ui.updateVisualsOnTurn()
 		
 	
-	prints(creatureName, " valid, takes action")
+	#prints(creatureName, " valid, takes action")
 	#### TICK COOLDOWNS ETC ON-TURN EFFECTS ON SKILL NODES
 	for skill in getSkills():
 		var pointlessReturn = skill.passTurn()
-		#if isPlayer:
-		prints("tick! ", skill.getCooldown())
+		#prints("tick! ", skill.getCooldown())
 	
 	$StatusEffects.tickStatus()
 	

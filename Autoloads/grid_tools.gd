@@ -4,20 +4,14 @@ extends Node2D
 var tileSize := 32
 
 
-
 func localToGrid(localPos: Vector2i) -> Vector2i:
+	return $JustForFunctions.local_to_map(localPos)
 	
-	var gridPos = $JustForFunctions.local_to_map(localPos)
-	return gridPos
 
 
-
-func gridToWorld(grid_pos: Vector2i) -> Vector2i:
+func gridToWorld(gridPos: Vector2i) -> Vector2i:
+	return gridPos * tileSize + Vector2i(tileSize/2, tileSize/2)
 	
-	var halfVector := Vector2i(tileSize/2, tileSize/2)
-	var world_pos: Vector2i = grid_pos * tileSize + halfVector
-	return world_pos
-
 
 
 func worldToGrid(world_pos: Vector2i) -> Vector2i:
