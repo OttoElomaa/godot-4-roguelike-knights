@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3sgsr785g1p1"]
+[gd_scene load_steps=6 format=3 uid="uid://b3sgsr785g1p1"]
 
 [ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Creatures/Creature.tscn" id="1_7g7m4"]
 [ext_resource type="Texture2D" uid="uid://bnut6as3xry7a" path="res://Sprites/Enemies/creature-houndmaster.png" id="2_kd8vu"]
 [ext_resource type="PackedScene" uid="uid://bgn3tn8gncvs" path="res://Skills/SummonDog.tscn" id="3_226g2"]
 [ext_resource type="PackedScene" uid="uid://0o5uveeqmtnk" path="res://Skills/Shoot.tscn" id="4_35vdw"]
+[ext_resource type="PackedScene" uid="uid://rxr0ciqejie2" path="res://Items/We-ShortBow.tscn" id="5_y3ww6"]
 
 [node name="Houndmaster" instance=ExtResource("1_7g7m4")]
 creatureName = "Houndmaster"
@@ -18,3 +19,5 @@ baseEvasion = 15
 [node name="SummonDogs" parent="Skills" index="0" instance=ExtResource("3_226g2")]
 
 [node name="Shoot" parent="Skills" index="1" instance=ExtResource("4_35vdw")]
+
+[node name="ShortBow" parent="Equipment/Weapons" index="0" instance=ExtResource("5_y3ww6")]

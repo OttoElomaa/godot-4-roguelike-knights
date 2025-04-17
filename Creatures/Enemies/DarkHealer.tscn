@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmcfrrddl4txy"]
+[gd_scene load_steps=7 format=3 uid="uid://bmcfrrddl4txy"]
 
 [ext_resource type="PackedScene" uid="uid://bjncipjr144kf" path="res://Creatures/Creature.tscn" id="1_5rka5"]
 [ext_resource type="Texture2D" uid="uid://bnhrqy1c0eihc" path="res://Sprites/Enemies/enemy-dark-healer-transparent-32px.png" id="2_5yg5m"]
 [ext_resource type="PackedScene" uid="uid://1nkco862q1po" path="res://Skills/BasicHeal.tscn" id="3_yo8tq"]
 [ext_resource type="PackedScene" uid="uid://dhb8f73rg8a83" path="res://Skills/Harden.tscn" id="4_aau6t"]
 [ext_resource type="PackedScene" uid="uid://d4g5rogm106cr" path="res://Skills/Strike.tscn" id="5_alnnj"]
+[ext_resource type="PackedScene" uid="uid://cavug3tjd0y8i" path="res://Items/We-WoodenStaff.tscn" id="6_5b8e4"]
 
 [node name="Healer" instance=ExtResource("1_5rka5")]
 creatureName = "Dark Healer"
@@ -17,3 +18,5 @@ texture = ExtResource("2_5yg5m")
 [node name="Harden" parent="Skills" index="1" instance=ExtResource("4_aau6t")]
 
 [node name="Strike" parent="Skills" index="2" instance=ExtResource("5_alnnj")]
+
+[node name="WoodenStaff" parent="Equipment/Weapons" index="0" instance=ExtResource("6_5b8e4")]

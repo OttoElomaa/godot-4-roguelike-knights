@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://bjncipjr144kf"]
+[gd_scene load_steps=14 format=3 uid="uid://bjncipjr144kf"]
 
 [ext_resource type="Script" path="res://Creatures/creature.gd" id="1_7vqxp"]
 [ext_resource type="Texture2D" uid="uid://cq8503ln6m6hc" path="res://Sprites/Heroes/heroes-thief.png" id="2_ojbkc"]
 [ext_resource type="Script" path="res://Creatures/Components-Scripts/CreatureStatsComponent.gd" id="3_4xke1"]
 [ext_resource type="Script" path="res://Creatures/Components-Scripts/StatusEffectsComponent.gd" id="4_q2ty8"]
-[ext_resource type="Script" path="res://Creatures/Components-Scripts/creatureEquipmentComp.gd" id="5_dfske"]
 [ext_resource type="Script" path="res://Creatures/Components-Scripts/creatureMovementComp.gd" id="5_unpd6"]
 [ext_resource type="PackedScene" uid="uid://c88p26kmuj5fw" path="res://Creatures/Components-Scripts/health_component.tscn" id="6_hpeqo"]
 [ext_resource type="PackedScene" uid="uid://bq678nwpus50l" path="res://Creatures/Components-Scripts/animation_component.tscn" id="7_a2bjn"]
@@ -103,7 +102,6 @@ baseCrit = 10
 script = ExtResource("4_q2ty8")
 
 [node name="Equipment" type="Node2D" parent="."]
-script = ExtResource("5_dfske")
 
 [node name="Weapons" type="Node2D" parent="Equipment"]
 

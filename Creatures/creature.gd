@@ -68,10 +68,12 @@ func setupHelp():
 		skill.setup(self)
 	
 	#### EQUIPMENT SETUP
-	$Equipment.setup(self)
+	for item in getEquippedItems():
+		item.setup(self)
+	
 	if $Equipment/Weapons.get_child_count() == 0:
 		var unarmedW = UnarmedWeapon.instantiate()
-		equip(unarmedW, true)
+		PlayerInventory.creatureEquip(self, unarmedW)
 
 
 func _physics_process(delta: float) -> void:
@@ -170,9 +172,8 @@ func startTurn():
 	if not self.checkValidity():
 		return	
 	
-	#### MAINTENANCE ON EACH TURN START
-	#$Stats.turnStartUpdate()    # Reset Stats
-	$StatusEffects.modifyStats(stats)
+	#### MAINTENANCE ON EACH TURN START   
+	$StatusEffects.modifyStats(stats) # Reset and Update Stats
 	
 	#### VISUAL UPDATES ON TURN START
 	$HealthBar.updateVisual(stats.health, stats.guard)
@@ -362,11 +363,25 @@ func playAttackAnimation():
 #########################################################################
 #### BOONS
 
+func getMyBoons():
+	var boons := []
+	
+	#### GET CREATURE'S BOONS
+	boons.append_array(status.getBoons())
+	
+	#### GET BOONS FROM EQUIPPED ITEMS
+	for item in getEquippedItems():
+		boons.append_array(item.getBoons() )
+	return boons
+
+
+
 #### CALLED FROM CreatureMovement.HandleMove
 func triggerBoonSelfStep():
-	for boon in status.get_children():
-		if boon.isBoon:
-			boon.triggerBoons(BoonTypes.SELF_STEP, self)
+	for boon in getMyBoons():
+		boon.triggerBoons(BoonTypes.SELF_STEP, self)
+
+
 
 #### CALLED FROM CreatureMovement.HandleMove
 #### VIA WORLD SCENE -> To All Creatures			
@@ -380,10 +395,10 @@ func triggerBoonAdjacentStep(creature:Node):
 		return
 	
 	#### PASS IT TO BOONS
-	for boon in status.get_children():
-		if boon.isBoon:
-			prints("Adjacent step. Boon haver %s finds adjacent creatures: " % creatureName, myAdjacentC)
-			boon.triggerBoons(BoonTypes.ADJACENT_STEP, self)
+	for boon in getMyBoons():
+		prints("Adjacent step. Boon haver %s finds adjacent creatures: " % creatureName, myAdjacentC)
+		boon.triggerBoons(BoonTypes.ADJACENT_STEP, self)
+
 
 
 func triggerBoonCreatureDeath(creature:Node):
@@ -392,10 +407,9 @@ func triggerBoonCreatureDeath(creature:Node):
 		return
 	
 	#### PASS IT TO BOONS
-	for boon in status.get_children():
-		if boon.isBoon:
-			prints("Creature death of %s. Boon haver %s tries... " % [creature.creatureName, creatureName])
-			boon.triggerBoons(BoonTypes.CREATURE_DEATH, self)
+	for boon in getMyBoons():
+		prints("Creature death of %s. Boon haver %s tries... " % [creature.creatureName, creatureName])
+		boon.triggerBoons(BoonTypes.CREATURE_DEATH, self)
 		
 
 ######################################################################

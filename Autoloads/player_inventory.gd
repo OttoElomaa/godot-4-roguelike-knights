@@ -20,6 +20,20 @@ func getItems() -> Array:
 	return $Items.get_children()
 
 
+#### FOR NON-PLAYERS
+func creatureEquip(creature:Node, item:Node):
+		
+	var itemToUnequip:Node = creature.getEquipItemInSameSlot(item)
+	var slot:Node = creature.getSameSlotAsItem(item)
+	
+	if itemToUnequip:
+		print("Item to unequip while equipping: " + itemToUnequip.itemName)
+		slot.remove_child(itemToUnequip)
+		
+	slot.add_child(item)
+	item.setup(creature)
+
+
 
 func playerEquip(item:Node):
 	
@@ -32,6 +46,7 @@ func playerEquip(item:Node):
 		itemToUnequip.reparent($Items)
 	
 	item.reparent(slot)
+	item.setup(player)
 
 		
 

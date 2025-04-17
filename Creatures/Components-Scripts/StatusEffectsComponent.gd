@@ -16,6 +16,14 @@ func setup(creature):
 			boon.setup(null, creature)
 
 
+func getBoons() -> Array:
+	var boons := []
+	for effect in get_children():
+		if effect.isBoon:
+			boons.append(effect)
+	return boons
+
+
 #### CALLED IN Creature.StartTurn
 func tickStatus():
 	isStunned = false

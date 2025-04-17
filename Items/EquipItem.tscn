@@ -6,3 +6,5 @@
 [node name="EquipItem" type="Node"]
 script = ExtResource("1_waifl")
 itemIcon = ExtResource("2_bdhxx")
+
+[node name="Boons" type="Node" parent="."]

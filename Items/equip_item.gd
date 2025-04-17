@@ -18,10 +18,23 @@ enum EquipTypes {
 @export var armor := 0
 
 
+var world:Node = null
 var creature:Node = null
+
+
 
 func setup(creature:Node):
 	self.creature = creature
+	self.world = creature.world
+	
+	for boon in getBoons():
+		boon.setup(null, creature)
+
+
+
+func getBoons():
+	return $Boons.get_children()
+
 
 
 func getRealDamage(actor:Node) -> int:
@@ -51,6 +64,7 @@ func getRealDamage(actor:Node) -> int:
 	return realDamage
 
 
+##################################################################
 
 func getInfoString():
 	if equipType == EquipTypes.WEAPON:
