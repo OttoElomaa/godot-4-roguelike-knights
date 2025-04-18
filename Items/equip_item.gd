@@ -29,6 +29,7 @@ func setup(creature:Node):
 	
 	for boon in getBoons():
 		boon.setup(null, creature)
+		boon.item = self
 
 
 
@@ -61,6 +62,8 @@ func getRealDamage(actor:Node) -> int:
 		critText += " <- low)"
 		
 	actor.world.ui.addCaveat(critText)
+	print(critText)
+	
 	return realDamage
 
 

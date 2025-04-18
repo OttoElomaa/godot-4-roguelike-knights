@@ -408,7 +408,7 @@ func triggerBoonCreatureDeath(creature:Node):
 	
 	#### PASS IT TO BOONS
 	for boon in getMyBoons():
-		prints("Creature death of %s. Boon haver %s tries... " % [creature.creatureName, creatureName])
+		print("Creature death of %s. Boon haver %s tries... " % [creature.creatureName, creatureName])
 		boon.triggerBoons(BoonTypes.CREATURE_DEATH, self)
 		
 

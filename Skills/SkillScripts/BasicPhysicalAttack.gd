@@ -22,6 +22,7 @@ func activate(targets:Array) -> Node:
 	#### NPC's GET TARGET FROM FILTERED LIST
 	#### ALSO AUTO-TARGETING SKILLS VIA BOONS ETC
 	var target = targets[0]
+	var ref: SkillUseRef = skill.skillUseRef
 	
 	#### MANUAL TARGET SELECTION - FOR MANUAL SKILL USE ONLY
 	if actor.isPlayer:
@@ -36,11 +37,18 @@ func activate(targets:Array) -> Node:
 	
 	#### CREATE FIRST HALF OF DOUBLE MESSAGE
 	var actorWeapon = actor.getWeapon()
-	skill.ui.saveInitialMessage("%s uses %s (%s)" % [skill.actor.creatureName,skill.skillName, actorWeapon.itemName], Color.WHITE)
+	var creName = skill.actor.creatureName
+	var skillStr = "%s uses %s (%s)" % [creName, skill.skillName, actorWeapon.itemName]
+	
+	skill.ui.saveInitialMessage(skillStr, Color.WHITE)
+	print(skillStr)
+	
+	skill.printBoonText()
+	
+
+	
+	
 	var success = false
-	
-	
-	
 	#### JUST LOG ROW FORMATTING Stuff Atm
 	handleMultiAttack()
 	

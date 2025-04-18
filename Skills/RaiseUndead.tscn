@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Skills/BaseSkill.tscn" id="1_rlia6"]
 [ext_resource type="Texture2D" uid="uid://d2jgliqvedpc5" path="res://Sprites/Enemies/enemy-guardian-spirit-transparent-32px.png" id="2_hlxdc"]
-[ext_resource type="Script" path="res://Skills/ScriptsComponents/summon_script.gd" id="3_q4qta"]
+[ext_resource type="Script" path="res://Skills/SkillScripts/summon_script.gd" id="3_q4qta"]
 [ext_resource type="PackedScene" uid="uid://4g6f66o5hoeh" path="res://Creatures/Summons/UndeadWarrior.tscn" id="4_t2jqi"]
 
 [node name="RaiseUndead" instance=ExtResource("1_rlia6")]

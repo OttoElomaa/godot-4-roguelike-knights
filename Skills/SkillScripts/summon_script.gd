@@ -16,10 +16,14 @@ func setup(skill):
 #### RETURN TARGET=TRUE, RETURN NULL=FALSE
 func activate(targets:Array) -> Node:
 	
+	var ref: SkillUseRef = skill.skillUseRef
+	
 	#### POST TRIGGER MESSAGE, FOR EXAMPLE
 	skill.ui.addInitialRow()
 	
-	skill.ui.saveInitialMessage("%s uses %s" % [skill.actor.creatureName,skill.skillName], Color.WHITE)
+	var skillStr = "%s uses %s" % [skill.actor.creatureName,skill.skillName]
+	skill.ui.saveInitialMessage(skillStr, Color.WHITE)
+	print(skillStr)
 	
 	
 	var count := 0
@@ -28,6 +32,8 @@ func activate(targets:Array) -> Node:
 	for i in range(summonsAmount):
 		if summonCreature(actorPos):
 			count += 1
+	
+	skill.printBoonText()
 	
 	#### IF AT LEAST ONE SUMMONED CREATURE, RETURN SUCCESS VALUE
 	if count > 0:

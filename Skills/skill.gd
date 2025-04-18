@@ -15,6 +15,7 @@ var ui:Node = null
 var selectedTarget: Node = null
 
 #### THIS SKILL CAN BE ATTACHED TO AN EFFECT, like a boon
+var skillUseRef: SkillUseRef = null
 var myEffect: Node = null
 
 #### RESOURCE STUFF
@@ -58,9 +59,14 @@ func passTurn():
 #### SUCCESS=TRUE, FAILURE=FALSE
 func activate() -> bool:
 	
-	if actor.isPlayer:
-		print("%s uses %s" % [actor.creatureName, skillName])
+	#### RECORDING SKILL USE REFERENCE INFO
+	if skillUseRef == null:
+		skillUseRef = SkillUseRef.new()
+		skillUseRef.actor = actor
 	
+	skillUseRef.skill = self
+	
+		
 	#### RESOURCES - CHECK FOR COST - CAN'T USE IF CAN'T PAY
 	if zealCost > 0:
 		if zealCost > actor.stats.zeal.current:
@@ -108,14 +114,18 @@ func handleSuccess():
 	actor.stats.zeal.current -= zealCost
 
 
+#############################################################
+
+func passBoonReference(ref: SkillUseRef):	
+	skillUseRef = ref
+
+
 func applyStatusEffects(target:Node):
-	
 	for effect in $StatusEffects.get_children():
 		effect.applyStatus(target)
 
 
 func isOnCooldown() -> bool:
-	
 	return $Cooldown.isOnCooldown()
 
 
@@ -135,4 +145,22 @@ func getCostString() -> String:
 
 func getZealEnhanceAmount() -> int:
 	
-	return zealEnhance * actor.stats.zeal.current
+	var amount = actor.stats.zeal.current
+	if zealEnhance > 0:
+		if amount > 0:
+			print("Enhanced: %d Zeal * %d multiplier")
+	
+	return zealEnhance * amount
+
+
+
+func printBoonText():
+	var ref = skillUseRef
+	var boonText = ""
+	
+	if ref.boon:
+		boonText = "Boon: %s" % ref.boon.effectName
+	if ref.item:
+		boonText += " Item: %s" % ref.item.itemName
+	
+	print(boonText)

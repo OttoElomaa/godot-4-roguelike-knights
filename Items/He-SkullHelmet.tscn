@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://ce42xus2k14dx"]
+
+[ext_resource type="PackedScene" uid="uid://d2gp3fn6hevgq" path="res://Items/EquipItem.tscn" id="1_mi441"]
+[ext_resource type="Texture2D" uid="uid://bl68k7m3bsarp" path="res://Sprites/item-eq-head-helm01.png" id="2_uejjk"]
+[ext_resource type="PackedScene" uid="uid://bqvlykk486ylk" path="res://StatusEffects/Boons/BoonNecromancy.tscn" id="3_xfwkq"]
+
+[node name="SkullHelmet" instance=ExtResource("1_mi441")]
+itemName = "Skullmage Helmet"
+itemIcon = ExtResource("2_uejjk")
+equipType = 2
+armor = 5
+
+[node name="BoonNecromancy" parent="Boons" index="0" instance=ExtResource("3_xfwkq")]

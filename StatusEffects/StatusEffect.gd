@@ -1,6 +1,7 @@
 extends Node
 
 
+
 enum BoonTypes {
 	NONE, SELF_STEP, ADJACENT_STEP, RECEIVE_PHYS_ATTACK, CREATURE_DEATH
 }
@@ -20,6 +21,8 @@ enum targetingGroupEnum {
 
 var skill:Node = null
 var actor:Node = null
+var item:Node = null
+
 var world:Node = null
 var ui:Node = null
 
@@ -101,16 +104,24 @@ func tickStatus(target:Node, statusHandler:Node):
 	
 
 func tickScripts(target:Node, statusHandler:Node):
+	
+	#### CREATE THE SKILL-USE REFERENCE SHEET
+	var ref = SkillUseRef.new()
+	ref.boon = self
+	ref.actor = actor
+	ref.item = item
+	
+	
 	#### GO THROUGH EACH SCRIPT. SKILL SCRIPTS ARE ACTIVATED. STATUS SCRIPTS ARE TICKED
 	for script in $Scripts.get_children():
 		script.tickStatus(target, statusHandler)
 	for scene in $Skills.get_children():
+		scene.passBoonReference(ref)
 		scene.activate()
 
 
 
-func modifyStats(statsHandler:Node):
-	$StatModifier.modifyStats(statsHandler)
+
 
 
 
@@ -121,9 +132,17 @@ func triggerBoons(boonType:BoonTypes, target:Node):
 		return
 		
 	if boonType == self.boonType:
+		print(".")
+		
 		var text = "%s triggers %s!" % [target.creatureName, effectName]
 		print(text)
 		ui.saveInitialMessage(text, MyColors.fontBrightOrange)
 		
 		tickScripts(target, target.status)
-			
+		
+		
+
+
+
+func modifyStats(statsHandler:Node):
+	$StatModifier.modifyStats(statsHandler)		

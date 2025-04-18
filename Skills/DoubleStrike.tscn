@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Skills/BaseSkill.tscn" id="1_d6leu"]
 [ext_resource type="Texture2D" uid="uid://ctpg7lgwh3fea" path="res://Sprites/skill-icon-melee-sword.png" id="2_gkq45"]
-[ext_resource type="Script" path="res://Skills/ScriptsComponents/BasicPhysicalAttack.gd" id="3_cyjos"]
+[ext_resource type="Script" path="res://Skills/SkillScripts/BasicPhysicalAttack.gd" id="3_cyjos"]
 
 [node name="DoubleStrike" instance=ExtResource("1_d6leu")]
 skillIcon = ExtResource("2_gkq45")

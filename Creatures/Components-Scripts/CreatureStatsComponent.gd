@@ -200,8 +200,10 @@ func reduceDamageByGuard(damage:int) -> int:
 	guard.current -= reduction
 	
 	var blockString : String =  "%s guards against %d damage and avoids %d!" % [creature.creatureName, damage, reduction] 
+		
 	ui.addInitialRow()
 	ui.addMessage(blockString, Color.LIGHT_BLUE)
+	print(blockString)
 	
 	ui.saveInitialMessage("Guard broken!", Color.LIGHT_BLUE)
 	
@@ -210,7 +212,9 @@ func reduceDamageByGuard(damage:int) -> int:
 
 func reduceDamageByArmor(damage:int) -> int:
 	
+	#### REDUCTION AMOUNT
 	var multiplier = float(100 - armor.current) / 100
+	
 	var reducedDamage:int = ceil(damage * multiplier)
-	print("damage:%d, multiplier:%d, reduced:%d" % [damage,multiplier,reducedDamage])
+	print("Armor - Damage: %d  Reduction percentage: %f  Dmg After Reduce: %d" % [damage,multiplier,reducedDamage])
 	return reducedDamage
