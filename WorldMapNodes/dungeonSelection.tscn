@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://lwjyjcutnpcs"]
 
 [ext_resource type="FontFile" uid="uid://bbravl5syvs5u" path="res://Resources/Fonts/stepalange-font/Stepalange-x3BLm.otf" id="1_3qih1"]
-[ext_resource type="Script" path="res://WorldMapNodes/dungeonSelection.gd" id="1_dteh5"]
+[ext_resource type="Script" uid="uid://dc1meudk1eri5" path="res://WorldMapNodes/dungeonSelection.gd" id="1_dteh5"]
 [ext_resource type="PackedScene" uid="uid://dtrsaqfh6mpaf" path="res://WorldMapNodes/GameStartDungeonButton.tscn" id="3_i6sg3"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="4_u2q0t"]
 [ext_resource type="Theme" uid="uid://knljw27a4uiu" path="res://Resources/Fonts/FancyPixelFontWhite.tres" id="5_5wb2y"]

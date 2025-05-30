@@ -1,16 +1,16 @@
 [gd_scene load_steps=17 format=3 uid="uid://bckhqa15oogpo"]
 
-[ext_resource type="Script" path="res://WorldMapNodes/game_main.gd" id="1_sbe32"]
+[ext_resource type="Script" uid="uid://2c8ksmsxka4p" path="res://WorldMapNodes/game_main.gd" id="1_sbe32"]
 [ext_resource type="Texture2D" uid="uid://okbarnnlo02g" path="res://Sprites/worldmap-tiles-water.png" id="2_4lvc5"]
 [ext_resource type="Texture2D" uid="uid://bh5055qxfdx57" path="res://Sprites/worldmap-tiles-plains.png" id="2_kvkpm"]
-[ext_resource type="Script" path="res://file_loader.gd" id="2_s4e6f"]
+[ext_resource type="Script" uid="uid://cb1idscqrnt51" path="res://file_loader.gd" id="2_s4e6f"]
 [ext_resource type="Texture2D" uid="uid://68h5r0pnli3t" path="res://Sprites/worldmap-tiles-highlights.png" id="4_jlb41"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="4_np8ec"]
 [ext_resource type="Texture2D" uid="uid://gdtfngupufrv" path="res://Sprites/worldmap-tiles-village.png" id="5_aa7ta"]
 [ext_resource type="PackedScene" uid="uid://k0em0rdf8bbx" path="res://WorldMapNodes/characterCreation.tscn" id="5_keji2"]
 [ext_resource type="Theme" uid="uid://knljw27a4uiu" path="res://Resources/Fonts/FancyPixelFontWhite.tres" id="5_pbyug"]
-[ext_resource type="Script" path="res://WorldNodes/walkerWorldgenV2.gd" id="6_3kdy8"]
-[ext_resource type="Script" path="res://WorldNodes/a_star_grid_node.gd" id="7_mnc6u"]
+[ext_resource type="Script" uid="uid://bryl2hpyl56v" path="res://WorldNodes/walkerWorldgenV2.gd" id="6_3kdy8"]
+[ext_resource type="Script" uid="uid://b7v60731f14el" path="res://WorldNodes/a_star_grid_node.gd" id="7_mnc6u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mcbur"]
 texture = ExtResource("2_4lvc5")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://7x5e7cauhthd"]
 
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="1_0lct2"]
-[ext_resource type="Script" path="res://Dungeon-UI/lookPanel.gd" id="2_0lonv"]
+[ext_resource type="Script" uid="uid://cch3io7d7t6u5" path="res://Dungeon-UI/lookPanel.gd" id="2_0lonv"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Resources/Fonts/LabelSettingSmallFontWhite.tres" id="3_82hgx"]
 [ext_resource type="Theme" uid="uid://dnmve288k8de2" path="res://Resources/Fonts/BasicSmallPixelFont.tres" id="3_pxrl6"]
 [ext_resource type="Theme" uid="uid://ctkfud23u7av3" path="res://Resources/Fonts/FancyPixelFontYellow.tres" id="4_66lwf"]

@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c6wu23oa3fk3l"]
+[gd_resource type="Resource" script_class="SkillUseRef" load_steps=2 format=3 uid="uid://c6wu23oa3fk3l"]
 
-[ext_resource type="Script" path="res://ReferenceData/skillUseRef.gd" id="1_mnxle"]
+[ext_resource type="Script" uid="uid://delkl1r2doyem" path="res://ReferenceData/skillUseRef.gd" id="1_mnxle"]
 
 [resource]
 script = ExtResource("1_mnxle")

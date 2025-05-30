@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Skills/BaseSkill.tscn" id="1_cm60j"]
 [ext_resource type="Texture2D" uid="uid://d2jgliqvedpc5" path="res://Sprites/Enemies/enemy-guardian-spirit-transparent-32px.png" id="2_sm7j4"]
-[ext_resource type="Script" path="res://Skills/SkillScripts/summon_script.gd" id="3_mmq5u"]
+[ext_resource type="Script" uid="uid://dga3tcwql4k3f" path="res://Skills/SkillScripts/summon_script.gd" id="3_mmq5u"]
 [ext_resource type="PackedScene" uid="uid://dxn8gcr6ya5vo" path="res://Creatures/Summons/GuardianSpirit.tscn" id="4_tbrbx"]
 
 [node name="Summon" instance=ExtResource("1_cm60j")]

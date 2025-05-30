@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dtrsaqfh6mpaf"]
 
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="1_6p2sd"]
-[ext_resource type="Script" path="res://WorldMapNodes/gameStartDungeonButton.gd" id="2_qp3jv"]
+[ext_resource type="Script" uid="uid://c104k18av4kbb" path="res://WorldMapNodes/gameStartDungeonButton.gd" id="2_qp3jv"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Resources/Fonts/LabelSettingSmallFontWhite.tres" id="3_t0m45"]
 [ext_resource type="LabelSettings" uid="uid://df882tsfd50yb" path="res://Resources/Fonts/LabelSettingYellowHeaderFont.tres" id="3_ycscr"]
 [ext_resource type="Texture2D" uid="uid://dvi7npudqaxm8" path="res://Sprites/dungeon-entrance-transparent-32px.png" id="4_obhjq"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bq678nwpus50l"]
 
-[ext_resource type="Script" path="res://Creatures/Components-Scripts/animation_component.gd" id="1_fh7it"]
+[ext_resource type="Script" uid="uid://iirifptv2xrh" path="res://Creatures/Components-Scripts/animation_component.gd" id="1_fh7it"]
 
 [sub_resource type="Animation" id="Animation_at7b3"]
 resource_name = "MeleeHit"
@@ -131,8 +131,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ka2d4"]
 _data = {
-"MeleeHit": SubResource("Animation_at7b3"),
-"RESET": SubResource("Animation_4ge8a")
+&"MeleeHit": SubResource("Animation_at7b3"),
+&"RESET": SubResource("Animation_4ge8a")
 }
 
 [node name="AnimationComponent" type="Node2D"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Skills/BaseSkill.tscn" id="1_iiwfe"]
 [ext_resource type="Texture2D" uid="uid://nce6ksq6qacd" path="res://Sprites/Heroes/heroes-knight.png" id="2_85ihq"]
-[ext_resource type="Script" path="res://Skills/SkillScripts/BasicHeal.gd" id="4_2w5eu"]
+[ext_resource type="Script" uid="uid://g4pxl2w1opju" path="res://Skills/SkillScripts/BasicHeal.gd" id="4_2w5eu"]
 [ext_resource type="PackedScene" uid="uid://c04f40l80yoww" path="res://StatusEffects/HardenStatus.tscn" id="4_46x0x"]
 
 [node name="Harden" instance=ExtResource("1_iiwfe")]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbx4lxn5g5ryb"]
 
-[ext_resource type="Script" path="res://Dungeon-UI/basic_log.gd" id="1_xa3yp"]
+[ext_resource type="Script" uid="uid://bef087ahqq1vo" path="res://Dungeon-UI/basic_log.gd" id="1_xa3yp"]
 [ext_resource type="PackedScene" uid="uid://irn8tsvxkxy0" path="res://Dungeon-UI/BasicLogMessage.tscn" id="2_ywuan"]
 
 [node name="CombatLog" type="PanelContainer"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://cwakr1joaem2j"]
 
-[ext_resource type="Script" path="res://WorldNodes/dungeon_ui.gd" id="1_wy0uv"]
+[ext_resource type="Script" uid="uid://8kgffatmfa55" path="res://WorldNodes/dungeon_ui.gd" id="1_wy0uv"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="2_0cgky"]
 [ext_resource type="PackedScene" uid="uid://7x5e7cauhthd" path="res://Dungeon-UI/LookCreatureInfoPanel.tscn" id="3_fnthc"]
 [ext_resource type="LabelSettings" uid="uid://df882tsfd50yb" path="res://Resources/Fonts/LabelSettingYellowHeaderFont.tres" id="3_j6j3s"]

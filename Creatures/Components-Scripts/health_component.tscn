@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c88p26kmuj5fw"]
 
-[ext_resource type="Script" path="res://Creatures/Components-Scripts/health_component.gd" id="1_jqaur"]
+[ext_resource type="Script" uid="uid://duj2tp7nwbyf" path="res://Creatures/Components-Scripts/health_component.gd" id="1_jqaur"]
 [ext_resource type="StyleBox" uid="uid://ddemw1shpdae2" path="res://Resources/ResourceBarBackground01.tres" id="2_nheb4"]
 [ext_resource type="StyleBox" uid="uid://bp7hh5ftt14iw" path="res://Resources/HealthBarBasic.tres" id="3_l1dc2"]
 [ext_resource type="StyleBox" uid="uid://dpjooy8swasju" path="res://Resources/GuardBarBasicBlue.tres" id="4_am5mg"]

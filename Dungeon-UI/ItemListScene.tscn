@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://d86hcstp7f2l"]
 
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://Resources/EmptyStyleBox.tres" id="1_ldxar"]
-[ext_resource type="Script" path="res://Dungeon-UI/item_list_scene.gd" id="2_e6bbf"]
+[ext_resource type="Script" uid="uid://d30m5qv0d87lb" path="res://Dungeon-UI/item_list_scene.gd" id="2_e6bbf"]
 [ext_resource type="Texture2D" uid="uid://e8n26chq37ad" path="res://Sprites/roguelike-chest-closed.png" id="2_sqljb"]
 [ext_resource type="LabelSettings" uid="uid://4clxhxygbncp" path="res://Resources/Fonts/LabelSettingSmallFontWhite.tres" id="3_2pac5"]
 [ext_resource type="StyleBox" uid="uid://cuau5auulqx2j" path="res://Resources/SelectBoxTransparent.tres" id="3_uuq3l"]

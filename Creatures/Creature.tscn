@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=3 uid="uid://bjncipjr144kf"]
 
-[ext_resource type="Script" path="res://Creatures/creature.gd" id="1_7vqxp"]
+[ext_resource type="Script" uid="uid://c34hv85dkp126" path="res://Creatures/creature.gd" id="1_7vqxp"]
 [ext_resource type="Texture2D" uid="uid://cq8503ln6m6hc" path="res://Sprites/Heroes/heroes-thief.png" id="2_ojbkc"]
-[ext_resource type="Script" path="res://Creatures/Components-Scripts/CreatureStatsComponent.gd" id="3_4xke1"]
-[ext_resource type="Script" path="res://Creatures/Components-Scripts/StatusEffectsComponent.gd" id="4_q2ty8"]
-[ext_resource type="Script" path="res://Creatures/Components-Scripts/creatureMovementComp.gd" id="5_unpd6"]
+[ext_resource type="Script" uid="uid://b8wbsyxojijx5" path="res://Creatures/Components-Scripts/CreatureStatsComponent.gd" id="3_4xke1"]
+[ext_resource type="Script" uid="uid://chb2ab0olypap" path="res://Creatures/Components-Scripts/StatusEffectsComponent.gd" id="4_q2ty8"]
+[ext_resource type="Script" uid="uid://toxi1n1ifs7d" path="res://Creatures/Components-Scripts/creatureMovementComp.gd" id="5_unpd6"]
 [ext_resource type="PackedScene" uid="uid://c88p26kmuj5fw" path="res://Creatures/Components-Scripts/health_component.tscn" id="6_hpeqo"]
 [ext_resource type="PackedScene" uid="uid://bq678nwpus50l" path="res://Creatures/Components-Scripts/animation_component.tscn" id="7_a2bjn"]
 
@@ -71,10 +71,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5otlx"]
 _data = {
-"AllyAttack": SubResource("Animation_1s4cr"),
-"EnemyAttack": SubResource("Animation_q17g7"),
-"MovementWobble": SubResource("Animation_dxgkf"),
-"RESET": SubResource("Animation_t048g")
+&"AllyAttack": SubResource("Animation_1s4cr"),
+&"EnemyAttack": SubResource("Animation_q17g7"),
+&"MovementWobble": SubResource("Animation_dxgkf"),
+&"RESET": SubResource("Animation_t048g")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vxror"]
@@ -130,7 +130,7 @@ simplify_epsilon = 5.0
 
 [node name="SpriteAnimations" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_5otlx")
+&"": SubResource("AnimationLibrary_5otlx")
 }
 
 [node name="MouseArea" type="Area2D" parent="."]

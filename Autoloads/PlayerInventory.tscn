@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b3m5ds2usal6o"]
 
-[ext_resource type="Script" path="res://Autoloads/player_inventory.gd" id="1_qlkmu"]
+[ext_resource type="Script" uid="uid://w3b3bunmcvp7" path="res://Autoloads/player_inventory.gd" id="1_qlkmu"]
 [ext_resource type="PackedScene" uid="uid://w633ci1oelc2" path="res://Items/We-IronSword.tscn" id="2_lmjef"]
 [ext_resource type="PackedScene" uid="uid://f2b571pb5pwt" path="res://Items/He-ChainHelmet.tscn" id="3_i3oeu"]
 [ext_resource type="PackedScene" uid="uid://rxr0ciqejie2" path="res://Items/We-ShortBow.tscn" id="3_owckr"]

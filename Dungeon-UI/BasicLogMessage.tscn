@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://irn8tsvxkxy0"]
 
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://Resources/EmptyStyleBox.tres" id="1_sv3t4"]
-[ext_resource type="Script" path="res://Dungeon-UI/basic_log_message.gd" id="1_xqjs1"]
+[ext_resource type="Script" uid="uid://bq6ycexqtf3cu" path="res://Dungeon-UI/basic_log_message.gd" id="1_xqjs1"]
 [ext_resource type="Theme" uid="uid://dnmve288k8de2" path="res://Resources/Fonts/BasicSmallPixelFont.tres" id="3_73alm"]
 
 [node name="Message" type="PanelContainer"]

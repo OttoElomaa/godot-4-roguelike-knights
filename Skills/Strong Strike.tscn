@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://d21u4j6yuyimo" path="res://Skills/BaseSkill.tscn" id="1_25u2t"]
 [ext_resource type="Texture2D" uid="uid://bdfti26osccyc" path="res://Sprites/roguelike-look-indicator.png" id="2_l0435"]
 [ext_resource type="PackedScene" uid="uid://cij3n60fr0m55" path="res://Skills/ScriptsComponents/ComponentZealResource.tscn" id="3_d2bwv"]
-[ext_resource type="Script" path="res://Skills/SkillScripts/BasicPhysicalAttack.gd" id="3_d3tvs"]
+[ext_resource type="Script" uid="uid://6lqw100v862q" path="res://Skills/SkillScripts/BasicPhysicalAttack.gd" id="3_d3tvs"]
 
 [node name="StrongStrike" instance=ExtResource("1_25u2t")]
 skillIcon = ExtResource("2_l0435")

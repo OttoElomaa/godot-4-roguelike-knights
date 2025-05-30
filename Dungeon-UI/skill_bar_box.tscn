@@ -2,7 +2,7 @@
 
 [ext_resource type="StyleBox" uid="uid://csxe58yu2qsba" path="res://Resources/EmptyStyleBox.tres" id="1_tkmai"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="1_uiii7"]
-[ext_resource type="Script" path="res://Dungeon-UI/skill_bar_box.gd" id="2_mnnst"]
+[ext_resource type="Script" uid="uid://ky4cjukrao2k" path="res://Dungeon-UI/skill_bar_box.gd" id="2_mnnst"]
 [ext_resource type="Theme" uid="uid://ctkfud23u7av3" path="res://Resources/Fonts/FancyPixelFontYellow.tres" id="3_jrgyn"]
 [ext_resource type="Texture2D" uid="uid://cd1rirf0mh0ad" path="res://Sprites/Heroes/heroes-sorcerer.png" id="5_8vca8"]
 [ext_resource type="Theme" uid="uid://dnmve288k8de2" path="res://Resources/Fonts/BasicSmallPixelFont.tres" id="5_udqto"]

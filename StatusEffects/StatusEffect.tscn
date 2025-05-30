@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://c03effeto5f3m"]
 
-[ext_resource type="Script" path="res://StatusEffects/StatusEffect.gd" id="1_bgk4h"]
-[ext_resource type="Script" path="res://StatusEffects/StatusEffect-StatModifier.gd" id="2_fa6oq"]
-[ext_resource type="Script" path="res://StatusEffects/statusRestrictions.gd" id="3_f6bot"]
+[ext_resource type="Script" uid="uid://cni7ukripw8kb" path="res://StatusEffects/StatusEffect.gd" id="1_bgk4h"]
+[ext_resource type="Script" uid="uid://dlgv1bpcktarm" path="res://StatusEffects/StatusEffect-StatModifier.gd" id="2_fa6oq"]
+[ext_resource type="Script" uid="uid://cu36d5nxjhmk6" path="res://StatusEffects/statusRestrictions.gd" id="3_f6bot"]
 
 [node name="StatusEffect" type="Node"]
 script = ExtResource("1_bgk4h")

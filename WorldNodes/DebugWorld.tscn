@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b3sgsr785g1p1" path="res://Creatures/Enemies/Houndmaster.tscn" id="5_6usrl"]
 [ext_resource type="PackedScene" uid="uid://cbu18kyqxrpvs" path="res://Creatures/Enemies/Orc.tscn" id="6_qffis"]
 [ext_resource type="PackedScene" uid="uid://drr6x5762e2r0" path="res://Creatures/Bosses/OrcWarlord.tscn" id="7_1dpor"]
-[ext_resource type="Script" path="res://WorldNodes/debugNodes.gd" id="8_dntog"]
+[ext_resource type="Script" uid="uid://4uguyey5ikuh" path="res://WorldNodes/debugNodes.gd" id="8_dntog"]
 [ext_resource type="PackedScene" uid="uid://dxn8gcr6ya5vo" path="res://Creatures/Summons/GuardianSpirit.tscn" id="8_v4bki"]
 [ext_resource type="PackedScene" uid="uid://c3nup8qw8wgmx" path="res://Creatures/Enemies/Slime.tscn" id="9_1qux1"]
 

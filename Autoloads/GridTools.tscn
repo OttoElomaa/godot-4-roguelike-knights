@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c8ic0eaurnr03"]
 
-[ext_resource type="Script" path="res://Autoloads/grid_tools.gd" id="1_gc7en"]
+[ext_resource type="Script" uid="uid://b7gbpr4xx8471" path="res://Autoloads/grid_tools.gd" id="1_gc7en"]
 [ext_resource type="TileSet" uid="uid://7slev8tg8jyu" path="res://Resources/Tilemaps/VoidDebugTiles.tres" id="2_2jtl1"]
 
 [node name="GridTools" type="Node2D"]

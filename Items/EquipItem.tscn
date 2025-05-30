@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d2gp3fn6hevgq"]
 
-[ext_resource type="Script" path="res://Items/equip_item.gd" id="1_waifl"]
+[ext_resource type="Script" uid="uid://ci34j0gofc8xm" path="res://Items/equip_item.gd" id="1_waifl"]
 [ext_resource type="Texture2D" uid="uid://dilvg23aedefe" path="res://Sprites/roguelike-indicator-targeting.png" id="2_bdhxx"]
 
 [node name="EquipItem" type="Node"]

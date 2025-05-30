@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dgmemnbsptnoj"]
 
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="1_pj7s2"]
-[ext_resource type="Script" path="res://Dungeon-UI/inventoryScreen.gd" id="2_g6ep0"]
+[ext_resource type="Script" uid="uid://cm3qfop1dxjo6" path="res://Dungeon-UI/inventoryScreen.gd" id="2_g6ep0"]
 [ext_resource type="StyleBox" uid="uid://ddemw1shpdae2" path="res://Resources/ResourceBarBackground01.tres" id="2_lwodh"]
 [ext_resource type="LabelSettings" uid="uid://df882tsfd50yb" path="res://Resources/Fonts/LabelSettingYellowHeaderFont.tres" id="3_oblao"]
 [ext_resource type="PackedScene" uid="uid://d86hcstp7f2l" path="res://Dungeon-UI/ItemListScene.tscn" id="4_buqgk"]

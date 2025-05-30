@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bywsg41j5npg1"]
 
-[ext_resource type="Script" path="res://Interactables/interact_object.gd" id="1_sr8op"]
+[ext_resource type="Script" uid="uid://dt6mmycsiqumf" path="res://Interactables/interact_object.gd" id="1_sr8op"]
 [ext_resource type="StyleBox" uid="uid://jqa8dgagawo1" path="res://Resources/SkillBarBoxStyle.tres" id="3_g05wo"]
 [ext_resource type="FontFile" uid="uid://byafnu4pqy01b" path="res://Resources/Fonts/monaco/monaco.ttf" id="3_r3nit"]
 [ext_resource type="Texture2D" uid="uid://ctpg7lgwh3fea" path="res://Sprites/skill-icon-melee-sword.png" id="4_ivd2g"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://k0em0rdf8bbx"]
 
 [ext_resource type="FontFile" uid="uid://bbravl5syvs5u" path="res://Resources/Fonts/stepalange-font/Stepalange-x3BLm.otf" id="1_bijxy"]
-[ext_resource type="Script" path="res://WorldMapNodes/characterCreation.gd" id="1_wi0ip"]
+[ext_resource type="Script" uid="uid://cla7ud7k4r2om" path="res://WorldMapNodes/characterCreation.gd" id="1_wi0ip"]
 [ext_resource type="PackedScene" uid="uid://qxc2qwv3njt4" path="res://WorldMapNodes/GameStartCharButton.tscn" id="2_6kmw4"]
 [ext_resource type="StyleBox" uid="uid://cuau5auulqx2j" path="res://Resources/SelectBoxTransparent.tres" id="2_fbe35"]
 [ext_resource type="PackedScene" uid="uid://t6iw2eyutq4j" path="res://Creatures/PlayerCharacters/PlayerKnight.tscn" id="3_yvxih"]
