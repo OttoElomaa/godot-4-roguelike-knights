@@ -8,7 +8,7 @@ var RangedLine = load("res://MiscUI/RangedShotLine.tscn")
 var previouslySeenTiles := []
 var visibleTiles := []
 var world:Node = null
-var grid:Node = null
+var grid:GridController = null
 
 
 
@@ -57,17 +57,13 @@ func createRangedLine(startPos, endPos):
 #### PreviouslySeenTiles: WE UPDATE IT IN THIS FUNC
 func handleFogOfWar(startCoord:Vector2i, range:int, tilemap:TileMapLayer):
 	
-	#### PUT NAVIGATOR TO PLAYER'S CURRENT GRID POSITION (Where player stands / is moving to)
-	$Mover.position = GridTools.gridToWorld(startCoord)
-	visibleTiles = []
-	
+	self.visibleTiles = []
 	var coordsToCheck:Array = grid.getCoordsInRange(startCoord, range)
 	
 	var coordsDict := {}
 	var visibleCoords := []
 	var vec16 := Vector2i(16,16)
 	
-	var current_pos = startCoord * 32 + vec16
 	
 	#### SET AS UNSEEN DARK FOG (Value 0)
 	for coord in coordsToCheck:
@@ -82,22 +78,14 @@ func handleFogOfWar(startCoord:Vector2i, range:int, tilemap:TileMapLayer):
 	#### TRANSFORM EACH COORD FROM GRID TO SPATIAL
 	#### DICTIONARY - KEY:SPATIAL, VALUE: GRID COORD
 	for coord in coordsToCheck:
-		var spatial = Vector2(coord) * 32 + Vector2(16,16)
-		coordsDict[spatial] = coord
+		if lineOfSightBetweenTiles(startCoord, coord):
+			tilemap.set_cell(coord, -1, Vector2i(0,0))
+			visibleCoords.append(coord)
 	
 	
-	############################################################################
-	#### GET NAVIGATION PATH FROM START TO TARGET. ONLY IF PASSABLE TILE 
-	for coord:Vector2 in coordsDict.keys():
-		
-		if grid.getTileValue(coordsDict[coord]) == -1:
-			if coordsDict[coord] in grid.regionTiles:
-				#### PROCESS EACH TILE'S SIGHT LINE HERE - IMPORTANT
-				inRangeHelp(coordsDict, coord, tilemap, visibleCoords)
-				
 	
 	#### STORE THIS TURN'S VISIBLE COORDS TO LIST THAT'S AVAILABLE VIA WORLD
-	visibleTiles = visibleCoords
+	self.visibleTiles = visibleCoords
 			
 	###################################################################################
 	#### STORE INFO ON COORDS THAT ARE ADJACENT TO PATHABLE COORDS		
@@ -149,36 +137,31 @@ func handleFogOfWar(startCoord:Vector2i, range:int, tilemap:TileMapLayer):
 	
 	
 
-func inRangeHelp(coordsDict:Dictionary, coord:Vector2, tilemap:TileMapLayer, visibleCoords:Array):
-	
-	var navigator := $Mover/LineOfSightNavigator
-	
-	#### IF PATH IS STRAIGHT LINE, TARGET IS VISIBLE
-	navigator.target_position = coord
-	var startingPoint = GridTools.gridToWorld( world.player.gridPosition )
-	var finalPoint = navigator.get_final_position()
-	
-	#### LINEAR DISTANCE:
-	var straightDistance = startingPoint.distance_to(coord)
-	
-	#### CALCULATE PATH LENGTH, COMPARE TO SEE IS IT LINEAR
-	var points = navigator.get_current_navigation_path()
-	var dist := 0
-	for i in range(1, points.size()):
-		
-		var new:Vector2 = points[i]
-		var prev = points[i-1]
-		dist += new.distance_to(prev)
+########################################################
+#### ALGORITHMIC LOS
+func lineOfSightBetweenTiles(start: Vector2i, goal: Vector2i) -> bool:
+	var distX = abs(goal.x - start.x)
+	var distY = abs(goal.y - start.y)
 
-	
-	#### IF LINE IS STRAIGHT, IT'S IN LINE OF SIGHT
-	if dist <= straightDistance:
-		tilemap.set_cell(coordsDict[coord], -1, Vector2i(0,0))
-		visibleCoords.append(coordsDict[coord])
-		
-		#### DEBUG TO SEE Successful SIGHT LINES
-		if debugShowLOSLines:
-			var line:Line2D = RangedLine.instantiate()
-			#line.points = [startingPoint, finalPoint]
-			line.points = points
-			$Disposables.add_child(line)
+	var sx = 1 if start.x < goal.x else -1
+	var sy = 1 if start.y < goal.y else -1
+
+	var err = distX - distY
+	var x = start.x
+	var y = start.y
+
+	while true:
+		if x == goal.x and y == goal.y:
+			return true
+		var tile = Vector2i(x, y)
+		if tile != start and grid.isTileWall(tile):
+			return false
+
+		var e2 = 2 * err
+		if e2 >= -distY:
+			err -= distY
+			x += sx
+		if e2 <= distX:
+			err += distX
+			y += sy
+	return true

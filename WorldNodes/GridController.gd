@@ -1,5 +1,5 @@
 extends Node
-
+class_name GridController
 
 var tileSize := 32
 
@@ -105,9 +105,8 @@ func is_tile_empty(grid_pos: Vector2i) -> bool:
 		return true
 	
 	#### CHECK IF WALL OR VOID TILE BLOCKS THE TILE
-	match getTileValue(grid_pos):
-		1,2:
-			return false
+	if isTileWall(grid_pos):
+		return false
 	
 	#### ELSE, DOES CREATURE BLOCK IT		
 	for creature in world.getCreatures():
@@ -116,7 +115,14 @@ func is_tile_empty(grid_pos: Vector2i) -> bool:
 			
 	#### TILE IS EMPTY
 	return true
-	
+
+
+func isTileWall(grid_pos: Vector2i):
+	#### CHECK IF WALL OR VOID TILE BLOCKS THE TILE
+	match getTileValue(grid_pos):
+		1,2:
+			return true
+	return false
 	
 	
 #### GET ALL ROOMS IN THE CURRENT WORLD STATE

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://6rirwqrl30jg"]
+[gd_scene format=3 uid="uid://6rirwqrl30jg"]
 
 [ext_resource type="Script" uid="uid://d0s0uc4rh6acq" path="res://WorldNodes/world.gd" id="1_fx20f"]
 [ext_resource type="PackedScene" uid="uid://cwakr1joaem2j" path="res://Dungeon-UI/ui.tscn" id="2_wgef7"]
@@ -26,44 +26,44 @@ source_geometry_mode = 2
 source_geometry_group_name = &"nav-geometry"
 agent_radius = 0.0
 
-[node name="World" type="NavigationRegion2D"]
+[node name="World" type="NavigationRegion2D" unique_id=1558446207]
 navigation_polygon = SubResource("NavigationPolygon_akmnp")
 script = ExtResource("1_fx20f")
 
-[node name="UI" parent="." instance=ExtResource("2_wgef7")]
+[node name="UI" parent="." unique_id=1245256575 instance=ExtResource("2_wgef7")]
 
-[node name="RoomGeneration" type="Node2D" parent="."]
+[node name="RoomGeneration" type="Node2D" parent="." unique_id=608005066]
 
-[node name="Walker2" type="Node" parent="RoomGeneration"]
+[node name="Walker2" type="Node" parent="RoomGeneration" unique_id=1033388259]
 script = ExtResource("3_ua0t6")
 
-[node name="GlobalFloorTiles" type="TileMapLayer" parent="RoomGeneration" groups=["floortiles", "nav-geometry"]]
+[node name="GlobalFloorTiles" type="TileMapLayer" parent="RoomGeneration" unique_id=573584685 groups=["floortiles", "nav-geometry"]]
 z_index = -2
 tile_set = ExtResource("4_085pr")
 collision_enabled = false
 navigation_enabled = false
 
-[node name="GridController" type="Node" parent="." groups=["tilecontroller"]]
+[node name="GridController" type="Node" parent="." unique_id=309657061 groups=["tilecontroller"]]
 script = ExtResource("5_stjdu")
 
-[node name="AStarGridNode" type="Node2D" parent="."]
+[node name="AStarGridNode" type="Node2D" parent="." unique_id=1154130495]
 z_index = 10
 script = ExtResource("6_bcmm6")
 
-[node name="Disposables" type="Node2D" parent="AStarGridNode"]
+[node name="Disposables" type="Node2D" parent="AStarGridNode" unique_id=931432023]
 
-[node name="LineOfSight" type="Node2D" parent="."]
+[node name="LineOfSight" type="Node2D" parent="." unique_id=136718946]
 script = ExtResource("7_7nmn7")
 
-[node name="Disposables" type="Node2D" parent="LineOfSight"]
+[node name="Disposables" type="Node2D" parent="LineOfSight" unique_id=509507863]
 
-[node name="FogOfWarTimer" type="Timer" parent="LineOfSight"]
+[node name="FogOfWarTimer" type="Timer" parent="LineOfSight" unique_id=888697372]
 wait_time = 0.1
 one_shot = true
 
-[node name="Mover" type="Node2D" parent="LineOfSight"]
+[node name="Mover" type="Node2D" parent="LineOfSight" unique_id=1379108953]
 
-[node name="LineOfSightNavigator" type="NavigationAgent2D" parent="LineOfSight/Mover"]
+[node name="LineOfSightNavigator" type="NavigationAgent2D" parent="LineOfSight/Mover" unique_id=268168971]
 path_desired_distance = 5.0
 target_desired_distance = 5.0
 path_max_distance = 5000.0
@@ -71,51 +71,51 @@ navigation_layers = 3
 simplify_path = true
 simplify_epsilon = 5.0
 
-[node name="Rooms" type="Node2D" parent="."]
+[node name="Rooms" type="Node2D" parent="." unique_id=1838761850]
 z_index = -2
 
-[node name="Creatures" type="Node2D" parent="."]
+[node name="Creatures" type="Node2D" parent="." unique_id=2123050548]
 z_index = 10
 z_as_relative = false
 y_sort_enabled = true
 
-[node name="Objects" type="Node2D" parent="."]
+[node name="Objects" type="Node2D" parent="." unique_id=649110381]
 z_index = 10
 z_as_relative = false
 y_sort_enabled = true
 
-[node name="Utilities" type="Node2D" parent="."]
+[node name="Utilities" type="Node2D" parent="." unique_id=1659206694]
 
-[node name="Targeting" type="Node2D" parent="Utilities"]
+[node name="Targeting" type="Node2D" parent="Utilities" unique_id=1047433600]
 script = ExtResource("8_52j1m")
 
-[node name="TargetingIcon" type="Sprite2D" parent="Utilities/Targeting"]
+[node name="TargetingIcon" type="Sprite2D" parent="Utilities/Targeting" unique_id=435071705]
 texture = ExtResource("9_il066")
 
-[node name="LookTool" type="Node2D" parent="Utilities"]
+[node name="LookTool" type="Node2D" parent="Utilities" unique_id=606627069]
 z_index = 12
 script = ExtResource("10_akh64")
 
-[node name="Sprite2D" type="Sprite2D" parent="Utilities/LookTool"]
+[node name="Sprite2D" type="Sprite2D" parent="Utilities/LookTool" unique_id=1643106025]
 texture = ExtResource("11_nh211")
 
-[node name="FogTiles" type="TileMapLayer" parent="Utilities"]
+[node name="FogTiles" type="TileMapLayer" parent="Utilities" unique_id=928193141]
 z_index = 8
 z_as_relative = false
 tile_set = ExtResource("12_ehidn")
 collision_enabled = false
 navigation_enabled = false
 
-[node name="VoidTiles" type="TileMapLayer" parent="Utilities" groups=["nav-geometry"]]
+[node name="VoidTiles" type="TileMapLayer" parent="Utilities" unique_id=1271779085 groups=["nav-geometry"]]
 z_index = 10
 tile_set = ExtResource("13_njn17")
 navigation_enabled = false
 
-[node name="DumbTimer" type="Timer" parent="Utilities"]
+[node name="DumbTimer" type="Timer" parent="Utilities" unique_id=1383105154]
 wait_time = 0.4
 one_shot = true
 
-[node name="ExitSprite" type="Sprite2D" parent="."]
+[node name="ExitSprite" type="Sprite2D" parent="." unique_id=283694187]
 texture = ExtResource("14_k44we")
 script = ExtResource("15_h6cfj")
 

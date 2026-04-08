@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1vwhfultp2tg"]
+
+[ext_resource type="TileSet" uid="uid://7slev8tg8jyu" path="res://Resources/Tilemaps/VoidDebugTiles.tres" id="1_ei41b"]
+
+[node name="VoidTiles" type="TileMapLayer" groups=["nav-geometry"]]
+z_index = 10
+tile_set = ExtResource("1_ei41b")
+navigation_enabled = false
