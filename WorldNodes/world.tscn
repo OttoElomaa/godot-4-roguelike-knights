@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d0s0uc4rh6acq" path="res://WorldNodes/world.gd" id="1_fx20f"]
 [ext_resource type="PackedScene" uid="uid://cwakr1joaem2j" path="res://Dungeon-UI/ui.tscn" id="2_wgef7"]
 [ext_resource type="Script" uid="uid://bryl2hpyl56v" path="res://WorldNodes/walkerWorldgenV2.gd" id="3_ua0t6"]
+[ext_resource type="Script" uid="uid://eolmmy2dphov" path="res://WorldNodes/path_gen_3.gd" id="4_57oi3"]
 [ext_resource type="TileSet" uid="uid://rqvrx1aog7gv" path="res://Resources/Tilemaps/FloorTileset.tres" id="4_085pr"]
 [ext_resource type="Script" uid="uid://bgudti7ey21b0" path="res://WorldNodes/GridController.gd" id="5_stjdu"]
 [ext_resource type="Script" uid="uid://b7v60731f14el" path="res://WorldNodes/a_star_grid_node.gd" id="6_bcmm6"]
@@ -37,14 +38,20 @@ script = ExtResource("1_fx20f")
 [node name="Walker2" type="Node" parent="RoomGeneration" unique_id=1033388259]
 script = ExtResource("3_ua0t6")
 
-[node name="GlobalFloorTiles" type="TileMapLayer" parent="RoomGeneration" unique_id=573584685 groups=["floortiles", "nav-geometry"]]
+[node name="PathGen3" type="Node" parent="RoomGeneration" unique_id=88730681]
+script = ExtResource("4_57oi3")
+min_prefab_distance = 25
+generate_room_floors = true
+tile_pixel_size = Vector2(32, 32)
+
+[node name="GridController" type="Node2D" parent="." unique_id=1535540956 groups=["tilecontroller"]]
+script = ExtResource("5_stjdu")
+
+[node name="GlobalFloorTiles" type="TileMapLayer" parent="GridController" unique_id=573584685 groups=["floortiles", "nav-geometry"]]
 z_index = -2
 tile_set = ExtResource("4_085pr")
 collision_enabled = false
 navigation_enabled = false
-
-[node name="GridController" type="Node" parent="." unique_id=309657061 groups=["tilecontroller"]]
-script = ExtResource("5_stjdu")
 
 [node name="AStarGridNode" type="Node2D" parent="." unique_id=1154130495]
 z_index = 10

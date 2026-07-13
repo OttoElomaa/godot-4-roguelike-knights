@@ -163,7 +163,7 @@ func startTurn():
 	if isPlayer:
 		if gridPosition == world.exitGridPos:
 			print("EXIT REACHEDDDDDDDD")
-			world.resetLevel()
+			world.resetLevel(true)
 			return
 	
 	#### PLAYER OR SELF DEAD: DO NOTHING		
@@ -186,7 +186,7 @@ func startTurn():
 	#prints(creatureName, " valid, takes action")
 	#### TICK COOLDOWNS ETC ON-TURN EFFECTS ON SKILL NODES
 	for skill in getSkills():
-		var pointlessReturn = skill.passTurn()
+		await skill.passTurn()
 		#prints("tick! ", skill.getCooldown())
 	
 	$StatusEffects.tickStatus()

@@ -25,13 +25,6 @@ func setup(game: Node):
 	#$Tiles/Backdrop2.queue_free()
 	
 	
-func placeOnMetaGrid(metaPos: Vector2i):
-	
-	metaGridPos = metaPos
-	originGridPos = metaGridPos * globalRoomSize
-	position += Vector2(originGridPos) * 32
-	
-
 func placeOnGrid(gridPos:Vector2i):	
 	originGridPos = gridPos
 	position = Vector2(originGridPos) * 32

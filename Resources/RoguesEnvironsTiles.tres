@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=32 format=3 uid="uid://ddl5lqa65tlur"]
+[gd_resource type="TileSet" format=3 uid="uid://ddl5lqa65tlur"]
 
 [ext_resource type="Texture2D" uid="uid://dcawseduih5xw" path="res://Sprites/roguelike-tiles-walls.png" id="1_cy0rr"]
 [ext_resource type="Texture2D" uid="uid://dxunv7bs5lybb" path="res://Sprites/tiles.png" id="1_dx3do"]

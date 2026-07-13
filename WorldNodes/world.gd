@@ -65,29 +65,27 @@ func startGame(game:Node, playerScene:Node, dungeonInfo:Object):
 	#### TURN OFF INPUTS WHILE MAP GENERATES
 	ui.toggleLoadingScreen(true)
 	States.inputModeOff()
-	
-	var pointlessReturn = null
-	
+		
 	if debugShowVoidTiles:
 		$Utilities/VoidTiles.show()
 	else:
 		$Utilities/VoidTiles.hide()
 			
 	$Utilities/LookTool.setup(self)
-	
+	$Utilities/Targeting.setup(self)
 	
 	#### SETUP ASTARGRID TO CREATE PATH BETWEEN ROOM SCENES
-	pointlessReturn = $AStarGridNode.setup(self)
+	await $AStarGridNode.setup(self)
 	$GridController.setup(self)
 	set_navigation_layer_value(2, true)
 	
 	
 	#####################################################
 	#### ROOMS STUFF - GENERATE DUNGEON WITH PREFAB ROOMS
-	pointlessReturn = generateDungeon()
+	await generateDungeon()
 	
 	#### CREATE VOID TILES, ETC
-	pointlessReturn = $GridController.setupGrid()
+	await $GridController.setupGrid()
 	
 	addCreature(player)
 	
@@ -115,7 +113,7 @@ func startGame(game:Node, playerScene:Node, dungeonInfo:Object):
 	
 	
 	#### LOS STUFF SETUP, NOTHING TO WAIT
-	pointlessReturn = $LineOfSight.setup(self)
+	await $LineOfSight.setup(self)
 	
 	
 	######################################################
@@ -207,9 +205,9 @@ func startDebugLevel(game:Node, playerScene:Node, dungeonInfo:Object):
 	ui.updateVisualsOnTurn()
 		
 	#### CREATE VOID TILES, ETC
-	pointlessReturn = $GridController.setupGrid()
+	await $GridController.setupGrid()
 	#### LOS STUFF SETUP, NOTHING TO WAIT
-	pointlessReturn = $LineOfSight.setup(self)
+	await $LineOfSight.setup(self)
 		
 	$Utilities/DumbTimer.start()
 	#### INPUT MANAGEMENT
@@ -218,30 +216,32 @@ func startDebugLevel(game:Node, playerScene:Node, dungeonInfo:Object):
 
 	
 func generateDungeon():
+	var gen := $RoomGeneration/PathGen3
+	var dungeonGenRef:DungeonGenResult = gen.generate()
 	
-	#### TRYING NEW PATH STUFF
-	var walkerRoomPositions = $RoomGeneration/Walker2.walk(20)
-	pathTurns = walkerRoomPositions
+	pathTiles = dungeonGenRef.path_tiles
+	#grid.floorTiles.append_array(dungeonGenRef.all_room_floors())
+	for tile in dungeonGenRef.all_room_floors():
+		grid.setFloor(tile)
 	
-	
-	generatePath(walkerRoomPositions) 
-	pathTiles = $RoomGeneration/GlobalFloorTiles.get_used_cells()
-	
+	#### PAINT THE PATH
+	for coord in pathTiles:
+		$GridController/GlobalFloorTiles.set_cell(coord, 6, Vector2i.ZERO)
 	
 	#### TRY TO CREATE ROOMS ALONG PATH
 	var count := 0
 	var latest:Node = null
 	
-	for point in pathTurns:
-		prints("pathtiles worldgen: ", point.gridPosition)
+	for tile in dungeonGenRef.prefab_centers:
+		prints("pathtiles worldgen: ", tile)
 					
-		if point.hasRoom:
-			var scene = FileLoader.createRandomRoom()
-			placeRoom(scene, point.gridPosition - Vector2i(25,25))
-			if count == 0:
-				firstRoom = scene
-			count += 1
-			latest = scene
+		var scene = FileLoader.createRandomRoom()
+		#placeRoom(scene, tile - Vector2i(25,25))
+		placeRoom(scene, tile - Vector2i(10,10))
+		if count == 0:
+			firstRoom = scene
+		count += 1
+		latest = scene
 	
 	lastRoom = latest
 			
@@ -253,29 +253,6 @@ func generateDungeon():
 	return pathTiles
 
 
-#### GENERATE A PATH BETWEEN ROOMS
-#### INPUT: ARRAY OF COORDS. WAYPOINTS TO CREATE PATHS BETWEEN
-func generatePath(dungeonPath:Array) -> Array:
-	
-	var allPathTiles := []
-	
-	#### CREATE ASTAR PATHS BETWEEN EACH OF THEM
-	var paths := []
-	for i in range(1, dungeonPath.size()):
-		var prev = dungeonPath[i-1].gridPosition
-		var curr = dungeonPath[i].gridPosition
-		paths.append(aStar.createPathManhattan(prev, curr))
-	
-	#### CONVERT THEM TO GRID COORDINATES
-	for path in paths:
-		for coord in path:
-			#### CONVERSION FROM REGULAR COORDINATES
-			var converted = coord / 32 - Vector2(16.5, 16.5)
-			$RoomGeneration/GlobalFloorTiles.set_cell(converted, 6, Vector2i.ZERO)
-			
-	prints("Path by aStar node: ", allPathTiles )
-	return allPathTiles
-	
 
 func placeRoom(roomScene:Node, gridPos:Vector2i):
 	
@@ -295,12 +272,52 @@ func instantiateRoom(roomScene:Node, metaCoords:Vector2i):
 	newRoom.setup(self)	
 	
 	#### MOVE ROOM INTO POSITION BASED ON META POSITION AND GLOBAL ROOM SIZE
-	newRoom.placeOnMetaGrid(metaCoords) 
+	#newRoom.placeOnMetaGrid(metaCoords) 
 	
 	#newRoom.randomizeTileGraphics()
 	#prints("init success! ", newRoom.position)
 
 
+
+#### derive WALL tiles from FLOOR tiles. WALL = non-floor neighbor of any floor tile.
+#### EDGE WALL = wall with floor BELOW it (+Y on screen); from the floor's view that's its UP (-Y) neighbor.
+#### returns { walls, edge_walls, non_edge_walls } as deduped Array[Vector2i].
+func wallsFromFloors(floors: Array[Vector2i]) -> Dictionary:
+	var wall_set: Dictionary = {}        # coord -> true. THE dedup.
+	var edge_set: Dictionary = {}        # coord -> true. edge walls.
+
+	# 8 neighbor offsets. UP (-Y) handled specially for the edge test.
+	var offsets: Array[Vector2i] = [
+		Vector2i(0, -1), Vector2i(0, 1), Vector2i(1, 0), Vector2i(-1, 0),
+		Vector2i(1, 1), Vector2i(-1, 1), Vector2i(1, -1), Vector2i(-1, -1),
+	]
+
+	for f in floors:
+		for o in offsets:
+			var n := f + o
+			if n in floors or n in pathTiles:
+				continue                 # neighbor is floor, not a wall
+			wall_set[n] = true
+			# this wall has floor (f) directly below it -> EDGE wall.
+			if o == Vector2i(0, -1):
+				edge_set[n] = true
+
+	# split into edge / non-edge from the two sets.
+	var walls: Array[Vector2i] = []
+	var edge_walls: Array[Vector2i] = []
+	var non_edge_walls: Array[Vector2i] = []
+	for w in wall_set:
+		walls.append(w)
+		if edge_set.has(w):
+			edge_walls.append(w)
+		else:
+			non_edge_walls.append(w)
+
+	return { "walls": walls, "edge_walls": edge_walls, "non_edge_walls": non_edge_walls }
+
+
+#############################################################################
+#### GAMEPLAY OPERATIONS
 
 func _process(delta: float) -> void:
 	
@@ -409,9 +426,8 @@ func updateVisuals():
 	ui.updateVisualsOnTurn()
 	
 	
-
+#### CREATE LIST OF CURRENT TARGETS
 func updateTargeting():		
-	#### CREATE LIST OF CURRENT TARGETS
 	if not is_instance_valid(player):
 		return
 		
@@ -540,7 +556,7 @@ func _on_dumb_timer_timeout() -> void:
 	prints("rect: ", rect)  
 	navigation_polygon.baking_rect = rect
 	
-	var pointlessReturn = $AStarGridNode.setupGrid()
+	await $AStarGridNode.setupGrid()
 	bake_navigation_polygon(true)
 	
 	

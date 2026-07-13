@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name GridController
 
 var tileSize := 32
@@ -23,7 +23,6 @@ var voidTilemap:TileMapLayer = null
 # Called when the node enters the scene tree for the first time.
 func setup(world: Node):
 	self.world = world
-	
 	if world.isOverworld:
 		return
 		
@@ -32,10 +31,9 @@ func setup(world: Node):
 	
 	
 func setupGrid():
-	
-	
 	if world.isOverworld:
 		return
+	
 	
 	#### SETUP WALLS AND FLOORS TILE LISTS HERE
 	roomsList = world.getRooms()
@@ -96,6 +94,12 @@ func showTileInfo(grid_pos: Vector2i):
 	pass
 
 
+#### VALUES:
+#### -1: Empty Floor  |  1:Void  |  2:Walls
+func getTileValue(coord) -> int:
+	return voidTilemap.get_cell_source_id(coord)
+
+
 	
 #### GO THROUGH EVERY TILEMAP, EQUALIZE THEIR ORIGIN POSITIONS
 #### IF A WALL IS IN THE TILE, RETURN FALSE	
@@ -123,7 +127,16 @@ func isTileWall(grid_pos: Vector2i):
 		1,2:
 			return true
 	return false
+
+
+#func setWall(gridPos:Vector2i):
+
+func setFloor(gridPos:Vector2i):
+	floorTiles.append(gridPos)
+	voidTilemap.set_cell(gridPos, -1)
+	$GlobalFloorTiles.set_cell(gridPos, 6, Vector2i.ZERO)
 	
+
 	
 #### GET ALL ROOMS IN THE CURRENT WORLD STATE
 #### STORE EACH WALLS-TYPE TILEMAP AND ITS ROOM'S META POSITION IN A DICT	
@@ -203,15 +216,6 @@ func createVoidTiles(voidTilemap:TileMapLayer):
 		
 		
 		
-#### VALUES:
-#### -1: Empty  |  1:Void  |  2:Walls
-func getTileValue(coord) -> int:
-	
-	#var gridPos = voidTilemap.local_to_map(coord)
-	return voidTilemap.get_cell_source_id(coord)
-
-	
-	
 func getCreatureTiles() -> Array:
 	
 	var creaturePositions := []
@@ -219,9 +223,6 @@ func getCreatureTiles() -> Array:
 		creaturePositions.append(creature.gridPosition)
 		
 	return creaturePositions
-
-
-
 
 
 
