@@ -104,7 +104,7 @@ func tickStatus(target:Node, statusHandler:Node):
 	
 
 func tickScripts(target:Node, statusHandler:Node):
-	
+		
 	#### CREATE THE SKILL-USE REFERENCE SHEET
 	var ref = SkillUseRef.new()
 	ref.boon = self

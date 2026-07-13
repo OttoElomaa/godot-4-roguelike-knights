@@ -64,20 +64,6 @@ script = ExtResource("7_7nmn7")
 
 [node name="Disposables" type="Node2D" parent="LineOfSight" unique_id=509507863]
 
-[node name="FogOfWarTimer" type="Timer" parent="LineOfSight" unique_id=888697372]
-wait_time = 0.1
-one_shot = true
-
-[node name="Mover" type="Node2D" parent="LineOfSight" unique_id=1379108953]
-
-[node name="LineOfSightNavigator" type="NavigationAgent2D" parent="LineOfSight/Mover" unique_id=268168971]
-path_desired_distance = 5.0
-target_desired_distance = 5.0
-path_max_distance = 5000.0
-navigation_layers = 3
-simplify_path = true
-simplify_epsilon = 5.0
-
 [node name="Rooms" type="Node2D" parent="." unique_id=1838761850]
 z_index = -2
 
@@ -127,5 +113,4 @@ texture = ExtResource("14_k44we")
 script = ExtResource("15_h6cfj")
 
 [connection signal="bake_finished" from="." to="." method="_on_bake_finished"]
-[connection signal="timeout" from="LineOfSight/FogOfWarTimer" to="." method="_on_fog_of_war_timer_timeout"]
 [connection signal="timeout" from="Utilities/DumbTimer" to="." method="_on_dumb_timer_timeout"]

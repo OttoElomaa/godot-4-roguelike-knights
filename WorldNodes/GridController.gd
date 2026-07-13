@@ -41,13 +41,9 @@ func setupGrid():
 	nonVoidTiles = getWallAndFloorTiles()
 	
 	#### STORE TILE INFO IN A TILEMAP AT WORLD
+	return createVoidTiles(voidTilemap)
 	
-	var pointlessReturn = createVoidTiles(voidTilemap)
-	return pointlessReturn
 	
-
-
-
 #### THIS IS THE CATCH-ALL FUNCTION FOR PLACING STUFF ON THE GRID AND MAP
 #### INPUT: GRIDPOS CANDIDATE. HANDLES EVERYTHING
 func putOnGridAndMap(object:Node, gridPos:Vector2i) -> bool:

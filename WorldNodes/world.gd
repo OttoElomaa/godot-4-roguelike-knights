@@ -5,10 +5,8 @@ extends NavigationRegion2D
 
 #@export var dungeonName := "Cool Dungeon Name"
 
-@export var roomSize := 16
 
-
-@export var turnOffLineOfSight := false
+@export var turnOffFogOfWar := false
 @export var debugImmortalPlayer := false
 @export var debugShowVoidTiles := false
 
@@ -141,9 +139,9 @@ func startGame(game:Node, playerScene:Node, dungeonInfo:Object):
 		
 	
 	#### SHROUD THE WHOLE MAP IN FOG PRE- LINE OF SIGHT CHECKS
-	if not turnOffLineOfSight:
-		for x in range(-100,100):
-			for y in range(-100,100):
+	if not turnOffFogOfWar:
+		for x in range(-200,200):
+			for y in range(-200,200):
 				$Utilities/FogTiles.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
 	
 	$Utilities/DumbTimer.start()
@@ -163,8 +161,7 @@ func startDebugLevel(game:Node, playerScene:Node, dungeonInfo:Object):
 	ui.toggleLoadingScreen(true)
 	States.inputModeOff()
 	
-	var pointlessReturn = null
-	
+		
 	if debugShowVoidTiles:
 		$Utilities/VoidTiles.show()
 	else:
@@ -174,7 +171,7 @@ func startDebugLevel(game:Node, playerScene:Node, dungeonInfo:Object):
 	
 	
 	#### SETUP ASTARGRID TO CREATE PATH BETWEEN ROOM SCENES
-	pointlessReturn = $AStarGridNode.setup(self)
+	await $AStarGridNode.setup(self)
 	$GridController.setup(self)
 	set_navigation_layer_value(2, true)
 	
@@ -399,7 +396,6 @@ func callNextTurnAction(previous:Node):
 	if next.isPlayer:
 		#### WAIT 0.1 sec, so LINE OF SIGHT CHECKS HAVE COMPLETED. THEN TARGETING STUFF
 		handleFogOfWar()
-		$LineOfSight/FogOfWarTimer.start()
 		
 		#### INTERACT OBJECT VISUAL STUFF ON TURN
 		States.clearInteractObject() ## CLEAR
@@ -439,7 +435,7 @@ func updateTargeting():
 #### FOG OF WAR STUFF??
 func handleFogOfWar():
 	
-	if turnOffLineOfSight:
+	if turnOffFogOfWar:
 		return
 	if not player:
 		return	
